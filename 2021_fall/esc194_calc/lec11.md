@@ -6,7 +6,7 @@
 * Prove $\lim _{x \to 0} \frac{\sin x}{x} = 1$ and $\lim _{x \to 0} \frac{1 - \cos x}{0} = 0$
 	* We can't use the product limit theorem because $\lim _{x \to 0} \frac{1}{x}$ does not exist
 	* ![geometric proof](imgs/sinx_x.png){width=70%}
-	* $A_{\triangle OBA} \leq A_{\downslice OBA} \leq A_{\triangle ODA} \implies \sin x \leq x \leq \tan x \implies 1 \leq \frac{x}{\sin x} \leq \frac{1}{\cos x} \implies \cos x \leq \frac{\sin x}{x} \leq 1$
+	* $A_{\triangle OBA} \leq A_{OBA} \leq A_{\triangle ODA} \implies \sin x \leq x \leq \tan x \implies 1 \leq \frac{x}{\sin x} \leq \frac{1}{\cos x} \implies \cos x \leq \frac{\sin x}{x} \leq 1$
 	* We can use the sandwich theorem since $\cos 0 = 1 \implies \lim _{x \to 0} \frac{\sin x}{x} = 1$
 	* $\alignedeqntwo[t]{\lim _{x \to 0} \frac{\cos x - 1}{x}}{\lim _{x \to 0}\frac{(\cos x - 1)(\cos x + 1)}{x(\cos x + 1)}}{\lim _{x \to 0} \frac{\cos^2 x - 1}{x(\cos x + 1)}}{\lim _{x \to 0}\frac{-\sin^2 x}{x(\cos x + 1)}}{\lim _{x \to 0}\frac{\sin x}{x}\lim _{x \to 0}\frac{-\sin x}{\cos x + 1}}{1 \cdot \frac{\lim _{x \to 0} -\sin x}{\lim _{x \to 0}{\cos x + 1}}}{\frac{0}{2}}{0}$
 * $\alignedeqntwo[t]{\diff{}{x}\sin x}{\lim _{h \to 0}\frac{\sin(x + h) - \sin x}{h}}{\lim _{h \to 0}\frac{\sin x\cos h + \cos x\sin h - \sin x}{h}}{\lim _{h \to 0}\frac{\sin x(\cos h - 1) + \cos x\sin h}{h}}{\lim _{h \to 0}\sin x \lim _{h \to 0}\frac{\cos h - 1}{h} + \lim _{h \to 0}\cos x\lim _{h \to 0}\frac{\sin h}{h}}{0 \cdot \sin x + 1 \cdot \cos x}{\cos x}$
