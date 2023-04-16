@@ -9,5 +9,6 @@ for md in **/*.md
 	pushd $md_dir
 	pandoc $md_name -o (string split -r -m 1 . $md_name)[1].pdf -V geometry=margin=1in -H /home/tyler/Documents/mateng/ocw/ncommon.tex
 	popd
+	echo "Built $md"
 end
 
