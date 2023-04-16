@@ -1,0 +1,33 @@
+[submodule "/2021_winter/esc190_compsci/labs"]
+	path = 2021_winter/esc190_compsci/labs
+	url = git@github.com:tylertian123/esc190-labs.git
+[submodule "2022_fall/ece253_compsys/labs"]
+	path = 2022_fall/ece253_compsys/labs
+	url = https://github.com/Youssef-Rachad/ECE253
+[submodule "2021_winter/esc190_compsci/assn/a1"]
+	path = 2021_winter/esc190_compsci/assn/a1
+	url = /home/tyler/Documents/school/2021_winter/esc190_compsci/assn/a1/
+[submodule "2021_winter/esc190_compsci/assn/a2"]
+	path = 2021_winter/esc190_compsci/assn/a2
+	url = /home/tyler/Documents/school/2021_winter/esc190_compsci/assn/a2/
+[submodule "2021_fall/phy180_mechanics/lab"]
+	path = 2021_fall/phy180_mechanics/lab
+	url = git@github.com:tylertian123/phy180_lab.git
+[submodule "2021_winter/esc102_praxis/showcase"]
+	path = 2021_winter/esc102_praxis/showcase
+	url = git@github.com:tylertian123/esc102-showcase.git
+[submodule "2022_fall/che260_thermodynamics/labs"]
+	path = 2022_fall/che260_thermodynamics/labs
+	url = git@github.com:tylertian123/che260_labs.git
+[submodule "2022_fall/phy293_physics/labs"]
+	path = 2022_fall/phy293_physics/labs
+	url = git@github.com:tylertian123/phy293_labs.git
+[submodule "2022_fall/esc203_engsoc/assn/paper"]
+	path = 2022_fall/esc203_engsoc/assn/paper
+	url = /home/tyler/Documents/school/2022_fall/esc203_engsoc/assn/paper/
+[submodule "2023_winter/phy294_qm_therm_phy/labs"]
+	path = 2023_winter/phy294_qm_therm_phy/labs
+	url = git@github.com:Youssef-Rachad/PHY294-Labs.git
+[submodule "2023_winter/esc204_praxis/esc204"]
+	path = 2023_winter/esc204_praxis/esc204
+	url = git@github.com:tylertian123/esc204.git

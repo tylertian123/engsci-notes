@@ -1,0 +1,4 @@
+#!/bin/sh
+
+find . -type f -not -name "*.pdf" -not -path "./.git/*" -not -path "*/.ipynb_checkpoints/*" -not -path "*/__pycache__/*" -not -path "*/*.xopp~" | tar --exclude "*.mp4" -czvf ../notes_backup.tar.gz -T -
+

@@ -1,0 +1,258 @@
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{textcomp}
+\usepackage{mathtools}
+\usepackage{cancel}
+\usepackage{gensymb}
+\usepackage{esint}
+\usepackage{esvect}
+\usepackage{braket}
+\usepackage{siunitx}
+\usepackage{pifont}
+%\usepackage{MnSymbol}
+\usepackage{mathrsfs}
+\usepackage{mhchem}
+\usepackage{bm}
+\usepackage[american, siunitx, cuteinductors]{circuitikz}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{diagbox}
+\usepackage{ulem}
+
+\let\savedegree\degree
+\let\degree\relax
+%\usepackage{mathabx}
+\let\degree\savedegree
+
+\let\oldemptyset\emptyset
+\let\emptyset\varnothing
+
+\normalem
+
+% Thanks stack exchange
+\DeclareMathOperator*{\sumint}{%
+\mathchoice%
+  {\ooalign{$\displaystyle\sum$\cr\hidewidth$\displaystyle\int$\hidewidth\cr}}
+  {\ooalign{\raisebox{.14\height}{\scalebox{.7}{$\textstyle\sum$}}\cr\hidewidth$\textstyle\int$\hidewidth\cr}}
+  {\ooalign{\raisebox{.2\height}{\scalebox{.6}{$\scriptstyle\sum$}}\cr$\scriptstyle\int$\cr}}
+  {\ooalign{\raisebox{.2\height}{\scalebox{.6}{$\scriptstyle\sum$}}\cr$\scriptstyle\int$\cr}}
+}
+
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+
+\ctikzset{
+	bipoles/length=1.0cm,
+	bipoles/vsourceam/inner plus={\fontsize{5}{7}\selectfont $+$},
+	bipoles/vsourceam/inner minus={\fontsize{5}{7}\selectfont $-$},
+	logic ports=ieee,
+	logic ports/scale=0.8
+}
+
+\everymath{\displaystyle} % Always use display style math, even when inline
+
+\newcommand{\msout}[1]{\text{\sout{\ensuremath{#1}}}}
+
+% Increase maximum list nesting depth
+\usepackage{enumitem}
+\renewlist{itemize}{itemize}{9}
+\setlist[itemize,1]{label=\textbullet}
+\setlist[itemize,2]{label=--}
+\setlist[itemize,3]{label=*}
+\setlist[itemize,4]{label=\textbullet}
+\setlist[itemize,5]{label=--}
+\setlist[itemize,6]{label=*}
+\setlist[itemize,7]{label=\textbullet}
+\setlist[itemize,8]{label=--}
+\setlist[itemize,9]{label=*}
+
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+
+\newcommand{\dbar}{d\hspace*{-0.08em}\bar{}\hspace*{0.1em}}
+\newcommand{\ddbar}{\mathrm{d}\hspace*{-0.08em}\bar{}\hspace*{0.1em}}
+\newcommand{\grad}{\vec\nabla}
+\newcommand{\del}{\vec\nabla}
+\newcommand{\bv}[1]{\vec{\bm{#1}}}
+\newcommand{\dotvec}[1]{\dot{\vec{#1}}}
+
+\newcommand{\equal}{=} % Because tikz does not like plain equal signs in labels
+
+\newcommand{\xor}{\oplus}
+
+\newtcolorbox{note-note}{title=Note,colback=blue!5!white,colframe=blue,fonttitle=\bfseries}
+\newtcolorbox{note-important}{title=Important,colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries}
+\newtcolorbox{note-theorem}{title=Theorem,colback=green!5!white,colframe=green!75!black,fonttitle=\bfseries}
+\newtcolorbox{note-definition}{title=Definition,colback=green!5!white,colframe=green!75!black,fonttitle=\bfseries}
+\newtcolorbox{note-equation}{title=Equation,colback=green!5!white,colframe=green!75!black,fonttitle=\bfseries}
+\newtcolorbox{note-summary}{title=Summary,colback=yellow!10!white,colframe=yellow!75!black,fonttitle=\bfseries}
+\newcommand{\noteNote}[1]{\begin{note-note}#1\end{note-note}}
+\newcommand{\noteImportant}[1]{\begin{note-important}#1\end{note-important}}
+\newcommand{\noteThm}[1]{\begin{note-theorem}#1\end{note-theorem}}
+\newcommand{\noteDefn}[1]{\begin{note-definition}#1\end{note-definition}}
+\newcommand{\noteEqn}[1]{\begin{note-equation}#1\end{note-equation}}
+\newcommand{\noteSummary}[1]{\begin{note-summary}#1\end{note-summary}}
+
+\DeclareMathOperator{\rank}{rank} % Rank of a matrix
+\DeclareMathOperator{\tr}{tr} % Trace of a matrix
+\DeclareMathOperator{\diag}{diag} % Diagonal matrix
+\DeclareMathOperator{\im}{im} % Image
+\DeclareMathOperator{\proj}{proj} % Projection
+\DeclareMathOperator{\Span}{span} % Note \span is already defined
+\DeclareMathOperator{\Null}{null}
+\DeclareMathOperator{\row}{row}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\curl}{curl} % Curl of vector field
+\DeclareMathOperator{\divergence}{div} % Divergence of vector field
+\DeclareMathOperator{\erf}{erf}
+% Hyperbolic trig functions
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\Coth}{coth} % note coth is already defined
+\DeclareMathOperator{\adj}{adj}
+% div for divergence is defined as \divergence because \div is already used for the division symbol; uncomment the code below to redefine it
+%\let\divsymb\div
+%\let\div\relax
+%\DeclareMathOperator{\div}{div}
+\DeclareMathOperator{\erfc}{erfc} % complementary error function
+\DeclareMathOperator{\var}{var}
+\DeclareMathOperator{\cov}{cov}
+
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert} % Proper absolute values etc
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+
+\newcommand{\diff}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}} % Derivative, \diff{func}{var}
+\newcommand{\diffn}[3]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}} % Multi-derivative, \diffn{power}{func}{var}
+\newcommand{\pdiff}[2]{\frac{\partial#1}{\partial#2}} % Partial derivative, \pdiff{func}{var}
+\newcommand{\pdiffc}[3]{\left(\pdiff{#1}{#2}\right)_{#3}} % Partial derivative keeping a variable constant, \pdiffc{func}{var}{var}
+\newcommand{\pdiffn}[3]{\frac{\partial^{#1}#2}{\partial{#3}^{#1}}} % Partial multi-derivative, \pdiffn{power}{func}{var}
+\newcommand{\ppdiff}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
+\newcommand{\pppdiff}[4]{\frac{\partial^3 #1}{\partial #2 \partial #3 \partial #4}}
+\newcommand{\Diff}[2]{\frac{\mathrm{D}#1}{\mathrm{D}#2}}
+\newcommand{\laplace}[1]{\mathcal{L}\left\{ #1 \right\}} % Laplace transform
+\newcommand{\ilaplace}[1]{\mathcal{L}^{-1}\left\{ #1 \right\}} % Inverse Laplace transform
+\newcommand{\fourier}[1]{\mathcal{F}\left\{ #1 \right\}}
+\newcommand{\ifourier}[1]{\mathcal{F}^{-1}\left\{ #1 \right\}}
+
+% Derivative and other things evaluated at
+\newcommand{\eval}[2]{\left.#1\right\rvert_{#2}}
+\newcommand{\inteval}[3]{\left[#1\right]_{#2}^{#3}}
+\newcommand{\integral}[5][\int]{#1_{#2}^{#3}#4\,\mathrm{d}#5}
+
+% Cross product because I always forget that \cross isn't a thing
+\newcommand{\cross}{\times}
+
+\newcommand{\intinf}{\int_{-\infty}^{\infty}}
+\newcommand{\intuinf}[1]{\int_{#1}^{\infty}}
+\newcommand{\intlinf}[1]{\int_{-\infty}^{#1}}
+
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\complex}{\mathbb{C}}
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\rationals}{\mathbb{Q}}
+
+\newcommand{\funcip}[2]{\left(#1\middle|#2\right)}
+
+\newcommand{\matdim}[3][\mathbb{R}]{{}^{#2} #1 ^{#3}}
+
+% Differential d
+\newcommand{\dd}[1]{\mathrm{d}#1}
+\newcommand{\da}{\dd a}
+\newcommand{\db}{\dd b}
+\newcommand{\dc}{\dd c}
+\newcommand{\de}{\dd e}
+\newcommand{\df}{\dd f}
+\newcommand{\dk}{\dd k}
+\newcommand{\dr}{\dd r}
+\newcommand{\ds}{\dd s}
+\newcommand{\dt}{\dd t}
+\newcommand{\du}{\dd u}
+\newcommand{\dv}{\dd v}
+\newcommand{\dw}{\dd w}
+\newcommand{\dx}{\dd x}
+\newcommand{\dy}{\dd y}
+\newcommand{\dz}{\dd z}
+\newcommand{\dA}{\dd A}
+\newcommand{\dB}{\dd B}
+\newcommand{\dC}{\dd C}
+\newcommand{\dV}{\dd V}
+\newcommand{\dR}{\dd R}
+\newcommand{\dS}{\dd S}
+\newcommand{\dT}{\dd T}
+\newcommand{\dtheta}{\dd \theta}
+\newcommand{\drho}{\dd \rho}
+\newcommand{\dphi}{\dd \phi}
+\newcommand{\dvarphi}{\dd \varphi}
+\newcommand{\dtau}{\dd \tau}
+
+\newcommand{\Vbar}{\msout{V}}
+\newcommand{\ReN}{\text{Re}} % Reynolds number
+\newcommand{\FoN}{\text{Fo}} % Fourier number
+\newcommand{\BiN}{\text{Bi}} % Biot number
+\newcommand{\NuN}{\text{Nu}} % Nusselt number
+\newcommand{\PrN}{\text{Pr}} % Prandtl number
+\newcommand{\FrN}{\text{Fr}} % Froude number
+
+\newcommand{\union}{\cup}
+\newcommand{\intersect}{\cap}
+\newcommand{\intersection}{\cap}
+
+% Basis vectors
+\newcommand{\ihat}{\hat{i}}
+\newcommand{\jhat}{\hat{j}}
+\newcommand{\khat}{\hat{k}}
+
+% Shorthand for 2 or 3 piecewise
+\newcommand{\twopiece}[2]{\begin{cases} {#1} \\ {#2} \end{cases}}
+\newcommand{\threepiece}[3]{\begin{cases} {#1} \\ {#2} \\ {#3} \end{cases}}
+\newcommand{\fourpiece}[4]{\begin{cases} {#1} \\ {#2} \\ {#3} \\ {#4} \end{cases}}
+\newcommand{\fivepiece}[5]{\begin{cases} {#1} \\ {#2} \\ {#3} \\ {#4} \\ {#5} \end{cases}}
+% Because for some reason you can't use & inside the macro
+\newcommand{\twocond}[4]{\begin{cases} {#1} & {#2} \\ {#3} & {#4} \end{cases}}
+\newcommand{\threecond}[6]{\begin{cases} {#1} & {#2} \\ {#3} & {#4} \\ {#5} & {#6} \end{cases}}
+\newcommand{\fourcond}[8]{\begin{cases} {#1} & {#2} \\ {#3} & {#4} \\ {#5} & {#6} \\ {#7} & {#8} \end{cases}}
+
+% Matrices
+\newcommand{\mattwo}[5][b]{\begin{#1matrix} {#2} & {#3} \\ {#4} & {#5} \end{#1matrix}}
+\newcommand{\mattwothree}[7][b]{\begin{#1matrix} {#2} & {#3} & {#4} \\ {#5} & {#6} & {#7} \end{#1matrix}}
+\newcommand{\matthreetwo}[7][b]{\begin{#1matrix} {#2} & {#3} \\ {#4} & {#5} \\ {#6} & {#7} \end{#1matrix}}
+% Because TeX can't take more than 9 arguments in a macro...
+\newcommand{\matthree}[9]{\begin{matrix} {#1} & {#2} & {#3} \\ {#4} & {#5} & {#6} \\ {#7} & {#8} & {#9} \end{matrix}}
+\newcommand{\matthreeb}[9]{\begin{bmatrix} {#1} & {#2} & {#3} \\ {#4} & {#5} & {#6} \\ {#7} & {#8} & {#9} \end{bmatrix}}
+\newcommand{\matthreev}[9]{\begin{vmatrix} {#1} & {#2} & {#3} \\ {#4} & {#5} & {#6} \\ {#7} & {#8} & {#9} \end{vmatrix}}
+\newcommand{\matthreep}[9]{\begin{pmatrix} {#1} & {#2} & {#3} \\ {#4} & {#5} & {#6} \\ {#7} & {#8} & {#9} \end{pmatrix}}
+\newcommand{\matthreeB}[9]{\begin{Bmatrix} {#1} & {#2} & {#3} \\ {#4} & {#5} & {#6} \\ {#7} & {#8} & {#9} \end{Bmatrix}}
+
+\makeatletter % Column vector (variadic), \cvec[bracket_type]{x1}{x2}{x3}...
+\newcommand{\cvec}[2][b]{\begin{#1matrix} #2 \cvecchecknextarg{#1}}
+\newcommand{\cvecchecknextarg}[1]{\@ifnextchar\bgroup{\cvecnextarg{#1}}{\end{#1matrix}}}
+\newcommand{\cvecnextarg}[2]{\\ #2 \@ifnextchar\bgroup{\cvecnextarg{#1}}{\end{#1matrix}}}
+\makeatother
+
+\makeatletter % Row vector (variadic), \rvec[bracket_type]{x1}{x2}{x3}...
+\newcommand{\rvec}[2][b]{\begin{#1matrix} #2 \rvecchecknextarg{#1}}
+\newcommand{\rvecchecknextarg}[1]{\@ifnextchar\bgroup{\rvecnextarg{#1}}{\end{#1matrix}}}
+\newcommand{\rvecnextarg}[2]{& #2 \@ifnextchar\bgroup{\rvecnextarg{#1}}{\end{#1matrix}}}
+\makeatother
+
+\makeatletter
+\newcommand{\alignedlines}[3][]{\begin{aligned}[#1] &\hphantom{{}#2{}} #3 \alignedlineschecknextarg{#2}}
+\newcommand{\alignedlineschecknextarg}[1]{\@ifnextchar\bgroup{\alignedlinesnextarg{#1}}{\end{aligned}}}
+\newcommand{\alignedlinesnextarg}[2]{\\ &#1 #2 \@ifnextchar\bgroup{\alignedlinesnextarg{#1}}{\end{aligned}}}
+
+\newcommand{\alignedlinestwo}[4][]{\begin{aligned}[#1] #3 &#2 #4 \alignedlinestwochecknextarg{#2}}
+\newcommand{\alignedlinestwochecknextarg}[1]{\@ifnextchar\bgroup{\alignedlinestwonextarg{#1}}{\end{aligned}}}
+\newcommand{\alignedlinestwonextarg}[2]{\\ &#1 #2 \@ifnextchar\bgroup{\alignedlinestwonextarg{#1}}{\end{aligned}}}
+\makeatother
+
+\newcommand{\alignedeqn}[1][]{\alignedlines[#1]{=}}
+\newcommand{\alignedimp}[1][]{\alignedlines[#1]{\implies}}
+\newcommand{\alignedeqntwo}[1][]{\alignedlinestwo[#1]{=}}
+\newcommand{\alignedimptwo}[1][]{\alignedlinestwo[#1]{\implies}}
+
+\newcommand{\Tag}{& \qquad &}
+\newcommand{\Ttag}[1]{\Tag \text{#1}}
+\newcommand{\Tagcal}[1]{\Tag \mathcal{#1}}
+

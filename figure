@@ -1,0 +1,23 @@
+#!/usr/bin/fish
+
+set SS_NAME (find ~/Pictures/Screenshots -maxdepth 1 -type f -name "Screenshot from *.png" | sort -V | tail -n 1)
+set LEC_NUM (find . -maxdepth 1 -type f -name "lec*.md" | sort -V | tail -n 1 | string sub -s 6 -e -3)
+
+if not test -n "$SS_NAME"
+	or not test -n "$LEC_NUM"
+	exit 1
+end
+
+set IMG_NUM (find ./imgs -maxdepth 1 -type f -name "lec$LEC_NUM""_*.*" | sort -V | tail -n 1 | string split ".")
+set IMG_NUM $IMG_NUM[-2]
+set IMG_NUM (string split _ "$IMG_NUM")
+set IMG_NUM (math $IMG_NUM[-1]" + 1")
+set IMG_PATH "./imgs/lec$LEC_NUM""_$IMG_NUM.png"
+
+if test -n "$IMG_NUM"
+	set IMG_NUM 1
+end
+	
+mv "$SS_NAME" "$IMG_PATH"
+echo "Moved '$SS_NAME' to '$IMG_PATH'"
+
