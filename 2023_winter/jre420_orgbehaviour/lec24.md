@@ -15,7 +15,7 @@
 
 ![Lewin's 3-step process to change](imgs/lec24_1.png){width=50%}
 
-* Regardless of the type of change, there are 2 steps to the process:
+* Regardless of the type of change, there are 3 steps to the process:
 	1. Unfreezing: recognizing the need for change and what needs to change; planning the change
 		* Crises often stimulate this step
 	2. Changing: implementing the planned change

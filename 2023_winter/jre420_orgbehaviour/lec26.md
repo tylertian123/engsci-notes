@@ -9,6 +9,7 @@
 	* 3 types of outcomes:
 		* Perfect outcome
 		* Best available alternative (BATNA) is something you would be okay with
+			* e.g. walking away if you have another job available
 		* Worst available alternative (WATNA)
 * Acknowledgement
 	* After receiving the offer, acknowledge it and express interest and gratitude, but don't immediately accept the offer because you need time to read through it carefully
@@ -24,6 +25,7 @@
 		* The aspiration point is the optimistic goal
 		* The resistance point is an outcome below which you will not go
 		* Each party has an initial offer/asking price
+	* Anchor point: where the negotiation starts
 	* Expanding the pie: what about other benefits?
 		* Employers can have other methods of motivating a potential hire, e.g. bonuses, vacation, education/tuition, pension plans
 		* Try to push for more vacation days (usually starting at 2 weeks minimum)
