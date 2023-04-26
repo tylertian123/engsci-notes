@@ -11,7 +11,7 @@
 	* Even sampling one orientation every $10^{-13}$ seconds (fastest possible) this would take longer than the age of the universe
 	* Yet proteins fold on the order of micro to milliseconds
 	* Solution: inherent correlations involved in the fluctuations; the assumption that all degrees of freedom are independent is wrong
-	* Analogy: What is the optimal strategy to fin d a parking lot?
+	* Analogy: What is the optimal strategy to find a parking lot?
 		* You instructively try to look further out to see more of the lot at once
 		* In this analogy correlated actions are analogous to seeing more of the lot
 

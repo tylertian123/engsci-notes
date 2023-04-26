@@ -17,5 +17,14 @@
 
 ## Hybridization
 
-* Add together the s orbitals and p orbital wavefunctions
+* Add together the s orbitals and p orbital wavefunctions to create hybridized orbitals in order to follow VSEPR shapes
+* Examples:
+	* Tetrahedral: $\ce{NH4}$
+		* Nitrogen has valence shell electron configuration $2s^2 2p^3$
+		* 1 electron from the $s$ shell gets promoted into the same energy as a $p$ shell, and then the $s$ shell and 3 $p$ shells hybridize to form $sp^3$ orbitals
+		* The $sp^3$ orbitals have 4 symmetric lobes arranged in a tetrahedral pattern; each lobe will have 1 electron in it, which can $\sigma$ bond with the $s$ shell in the hydrogen
+	* Linear: $\ce{CO2}$
+		* The middle carbon forms $sp$ hybrid orbitals, with 2 symmetric lobes arrange linearly
+		* The 2 lobes from the $sp$ orbitals $\sigma$ bond with the $p$ orbitals in the oxygen atoms
+		* The remaining 2 $p$ unhybridized orbitals form $\pi$ bonds with the $p$ orbitals in the hydrogen atoms
 

@@ -18,6 +18,9 @@
 	* For a nonlinear molecule subtract 6 degrees (3 translational + 3 rotational of the base atom)
 	* For a linear molecule subtract 5 degrees (3 translational + 2 rotational of the base atom)
 * Spin multiplicity selection rule: $\Delta S = 0$
+
+## Transitions of an Excited Molecule
+
 * When a vibration is excited, it first undergoes internal conversions (between vibrations), and then falls down back to the ground state via fluorescence from the bottom level
 	* With high energy the vibrational energy levels are a lot closer together so energy transition happens very quickly
 * The triplet is lower in energy than the singlet (Hund's rule)

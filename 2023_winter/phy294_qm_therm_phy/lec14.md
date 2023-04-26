@@ -16,5 +16,4 @@
 	* Example: from an s orbital to p orbital involves a change in symmetry, so the transition is allowed (symmetry allowed); from 1s to 2s has no change in symmetry so it's not allowed (symmetry forbidden)
 	* The change in $l$ is always $\pm 1$
 	* There must be no spin multiplicity: $\Delta S = 0$
-* Beer's Law
 

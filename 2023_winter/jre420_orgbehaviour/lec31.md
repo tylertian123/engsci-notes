@@ -20,7 +20,7 @@
 		* Also individual differences in people's degree of sophistication when thinking about moral issues
 * Ethical managerial behaviour consists of ethical behaviour, social responsibility (fairness and advocating for justice, for local and global communities), environmental stewardship and fair employment practices
 * There are 3 traditional branches of ethics and 2 additional concepts:
-	* Virtual ethics (Aristotle): focused on your character; prudence, temperance, courage and justice
+	* Virtue ethics (Aristotle): focused on your character; prudence, temperance, courage and justice
 		* Your character pushes you to behave ethically
 	* Deontology/duty ethics (Immanuel Kant): rooted in rules; the intent is more important than the consequences
 		* Process matters; if you follow the process, then it is ethical regardless of consequences

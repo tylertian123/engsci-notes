@@ -28,4 +28,7 @@
 	* This has a zero point energy of $\frac{1}{2}h\nu$ -- even at 0 kelvin, atoms are still moving
 		* This is due to the uncertainty relation
 	* Energies are equally spaced, unlike the particle in a box
+	* The actual wavefunctions are given by $\psi _n(x) = N_ne^{-\beta^2x^2/2}H_n(\beta x)$, where $n$ is an integer quantum number, $\beta = \sqrt{\frac{mv}{h}}$, and $H_n$ are the *Hermite polynomials*
+
+![Shapes and energies of the quantum harmonic oscillator solutions](imgs/lec15_1.png){width=50%}
 

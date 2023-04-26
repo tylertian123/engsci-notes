@@ -12,5 +12,9 @@
 	* In the bonding state electron density builds up in the centre; the electrons are concentrated near the centre
 		* The bonding state has lower energy since the high electron density in the centre is closer to the protons
 	* In the bonding state, there is a minimum in the energy as a function of the inter-proton distance, which facilitates bonding
+* Both bonding and antibonding states are reflected by a superposition of atomic orbitals to form molecular orbitals (LCAO-MO)
+	* The two ways we can superimpose the two hydrogenic wavefunctions are $\Psi^+ = \Psi _1 + \Psi _2$ and $\Psi^- = \Psi _1 - \Psi _2$
+	* In the case of $\Psi^+$, the two wavefunctions are in phase, so in the middle between the two atoms they add constructively; this reflects the buildup in electron density that lowers the energy
+	* In the case of $\Psi^-$, the two wavefunctions are out of phase so interfere destructively between the two atoms; this reflects the depletion in electron density that raises the energy
 * When the overlap is spherically symmetric you get a $\sigma$ bond (s orbitals)
 
