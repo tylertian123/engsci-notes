@@ -54,6 +54,9 @@
 
 \newcommand{\msout}[1]{\text{\sout{\ensuremath{#1}}}}
 
+\mathchardef\arr="017E % character 7E from textfont 1 is the vector arrow 
+\newcommand\undervec[1]{\setbox0=\hbox{$#1$}\lower2ex\hbox to 0pt{\hbox to \wd0{\hss$\arr\;$\hss}\hss}\box0}
+
 % Increase maximum list nesting depth
 \usepackage{enumitem}
 \renewlist{itemize}{itemize}{9}
@@ -118,6 +121,12 @@
 \DeclareMathOperator{\erfc}{erfc} % complementary error function
 \DeclareMathOperator{\var}{var}
 \DeclareMathOperator{\cov}{cov}
+
+\DeclareMathOperator{\argmin}{argmin}
+\DeclareMathOperator{\argmax}{argmax}
+
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\sgn}{sgn}
 
 \DeclarePairedDelimiter{\abs}{\lvert}{\rvert} % Proper absolute values etc
 \DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
