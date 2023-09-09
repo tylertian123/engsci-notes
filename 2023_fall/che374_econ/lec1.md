@@ -1,0 +1,27 @@
+# Week 1 (Sep 10, 2023)
+
+* "Time Value of Money": borrowing money has a cost for the borrower; lending money should create value for the lender (investor/creditor)
+* Factors impacting interest rates:
+	* *Inflation*: higher expected inflation leads to increase in interest rates
+	* *Credit (default) risk*: higher risk of the borrower not being able to pay back leads to higher interest rates
+	* *Liquidity risk*: higher liquidity risk (not being able to access the invested funds during the investment) leads to higher interest rate
+	* *Maturity risk*: longer term investments (longer maturity) increase other risks, leading to higher interest rates
+* Two types of interest (assume compound unless stated otherwise):
+	* *Simple*: interest applies only to original principal, e.g. GICs (Guaranteed Investment Certificates)
+		* After $N$ periods, amount owed is $P(1 + Ni)$ where $P$ is the principal, $i$ is the interest rate
+	* *Compound*: interest applies to principal and all interest, e.g. mortgages, credit card debt
+		* After $N$ periods, amount owed is $P(1 + i)^N$
+* We can also compound multiple times a year with a fraction of the interest; for $m$ subperiods a year, the subperiod interest rate is $i_s = \frac{r}{m}$
+	* At the end of the year we would have $F = P\left(1 + \frac{r}{m}\right)^m$ after all $m$ subperiods
+	* The more frequently you compound, the more interest you will earn, so to compare investments with different compound periods, we need an *effective interest rate*
+* *Effective interest rate* ($i_e$): the equivalent interest rate of an account that is compounded just once over the stated time periods
+	* $i_e = \left(1 + \frac{r}{m}\right)^m - 1$
+	* As $m$ increases, $i_e$ increases and approaches a finite limit (known as *continuous compounding*)
+	* For continuous compounding, $i_e = \lim _{m \to \infty} \left(1 + \frac{r}{m}\right)^m = e^r - 1$
+* The formulas can be reversed to calculate the present value: $PV = \frac{FV}{(1 + i)^N}$
+	* In factor notation: $PV = FV(P/F, i, N) \implies (P/F, i, N) = \frac{1}{(1 + i)^N}$
+	* To calculate future value: $FV = PV(F/P, i, N) \implies (F/P, i, N) = (1 + i)^N$
+* Given a revenue stream of $A$ per year going on forever, the present value would be $PV = \frac{A}{1 + i} + \frac{A}{(1 + i)^2} + \frac{A}{(1 + i)^3} + \cdots = AS$
+	* By geometric series sum, $S = \frac{1}{i} - \frac{1}{i(1 + i)^N}$
+	* In factor notation: $PV = A(P/A, i, N) \implies (P/A, i, N) = \frac{1}{i} - \frac{1}{i(1 + i)^N}$
+

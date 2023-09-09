@@ -56,6 +56,10 @@
 
 \mathchardef\arr="017E % character 7E from textfont 1 is the vector arrow 
 \newcommand\undervec[1]{\setbox0=\hbox{$#1$}\lower2ex\hbox to 0pt{\hbox to \wd0{\hss$\arr\;$\hss}\hss}\box0}
+\newcommand{\uvec}{\undervec}
+
+\newcommand{\vectrix}[1]{\undervec{\bm{\mathcal{#1}}}}
+\newcommand{\vcx}{\vectrix}
 
 % Increase maximum list nesting depth
 \usepackage{enumitem}
