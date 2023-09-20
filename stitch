@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/fish
 
-find . -maxdepth 1 -type f -name "lec*.md" | sort -V | xargs cat | pandoc -o all_lecs.pdf -V geometry=margin=1in -H ~/Documents/mateng/ocw/ncommon.tex
+set header_file (realpath (dirname (status --current-filename)))"/ncommon.tex"
+find . -maxdepth 1 -type f -name "lec*.md" | sort -V | xargs cat | pandoc -o all_lecs.pdf -V geometry=margin=1in -H $header_file
 

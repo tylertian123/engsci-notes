@@ -2,17 +2,30 @@
 
 set SS_NAME (find ~/Pictures/Screenshots -maxdepth 1 -type f -name "Screenshot from *.png" | sort -V | tail -n 1)
 set LEC_NUM (find . -maxdepth 1 -type f -name "lec*.md" | sort -V | tail -n 1 | string sub -s 6 -e -3)
+set TUT_NUM (find . -maxdepth 1 -type f -name "tut*.md" | sort -V | tail -n 1 | string sub -s 6 -e -3)
 
 if not test -n "$SS_NAME"
-	or not test -n "$LEC_NUM"
+	or begin 
+		not test -n "$LEC_NUM"
+		and not test -n "$TUT_NUM"
+	end
+	echo "Cannot find a suitable screenshot or lecture/tutorial number!"
 	exit 1
 end
 
-set IMG_NUM (find ./imgs -maxdepth 1 -type f -name "lec$LEC_NUM""_*.*" | sort -V | tail -n 1 | string split ".")
-set IMG_NUM $IMG_NUM[-2]
-set IMG_NUM (string split _ "$IMG_NUM")
-set IMG_NUM (math $IMG_NUM[-1]" + 1")
-set IMG_PATH "./imgs/lec$LEC_NUM""_$IMG_NUM.png"
+if test -n "$LEC_NUM"
+	set IMG_NUM (find ./imgs -maxdepth 1 -type f -name "lec$LEC_NUM""_*.*" | sort -V | tail -n 1 | string split ".")
+	set IMG_NUM $IMG_NUM[-2]
+	set IMG_NUM (string split _ "$IMG_NUM")
+	set IMG_NUM (math $IMG_NUM[-1]" + 1")
+	set IMG_PATH "./imgs/lec$LEC_NUM""_$IMG_NUM.png"
+else
+	set IMG_NUM (find ./imgs -maxdepth 1 -type f -name "tut$TUT_NUM""_*.*" | sort -V | tail -n 1 | string split ".")
+	set IMG_NUM $IMG_NUM[-2]
+	set IMG_NUM (string split _ "$IMG_NUM")
+	set IMG_NUM (math $IMG_NUM[-1]" + 1")
+	set IMG_PATH "./imgs/tut$TUT_NUM""_$IMG_NUM.png"
+end
 
 if test -n "$IMG_NUM"
 	set IMG_NUM 1

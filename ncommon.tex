@@ -19,6 +19,7 @@
 \usepackage{tcolorbox}
 \usepackage{diagbox}
 \usepackage{ulem}
+\usepackage{accents}
 
 \let\savedegree\degree
 \let\degree\relax
@@ -55,7 +56,7 @@
 \newcommand{\msout}[1]{\text{\sout{\ensuremath{#1}}}}
 
 \mathchardef\arr="017E % character 7E from textfont 1 is the vector arrow 
-\newcommand\undervec[1]{\setbox0=\hbox{$#1$}\lower2ex\hbox to 0pt{\hbox to \wd0{\hss$\arr\;$\hss}\hss}\box0}
+\newcommand\undervec[1]{\underaccent{\vec}{#1}}
 \newcommand{\uvec}{\undervec}
 
 \newcommand{\vectrix}[1]{\undervec{\bm{\mathcal{#1}}}}
@@ -134,6 +135,8 @@
 
 \DeclarePairedDelimiter{\abs}{\lvert}{\rvert} % Proper absolute values etc
 \DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
 
 \newcommand{\diff}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}} % Derivative, \diff{func}{var}
 \newcommand{\diffn}[3]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}} % Multi-derivative, \diffn{power}{func}{var}
