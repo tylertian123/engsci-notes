@@ -36,6 +36,7 @@
 	* Decisional equivalence: due to indifferences on the part of decision maker among available choices
 		* For a decision maker, two cash-flows $P_t, F_{t + N}$ are equivalent if they are indifferent about the two
 		* The interest rate is not a priori information but rather implied (which can be calculated)
+	* The market tells us what interest rate we should take based on the risk; mathematical equivalence allows us to use that interest rate to do the math; decisional equivalence allows us to use the math to decide what to take
 
 ### Present Value of Cash-Flows
 
@@ -67,4 +68,22 @@
 * $(P/Geom, i, g, N) = \frac{1}{1 + g}(P/A, i^0, N)$ where $i^0 = \frac{1 + i}{i - g} - 1$
 	* Equivalently $(P/Geom, i, g, N) = \frac{1 - \left(\frac{1 + g}{1 + i}\right)^N}{1 + g}$
 	* Note for a geometric gradient cash flow, there is nothing at time 0, then at time 1 a cash flow of $A$, then at time 2 a cash flow of $A(1 + g)$ and so on
+
+### Examples
+
+* Consider annuity that pays \$10 per month for 1 year. If interest is 1\% per month compounded monthly, what is the equivalent continuous payment right now?
+	* $P = 10(P/A, 1\%, 12) = \$112.55$
+	* $P = \int _0^1 Ae^{-r_{cc}t}\,\dt$ and we can find $(1 + 1\%)^{12} = e^{r_{cc}} \implies r_{cc} = 11.94\si{\%/yr}$
+	* $\$112.55 = A\int _0^1 e^{-0.1194t}\,\dt \implies A = \$119.40\si{yr^{-1}}$
+* Determine the effective annual rate for an investment that earns 15% per year based on quarterly compounding for the first 4 months, then 11% per year based on continuous compounding for another 5 months
+	* $\left(1 + \frac{15\%}{4}\right)^\frac{4}{3}e^{11\% \cdot \frac{5}{12}} = (1 + r_{eff})^\frac{9}{12}$
+* A property was sold for \$10M. The buyer wants a VTB (vendor-take-back) mortgage for \$5M, with 4% interest and \$500k of principal paid yearly for 10 years; what is the present value to the seller at 10% interest per year?
+	* VTB is if the buyer defaults, the seller gets the building back
+	* The buyer first gets \$5M in year 0, then \$500k each year plus some interest each year
+		* As the year goes on the interest decreases, because the principal that the interest applies to decreases
+		* In year 1 the interest is $\$5000000 \cdot 4\%$, in year 2 it's $\$4500000 \cdot 4\%$ and so on
+		* This is an arithmetic gradient with a negative gradient
+	* We have $A = 4\% \times \$5000000 = \$200000, G = -\$500000 \cdot 4\% = \$20000$
+	* $P = 5000000 + (500000 + 200000)(P/A, 10\%, 10) - 20000(P/G, 10\%, 10) = 8843370$
+		* Note we had to add 200k to the annuity value because of the declining interest
 

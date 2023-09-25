@@ -48,17 +48,10 @@
 	* Suppose that in time $\dt$, $\uvec b$ rotated $\dtheta$; then $\norm{\dd\uvec b} = \norm{\uvec b}\sin\phi\dtheta$
 	* If we let $\uvec\omega = \uvec a\dot\theta$, then $\dtheta = \norm{\uvec\omega}\,\dt$ and so $\norm{\dd\uvec b} = \norm{\uvec\omega \times \uvec b}\,\dt$
 	* Therefore we have $\dd\uvec b = \uvec\omega \times \uvec b\,\dt$ and so $\eval{\diff{\uvec b}{t}}{\vcx F_a} = \uvec\omega \times \uvec b$
-* We will use the notation that $\uvec b_1^\bullet = \eval{\diff{\uvec b_1}{t}}{\vcx F_a}$ and $\uvec b_1^\circ = \eval{\diff{\uvec b_1}{t}}{\vcx F_b}$
+* We will use the notation that $\uvec b_1^\dota = \eval{\diff{\uvec b_1}{t}}{\vcx F_a}$ and $\uvec b_1^\dotb = \eval{\diff{\uvec b_1}{t}}{\vcx F_b}$
 * Since the axes of reference frames have constant length, we can use this for all 3 axis vectors
-	* We denote ${\vcx F_b^T}^\bullet = \uvec\omega^{ba} \times \vcx F_b^T = \rvec{\uvec\omega^{ba} \times \uvec b_1}{\uvec\omega^{ba} \times \uvec b_2}{\uvec\omega^{ba} \times \uvec b_3}$
+	* We denote ${\vcx F_b^T}^\dota = \uvec\omega^{ba} \times \vcx F_b^T = \rvec{\uvec\omega^{ba} \times \uvec b_1}{\uvec\omega^{ba} \times \uvec b_2}{\uvec\omega^{ba} \times \uvec b_3}$
 		* The $\uvec\omega^{ba}$ is the angular velocity of $\vcx F_b$ with respect to $\vcx F_a$
-	* ${\vcx F_b^T}^\bullet = \uvec\omega^{ba} \times \vcx F_b^T = \vcx F_b^T{\bm\omega^{ba}}^\times \implies \vcx F_b \cdot {\vcx F_b^T}^\bullet = \vcx F_b \cdot \vcx F_b^T{\bm\omega^{ba}}^\times \implies {\bm\omega^{ba}}^\times = \vcx F_b \cdot {\vcx F_b^T}^\bullet$
-* ${\bm\omega^{ba}}^\times = \vcx F_b \cdot {\vcx F_b^T}^\bullet$ becomes our definition for angular velocity in general
-* We want to know how $\uvec v^\bullet$ is related to $\uvec v^\circ$
-	* $\uvec v = \vcx F_a^T\bm v_a = \vcx F_b^T\bm v_b$
-	* $\uvec v^\bullet = {\vcx F_a^T}^\bullet\bm v_a + \vcx F_a^T\bm v_a^\bullet = \vcx F_a^T\bm v_b^\bullet$
-	* $\uvec v^\circ = {\vcx F_b^T}^\circ\bm v_b + \vcx F_b^T\bm v_b^\circ = \vcx F_b^T\bm v_b^\circ$
-	* $\uvec v^\bullet = \vcx F_b^T\dot{\bm v_b} + {\vcx F_b^T}^\bullet\bm v_b = \uvec v^\circ + \uvec\omega^{ba} \times \vcx F_b^T\bm v_b = \uvec v^\circ + \uvec\omega^{ba} \times \uvec v$
-* Note that when we have as scalar $\bm v_b$, we put the dot over instead of to the right, because for the scalar reference frames does not matter
-* Therefore $\uvec v^\bullet = \uvec v^\circ + \uvec\omega^{ba} \times \uvec v$
+	* ${\vcx F_b^T}^\dota = \uvec\omega^{ba} \times \vcx F_b^T = \vcx F_b^T{\bm\omega^{ba}}^\times \implies \vcx F_b \cdot {\vcx F_b^T}^\dota = \vcx F_b \cdot \vcx F_b^T{\bm\omega^{ba}}^\times \implies {\bm\omega^{ba}}^\times = \vcx F_b \cdot {\vcx F_b^T}^\dota$
+* ${\bm\omega^{ba}}^\times = \vcx F_b \cdot {\vcx F_b^T}^\dota$ becomes our definition for angular velocity of frame $b$ with respect to $a$ in general
 
