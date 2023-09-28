@@ -25,6 +25,10 @@
 		* Now we can calculate the monthly payment as $A = 354,320(A/P, \frac{6\%}{12}, 20 \cdot 12) = 2538$
 		* Note that this amount is higher than the first set because of the increase in interest rate
 * In real life the interest can vary within a term, you can make additional payments, etc
+* Example: on a principal of \$800k, 5 years ago the interest was 1.5% with monthly payments, with a term of 5 years and an amortization of 25 years; the new interest is now 5%, what are the new monthly payments?
+	* $800000 = A(P/A, 0.1246\%, 25 \times 12, 25 \cdot 12) \implies A = 3197.74$
+	* $F = 800000(F/P, 0.1246\%, 5 \cdot 12) - 3197.24(F/A, 0.1246\%, 5 \cdot 12) = 662975$
+	* $A = 992975(A/P, 0.4124\$, 20) = 4356.58$
 
 ### Bonds
 
@@ -40,8 +44,8 @@
 	* Example: if we are only willing to pay \$700 for the aforementioned bond, what is the interest rate?
 		* $700 = 46.25(P/A, \frac{i}{2}, 20) + 1000(P/F, \frac{i}{2}, 20)$
 		* We can solve this to get $i = 15.2\%$
-	* This new higher interest rate is called the *yield*
-	* The higher the yield, the cheaper the bond will be at the present moment
+	* This new higher interest rate is called the *yield* -- it is determined by the market and not the bond issuer
+	* The higher the yield, the cheaper the bond will be at the present moment; if the risk suddenly increases, yield will also increase and the present value of the bond will decrease
 	* Another way to interpret the yield is how much you prefer getting paid at the present moment than in the future
 	* Yield rates are expressed as annual rates based on compounding equivalent to the coupon payment frequency
 		* If the compounding period is less than a year, the interest is simply multiplied to get the annual interest (unless effective interest is stated)

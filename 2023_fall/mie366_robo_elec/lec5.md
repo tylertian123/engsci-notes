@@ -55,4 +55,8 @@
 		* Drawing too much current would start causing considerable loading effects
 		* The output resistance is typically in the range of ohms to kilohms
 		* Since we're usually using kilohm-level resistances in our circuits, this could be a very common issue
+* Additionally, real-world op-amps must be powered by some pair of voltages $V_{dd}, V_{ss}$, which restricts the range that $V_{out}$ can take on
+	* If we expect the output voltage to be outside this range, it is capped instead
+	* When the waveform is cut off due to op-amp output limits, it is referred to as *clipping*
+	* Clipping may not happen right at the supply voltage; there may be a small gap and clipping happens slightly below the supply voltage
 
