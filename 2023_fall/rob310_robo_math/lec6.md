@@ -31,6 +31,7 @@
 	* Consider the linear test equation: $\hat x_{k + 1} = x_k + h\lambda x_k$
 	* With an initial error of $\Delta x_0$: $\alignedeqntwo[t]{\hat x_1}{(x_0 + \Delta x_0) + h\lambda(x_0 + \Delta x_0)}{\underbrace{(1 + h\lambda)x_0}_{x_1 + \tilde x_1} + \underbrace{(1 + h\lambda)\Delta x_0}_{\Delta\tilde x_1}}$
 	* $\Delta\tilde x_1 = (1 + h\lambda)\Delta x_0 \implies \abs*{\frac{\Delta\tilde x_{k + 1}}{\Delta x_k}} = \abs{1 + h\lambda} < 1$ for stability
+	* This makes forward Euler *conditionally stable* (even when the problem is well-conditioned, we still need additional conditions for stability)
 	* With a larger $\lambda$ the function is changing faster, so it makes sense that we require a smaller timestep
 * If we have a *stiff* system (i.e. ratio of fastest to slowest eigenvalue is large), we need to make $h$ small to accommodate the fast mode which wastes resources on the slow mode
 
@@ -43,5 +44,6 @@
 	* For some cases, including the test equation, it is still straightforward to solve for $x_{k + 1}$
 	* For the test equation $x_{k + 1} = x_k + h\lambda x_{k + 1} \implies x_{k + 1} = \frac{x_k}{1 - h\lambda}$
 * The stability conditions are $\abs{1 - h\lambda} < 1$, so this time we're stable everywhere except a circle around 1
+	* Since the system is always stable for $\Re\lambda < 0$, it is *unconditionally stable*
 * Backward Euler can be harder to implement but has much better stability; this gives us more freedom to choose $h$, which helps with stiff systems in particular (where forward Euler struggles)
 

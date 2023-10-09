@@ -6,9 +6,9 @@
 
 \noteDefn{Given a set of $S$ elements with keys (i.e. priority) that can be compared, a \textit{priority queue} has the operations:
 \begin{itemize}
-	\item $\operatorname{Insert}(S, x)$: insert element $x$ in $S$
-	\item $\operatorname{Max}(S)$: returns an element of highest priority in $S$ (note there may be multiple elements with the same priority)
-	\item $\operatorname{ExtractMax}(S)$: returns the max element and removes it from $S$
+	\item $\textsc{Insert}(S, x)$: insert element $x$ in $S$
+	\item $\textsc{Max}(S)$: returns an element of highest priority in $S$ (note there may be multiple elements with the same priority)
+	\item $\textsc{ExtractMax}(S)$: returns the max element and removes it from $S$
 \end{itemize}}
 
 * Priority queues can be implemented in a variety of ways, e.g. with linked lists or sorted arrays, but max-heaps are a particularly efficient implementation that offers $\Theta(\log n)$ operations

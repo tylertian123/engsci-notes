@@ -2,18 +2,18 @@
 
 ## Binomial Heaps Continued
 
-* Another operation is $\operatorname{DecreaseKey}(T, x, k)$ which decreases the priority of $x$ to $k$
+* Another operation is $\textsc{DecreaseKey}(T, x, k)$ which decreases the priority of $x$ to $k$
 	* This can be implemented simply in $O(\log n)$ time in both binomial and binary heaps by moving the element up
-* $\operatorname{Remove}(T, x)$ removes the element $x$; this can also be implemented in $O(\log n)$ time for binomial heaps
+* $\textsc{Remove}(T, x)$ removes the element $x$; this can also be implemented in $O(\log n)$ time for binomial heaps
 * Even though a single Insert operation takes $O(\log n)$, inserting $k$ keys in sequence has a cost of at most $2k$ key-comparisons as long as $k > \log n$
 
 ## Dictionaries
 
 \noteDefn{Given a set $S$ of elements with keys, a \textit{dictionary} provides the operations:
 \begin{itemize}
-	\item $\operatorname{Search}(S, x)$: returns element with key $x$ if it is in $S$, else "not found"
-	\item $\operatorname{Insert}(S, x)$: inserts $x$ in $S$
-	\item $\operatorname{Delete}(S, x)$: deltes $x$ from $S$
+	\item $\textsc{Search}(S, x)$: returns element with key $x$ if it is in $S$, else "not found"
+	\item $\textsc{Insert}(S, x)$: inserts $x$ in $S$
+	\item $\textsc{Delete}(S, x)$: deltes $x$ from $S$
 \end{itemize}}
 
 * If we naively implement this with a linked list, we get $\Theta(1)$ insert, but $\Theta(n)$ search and delete; can we find a structure that does each operation in $\Theta(\log n)$ time?

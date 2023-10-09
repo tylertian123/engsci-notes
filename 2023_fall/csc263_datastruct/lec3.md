@@ -42,13 +42,13 @@ Alternatively, the root $B_k$ has $k$ children, with the first child being a bin
 * Two important properties to note:
 	* We can merge two min-heap ordered $B_k$ trees into a single min-heap ordered $B_{k + 1}$ tree with just a single key comparison, by making the tree with the smaller root the parent tree
 	* Deleting the root of a min-heap ordered $B_k$ tree gives a min binomial heap, since the children are binomial trees $B_0, B_1, \dots, B_{k - 1}$
-* We can now implement the $\operatorname{Union}(T, Q)$ operation, which merges two heaps
+* We can now implement the $\textsc{Union}(T, Q)$ operation, which merges two heaps
 	* The operation works like binary addition:
 		* Start with the $B_0$ trees in both heaps
 		* If there is a $B_k$ in one heap but not the other heap, simply add this tree to the result
 		* If there are $B_k$ trees in both heaps, merge them into a $B_{k + 1}$ tree and make it a "carry"; merge this carry with the existing $B_{k + 1}$ trees of the two heaps
 	* Since each $B_k$ tree merge takes constant time and both input heaps have at most $\log n$ trees, the complexity is $O(\log n)$
 * An insert operation is equivalent to merging with a heap of size 1
-* For $\operatorname{Min}(T)$, we have to scan the root of every $B_k$ tree; this gives us $O(\log n)$ complexity
-* For $\operatorname{ExtractMin}(T)$, find the $B_k$ root that contains the minimum and remove it; this gives us another binomial heap made of its children, so we can simply merge it into the original heap
+* For $\textsc{Min}(T)$, we have to scan the root of every $B_k$ tree; this gives us $O(\log n)$ complexity
+* For $\textsc{ExtractMin}(T)$, find the $B_k$ root that contains the minimum and remove it; this gives us another binomial heap made of its children, so we can simply merge it into the original heap
 

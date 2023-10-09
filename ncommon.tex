@@ -14,6 +14,7 @@
 \usepackage{mathrsfs}
 \usepackage{mhchem}
 \usepackage{bm}
+\usepackage{tikz}
 \usepackage[american, siunitx, cuteinductors]{circuitikz}
 \usepackage{xcolor}
 \usepackage{tcolorbox}
@@ -39,6 +40,13 @@
   {\ooalign{\raisebox{.2\height}{\scalebox{.6}{$\scriptstyle\sum$}}\cr$\scriptstyle\int$\cr}}
   {\ooalign{\raisebox{.2\height}{\scalebox{.6}{$\scriptstyle\sum$}}\cr$\scriptstyle\int$\cr}}
 }
+
+\newcommand\com{\text{%
+    \tikz[radius=0.3em] {%
+        \fill (0,0) -- ++(0.3em,0) arc [start angle=0,end angle=90] -- ++(0,-0.6em) arc [start angle=270, end angle=180];%
+        \draw (0,0) circle;%
+    }%
+}}
 
 \renewcommand{\Re}{\operatorname{Re}}
 \renewcommand{\Im}{\operatorname{Im}}
@@ -66,6 +74,8 @@
 \newcommand{\ddota}{{\dota\dota}}
 \newcommand{\dotb}{{\mbox{\tiny $\circ$}}}
 \newcommand{\ddotb}{{\dotb\dotb}}
+\newcommand{\dotc}{{\mbox{\tiny $\otimes$}}}
+\newcommand{\ddotc}{{\dotc\dotc}}
 
 % Increase maximum list nesting depth
 \usepackage{enumitem}
@@ -87,6 +97,7 @@
 \newcommand{\ddbar}{\mathrm{d}\hspace*{-0.08em}\bar{}\hspace*{0.1em}}
 \newcommand{\grad}{\vec\nabla}
 \newcommand{\del}{\vec\nabla}
+\newcommand{\udel}{\uvec\nabla}
 \newcommand{\bv}[1]{\vec{\bm{#1}}}
 \newcommand{\dotvec}[1]{\dot{\vec{#1}}}
 

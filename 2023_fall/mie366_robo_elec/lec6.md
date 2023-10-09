@@ -15,7 +15,7 @@
 * For the magnitude plot, a Bode plot shows the ratio of output amplitude over input amplitude in decibels -- $\si{dB} = 20\log _{10} \frac{A_{out}}{A_{in}}$
 	* At $-3\si{dB}$, we consider the output amplitude to have started deviating considerably
 	* A typical Bode plot for a single pole looks similar to the example figure, with a horizontal segment where frequency has little effect, and a diagonal segment where increasing frequency significantly affects the output
-		* The inflection point is the location of the pole
+		* The inflection point is the location of the pole; this is known as the *cutoff frequency* or *corner frequency*
 		* After the pole location, each decade of increase in frequency leads to about $-20\si{dB}$ of amplitude difference
 
 ![Phase Bode plot for the example transfer function.](imgs/lec6_2.png){width=70%}
