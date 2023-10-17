@@ -21,6 +21,7 @@
 		2. Predict the measurement covariance: $\bm S_{k + 1} = \bm D_{k + 1}\bm P_{k + 1|k}\bm D_{k + 1}^T + \bm R_{k + 1}$
 		3. Calculate the Kalman gain: $\bm W_{k + 1} = \bm P_{k + 1|k}\bm D_{k + 1}^T\bm S_{k + 1}^{-1}$
 		4. Update the state covariance: $\bm P_{k + 1|k + 1} = \bm P_{k + 1|k} - \bm W_{k + 1}\bm S_{k + 1}\bm W_{k + 1}^T$
+* The state covariance estimation part can be combined into a single equation, which is known as the *Ricatti equation*
 * This only works if we have noise -- if $\bm R_{k + 1} = \bm 0$, often $\bm S_{k + 1}$ is not invertible; however if $\bm R_{k + 1}$ is invertible, then due to the positive-definiteness of $\bm P_{k + 1|k}$, we are guaranteed that $\bm S$ is invertible
 * Example: body in free fall
 	* Model: $\cvec{x_{k + 1}}{v_{k + 1}} = \mattwo{1}{1}{0}{1}\cvec{x_k}{v_k} + \cvec{-\frac{1}{2}g}{-g}$

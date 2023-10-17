@@ -13,7 +13,7 @@
 \begin{itemize}
 	\item $\textsc{Search}(S, x)$: returns element with key $x$ if it is in $S$, else "not found"
 	\item $\textsc{Insert}(S, x)$: inserts $x$ in $S$
-	\item $\textsc{Delete}(S, x)$: deltes $x$ from $S$
+	\item $\textsc{Delete}(S, x)$: deletes $x$ from $S$
 \end{itemize}}
 
 * If we naively implement this with a linked list, we get $\Theta(1)$ insert, but $\Theta(n)$ search and delete; can we find a structure that does each operation in $\Theta(\log n)$ time?

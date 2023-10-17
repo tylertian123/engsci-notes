@@ -77,8 +77,10 @@
 		* We can try to get $K_1, K_2$ as close to 1 as possible for both stages
 	* For circuit 1: we can try to select $C_1, C_2$ first
 		* We want $\omega _c = 50\si{rad/s}$ which has value $P = \frac{1}{R_1C_1}$
-		* We can try a capacitor value that's in the middle of a rage, e.g. $0.5\si{\micro f}$
-		* The resistors has to be $R_1 = 43\si{k\ohm}$
+		* We can try a capacitor value that's in the middle of the range, e.g. $0.5\si{\micro F}$, giving $R_1 = 43\si{k\ohm}$
 	* For circuit 2: let's pick $R_2 = R_1$
-		* We get a capacitor value around $460\si{pF}$, which works but is quite small
+		* We get a capacitor value around $23\si{pF}$, which works but is quite small
+
+\noteImportant{Lower frequency poles and zeroes are more easily realized with capacitors; higher frequency poles and zeros are more easily realized with inductors. This is a direct result of the range of component values we can use.
+Inductors begin to struggle below 100.}
 

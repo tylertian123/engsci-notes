@@ -66,7 +66,7 @@
 	* This can be derived by turning the arithmetic gradient into a series of annuities
 	* $P = G\sum _{k = 1}^{N - 1} \frac{(P/A, i, N - k)}{(1 + i)^k}$ ignoring the annuity starting on year 1
 * $(P/Geom, i, g, N) = \frac{1}{1 + g}(P/A, i^0, N)$ where $i^0 = \frac{1 + i}{i - g} - 1$
-	* Equivalently $(P/Geom, i, g, N) = \frac{1 - \left(\frac{1 + g}{1 + i}\right)^N}{1 + g}$
+	* Equivalently $(P/Geom, i, g, N) = \frac{1 - \left(\frac{1 + g}{1 + i}\right)^N}{i - g}$
 	* Note for a geometric gradient cash flow, there is nothing at time 0, then at time 1 a cash flow of $A$, then at time 2 a cash flow of $A(1 + g)$ and so on
 
 ### Examples

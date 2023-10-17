@@ -21,6 +21,8 @@
 \usepackage{diagbox}
 \usepackage{ulem}
 \usepackage{accents}
+\usepackage{clrscode3e}
+\usepackage{wasysym}
 
 \let\savedegree\degree
 \let\degree\relax
@@ -44,6 +46,12 @@
 \newcommand\com{\text{%
     \tikz[radius=0.3em] {%
         \fill (0,0) -- ++(0.3em,0) arc [start angle=0,end angle=90] -- ++(0,-0.6em) arc [start angle=270, end angle=180];%
+        \draw (0,0) circle;%
+    }%
+}}
+\newcommand\scom{\text{%
+    \tikz[radius=0.2em] {%
+        \fill (0,0) -- ++(0.2em,0) arc [start angle=0,end angle=90] -- ++(0,-0.4em) arc [start angle=270, end angle=180];%
         \draw (0,0) circle;%
     }%
 }}
@@ -256,6 +264,9 @@
 \newcommand{\matthreev}[9]{\begin{vmatrix} {#1} & {#2} & {#3} \\ {#4} & {#5} & {#6} \\ {#7} & {#8} & {#9} \end{vmatrix}}
 \newcommand{\matthreep}[9]{\begin{pmatrix} {#1} & {#2} & {#3} \\ {#4} & {#5} & {#6} \\ {#7} & {#8} & {#9} \end{pmatrix}}
 \newcommand{\matthreeB}[9]{\begin{Bmatrix} {#1} & {#2} & {#3} \\ {#4} & {#5} & {#6} \\ {#7} & {#8} & {#9} \end{Bmatrix}}
+
+\newcommand{\diagthree}[4][b]{\begin{#1matrix} {#2} & & \\ & {#3} & \\ & & {#4} \end{#1matrix}}
+\newcommand{\diagfour}[5][b]{\begin{#1matrix} {#2} & & & \\ & {#3} & & \\ & & {#4} & \\ & & & {#5} \end{#1matrix}}
 
 \makeatletter % Column vector (variadic), \cvec[bracket_type]{x1}{x2}{x3}...
 \newcommand{\cvec}[2][b]{\begin{#1matrix} #2 \cvecchecknextarg{#1}}
