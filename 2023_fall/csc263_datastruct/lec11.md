@@ -18,7 +18,7 @@
 	* To find, we simply traverse up the tree until we reach the root
 	* To merge, we find the root of both sets, and make one of them a child of the other
 	* With this, in the worst case we can get a complexity of $O(mn)$ since merging sets can create a chain of $m$ nodes
-* To improve this, we can perform weighted union by size, i.e. every time we merge, we make the larger tree the parent
+* To improve this, we can perform weighted union (WU) by size, i.e. every time we merge, we make the larger tree the parent
 	* With this, any tree $T$ created during the execution of $\sigma$ has height at most $\log _2(n)$
 		* Lemma: any tree $T$ of height $h$ created during the execution of $\sigma$ has at least $2^h$ nodes
 			* Base case: for $h = 0$, any tree of height $0$ contains at least $2^0 = 1$ node
@@ -29,5 +29,14 @@
 				* Therefore overall the tree has at least $2^h + 2^h = 2^{h + 1}$ nodes
 		* Since $2^h \leq \abs{T} \leq n$, we have $h \leq \log _2 n$
 	* Therefore the worst case cost is $O(m\log n)$
-* Another more effective technique is path compression: after a $\proc{Find}(x)$ operation, before returning, the parent of $x$ is set to be the representative element of the set containing $x$, so that future $\proc{Find}$ operations take a shorter path
+* Another more effective technique is path compression (PC): after a $\proc{Find}(x)$ operation, before returning, the parent of $x$ is set to be the representative element of the set containing $x$, so that future $\proc{Find}$ operations take a shorter path
+	* This increases the cost of $\proc{Find}$, but makes future operations cheaper
+	* This is called *amortization*
+
+\noteImportant{Differences between our data structure and the one described in CLRS:
+\begin{itemize}
+	\item We assume that $x$ and $y$ in the $\proc{Union}$ operation are the representatives of their respective sets (as opposed to CLRS which does not require this).
+	\item In our analysis it is assumed that we have $n$ elements and $m$ $\proc{Find}$ operations (as opposed to $m$ total $\proc{Find}$ and $\proc{Union}$ operations in CLRS)
+	\item In our disjoint set forest, we are using a weighted union heuristic, i.e. union-by-size (as opposed to union-by-rank in CLRS)
+\end{itemize}}
 

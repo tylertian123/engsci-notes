@@ -28,7 +28,7 @@
 
 * IRR ignores the size of the investments
 * For an investment, the money not invested is assumed to be invested at MARR
-* An investment with lower IRR can give you higher overall returns if the project is larger, so you can invest more money
+* An investment with lower IRR can give you higher overall returns if the project is larger, so you can invest more money, or if the project is longer term
 * Incremental IRR compares incremental differences in present and annual worth between two projects
 * Incremental analysis steps:
 	1. Order investments by first cost in increasing order

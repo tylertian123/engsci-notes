@@ -7,7 +7,7 @@
 * In this case our a priori covariance estimate is $\bm A_k\bm P_{k|k}\bm A_k^T + \bm B_k\bm N_k\bm B_k^T + \bm Q_k$
 * The rest stays unchanged
 
-## Kalman Filtering Example
+## Kalman Filtering Example -- Observability, Controllability, Detectability and Stabilizability
 
 ![Example scenario.](imgs/lec11_1.png){width=30%}
 
@@ -22,6 +22,13 @@
 * Our system is not observable, since $\bm A$ is the identity and $\bm D$ has rank 2
 	* This corresponds to the fact that we don't get enough information by just looking at the wall; we could be anywhere along the wall and still get the same measurement
 	* In this case, the output of the filter is not guaranteed to be correct (but we have no way of telling this)
+* *Detectability* is a weaker form of observability which requires an $\bm L$ to exist such that $\bm A + \bm L\bm D$ is stable
+	* This means that the unobservable states are stable according to their own dynamics
+* *Stabilizability* is the dual of detectability, which requires $\bm K$ to exist such that $\bm A + \bm B\bm K$ is stable
+	* This means that the uncontrollable states are stable according to their own dynamics
+* If a system is not observable, but it is still detectable and stabilizable, then the Kalman filter will still converge
+* Note that stability in a discrete system requires that all $\abs{\lambda} < 1$ (since we have $\bm x_n = \bm A^n\bm x_0$), whereas in a continuous system we require the eigenvalues to have negative real parts
+	* This is known as *Schur stability*
 
 ## Mapping
 

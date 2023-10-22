@@ -45,10 +45,3 @@
 	* The eigenvalues are $\lambda = 1, 4$, so we choose $\lambda = 1$ and its eigenvector normalized to unit length (for constraint $g$)
 	* Note that there are actually two solutions here ($\pm$ on the unit eigenvector)
 
-## Inequality Constraints: Introduction
-
-* There are 2 possible cases for each inequality constraint; consider a minimum $\bm x$, then either $h_i(\bm x) = 0$ this point (active), or $h_i(\bm x) > 0$ (inactive)
-	* In the first case, the inequality constraint is the same as an equality constraint and the optimum will be on the boundary of the inequality region
-	* In the second case, the inequality constraint has effectively no impact on where the optimum is, since it lies fully within the inequality region
-	* If there are multiple active inequality constraints, then the solution lies on the intersection of their boundaries
-
