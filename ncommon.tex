@@ -23,6 +23,7 @@
 \usepackage{accents}
 \usepackage{clrscode3e}
 \usepackage{wasysym}
+\usepackage{sansmath}
 
 \let\savedegree\degree
 \let\degree\relax
@@ -33,6 +34,7 @@
 \let\emptyset\varnothing
 
 \normalem
+
 
 % Thanks stack exchange
 \DeclareMathOperator*{\sumint}{%
@@ -82,8 +84,16 @@
 \newcommand{\ddota}{{\dota\dota}}
 \newcommand{\dotb}{{\mbox{\tiny $\circ$}}}
 \newcommand{\ddotb}{{\dotb\dotb}}
-\newcommand{\dotc}{{\mbox{\tiny $\otimes$}}}
+\newcommand{\dotc}{{\mbox{\tiny $\triangle$}}}
 \newcommand{\ddotc}{{\dotc\dotc}}
+
+\newcommand{\tarc}{\mbox{\large$\frown$}}
+\newcommand{\overarc}[2][-3ex]{{#2}{\kern #1{\raisebox{1.5ex}{\tarc}}}}
+
+\newcommand{\sans}[1]{\begin{sansmath}\text{${#1}$}\end{sansmath}}
+
+\newcommand{\ssquare}{\scalebox{0.5}{$\square$}}
+\newcommand{\striangle}{\scalebox{0.5}{$\triangle$}}
 
 % Increase maximum list nesting depth
 \usepackage{enumitem}
@@ -204,6 +214,7 @@
 \newcommand{\dc}{\dd c}
 \newcommand{\de}{\dd e}
 \newcommand{\df}{\dd f}
+\newcommand{\dm}{\dd m}
 \newcommand{\dk}{\dd k}
 \newcommand{\dr}{\dd r}
 \newcommand{\ds}{\dd s}
@@ -267,6 +278,12 @@
 
 \newcommand{\diagthree}[4][b]{\begin{#1matrix} {#2} & & \\ & {#3} & \\ & & {#4} \end{#1matrix}}
 \newcommand{\diagfour}[5][b]{\begin{#1matrix} {#2} & & & \\ & {#3} & & \\ & & {#4} & \\ & & & {#5} \end{#1matrix}}
+
+\newenvironment{amatrix}[1]{%
+  \left[\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+\end{array}\right]
+}
 
 \makeatletter % Column vector (variadic), \cvec[bracket_type]{x1}{x2}{x3}...
 \newcommand{\cvec}[2][b]{\begin{#1matrix} #2 \cvecchecknextarg{#1}}

@@ -62,6 +62,8 @@
 
 ![Example half-wave rectifier.](imgs/lec13_4.png){width=50%}
 
+![Half-way rectifier with capacitor.](imgs/lec13_5.png){width=80%}
+
 * A rectifier circuit converts an input AC voltage into an output DC voltage
 * In the example half-wave rectifier above, the diode will allow current to pass through whenever the AC voltage is positive, and block it when the voltage is negative
 	* However this is produces an output that is far from DC since whenever the AC voltage goes negative, our DC voltage goes to zero

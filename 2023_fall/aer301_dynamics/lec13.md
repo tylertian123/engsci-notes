@@ -37,7 +37,7 @@
 ## Example Problem
 
 * Given that the orbital shape of a body is $r = a\sqrt{\cos 2\theta}$, show that in order to create this orbital shape, the force satisfies $f \propto \frac{1}{r^7}$
-* For a general central force we have $\twopiece{\ddot r - r\dot\theta^2 = f}{r\ddot\theta + 2\dot r\dot\theta = 0}$
+* For a general central force we have $\twopiece{\ddot r - r\dot\theta^2 = \frac{f}{m}}{r\ddot\theta + 2\dot r\dot\theta = 0}$
 * Now we can simply substitute in $r$: $\twopiece{\dot r = -\frac{a\dot\theta\sin 2\theta}{\sqrt{\cos 2\theta}}}{\ddot r = -\frac{a\ddot\theta\sin2\theta}{\sqrt{\cos2\theta}} - \frac{a\dot\theta\sin2\theta}{\cos^\frac{3}{2}2\theta} - 2a\dot\theta^2\sqrt{\cos2\theta}}$
 	* Using the second equation, $\dot\theta = \frac{h}{r^2}$ and $\ddot\theta = -\frac{2h}{r^3}\dot r = \frac{2\dot\theta^2\sin2\theta}{\cos2\theta}$
 	* This allows us to express everything in terms of $r$ in the first equation

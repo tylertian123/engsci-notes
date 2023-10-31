@@ -37,6 +37,17 @@ That is, each vector has norm 1 and is orthogonal to every other vector. \tcblow
 * Gaussian elimination is equivalent to first factorizing $\bm A\bm x = \bm L\bm U\bm x = \bm b$ and then solving $\bm L\bm y = \bm b, \bm U\bm x = \bm y$, where $\bm L$ is lower triangular and $\bm U$ is upper triangular
 	* If we want to reuse $\bm A$ with different values of $\bm b$, we can prefactorize $\bm A$ and reuse the factors to save time
 * In practice, use `x = np.linalg.solve(A, b)` in Python or `x = A \ b` in MATLAB
+* Example: solve $\mattwo{1}{2}{2}{5}\cvec{x_1}{x_2} = \cvec{1}{1}$
+	* We could do this by Gaussian elimination:
+		* $\mattwothree{1}{2}{1}{2}{5}{1} \to \mattwothree{1}{2}{1}{0}{1}{-1} \to \mattwo{1}{2}{0}{1}\cvec{x_1}{x_2} = \cvec{1}{-1}$
+		* $x_2 = -1 \implies x_1 = 3$
+	* Note the first row operation was $\left(I - 2\mattwo{0}{0}{1}{0}\right)\bm A = \mattwo{1}{2}{0}{1}$
+		* $\mattwo{1}{0}{-2}{1}\mattwo{1}{2}{2}{5} = \mattwo{1}{2}{0}{1}$
+		* Notice the matrix multiplying $\bm A$ is lower triangular and the result is upper triangular; now we can invert the first matrix to get a form of $\bm A = \bm L\bm U$, since the inverse of a lower triangular matrix is also lower triangular
+	* LU factorization:
+		* $\mattwo{1}{0}{2}{1}\mattwo{1}{2}{0}{1}\cvec{x_1}{x_2} = \cvec{b_1}{b_2}$
+		* Solve first $\cvec{1}{0}{2}{1}\cvec{y_1}{y_2} = \mattwo{1}{1} \implies y_1 = 1, y_2 = -1$
+		* Now we can solve $\mattwo{1}{2}{0}{1}\cvec{x_1}{x_2} = \bm y = \cvec{1}{-1}$, which gives us the same result
 
 ### Matrix and Vector Norms
 
@@ -74,6 +85,7 @@ Or equivalently $$\norm{\bm A} = \max _{\bm x \in \reals^n, \bm x \neq 0} = \fra
 		* Proof:
 			* $\norm{\bm A}_\infty = \max\Set{\norm{\bm A\bm x}_\infty | \norm{\bm x}_\infty = 1}$
 			* Note $[\bm A\bm x]_i = \sum _j a_{ij}x_j$, so $\norm{\bm A\bm x}_\infty = \max _i\abs*{\sum _j a_{ij}x_j} \leq \max _i\sum _j \abs{a_{ij}}\abs{x_j} \leq \max _i \sum _j \abs{a_{ij}}x_{max} = \max _i\sum _j \abs{a_{ij}}\norm{\bm x}_\infty = \max _i \sum _j\abs{a_{ij}}$
+			* We can show the bound the other way by selecting $x_j$ in a special way (see posted notes)
 
 ### Condition Number
 

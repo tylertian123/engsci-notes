@@ -1,4 +1,4 @@
-# Lecture 6, Oct 15, 2023
+# Lecture 6, Oct 18, 2023
 
 ## Internal Rate of Return (IRR)
 
