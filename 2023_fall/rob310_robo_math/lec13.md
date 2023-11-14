@@ -24,7 +24,7 @@ That is, each vector has norm 1 and is orthogonal to every other vector. \tcblow
 	* Applying $\bm Q$ has a linear transformation will not affect the length of a vector or the angle between two vectors; this means $\bm Q$ is an *isometry*
 		* $\norm{\bm Q\bm x}_2^2 = \bm x^T\bm Q^T\bm Q\bm x = \bm x^T\bm x = \norm{\bm x}_2^2$
 		* $(\bm Q\bm x) \cdot (\bm Q\bm y) = \bm x^T\bm Q^T\bm Q\bm y = \bm x^T\bm y = \bm x \cdot \bm y$
-* An orthogonal matrix can rate vectors but not scale them; all rotation matrices are orthogonal
+* An orthogonal matrix can rotate vectors but not scale them; all rotation matrices are orthogonal
 
 ### Solving Linear Systems
 
@@ -68,7 +68,7 @@ That is, each vector has norm 1 and is orthogonal to every other vector. \tcblow
 * All $p$-norms for $p \geq 1$ (including the $\infty$-norm) are convex
 
 \noteDefn{The \textit{matrix norm} on $\reals^{m \times n}$ induced by a vector norm $\norm{\cdot}$ is given by $$\norm{\bm A} = \max\Set{\norm{\bm A\bm x} | \norm{\bm x} = 1}$$
-Or equivalently $$\norm{\bm A} = \max _{\bm x \in \reals^n, \bm x \neq 0} = \frac{\norm{\bm A\bm x}}{\norm{\bm x}}$$}
+Or equivalently $$\norm{\bm A} = \max _{\bm x \in \reals^n, \bm x \neq 0}\frac{\norm{\bm A\bm x}}{\norm{\bm x}}$$}
 
 * The induced vector norm is essentially the maximum norm of a unit vector after multiplying by $\bm A$
 * This makes the property that $\norm{\bm A\bm x} \leq \norm{\bm A}\norm{\bm x}$
@@ -89,7 +89,7 @@ Or equivalently $$\norm{\bm A} = \max _{\bm x \in \reals^n, \bm x \neq 0} = \fra
 
 ### Condition Number
 
-\noteDefn{The \textit{condition number} of $\bm A \in \reals^{n \times n}$ with respect to a given norm $\norm{\cdot}$ is $$\operatorname{cond}\bm A = \norm{\bm A}\norm{\bm A^{-1}}$$ if $\bm A$ is invertible, $\operatorname{cond}\bm A = \infty$ by definition.}
+\noteDefn{The \textit{condition number} of $\bm A \in \reals^{n \times n}$ with respect to a given norm $\norm{\cdot}$ is $$\operatorname{cond}\bm A = \norm{\bm A}\norm{\bm A^{-1}}$$ if $\bm A$ is non-invertible, $\operatorname{cond}\bm A = \infty$ by definition.}
 
 * Recall that conditioning describes how a small error in the input propagates to an error in the output
 * For a matrix, we ask the question: for finding $\bm x$ such that $\bm A\bm x = \bm b$, how does the solution $\bm x$ change if we make a small change to the matrices $\bm A$ and $\bm b$?

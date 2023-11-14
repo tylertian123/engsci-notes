@@ -29,7 +29,7 @@
 	* Assume that there exists some update algorithm $g$ such that $g(x^*) = x^*$, so $f(x^*) = g(x^*) - x^* = 0$; this update function will bring us closer to the root if it converges
 		* This update is problem-dependent, but has to be Lipschitz continuous for convergence
 		* Example: for $f(x) = e^{\frac{1}{2}x} - x - 2$
-			* $g_1(x) = e^{\frac{1}{2}x - 2}$
+			* $g_1(x) = e^{\frac{1}{2}x} - 2$
 			* $e^{\frac{1}{2}x} = x + 2 \implies \frac{1}{2}x = \ln(x + 2) \implies -x + 2\ln(x + 2) = 0$
 			* $g_2(x) = 2\ln(x + 2)$
 	* The algorithm:

@@ -54,7 +54,7 @@
 	* This cash goes into assets, so we increase assets by \$50000; assets is a left hand side account so this is a debit
 	* The associated credit is an increase in the common shares account, which is an equity account (right hand side)
 
-### Financial Ratios
+## Financial Ratios
 
 * Financial ratios are a quick and dirty way for us to value a business
 * These can be used as metrics to compare similar companies or against the industry average, typically within the same industry

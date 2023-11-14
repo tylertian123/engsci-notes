@@ -43,7 +43,7 @@
 * To actually implement this we have a number of options, including inverting $f$, using a numerical root finding algorithm, or making further approximations
 	* For some cases, including the test equation, it is still straightforward to solve for $x_{k + 1}$
 	* For the test equation $x_{k + 1} = x_k + h\lambda x_{k + 1} \implies x_{k + 1} = \frac{x_k}{1 - h\lambda}$
-* The stability conditions are $\abs{1 - h\lambda} < 1$, so this time we're stable everywhere except a circle around 1
+* The stability conditions are $\abs{1 - h\lambda} > 1$, so this time we're stable everywhere except a circle around 1
 	* Since the system is always stable for $\Re\lambda < 0$, it is *unconditionally stable*
 * Backward Euler can be harder to implement but has much better stability; this gives us more freedom to choose $h$, which helps with stiff systems in particular (where forward Euler struggles)
 

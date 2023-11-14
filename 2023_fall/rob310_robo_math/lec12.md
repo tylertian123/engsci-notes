@@ -75,7 +75,7 @@
 	* This is similar to Newton's method -- taking a quadratic approximation, solving for the minimum, and then approximate again
 	* The active set method checks which constraints are active
 		* Given an active set, all constraints are treated as equality constraints and Lagrange multipliers are used to minimize
-	* SQP only converges if we start with an instal guess in the neighbourhood of the true minimum, similar to Newton's method
+	* SQP only converges if we start with an initial guess in the neighbourhood of the true minimum, similar to Newton's method
 	* Most model predictive controllers (MPC controllers) use SQP methods
 
 ![Illustration of barrier methods.](imgs/lec12_3.png){width=40%}

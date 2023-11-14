@@ -109,10 +109,3 @@
 	* $I_D$ is taken as positive but positive $I_D$ is $I_{SD}$ (source-to-drain) instead of $I_{DS}$
 	* For a PMOS $V_{GS}$ is typically negative in triode/saturation, and $V_T$ is also negative
 
-![Model of parasitic capacitance in a MOSFET.](imgs/lec15_9.png){width=20%}
-
-* In real life the construction of the MOSFET introduces a parasitic capacitance from gate to source (there are also gate-to-drain, drain-to-source parasitic capacitances but these are small)
-	* Typically $C_{GS} \sim \SI{5}{pF} - \SI{50}{nF}$
-	* This introduces a time limit for switching since we need to charge the capacitor
-	* This can also draw large transient currents when $V_{GS}$ changes rapidly, so we will need a driver IC or series gate resistors to mitigate this issue
-
