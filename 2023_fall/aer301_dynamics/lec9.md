@@ -33,7 +33,7 @@
 	* $\uvec h_\scom^\dota = \sum _i\uvec s_i^\dota \times \uvec p_i + \sum _i \uvec s_i \times \uvec p_i^\dota = \sum _i \uvec s_i \times \uvec f_{i,ext} = \uvec\tau _\scom$
 * So we have $\uvec h^\dota = \uvec \tau$ about $O_\mathfrak{I}$ and $\uvec h_\scom^\dota = \uvec\tau _\scom$ about $\com$
 	* This is a special result that only olds for the center of mass!
-	* In general $\uvec h_O^\dota + \uvec v_O \times \uvec p = \uvec\tau _O$ for a general $O$ moving at $\uvec v_O = \uvec r^{OO_\mathfrak{I}}$ with respect to $O_\mathfrak{I}$
+	* In general $\uvec h_O^\dota + \uvec v_O \times \uvec p = \uvec\tau _O$ for a general $O$ moving at $\uvec v_O = {\uvec r^{OO_\mathfrak{I}}}^\dota$ with respect to $O_\mathfrak{I}$
 		* In the inertially fixed point, $\uvec v_O = 0$
 		* At the center of mass, $\uvec p = m\uvec r_\scom^\dota = m\uvec v_O$, so when we cross it with $\uvec v_O$, the term cancels
 		* In both special frames we do not need to apply a correction

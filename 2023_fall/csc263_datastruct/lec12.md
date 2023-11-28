@@ -12,7 +12,7 @@
 * We claim that with WU and PC, executing $\sigma$ takes $O(m \log^* n)$ time (proof is left as an exercise to the reader)
 * Is there some sequence of $\sigma$ that takes at least $m\log^* n$ time? Can we execute $\sigma$ in $O(m)$ time?
 	* The real complexity is actually between the two -- not quite linear, but growing slower than $m\log^* n$
-	* The actual complexity is $\Theta(m\alpha^{-1}(m, n))$ where $\alpha^{-1}(m, n)$ is the inverse Ackermann function
-	* The lower bound of $\Omega(m\alpha^{-1}(m, n))$ applies for any disjoint set data structure, not just the forest implementation
+	* The actual complexity is $\Theta(m\alpha(m, n))$ where $\alpha(m, n)$ is the inverse Ackermann function
+	* The lower bound of $\Omega(m\alpha(m, n))$ applies for any disjoint set data structure, not just the forest implementation
 	* This took 25 years to derive
 

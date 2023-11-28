@@ -21,13 +21,18 @@
 	* However after purchase, depreciation and capital gains/losses do affect taxes
 	* In general if something does not show up on the income statement (i.e. only balance sheet), it does not affect taxes
 * Rate of returns are discounted by the tax rate for cash flows after tax, because we expect less profit
-	* MARR and IRR after tax is the pre-tax rate multiplied by 1 minus the tax rate
+	* MARR and IRR after tax is the pre-tax rate multiplied by 1 minus the tax rate (as an approximation)
+		* This gives the WACC
+	* Note that equity rates (i.e. numbers from CAPM) are after-tax; so we don't need to adjust these
+	* $R_{WACC} = \frac{E}{E + D}R_E + \frac{D}{E + D}R_D(1 - t)$
+		* Only the debt rate is discounted by tax
 
 ### Capital Cost Allowance (CCA)
 
 * Depreciation is not a real cash flow, but claiming depreciation saves on taxes
 	* A company will want to depreciate as much as possible, as fast as possible due to time value of money
 	* Government regulations exist to make sure companies can't arbitrarily depreciate
+	* Note that on the actual balance sheet, a company might want to depreciate more slowly because this makes their income look better, but for tax purposes they must use CCA; this results in a discrepancy on the balance sheet
 * CCA is the Canadian system for calculating depreciation and taxes
 	* The capital cost allowance (CCA) is the amount of depreciation
 	* The undepreciated capital cost (UCC) is the book value
@@ -69,7 +74,7 @@
 ### Calculating Present Worth
 
 * Using the explicit method:
-	* Use the after-tax discounted MARR
+	* Use the WACC (after-tax discounted MARR)
 	* Revenues are discounted by the tax rate
 	* No changes to first costs
 	* Take into account depreciation tax savings every year by calculating CCA every year
@@ -77,8 +82,9 @@
 * The *tax benefit factor* $\tau$ is defined as the ratio of the present worth of tax savings to the first cost of equipment
 	* Assets have inherent value but also value associated with tax benefits
 	* $\tau$ is how much every dollar spent will save in taxes
-	* This depends on the depreciation method, tax rate, MARR, etc
-	* For regular declining balance, $\tau _{db} = \frac{td}{i + d}$ where $i$ is the after-tax MARR, $d$ is the depreciation rate and $t$ is the tax rate
+		* Note that this assumes we will keep the asset around forever, so we get the tax savings for the rest of time
+	* This depends on the depreciation method, tax rate, WACC, etc
+	* For regular declining balance, $\tau _{db} = \frac{td}{i + d}$ where $i$ is the after-tax WACC, $d$ is the depreciation rate and $t$ is the tax rate
 		* This applies to asset disposition
 	* For declining balance with half-year rule, $\tau _{1/2} = \frac{td}{i + d}\left(\frac{1 + \frac{i}{2}}{1 + i}\right)$
 		* This applies to asset purchases
@@ -86,6 +92,7 @@
 	* $PW(FC) = -FC + FC\tau _{1/2} = -FC(1 - \tau _{1/2})$
 	* The term $(1 - \tau _{1/2})$ is known as the *capital tax factor* (CTF)
 * The *effective salvage value* of selling an asset is reduced because of losing tax savings
+	* Since the CTF assumes we keep the tax forever, when we actually sell the asset we need to correct for the tax savings that we lose
 	* $PW(S) = (S - R\tau _{db})(P/F, i, N)$
 	* $S$ is the salvage value, $R$ is the reduction in the pool due to selling the asset
 	* The term $(1 - \tau _{db})$ is known as the *capital salvage factor* (CSF)

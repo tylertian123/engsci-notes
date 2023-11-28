@@ -32,7 +32,7 @@
 \noteSummary{The transport equations relate velocity and acceleration as measured in one frame to how they're measured in another frame:
 \begin{itemize}
 	\item $\uvec v^\dota = \uvec v^\dotb + \uvec\omega^{ba} \times \uvec v$
-	\item $\dot{\bm v_a} = \bm C_{ab}(\dot{\bm v_b} + {\bm\omega_b^{ba}}^\times\bm v_b)$
+	\item $\dot{\bm v}_a = \bm C_{ab}(\dot{\bm v}_b + {\bm\omega_b^{ba}}^\times\bm v_b)$
 	\item $\uvec v^{\ddota} = \uvec v^{\dotb\dotb} + 2\uvec\omega^{ba} \times \uvec v^\dotb + {\uvec\omega^{ba}}^\dotb \times \uvec v + \uvec\omega^{ba} \times (\uvec\omega^{ba} \times \uvec v)$
 	\item $\ddot{\bm v}_a = \bm C_{ab}(\ddot{\bm v}_b + {2{\bm\omega}_b^{ba}}^\times\dot{\bm v}_b + {\dot{\bm\omega}_b^{ba}}^\times\bm v + {\bm\omega _b^{ba}}^\times{\bm\omega _b^{ba}}^\times\bm v_b)$
 \end{itemize}}

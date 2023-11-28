@@ -23,7 +23,7 @@
 
 \noteDefn{The \textit{singular value decomposition} (SVD) of $\bm A \in \reals^{m \times n}$ is $$\bm U^T\bm A\bm V = \bm\Sigma \iff \bm A = \bm U\bm\Sigma\bm V^T$$ where $\bm V \in \reals^{n \times n}, \bm U \in \reals^{m \times m}$ are orthogonal matrices, and $\bm\Sigma \in \reals^{m \times n}$ is a rectangular diagonal matrix which contains the singular values of $\bm A$.
 \tcblower
-Note that $\bm V$ contains the eigenvalues of $\bm A^T\bm A$ and $\bm U$ contains the eigenvectors of $\bm A\bm A^T$, while the $\sigma _i \in \reals$ singular values on the diagonal of $\bm\Sigma$ are the square roots of the eigenvalues of $\bm A^T\bm A$.}
+Note that $\bm V$ contains the eigenvectors of $\bm A^T\bm A$ and $\bm U$ contains the eigenvectors of $\bm A\bm A^T$, while the $\sigma _i \in \reals$ singular values on the diagonal of $\bm\Sigma$ are the square roots of the eigenvalues of $\bm A^T\bm A$.}
 
 * Note $\bm\Sigma$ has the same dimension as $\bm A$
 * $\bm A^T\bm A$, $\bm A\bm A^T$ are symmetric, so by the spectral theorem their eigenvalues are orthonormal; furthermore, $\bm A^T\bm A$ is positive semi-definite so eigenvalues are all nonnegative, thus the singular values are real

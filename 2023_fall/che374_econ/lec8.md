@@ -66,7 +66,7 @@
 		* The acid-test ratio shows the ability to pay liabilities if they are due immediately
 			* This is the ratio of (cash + short-term investments + net current receivables) to liabilities
 	2. Efficiency ratios: ability to sell inventory and collect receivables
-		* The inventory turnover ratio is the cost of goods sold to average inverter
+		* The inventory turnover ratio is the cost of goods sold to average inventory
 		* This is a measure of the number of times that we would sell the average inventory in a given year
 			* Note that if we change the time period in question, we have to adjust accordingly
 		* Larger companies are generally less efficient on this front -- lower inventory turnover ratio means more money is tied up in inventory
@@ -95,4 +95,25 @@
 			* Mature and stable companies tend to pay dividends, while high growth companies tend to not pay dividends and instead reinvest the money
 		* Market capitalization is the total market value of a company's outstanding shares of stock (not a ratio)
 			* Companies are categorized by size by market capitalization: large-cap (10B+), mid-cap (2B to 10B), small-cap (300M to 2B)
+
+| Name | Expression | Interpretation | Notes |
+|---|-----|--------|--------|
+| Current | $\frac{\text{curr. assets}}{\text{curr. liab.}}$ | Ability to pay current liabilities | Below 1 could be a sign of distress |
+| Acid Test | $\frac{\splitfrac{\text{cash} + \text{curr. receivables}}{+ \text{s.t. investments}}}{\text{curr. liabilities}}$ | Ability to pay liabilities if due immediately | Better if > 1 |
+| Inventory Turnover | $\frac{\text{COGS}}{\text{avg. inventory}}$ | How many times per time period the average inventory is sold | Higher is more efficient; tends to be smaller for larger companies |
+| Days' Inventory | $\frac{\text{avg. inventory}}{\text{avg. COGS per day}}$ | Days to sell average inventory | Lower is more efficient |
+| Acc. Receivable Turnover | $\frac{\text{net credit sales}}{\text{net acc. payable}}$ | Number of times credit is collected | Higher is more efficient |
+| Days' Receivables | $\frac{\text{avg. acc. receivables}}{\text{avg. sales per day}}$ | How many days it takes to collect credit | Lower is more efficient |
+| Days' Payables | $\frac{\text{avg. acc. payables}}{\text{avg. COGS per day}}$ | How many days it takes to pay creditors | Higher means more funds are retained, too high might be problematic |
+| Debt Ratio | $\frac{\text{total liabilities}}{\text{total assets}}$ | Proportion of assets financed with debt | Higher is more risky |
+| Equity Ratio | $\frac{\text{total equity}}{\text{total assets}}$ | Proportion of assets financed with equity | Higher is less risky |
+| Times Interest Earned | $\frac{\text{income or EBIT}}{\text{interest expense}}$ | How many times income can cover interest | Higher is better |
+| Profit Margin | $\frac{\text{net income}}{\text{net sales}}$ | How many dollars of profit per dollar of sales | Higher is better |
+| Return on Assets (ROA) | $\frac{\text{net income}}{\text{total assets}}$ | How profitably the company uses its assets | Higher is more efficient |
+| Return on Equity (ROE) | $\frac{\text{net income}}{\text{total equity}}$ | How profitably the company uses equity | Higher is more efficient |
+| Earnings Per Share (EPS) | $\frac{\text{net income}}{\text{\# of shares}}$ | Amount of profit per share | Higher is better |
+| Price To Earnings (P/E) | $\frac{\text{share price}}{\text{EPS}}$ | (Inverse) Relative value in shares | Higher means stock is overvalued or high growth |
+| Dividend Yield | $\frac{\text{dividend per share}}{\text{EPS}}$ | Dividends relative to stock price | Mature companies tend to pay more dividends |
+| Market Capitalization | total market value of all shares | Measure of size of company | Large-cap (10B+), mid-cap (2-10B), small-cap (300M-2B) |
+
 

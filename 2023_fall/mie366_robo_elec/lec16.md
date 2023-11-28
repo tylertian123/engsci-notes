@@ -55,6 +55,11 @@
 * Example: find the drain and source voltage of the MOSFET above, and select a resistor to replace the current source with, without changing the source or drain current
 	* We expect the MOSFET to be in saturation mode
 	* We have $V_G = \SI{0}{V}, I_D = \SI{2}{mA}$
-	* The drain voltage can be calculated by as $V_D = V_DD - R_DI_D = \SI{2}{V}$
+	* The drain voltage can be calculated by as $V_D = V_{DD} - R_DI_D = \SI{2}{V}$
+		* Note when we solve the equation we will get 2 possible values, but one of them will give us cutoff instead of saturation
 	* $V_{GD} = \SI{-2}{V} < V_T$ so we are indeed in saturation mode
+	* Now use $I_D = \frac{1}{2}k_n\frac{W}{L}\left(V_{GS} - V_T\right)^2$, with $I_D = \SI{2}{mA}$ to solve for $V_{GS} = \SI{4}{V}$
+		* Again we will get 2 values, but one of them gives us cutoff
+	* So $V_S = V_G - V_{GS} = \SI{4}{V}$
+	* We can now solve for an equivalent resistance value that can replace the current source: $I_S = I_D = \SI{2}{mA} = \frac{V_S - V_{SS}}{R_S}$ to get $R_S = \SI{3}{k\ohm}$
 
