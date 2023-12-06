@@ -92,8 +92,8 @@
 
 \newcommand{\sans}[1]{\begin{sansmath}\text{${#1}$}\end{sansmath}}
 
-\newcommand{\ssquare}{\scalebox{0.5}{$\square$}}
-\newcommand{\striangle}{\scalebox{0.5}{$\triangle$}}
+\newcommand{\ssquare}{{\scalebox{0.5}{$\square$}}}
+\newcommand{\striangle}{{\scalebox{0.5}{$\triangle$}}}
 
 % Increase maximum list nesting depth
 \usepackage{enumitem}
@@ -168,6 +168,11 @@
 
 \DeclareMathOperator{\sign}{sign}
 \DeclareMathOperator{\sgn}{sgn}
+
+\let\argmax\relax
+\let\argmin\relax
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\argmin}{argmin}
 
 \DeclarePairedDelimiter{\abs}{\lvert}{\rvert} % Proper absolute values etc
 \DeclarePairedDelimiter{\norm}{\lVert}{\rVert}

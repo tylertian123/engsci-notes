@@ -50,7 +50,9 @@
 
 ![Example: Common gate amplifier.](imgs/lec20_3.png){width=50%}
 
-***TODO get diagrams from lecture recording***
+![Transformed circuit.](imgs/lec20_4.png){width=70%}
+
+![Transformed circuit using the T-model.](imgs/lec20_5.png){width=50%}
 
 * Example: Find the same 3 quantities in the circuit above, ignoring channel length modulation
 	* First transform the circuit
@@ -68,6 +70,10 @@
 	* With the T-model, we can easily tell that $R_{in} = R_S \parallel \frac{1}{gm}$
 	* For $R_{out}$, with a $v_{in} = 0$ we have no current through the current source, so $R_{out} = R_D$
 
+![Second example circuit.](imgs/lec20_7.png){width=70%}
+
+![Transformed second example circuit.](imgs/lec20_8.png){width=70%}
+
 * Example: similar to the common source amplifier we solved before, but using a current mirror and no bypass capacitor
 	* Note that this is not a proper amplifier, since we do not have a bypass capacitor
 	* Normally this would not be solvable if we replaced the current mirror with a current source, but real world CLM effects provide a path for current
@@ -78,4 +84,26 @@
 		* The sources of both of these MOSFETs are grounded, and there is no path from $v_{in}$ to their gates
 		* In this scenario, we can assume $v_{gs_2} = v_{gs_3} = 0$ to simplify the circuit
 	* Now we can eliminate the current source from the second MOSFET, leaving us with only $r_{0_2}$, a large resistance to ground
+	* This is equivalent to having a source resistor on the original MOSFET circuit
+		* Source resistors usually act like localized negative feedback -- they reduce gain but improve some other parameters, such as lowering output resistance
+		* However, unlike a normal source resistor, the CLM resistor is both hard to control and way too big
+	* Write node equations:
+		* At $v_{s_1}$ or $v_{D_2}$: $\frac{v_{s_1}}{r_{0_2}} + \frac{v_{s_1} - v_{out}}{r_{0_1}} - g_{m_1}v_{gs_1} = 0$
+			* Note $v_{gs_1} = v_{in} - v_{s_1}$
+		* At $v_{out}$: $\frac{v_{out}}{r_{0_1}} + \frac{v_{out} - v_{s_1}}{r_{0_1}} + g_{m_1}v_{gs_1} = 0$
+		* Add the equations: $\frac{v_{s_1}}{r_{0_2}} + \frac{v_{out}}{r_{0_1}} = 0 \implies v_{s_1} = -\frac{r_{0_2}}{R_D}v_{out}$
+		* Substitute into one of the equations, and $A_{v_0} = \frac{v_{out}}{v_{in}} = -\frac{g_{m_1}r_{0_1}R_D}{g_{m_1}r_{0_1}r_{0_2} + r_{0_1} + r_{0_2} + R_D}$
+	* Sine the CLM resistances are high, this is approximately $\frac{R_D}{r_{0_2}}$
+		* As expected, the negative feedback reduces the gain, approximately by dividing by the resistance value
+		* However since $r_{0_2}$ is much bigger than $R_D$, we will have a gain much less than 1, so this is not practical
+		* This is why source resistors are typically in the ohms or hundreds of ohms range
+	* Input resistance is simply $R_G$, which has not changed
+	* Recall that when calculating output resistance only, we assume an input voltage of zero to avoid double-counting gain effects
+		* Assuming $v_{in} = 0$ gives us $v_{gs_1} = -v_{s_1}$, which is not necessarily zero
+		* We can brute force this by using a test output current
+		* However in this case we have a *cascode connection*, we can replace the entire thing with a single resistor to ground $R_A$
+		* $R_A = (1 + g_{m_1}r_{0_1})r_{0_2} + r_{0_1} \approx g_{m_1}r_{0_1}r_{0_2}$
+		* Therefore the output resistance is simply $R_A \parallel R_D$, but since $R_D$ is much smaller than $R_A$, the output resistance is still about $R_D$
+
+![Cascode connection.](imgs/lec20_6.png){width=70%}
 

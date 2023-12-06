@@ -1,6 +1,6 @@
 # Lecture 18, Nov 17, 2023
 
-## More Probability
+## Mean, Variance, and Change of Variables
 
 \noteDefn{The \textit{expected value} of $\bm x$ over a distribution $f_x(\bm x)$ is defined as: $$E[\bm x] = \sum _{\bm x \in \mathcal X} xf_x(\bm x)$$
 The sum is replaced by an integral for a continuous distribution.
@@ -28,7 +28,7 @@ The \textit{variance} of $\bm x$ is defined as $$\Var[\bm x] = E[(\bm x - E[\bm 
 		* $\Pr(x \in [\bar x, \bar x + \Delta x]) = \int _{\bar x}^{\bar x + \Delta x} f_x(x)\,\dx \approx f(\bar x)\Delta x$
 		* But we also have $\Pr(x \in [\bar x, \bar x + \Delta x]) = \Pr(y \in [\bar y, \bar y + \Delta y])$ because these are the same intervals
 		* $f_x(\bar x)\Delta x = f_y(\bar x)\Delta y \implies f_x(\bar x)\diff{g(\bar y)}{y}\Delta y = f_y(\bar y)\Delta y \implies f_x(x) = \frac{f_y(y)}{\diff{g(y)}{y}}$
-	* We can also think about this as a change of variables; we need $\int _\mathcal Y f_y(y)\,\dy = 1$, and since $x = g(y)$, $\diff{g(y)}{y}\,\dy \implies \dy = \frac{1}{\diff{g(y)}{y}}\,\dx$, then $\int _\mathcal X f_y(y)\frac{1}{\diff{g(y)}{y}}\,\dx = 1$, so the expression inside the integral must be the PDF of $x$
+	* We can also think about this as a change of variables in the integral; we need $\int _\mathcal Y f_y(y)\,\dy = 1$, and since $x = g(y)$, $\diff{g(y)}{y}\,\dy \implies \dy = \frac{1}{\diff{g(y)}{y}}\,\dx$, then $\int _\mathcal X f_y(y)\frac{1}{\diff{g(y)}{y}}\,\dx = 1$, so the expression inside the integral must be the PDF of $x$
 
 ## Bayes' Theorem in Practice
 
