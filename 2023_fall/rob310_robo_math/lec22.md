@@ -28,7 +28,7 @@
 * The sum of two independent Gaussians is Gaussian: $\bm y_1 \sim \mathcal N(\bm a_1, \bm B_1), \bm y_2 \sim \mathcal N(\bm a_2, \bm B_2) \implies c_1\bm y_1 + c_2\bm y_2 \sim \mathcal N(c_1\bm a_1 + c_2\bm a_2, c_1^2\bm B_1 + c_2^2\bm B_2)$
 	* This extends to matrix coefficients, since the transformation is linear
 	* In general passing a Gaussian through a linear transformation preserves the Gaussian property
-	* $\bm C_1\bm y_1 + \bm C_2\bm y_2 \sim \mathcal N(\bm C_1\bm a_1 + \bm C_2\bm a_2, \bm C_1^T\bm B_1\bm C_1, \bm C_2^T\bm B_2\bm C_2)$
+	* $\bm C_1\bm y_1 + \bm C_2\bm y_2 \sim \mathcal N(\bm C_1\bm a_1 + \bm C_2\bm a_2, \bm C_1^T\bm B_1\bm C_1 + \bm C_2^T\bm B_2\bm C_2)$
 * However, Gaussians don't remain Gaussian after passing through a nonlinear mapping
 	* We can approximate using a linear function around the mean, so that if $y = g(x)$, then $x \sim \mathcal N(\mu _x, \sigma _x^2) \implies y \sim \mathcal N(\mu _y, a^2\sigma _x^2)$
 		* $\delta y = y - \mu _y \approx \eval{\diff{g(x)}{x}}{x = \mu _x}(x - \mu x) = a\delta x$
@@ -49,7 +49,7 @@
 	* Note the product of Gaussians is not normalized, so we need to find the normalization constant so that the distribution integrates to 1
 		* In practice however we almost never have to compute this, since we usually only keep track of the mean and variance
 	* In the multivariate case, $\mathcal N(\bm\mu, \bm\Sigma) = \beta\prod _{n = 1}^N \mathcal N(\bm\mu _n, \bm\Sigma _n)$
-		* $\bm\Sigma^{-1} = \sum _{n = 1}^n\bm\Sigma _n^{-1}$
+		* $\bm\Sigma^{-1} = \sum _{n = 1}^N\bm\Sigma _n^{-1}$
 		* $\bm\Sigma^{-1}\bm\mu = \sum _{n = 1}^N \bm\Sigma _n^{-1}\bm\mu _n$
 * Since Gaussians remain Gaussian under many different useful operations, it often suffices to keep track of only the sum and (co)variance of the distributions
 * Under the assumption that random variables are Gaussian, analytic results for state estimation and other applications are available (e.g. a Kalman filter); without this assumption PDFs often have to be propagated through sampling (e.g. Monte Carlo methods)

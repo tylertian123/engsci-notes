@@ -37,9 +37,9 @@ Note that $\bm V$ contains the eigenvectors of $\bm A^T\bm A$ and $\bm U$ contai
 		* $\bm v_1$ to $\bm v_k$ are the normalized eigenvectors of $\bm A^T\bm A$
 		* $\bm v_{k + 1}$ to $\bm v_n$ are taken from the null space of $\bm A^T\bm A$
 		* All $\bm v_j$ are chosen such that $\bm V$ is orthogonal
-	* $\bm U = \rvec{\bm u_1}{\bm u_2}{\cdots}{\bm u_k}{\bm u_{k + 1}}{\bm u_{k + 2}}{\cdots}{\bm u_n}$
+	* $\bm U = \rvec{\bm u_1}{\bm u_2}{\cdots}{\bm u_k}{\bm u_{k + 1}}{\bm u_{k + 2}}{\cdots}{\bm u_m}$
 		* $\bm u_1$ to $\bm u_k$ are the normalized eigenvectors of $\bm A\bm A^T$
-		* $\bm u_{k + 1}$ to $\bm u_n$ are taken from the null space of $\bm A\bm A^T$
+		* $\bm u_{k + 1}$ to $\bm u_m$ are taken from the null space of $\bm A\bm A^T$
 		* All $\bm u_j$ are chosen such that $\bm U$ is orthogonal
 		* This is because $\bm A\bm A^T = \bm U\bm\Sigma\bm V^T(\bm V\bm\Sigma^T\bm U^T) = \bm U\bm\Sigma\bm\Sigma^T\bm U^T = \bm U\bm\Lambda\bm U^T$ which is just a diagonalization; ditto for $\bm V$
 * Example: find the SVD of $\rvec{1}{0}$

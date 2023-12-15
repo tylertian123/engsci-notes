@@ -40,7 +40,7 @@
 ### Maximum *a Posteriori* (MAP)
 
 * If we have a PDF for $\bm x$, we can use MAP
-* From Bayes's theorem: $f(\bm x|\bm y) = \frac{\bm f(\bm y | \bm x)\bm f(\bm x)}{\bm f(\bm y)}$
+* From Bayes's theorem: $f(\bm x|\bm y) = \frac{f(\bm y | \bm x)f(\bm x)}{f(\bm y)}$
 * With MAP, we have $\hat{\bm x}^{MAP} = \argmax _{\bm x} f(\bm y | \bm x)f(\bm x)$
 	* We want to maximize the choice of the parameter that makes both the observations and the parameter itself most likely
 * If $f(\bm x)$ is constant, then $\hat{\bm x}^{MAP} = \hat{\bm x}^{ML}$
@@ -60,8 +60,8 @@
 ### Minimum Mean Squared Error (MMSE)
 
 * The MMSE is the a posteriori estimate that minimizes the mean squared error
-* $\hat{\bm x}^{MMSE} = \argmin _{\hat{\bm x}} E_{x|y}\left[(\bm x - \hat{\bm x})^T(\bm x - \hat{\bm x})|y\right]$
-	* Expand and differentiate with respect to $\hat{\bm x}$: $2\hat{\bm x} - 2E[x|y] = 0 \implies \hat{\bm x} = E[x|y]$
+* $\hat{\bm x}^{MMSE} = \argmin _{\hat{\bm x}} E_{x|y}\left[(\bm x - \hat{\bm x})^T(\bm x - \hat{\bm x})|\bm y\right]$
+	* Expand and differentiate with respect to $\hat{\bm x}$: $2\hat{\bm x} - 2E[\bm x|\bm y] = 0 \implies \hat{\bm x} = E[\bm x|\bm y]$
 	* The MMSE estimate is the expected value of $\bm x$ conditioned on $\bm y$
 * While MAP is the maximum of the posterior, MMSE is the mean of the posterior
 * Note we did not constrain $\hat{\bm x}$ in our minimization, but for some applications we might want to introduce constraints

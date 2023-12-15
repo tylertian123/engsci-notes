@@ -8,7 +8,7 @@
 	* Notice that if we remove $z$ we just get the regular marginalization and conditioning laws
 		* The parameter $z$ can be e.g. a mean or standard deviation for a normal distribution, etc
 * Note that everything to the left of the bar is a random variable and everything to the right is a fixed conditioning variable (the bar has lower "precedence" than the comma)
-* $f_{xyz}(x, y, z) = f_{xy|z}(x, y|z)f_z(z) \implies f_{xz}(x, z) = \sum _{y \in \mathcal Y} f_{xyz}(x, y, z) = \sum _{y \in \mathcal Y} f_{x,y|z}(x, y|z)f_z(z) \implies f_{x|z}(x|z) = \frac{f_{xz}(x, z)}{f_z(z)} = \sum _{y \in \mathcal Y} f_{x,y|z}(x,y|z)$
+* $f_{xyz}(x, y, z) = f_{xy|z}(x, y|z)f_z(z) \implies f_{xz}(x, z) = \sum _{y \in \mathcal Y} f_{xyz}(x, y, z) = \sum _{y \in \mathcal Y} f_{xy|z}(x, y|z)f_z(z) \implies f_{x|z}(x|z) = \frac{f_{xz}(x, z)}{f_z(z)} = \sum _{y \in \mathcal Y} f_{x,y|z}(x,y|z)$
 * $f_{x|yz}(x|y,z) = \frac{f_{xyz}(x, y, z)}{f_{yz}(y, z)} = \frac{f_{xy|z}(x, y|z)f_z(z)}{f_{y|z}(y|z)f_z(z)} = \frac{f_{xy|z}(x, y|z)}{f_{y|z}(y|z)} \implies f_{xy|z}(x,y|z) = f_{x|yz}(x|y,z)f_{y|z}(y|z)$
 	* $f_{x|yz}(x|y,z)$ is conditioned on both $y$ and $z$; so we can think of the above as multiplying by a distribution of $y$ moves $y$ to the left of the bar
 	* Since both distributions are conditioned on $z$, the resulting distribution will also be conditioned on $z$

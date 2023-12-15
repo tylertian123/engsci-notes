@@ -41,7 +41,7 @@
 * Measurements are modelled by $\bm\zeta _k = \bm\eta(\bm x_k, \bm\xi _k) + \bm\varpi _k$
 	* Example: if we treat landmarks as points $(\xi^{(i)}, \eta^{(i)})$ and we measure their bearing $\rho$ and distance $\phi$, then:
 		* $\rho _k^{(i)} = \sqrt{(\xi _k^{(i)} - x_k)^2 + (\eta _k^{(i)} - y_k)^2}$
-		* $\phi _k^{(i)} = \tan^{-1} \frac{\eta _k^{(i)} - y_k}{\xi _k^{(i)} - x_k} - \theta _k$
+		* $\phi _k^{(i)} = \tan^{-1}\left(\frac{\eta _k^{(i)} - y_k}{\xi _k^{(i)} - x_k}\right) - \theta _k$
 	* This can then be linearized to obtain $\bm D_{k + 1}^{(i)}$
 * Apply EKF:
 	* State estimation:

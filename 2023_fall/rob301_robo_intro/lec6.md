@@ -12,5 +12,7 @@
 
 ## Example: Wheel Constraint Model
 
-* (see Xournal++ notes)
+* Consider the following robot at $(x, y)$ with heading $\theta$; the wheel is at a distance $l$ and angle $\alpha$ from the robot center; the wheel has diameter $a$ and rotation angle $\phi$ and cannot slip; determine the constraints imposed by this wheel
+
+![Wheel constraint model example.](imgs/lec6_2.png){width=75%}
 
