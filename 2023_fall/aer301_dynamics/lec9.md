@@ -9,7 +9,7 @@
 	* The total momentum is $\uvec p = \sum _i \uvec p_i = \sum _i m_i\uvec r_i^\dota$
 	* $\uvec h_i = m_i\uvec r_i \times \uvec r_i^\dota = m_i\uvec r_i \times \uvec v_i = \uvec r_i \times \uvec p_i$
 	* Total angular momentum is $\uvec h = \sum _i \uvec h_i = \sum _i m_i\uvec r_i \times \uvec r_i^\dota$
-* The centre of mass is $\uvec r_\scom = \sum _i \frac{\dot m_i\uvec r_i}{m}$ where $m = \sum _i m_i$ is the total mass
+* The centre of mass is $\uvec r_\scom = \sum _i \frac{m_i\uvec r_i}{m}$ where $m = \sum _i m_i$ is the total mass
 	* Therefore $m\uvec r_\scom = \sum _i m_i\uvec r_i \implies m\uvec r_\scom^\dota = \sum _i m_i\uvec r_i^\dota = \uvec p$ which is the total momentum
 	* We can therefore work with momentum as though all particles are concentrated at the center of mass
 * $\uvec r_i = \uvec r_\scom + \uvec s_i \implies \uvec p = \sum _i m_i(\uvec r_\scom^\dota + \uvec s_i^\dota) = \sum _i m_i\uvec r_\scom^\dota + \sum _i m_i\uvec s_i^\dota = m\uvec r_\scom^\dota + \sum _i m_i\uvec s_i^\dota$
@@ -31,12 +31,14 @@
 	* Note this is not $\uvec h_\scom$, but angular momentum about the inertial reference point $O_\mathfrak{I}$
 * $\uvec h_\scom = \sum _i s_i \times m_i(\uvec r_\scom^\dota + \uvec s_i^\dota) = \sum _i m_i\uvec s_i \times \uvec s_i^\dota + \left(\sum _i m_i\uvec s_i\right) \times \uvec r_\scom^\dota = \sum _i m_i\uvec s_i \times \uvec s_i^\dota$
 	* $\uvec h_\scom^\dota = \sum _i\uvec s_i^\dota \times \uvec p_i + \sum _i \uvec s_i \times \uvec p_i^\dota = \sum _i \uvec s_i \times \uvec f_{i,ext} = \uvec\tau _\scom$
-* So we have $\uvec h^\dota = \uvec \tau$ about $O_\mathfrak{I}$ and $\uvec h_\scom^\dota = \uvec\tau _\scom$ about $\com$
-	* This is a special result that only olds for the center of mass!
-	* In general $\uvec h_O^\dota + \uvec v_O \times \uvec p = \uvec\tau _O$ for a general $O$ moving at $\uvec v_O = {\uvec r^{OO_\mathfrak{I}}}^\dota$ with respect to $O_\mathfrak{I}$
-		* In the inertially fixed point, $\uvec v_O = 0$
-		* At the center of mass, $\uvec p = m\uvec r_\scom^\dota = m\uvec v_O$, so when we cross it with $\uvec v_O$, the term cancels
-		* In both special frames we do not need to apply a correction
+* Therefore $\uvec h^\dota = \uvec \tau$ about $O_\mathfrak{I}$ and $\uvec h_\scom^\dota = \uvec\tau _\scom$ about $\com$
+	* This is a special result that only holds for the center of mass!
+* In general $\uvec h_O^\dota + \uvec v_O \times \uvec p = \uvec\tau _O$ for a general $O$ moving at $\uvec v_O = {\uvec r^{OO_\mathfrak{I}}}^\dota$ with respect to $O_\mathfrak{I}$
+	* If $\uvec \rho _i$ is the position of each particle about a moving reference point $O$, then each particle has inertial velocity $\uvec v = \uvec v_O + \uvec \rho^\dota$ so $\uvec \rho^\dota = \uvec v - \uvec v_O$
+	* $\alignedeqntwo[t]{\uvec h^\dota}{\sum _i (\uvec \rho _i \times \uvec p_i)^\dota}{\sum _i m_i\uvec \rho _i^\dota \times \uvec v_i + \sum _i m_i\uvec \rho _i \times \uvec v_i^\dota}{\sum _i m_i(\uvec v_i - \uvec v_O) \times \uvec v_i + \sum _i \uvec \rho _i \times \uvec f_i}{-\uvec v_O \times \sum _i m_iv_i + \sum _i \uvec\tau _i}{-\uvec v_O \times \uvec p + \uvec \tau _O}$
+	* In the inertially fixed point, $\uvec v_O = 0$
+	* At the center of mass, $\uvec p = m\uvec r_\scom^\dota = m\uvec v_O$, so when we cross it with $\uvec v_O$, the term cancels
+	* In both special frames we do not need to apply a correction
 * What about work and kinetic energy?
 	* $W_i = \int _A^B \uvec f_i \cdot \dd\uvec r_i$
 	* $W = \sum _i W_i = \sum _i T_i^B - \sum _i T_i^A = T_B - T_A$ by the principle of work and kinetic energy
@@ -45,6 +47,15 @@
 	* So the total kinetic energy is the kinetic energy as if all the mass is at the center of mass, plus the kinetic energy of all the particles relative to the center of mass
 	* If we have a rigid body in translation, all $u_i = 0$, so the kinetic energy is just the same as if the mass is concentrated at the center of mass
 		* Note this does not apply in rotation -- in that case the second term would result in rotational kinetic energy
+
+\noteSummary{For a grammar of particles, the total momentum and angular momentum are defined as:
+$$\uvec p = \sum _i \uvec p_i = \sum _i m_i\uvec r_i^\dota \qquad \uvec h = \sum _i \uvec h_i = \sum _i m_i\uvec r_i \times \uvec r_i^\dota$$
+The centre of mass, located at $\uvec r_\scom = \frac{\sum _i m_i \uvec r_i}{\sum _i m_i}$, satisfies:
+$$m\uvec r_\scom = \uvec p \qquad m\uvec r_\scom^\ddota = \uvec f = \sum _i \uvec f_{i,ext}$$
+The total angular momentum about $O$, moving at $\uvec v_O$ relative to inertial space, in general satisfies:
+$$\uvec h_O^\dota + \uvec v_O \times \uvec p = \uvec\tau _O = \sum _i \uvec\rho _i \times \uvec f_{i,ext}$$
+When $O = \com$ or inertially fixed, this reduces to $\uvec h^\dota = \uvec\tau$.
+}
 
 ## D'Alembert's Principle
 

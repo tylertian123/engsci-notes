@@ -7,8 +7,8 @@
 * Consider a rigid body $R$ and some inertial reference point $O_\mathfrak{I}$
 	* Each differential mass element $\dm$ has momentum $\dd\uvec p = \uvec r^\dota\,\dm$
 	* Therefore the overall momentum is $\uvec p = \int _R \uvec r^\dota\,\dm$
-* Consider some reference point $O$ fixed to the body, and let $\uvec\rho$ be the position of a mass element relative to $\uvec\rho$
-	* $\uvec r^\dota = \uvec v_O + \uvec\rho^\dota \uvec v_O + \uvec\rho^\dotb + \uvec\omega + \uvec\rho$
+* Consider some reference point $O$ fixed to the body, and let $\uvec\rho$ be the position of a mass element relative to $O$
+	* $\uvec r^\dota = \uvec v_O + \uvec\rho^\dota = \uvec v_O + \uvec\rho^\dotb + \uvec\omega \times \uvec\rho$
 	* But $\uvec\rho$ is fixed as seen in a body-relative frame, so $\uvec\rho^\dotb = 0$ (unless the body is deformable)
 	* $\uvec p = \int _R (\uvec v_O + \uvec\omega \times \uvec\rho)\,\dm = \int _R \uvec v_O \,\dm - \int _R \uvec\rho \times \uvec\omega\,\dm = m\uvec v_O - \left(\int _R \uvec \rho\,\dm\right)\times \uvec\omega$
 * Let $\uvec c_O = \int _R \uvec\rho\,\dm$ be the *first moment of mass* (aka *first moment of inertia*), then $\uvec p = m\uvec v_O - \uvec c_O \times \uvec \omega$

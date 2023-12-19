@@ -5,7 +5,7 @@
 * Kepler's laws:
 	1. The orbits of planets are ellipses with the sun at one focus
 	2. An orbiting planet sweeps out an equal area in equal time, i.e. $\diff{A}{t} = c$
-	3. The square of the orbital period of a planet is proportional to the cube of the mean distance from the sun, i.e. $T^3 \propto a^3$
+	3. The square of the orbital period of a planet is proportional to the cube of the mean distance from the sun, i.e. $T^2 \propto a^3$
 * Kepler tells us the shape of the orbits without need for epicycles, but still does not tell us the fundamental force that causes such motion
 * Newton's law of gravitation: $\uvec f_b^a = \frac{Gm_am_b}{r_3}\uvec r_b^a$ where $G = \SI{6.67e-11}{N.m^2.kg^{-2}}$ is the universal gravitation constant
 	1. The force of gravity is central
