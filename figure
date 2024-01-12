@@ -34,3 +34,6 @@ end
 mv "$SS_NAME" "$IMG_PATH"
 echo "Moved '$SS_NAME' to '$IMG_PATH'"
 
+# Copy markdown for image to clipboard
+echo "![]($IMG_PATH){width=%}" | xsel -i --clipboard
+
