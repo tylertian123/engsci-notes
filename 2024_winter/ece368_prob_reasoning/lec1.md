@@ -23,7 +23,7 @@
 	* $P[A|B]$ is known as the *a posteriori* probability 
 	* By symmetry, $P[B|A] = \frac{P[A \cap B]}{P[A]}$
 * This gives the *product formula*: $P[A \cap B] = P[A|B]P[B] = P[B|A]P[A]$
-* Events $A$ and $B$ are *independent* iff $P[A|B] = P[A]$, equivalently $P[A \cap B] = P[A]P[B]$
+* Events $A$ and $B$ are *independent* (denoted $A \perp B$) iff $P[A|B] = P[A]$, equivalently $P[A \cap B] = P[A]P[B]$
 
 ## Partitioning
 

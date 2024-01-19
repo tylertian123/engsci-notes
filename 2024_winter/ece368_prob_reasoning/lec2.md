@@ -35,6 +35,7 @@
 	* Expanding gives $E[XY] - E[X]E[Y]$ ($E[XY]$ is known as the *correlation*)
 	* Normalizing gives the *correlation coefficient* $\rho _{XY} = E\left[\left(\frac{X - m_X}{\sigma _x}\right)\left(\frac{Y - m_Y}{\sigma _Y}\right)\right] = \frac{\Cov(X, Y)}{\sigma _X\sigma _Y}$
 	* $X$ and $Y$ are *uncorrelated* if $\rho _{XY} = 0 \iff \Cov(X, Y) = 0$ (note uncorrelated does not always imply independent)
+	* Note covariance is bilinear (i.e. linear in each argument)
 * $X, Y$ are independent if $f_{\bm X}(x, y) = f_X(x)f_Y(y)$ or $p_{\bm X}(x_i, y_j) = p_X(x_i)p_Y(y_j)$
 	* Independence means $E[g(X)h(Y)] = E[g(X)]E[h(Y)]$
 	* This also means $\Cov(X, Y) = 0$ (i.e. independence implies uncorrelated)

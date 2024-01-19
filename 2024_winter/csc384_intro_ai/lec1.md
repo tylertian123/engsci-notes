@@ -59,8 +59,12 @@
 	* *Space complexity*: how many nodes do we need to store in memory?
 * To quantify the problem we use the following parameters:
 	* Branch width $b$: maximum number of successors on each node
+		* Unless otherwise stated, assuming that this is finite, i.e. at every state there are a finite number of states we can go to
 	* Depth $d$: depth of shallowest goal node
+		* This is usually finite
 	* Max depth $m$: max depth of any node from the start node
+		* This is often infinite (but countably infinite) -- e.g. if the workspace of the robot is the entirety of Mars
+	* We don't know the number of nodes in advance so instead of we use these parameters, since they are local properties
 * Note worst-case scenario analysis does not capture the graph structure; performance in the real world is often highly problem-dependent, so the best algorithm will also be
 * *Uninformed* search algorithms use only the problem input; no domain information is used
 	* The problem is represented either explicitly or implicitly as graphs
