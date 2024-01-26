@@ -53,8 +53,8 @@
 	4. If operands had different signs, take 2's complement of the result
 * Number representations affect our choice of microcontroller -- if we need to work with a lot of large numbers or floating-point numbers, we need to choose processors that have the corresponding features, otherwise performance will be very poor
 * Data can be stored in multiple different locations:
-	* Data memory
-	* Instruction memory
+	* Data memory (often but not always RAM)
+	* Instruction memory (often non-volatile, non-runtime-modifiable memory)
 	* Registers
 	* Memory inherent to instruction
 * Going down this list, the amount of memory available gets smaller but the memory is faster

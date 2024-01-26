@@ -34,15 +34,3 @@
 * Another way is to use the conditional expectation $\hat\Theta _n(x) = E[\Theta | \bm X = \bm x]$
 	* $\alignedeqntwo[t]{P[X_{n = 1} = 1 | X_1 = 1, \dots, X_n = 1]}{E[\Theta | \bm X_n = \bm 1]}{\int _0^1 \theta f_{\theta|\bm X_n}(\theta | 1, \dots, 1)\,\dtheta}{\int _0^1 \theta\frac{\theta^n}{\frac{1}{n + 1}}\,\dtheta}{\frac{n + 1}{n + 2}}$
 
-## Maximum A Posteriori (MAP) Estimation
-
-* This is the Bayesian approach
-* $\hat\Theta _n = \argmax _\theta p_{\theta|\bm X}(\theta | \bm x)$
-* *Conjugate prior*: pick a form for the prior that is the same as the likelihood
-* Example: binomial distribution $p_{X|\Theta}(x|\theta) = \binom{n}{k}\theta^k(1 - \theta)^{n - k} = \frac{n!}{k!(n - k)!}\theta^k(1 - \theta)^{n - k}$
-	* There are many possible shapes of priors
-	* These are all represented by the *beta distribution* $f_\Theta(\theta) = c\theta^{\alpha - 1}(1 - \theta)^{\beta - 1}$ where $\alpha, \beta > 0$ and $c$ is a normalization constant
-		* When $\alpha = \beta = 1$ this is uniform
-		* $c = \frac{1}{B(\alpha, \beta)}$ where $B(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha\beta)}$
-		* If $\alpha, \beta$ are integers then $\frac{1}{B(\alpha, \beta)} = \frac{(\alpha + \beta - 1)!}{(\alpha - 1)!(\beta - 1)!}$
-

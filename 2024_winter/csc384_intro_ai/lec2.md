@@ -16,11 +16,16 @@
 		* This means a sufficient condition is $h(v_i) \leq h(v_j) + c(v_i, v_j)$
 * This property is known as *consistency*: $\forall v_i, v_j, h(v_i) \leq h(v_j) + c(v_i, v_j)$ where $v_j$ is a successor of $v_i$
 	* If $h$ is consistent, then $A^*$ is optimal; we can prove this in the same way that we proved UCS optimal
-* $h$ is *admissible* if it satisfies $\forall v_i, h(v_i) \leq C^*(v_i)$ where $C^*(v) = g(w) - g(v)$ which is the true cost to reach the goal from $v$
-	* Admissibility is generally a weaker property than consistency
+* $h$ is *admissible* if it satisfies $\forall v_i, h(v_i) \leq C^*(v_i)$ where $C^*(v) = g(w) - g(v)$ which is the true (optimal) cost to reach the goal from $v$
 	* Theorem: if $h$ is admissible, then $A^*$ with tree search (i.e. no cycle checking) is optimal
 		* Note this only works with tree search because of it possibly searching the same node multiple times
-	* Lemma: if $h(w) = 0$, then consistency implies admissibility
+		* If we do cycle checking, then if we popped a node in the wrong order, then we will never take the correct path to it again
+* Admissibility is generally a weaker property than consistency; if $h(w) = 0$, then consistency implies admissibility
+
+\noteDefn{\textit{Consistency}: The evaluation function $h$ is \textit{consistent} if it satisfies $$\forall v_i, v_j, h(v_i) \leq h(v_j) + c(v_i, v_j)$$where $v_j$ is a successor of $v_i$ and $c(v_i, v_j)$ is the cost of moving from $v_i$ to $v_j$, i.e. for each step we move backwards, the value of the heuristic at the further node is less than or equal to the value at the closer node plus the cost of the step.}
+
+\noteDefn{\textit{Admissibility}: The evaluation function $h$ is \textit{admissible} if it satisfies $$\forall v_i, h(v_i) \leq C^*(v_i) = g(w) - g(v_i)$$where $C^*(v)$ is the true optimal cost to reach the goal from $v$, i.e. the value of the heuristic is always less than or equal to the true cost of reaching the goal.}
+
 * Now we have requirements for $h$, how do we choose one?
 	* Euclidean distance (L2 norm) is one option
 		* Since it satisfies the triangle inequality, it is admissible and consistent

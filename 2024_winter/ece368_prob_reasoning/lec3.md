@@ -61,6 +61,9 @@
 	* The *bias* is $E[\hat\Theta _n(\bm X)] - \theta$
 		* This is whether we get the correct estimate on average
 	* An estimator is *unbiased* if the expected value of the error is zero, i.e. the bias is zero
+		* i.e. on average, our estimate will be correct
 	* An estimator is *asymptotically unbiased* if $\lim _{n \to \infty} E[\Theta _n(\bm X)] = \theta$, even if it's not unbiased
-	* An estimator is *consistent* if $\hat\Theta _n$ as $n \to \infty$ (weak law)
+	* An estimator is *consistent* if as $n \to \infty$, the distribution of $\hat\Theta _n$ converges to $\theta$ (weak law)
+		* i.e. as the sample size increases, the estimates become more and more concentrated around $\theta$
+		* Consistency implies asymptotic unbiasedness (if the estimator has finite variance) but the reverse is not true
 
