@@ -17,6 +17,9 @@
 		* This should reflect the "quality" of the state, i.e. how close it is to the goal
 		* For the $N$-queens problem, this could be the number of pairs of queens that can attack each other
 		* We want $\operatorname{Val}(w) = 0$ where $w$ is the goal, so the problem becomes minimizing $\operatorname{Val}(s)$ until we reach 0
+
+### Hill Climb Algorithm
+
 * A simple strategy would be to always take steps that improve the value of the state in hopes of eventually reaching the goal; this leads to the *hill climb* algorithm
 	* This is a type of *local search*, since at each step we aim to improve the local situation we're in
 
@@ -26,6 +29,9 @@
 	* However, hill climb is susceptible to getting stuck in local minima
 	* Since it only allows moves to better positions, if the goal is locked behind a worse position, it will never be reached
 	* We want an algorithm that allows making a "mistake" (moving to a state with higher value) but still stays mostly on track to the goal
+
+### Simulated Annealing
+
 * We can use the *simulated annealing* algorithm, where transitions to states that raise the value are allowed, and the probability of such transitions is dependent on the difference in value
 
 ![Simulated annealing algorithm.](./imgs/lec3_3.png){width=50%}

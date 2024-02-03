@@ -34,12 +34,14 @@
 		* Both inverses are easy to compute due to them being triangular
 	* Note it is common to add a small perturbation, replacing $\bm X^T\bm X$ with $\bm X^T\bm X + \lambda\bm I$ to prevent ill-conditioning; this is equivalent to $l_2$ regularization
 	* Cost: $\textstyle O(N(D + 1)^2 + \frac{1}{3}(D + 1)^3)$
+		* Computing $\bm R$ takes $mn^2 + \frac{1}{3}n^3$ flops
 * Economic QR (aka. reduced or thin QR): $\bm X = \bm Q\bm R$ where $\bm Q \in \reals^{N \times (D + 1)}$ is orthonormal, $\bm R \in \reals^{(D + 1) \times (D + 1)}$ is upper-triangular
 	* $\bm X^T\bm X\bm w = \bm X^T\bm y \implies \bm R^T\bm Q^T\bm Q^T\bm R\bm w = \bm R^T\bm Q^T\bm y \implies \bm R^T\bm R\bm w = \bm R^T\bm Q^T\bm y$
 	* Then we have $\hat{\bm w} = \bm R^{-1}\bm Q^T\bm y$
 	* Note instead of directly inverting $R$, we again use a backward substitution
 	* This method can fail when $\bm X$ is nearly rank-deficient (i.e. two data points being close together); in this case, SVD is a more robust option
 	* Cost: $\textstyle O(2N(D + 1)^2 + \frac{2}{3}(D + 1)^3)$ (approximate)
+		* QR factorization costs about $2mn^2$ flops; for $m \gg n$ Cholesky is faster, but only a factor of 2 at most
 * Singular value decomposition: $\bm X = \bm U\bm\Sigma\bm V^T$ where $\bm U \in \reals^{N \times N}, \bm V \in \reals^{(D + 1) \times (D + 1)}$ are orthogonal and $\bm\Sigma \in \reals^{N \times (D + 1)}$ is rectangular diagonal
 	* Note we can write this as $\bm X = \rvec{\bm U_1}{\bm U_2}{\cvec{\bm\Sigma _1}{\bm 0}}{\bm V^T}$ or $\bm X = \bm U_1\bm\Sigma _1\bm V^T$
 	* $\norm{\bm y - \bm X\bm w}_2^2 = \norm{\bm U^T(\bm y - \bm X\bm w)}_2^2 = \norm*{\cvec{\bm U_1^T\bm y}{\bm U_2\bm y} - \cvec{\bm\Sigma _1\bm V^T\bm w}{\bm 0}}_2^2 = \norm{\bm U_1^T\bm y - \bm\Sigma _1\bm V^T\bm w}_2^2 + \norm{\bm U_2^T\bm y}_2^2$
@@ -49,7 +51,7 @@
 		* If some singular values are very small, we can truncate this summation for better numerical stability
 	* Alternatively the same result can be obtained by simply substituting the SVD into the original expression
 	* Cost: $O(2N(D + 1)^2 + 11N(D + 1)^3)$ (approximate)
-* Moore-Penrose pseudoinverse: $\bm X^\dagger = (\bm X^T\bm X)^{-1}\bm X^T$
+* Moore-Penrose pseudoinverse: $\bm X^\dagger = (\bm X^T\bm X)^{-1}\bm X^T = \bm V\bm\Sigma^\dagger\bm U^T$
 	* Then $\hat{\bm w} = \bm X^\dagger\bm y$ when $\bm X$ is full rank (so $\bm X^T\bm X$ is symmetric positive definite)
 	* Using QR and SVD we can also write $\bm X^\dagger = \bm R^{-1}\bm Q^T$ or $\bm X^\dagger = \bm V\bm\Sigma _1^{-1}\bm U_1^T$
 	* If $\bm X$ is rank deficient, then we can take $\hat{\bm w} = \bm V\bm\Sigma _1^\dagger\bm U_1^T\bm y$

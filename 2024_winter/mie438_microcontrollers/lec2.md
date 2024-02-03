@@ -46,6 +46,8 @@
 	* If the number is negative, the magnitude is complemented (inverted) and has 1 added to it
 	* This allows us to unify the addition and subtraction logic
 	* Underflow or overflow is indicated by the sign bit of the result and the carry-out being different
+* When we move a signed value into storage that has more bits, we perform *sign extension*, i.e. duplicating the MSB to fill any unfilled bits
+	* e.g. $0b11100000$ becomes $0b11111111'11100000$ upon sign extension to 16 bits
 * For multiplication/division, most modern RISC systems will do this in a number of steps:
 	1. Check the signs of the operands
 	2. Take 2's complement of any negative operands
