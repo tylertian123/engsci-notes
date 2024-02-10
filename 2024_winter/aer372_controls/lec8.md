@@ -36,13 +36,3 @@
 
 ![Block diagram reduction rules.](./imgs/lec8_3.png){width=60%}
 
-## First-Order System Response
-
-* Consider a pure integrator: $y(t) = \int _0^t u(t)\,\dt + y(0)$ which has transfer function $H(s) = \frac{1}{s}$ if $y(0) = 0$
-	* The ODE is $\dot y(t) = u(t)$
-	* The impulse response is $y_i(t) = \ilaplace{H(s)} = \ilaplace{\frac{1}{s}} = 1$
-	* The step response is $y_s(t) = \ilaplace{H(s)\frac{1}{s}} = \ilaplace{\frac{1}{s^2}} = t$
-	* What if the initial condition is not zero?
-		* Laplace transform the ODE to get $sY(s) - y(0) = U(s) \implies Y(s) = \frac{1}{s}U(s) + \frac{1}{s}y(0)$
-		* For a step response, $y_s(t) = \ilaplace{\frac{1}{s^2}} + \ilaplace{\frac{1}{s}y(0)} = t + y(0)1(t) = t + y(0)$
-

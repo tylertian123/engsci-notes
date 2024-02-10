@@ -6,7 +6,7 @@
 	* An outcome $s$ is a member of the sample space: $s \in S$
 * An *event* is a set of outcomes that satisfy a certain condition
 	* Event $A$ is a subset of $S$: $A \subseteq S$
-* The *complement* of $A$ is the set of all elements in $S$ that are not in $A$, denoted $A^C$; note $A \cup A^C = S$ and $A \cap A^C = \emptyset$
+* The *complement* of $A$ is the set of all elements in $S$ that are not in $A$, denoted $A^c$; note $A \cup A^C = S$ and $A \cap A^C = \emptyset$
 * Given two events $A$ and $B$, the event of either occurring is denoted $A \cup B$; both occurring is $A \cap B$
 	* We can break $A \cup B$ into 3 parts: outcomes in $A$ only, outcomes in both $A$ and $B$, and outcomes in $B$ only; these are mutually exclusive
 	* $A \cup B = (A \cap B^C) \cup (A^C \cap B) \cup (A \cap B)$

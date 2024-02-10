@@ -38,6 +38,7 @@
 * The later layers will learn more abstract/higher level features and there will be fewer neurons
 	* At the end we flatten the features and pass to an ANN for classification
 	* At this point the features are very abstract and no longer geometric, so we don't lose information
+	* The CNN layers are the *encoder*, which extracts features from the image, while the ANN layers are the *classifier* or *head*, which classifies the image based on features
 * The network learns all the weights in the kernel, as well as a bias for each kernel
 	* The weights are randomly initialized
 * Images and convolutional layers can have multiple channels

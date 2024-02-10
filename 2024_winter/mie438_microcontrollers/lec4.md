@@ -76,12 +76,15 @@
 		BRA     loop
 	end:
 	```
+* Note we used labels here for the relative branch instructions; if not, we would have to compute the offsets ourselves
+	* Assuming each instruction takes 2 bytes, the `BGT` would have an offset of `0x06` while the `BRA` would have `0xF6` (-10)
 
 ### Example 2: Square Root
 
 * Example: calculate the square root of a number $S$ in `R0` by the following procedure:
 	* Set $x_n = S / 2$
 	* Iterate $x_{n + 1} = \frac{1}{2}\left(x_n + \frac{S}{x_n}\right)$
+* Code generation:
 
 	```asm
 		MOV     R1, R0     ; int x_n = S;
@@ -91,5 +94,6 @@
 		DIV     R2, R1     ; temp = temp / x_n;
 		ADD     R1, R2     ; x_n = x_n + temp;
 		DIV     R1, 2      ; x_n = x_n / 2;
+		BRA     loop
 	```
 

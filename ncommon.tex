@@ -45,6 +45,9 @@
   {\ooalign{\raisebox{.2\height}{\scalebox{.6}{$\scriptstyle\sum$}}\cr$\scriptstyle\int$\cr}}
 }
 
+\DeclareMathOperator*{\LessGtr}{\lessgtr}
+\DeclareMathOperator*{\GtrLess}{\gtrless}
+
 \newcommand\com{\text{%
     \tikz[radius=0.3em] {%
         \fill (0,0) -- ++(0.3em,0) arc [start angle=0,end angle=90] -- ++(0,-0.6em) arc [start angle=270, end angle=180];%
@@ -194,7 +197,7 @@
 
 % Derivative and other things evaluated at
 \newcommand{\eval}[2]{\left.#1\right\rvert_{#2}}
-\newcommand{\inteval}[3]{\left[#1\right]_{#2}^{#3}}
+\renewcommand{\inteval}[3]{\left[#1\right]_{#2}^{#3}}
 \newcommand{\integral}[5][\int]{#1_{#2}^{#3}#4\,\mathrm{d}#5}
 
 % Cross product because I always forget that \cross isn't a thing

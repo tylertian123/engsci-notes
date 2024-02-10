@@ -32,6 +32,7 @@
 * The basis functions are the univariate polynomials $\set{1, x_i, x_i^2, \dots, x_i^p}$ up to order $p$
 * If $D = 1$, then the basis functions are $\phi _i = x^i$ so $\hat f(x) = w_0 + w_1x + \dots + w_px^p$
 	* Note taking tensor products of higher-order univariate polynomials is not a good idea since we will generate $p^D$ basis functions
+	* For arbitrary $D$ we would have $\bm\phi(\bm x) = \cvec{1}{x_1}{\vdots}{x_D}{x_1x_2}{\vdots}{x_{D - 1}x_D}{\vdots}{x_1x_2\dots x_D}$
 	* We can circumvent this with the *kernel trick* covered later
 
 ![1D polynomial regression for various values of $p$. (Note $M = p + 1$.)](./imgs/lec6_1.png){width=70%}
@@ -56,15 +57,15 @@
 * The regularized loss function is also quadratic in $\bm w$, so we can use the same steps as before
 	* Expanded loss: $\bm y^T\bm y + \bm w^T\bm\Phi^T\bm\Phi\bm w - 2\bm w^T\bm\Phi^T\bm y + \lambda\bm w^T\bm w$
 	* $\pdiff{\mathcal L}{\bm w} = 2\bm\Phi^T\bm\Phi\bm w - 2\bm\Phi^T\bm y + 2\lambda\bm w = 0$
-	* Rearrange: $\bm\Phi^T\bm\Phi\bm w + \lambda\bm w = \bm\Phi^T\bm y \implies (\bm\Phi^T\bm\Phi + \lambda\bm I)\bm w = \bm\Phi^T\bm y$
+	* Rearrange: $\bm\Phi^T\bm\Phi\bm w + \lambda\bm w = \bm\Phi^T\bm y \implies (\bm\Phi^T\bm\Phi + \lambda\bm 1)\bm w = \bm\Phi^T\bm y$
 		* Therefore $l_2$ regularization is equivalent to adding a small positive perturbation to the diagonal of $\bm\Phi^T\bm\Phi$
 		* We saw this in a previous lecture -- this also helps with ill-conditioning
 		* If $\lambda$ is sufficiently large we can avoid ill-conditioning completely
 * Using SVD: $\bm\Phi = \bm U\bm\Sigma\bm V^T$
-	* $((\bm U\bm\Sigma\bm V^T)^T\bm U\bm\Sigma\bm V^T + \lambda\bm I)\bm w = (\bm U\bm\Sigma\bm V^T)^T\bm y$
-	* Simply to get $\bm V(\bm\Sigma^T\bm\Sigma + \lambda\bm I)\bm V^T\bm w = \bm V\bm\Sigma^T\bm U^T\bm y$
-	* Multiply each side by $\bm V^T$ to get $(\bm\Sigma^T\bm\Sigma + \lambda\bm I)\bm V^T\bm w = \bm\Sigma^T\bm U^T\bm y$
-	* Therefore $\bm w = \bm V(\bm\Sigma^T\bm\Sigma + \lambda\bm I)^{-1}\bm\Sigma^T\bm U^T\bm y$
+	* $((\bm U\bm\Sigma\bm V^T)^T\bm U\bm\Sigma\bm V^T + \lambda\bm 1)\bm w = (\bm U\bm\Sigma\bm V^T)^T\bm y$
+	* Simply to get $\bm V(\bm\Sigma^T\bm\Sigma + \lambda\bm 1)\bm V^T\bm w = \bm V\bm\Sigma^T\bm U^T\bm y$
+	* Multiply each side by $\bm V^T$ to get $(\bm\Sigma^T\bm\Sigma + \lambda\bm 1)\bm V^T\bm w = \bm\Sigma^T\bm U^T\bm y$
+	* Therefore $\bm w = \bm V(\bm\Sigma^T\bm\Sigma + \lambda\bm 1)^{-1}\bm\Sigma^T\bm U^T\bm y$
 	* This can be rewritten as $\hat{\bm w}(\lambda) = \sum _{i = 1}^M \bm v_i\frac{\sigma _i\bm u_i^T\bm y}{\sigma _i^2 + \lambda}$
 		* $\bm v_i, \bm u_i$ are the $i$th columns of $\bm V$ and $\bm U$
 		* If $0 \approx \sigma _i \ll \lambda$ this goes to 0

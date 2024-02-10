@@ -45,14 +45,14 @@
 * Hypothesis testing is like a more constrained version of parameter estimation; instead of estimating the value of $\theta$, we are testing whether $\theta _0$ or $\theta _1$ is more likely
 * Given two hypotheses $H_0$ (the *null hypothesis*, or the "default" to be proved or disproved) and $H_1$ (the *alternative hypothesis*), we want to know which one is more likely
 * We would like to find $g \colon S_{\bm X} \mapsto \set{H_0, H_1}$ mapping from observations to hypotheses based on $P[\bm X \in A; H_j]$
-	* $g$ divides the sample space into 2 parts, the *acceptance region* $R'$ where $H_0$ is accepted and *rejection region* $R$ where $H_0$ is rejected
+	* $g$ divides the sample space into 2 parts, the *acceptance region* $R^c$ where $H_0$ is accepted and *rejection region* $R$ where $H_0$ is rejected
 * If $g$ is not perfect, then 2 types of error can occur:
 	* *Type I error*: $H_0$ is rejected when it is true
 		* Also known as the *significance level* of a test
 		* $\alpha(R) = P[\bm X \in R; H_0]$
 		* We typically pick this to be 10%, 5%, 1%, etc
 	* *Type II error*: $H_0$ is accepted when $H_1$ is true (i.e. $H_0$ is false)
-		* $\beta(R) = P[\bm X \in R'; H_1]$
+		* $\beta(R) = P[\bm X \in R^c; H_1]$
 * We can do this partitioning using our 3 estimators
 * Using MLE, we simply pick the $H$ that gives us the maximum likelihood
 	* We just need to test $p_{\bm X}(\bm x | H_0)$ and $p_{\bm X}(\bm x | H_1)$
@@ -64,7 +64,7 @@
 * Example: $H_0: X \sim \mathcal N(0, 1), H_1 : X \sim \mathcal N(1, 1)$
 	* The hypothesis changes the mean of the Gaussian
 	* $L(x) = \frac{f_X(x; H_1)}{f_X(x; H_2)} = \frac{e^{-(x - 1)^2/2}}{e^{-x^2 / 2}} = e^{-\frac{1}{2}(-2x + 1)}$
-	* In this case the threshold rule is $x \lessgtr \gamma = \ln\xi + \frac{1}{2}$
+	* In this case the threshold rule is $x \LessGtr \gamma = \ln\xi + \frac{1}{2}$
 	* Type I error: $\alpha(\gamma) = \int _\gamma^\infty \frac{1}{\sqrt{2\pi}}e^{-{x'}^2/2}\,\dx' = Q(\gamma)$
 		* This decreases with $\gamma$
 	* Type II error: $\beta(\gamma) = \int _{-\infty}^\gamma = \frac{1}{\sqrt{2\pi}}e^{-(x' - 1)^2/2}\,\dx' = Q(1 - \gamma)$

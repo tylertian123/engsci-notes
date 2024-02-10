@@ -30,5 +30,14 @@
 	* The `L1` page table index would be 511, which stores, e.g. a PPN of `0x8`
 	* Then we look up the `L0` page table, at address `0x8000`, and index it with 511, which stores, e.g. `0xCAFE`
 	* The final physical address would be `0xCAFE008`
+* Example: if we have a program that uses 512 pages, what is the minimum number of page tables we need and what is the maximum?
+	* Minimum: 512 pages fits into a single `L0` page table, so we only need 3 tables (`L2`, `L1`, `L0`)
+	* Maximum: each page has its own `L0` table, which has its own `L1` table, but with a shared `L2` (since `L2` is always unique); in this case we need 1025 tables
+* Example: assume a 32-bit virtual address with a page size of 4096 bytes and a PTE size of 4 bytes
+	* To have each page table fit into a single page, we need $4096/4 = 1024$ PTEs on a single page
+	* To index each page table we need 10 bits
+	* Each virtual address has 12 bits dedicated to the offset (for the page table size of 4096), so 20 bits are left for the VPN
+	* Therefore we need 2 levels since each level gives 10 bits
+	* The number of levels can be found by taking the virtual address bits, subtracting the offset bits and dividing by the number of bits to index each table (ceil if not an integer)
 * Next time on ECE353: Now we have to do 3 memory accesses to look up an address, so this is 4 times slower than accessing physical memory directly; how do we make this faster?
 
