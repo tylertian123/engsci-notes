@@ -31,25 +31,3 @@
 	* Depending in ISA we may have branching instructions for result equal to zero, positive/negative, overflow, etc
 	* Some ISAs offer a compare instruction, which is a specialized subtraction that may have benefits such as not modifying the operands, restoring the original CCR bits after branching, etc
 
-## Code Reuse
-
-### Inline Functions and Macros
-
-* *Inline functions* or *macros* are code blocks defined once and duplicated by the assembler or compiler each time it's used
-* Since no function call is involved, they have no overhead, can be easily optimized, and is simple to implement
-* However duplicating them each time means inefficient code memory usage, so we should keep them short
-* Usually they will make explicit assumptions about the program state (e.g. operands are in certain registers)
-	* Should only contain re-locatable code (i.e. no jumping to fixed addresses within the code block)
-	* Also cannot contain recursion!
-* Best used for code that are executed often (e.g. inside a loop), but called/used in few other places
-
-### Subroutines
-
-* *Subroutines* are defined and compiled once; to execute them, code execution jumps to the memory they occupy and jumps back after they're done 
-* A call instruction saves the current PC on the stack and jumps to the subroutine
-* A return instruction loads the saved PC and jumps to that location, returning to the point before the subroutine call
-* The code does not strictly need to be relocatable
-* Reduces code memory usage since only one copy is needed
-* However, calling and passing arguments introduces some overhead, which could amount to a significant amount if the subroutine itself is short
-* Also harder to optimize since the subroutine code needs to be as generic as possible, so each call cannot be optimized by itself
-

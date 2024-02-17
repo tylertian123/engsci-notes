@@ -44,6 +44,7 @@
 * Rule of thumb: the response of the second-order underdamped systems (with no finite zeroes) with different damping ratios rises roughly with the same pace
 	* Typically we related $t_r$ to only $\omega _n$ instead of also $\zeta$, as an approximation
 	* For $\zeta = 0.5$, we can approximate $t_r \approx \frac{1.8}{\omega _n}$
+	* We typically choose $\zeta$ between $0.5$ and $0.7$ for a balance between overshoot and rise time
 * For settling time we can approximate the deviation of the response by the exponential only
 	* Therefore $e^{-\zeta\omega _nt_s} \approx 0.01 \implies t_s \approx \frac{4.6}{\zeta\omega _n} = \frac{4.6}{\zeta}$
 

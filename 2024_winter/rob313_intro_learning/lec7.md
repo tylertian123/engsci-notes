@@ -121,6 +121,10 @@
 * Using $l_1$ regularization can also give models that are more sparse and easy to interpret
 	* However with $l_1$ regularization we can no longer use linear algebra to obtain a closed form solution
 	* Optimization algorithms need to be used in this case
+* In summary:
+	* If $M$ is high or possibly infinite, use kernel methods
+	* If $N$ is high, use explicit basis functions
+	* When both are high, options include greedy algorithms for sparsity, clustering, scholastic algorithms, etc
 
 ![Comparison of $l_1$ vs $l_2$ regularization.](./imgs/lec7_1.png){width=50%}
 

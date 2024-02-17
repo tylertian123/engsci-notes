@@ -9,7 +9,7 @@
 * Notice that the expression is symmetric in $X$ and $Y$, and both variables appear in their normalized form
 * If $X$ and $Y$ are uncorrelated, then $f_{X, Y}(x, y) = \frac{1}{2\pi\sigma _1\sigma _2}e^{-\frac{1}{2}\left(\left(\frac{x - \mu _1}{\sigma _1}\right)^2 + \left(\frac{y - \mu _2}{\sigma _2}\right)^2\right)} = f_X(x)f_Y(y)$
 	* For Gaussian RVs, uncorrelated implies independent
-* If we compute marginals by completing the square, we that both are Gaussian
+* If we compute marginals by completing the square, we see that both are Gaussian
 
 ![Plot of a joint Gaussian distribution with zero-mean, unit variance and uncorrelated $X, Y$.](./imgs/lec9_1.png){width=50%}
 

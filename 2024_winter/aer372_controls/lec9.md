@@ -24,7 +24,7 @@
 		* For negative $a$ this diverges exponentially
 		* For zero $a$ this gives a linear response (note we can derive this by nothing $H(s) = \frac{b}{s}$ in this case)
 * The time constant is given by $T = \frac{1}{a}$
-	* The rise time is given by $t_r \approx 2.2t$, which is the time taken for the output to go from 10% to 90% of the DC gain
+	* The rise time is given by $t_r \approx 2.2T$, which is the time taken for the output to go from 10% to 90% of the DC gain
 	* The settling time is given by $t_s \approx \frac{4.6}{a}$, which is the time taken for the output to reach 99% of the DC gain
 * In a first-order system, there is never any overshoot or oscillation; the output never passes the steady state value
 
