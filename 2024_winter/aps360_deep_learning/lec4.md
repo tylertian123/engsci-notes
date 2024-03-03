@@ -33,7 +33,7 @@
 	* This retains the geometric information in the image that would otherwise be lost by flattening
 	* Weight sharing significantly reduces the number of parameters that need to be learned
 
-![Illustration of CNNs vs ANNs for classification.](./imgs/lec4_1.png){width=80%}
+![Illustration of CNNs vs ANNs for classification.](./imgs/lec4_1.png){width=60%}
 
 * The later layers will learn more abstract/higher level features and there will be fewer neurons
 	* At the end we flatten the features and pass to an ANN for classification
@@ -51,6 +51,8 @@
 * As we go through the layers, the filter depth increases, and the feature map size decreases; i.e. we have more sets of features that are each individually lower in resolution
 
 ![Progression of convolutional layers in a network.](./imgs/lec4_3.png){width=70%}
+
+![Convolution for $3 \times 5 \times 5$ input (1 padding), with $2 \times 3 \times 3$ convolutional kernels.](./imgs/lec4_4.png){width=60%}
 
 ### Pooling
 

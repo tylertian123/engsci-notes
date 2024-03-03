@@ -4,7 +4,7 @@
 
 ### Neurons
 
-![The artificial neuron model.](./imgs/lec2_1.png){width=50%}
+![The artificial neuron model.](./imgs/lec2_1.png){width=30%}
 
 * Each neuron takes inputs $\bm x$, has weights $\bm w$ and bias $b$, and an activation function $f$ which produces the output $y$
 	* $y = f(\bm w \cdot \bm x + b)$
@@ -15,7 +15,7 @@
 * Linear activation functions are not useful because composing any number of them will still result in another linear function, so there is no benefit to having a more complex network
 	* Most data in reality is not linearly separable, so linear activation functions can never work even with many layers
 * Example activation functions:
-	* Perceptron: $f(x) = \sgn(x) = \twocond{0}{x < 0}{1}{x \geq 0}$
+	* Perceptron: $f(x) = \sgn(x) = \twocond{-1}{x < 0}{1}{x > 0}$, or $f(x) = \twocond{0}{x < 0}{1}{x \geq 0}$
 		* $0$ is the *decision boundary*, where the output of the neuron changes
 		* Used in early artificial neurons and no longer used today
 		* Problem: Not differentiable, continuous or smooth
@@ -37,13 +37,10 @@
 				* Another continuous approximation
 				* Often gives better performance than regular ReLU but possibly slower to train
 
-![Perceptron activation function.](./imgs/lec2_5.png){width=30%}
-
-![Sigmoid activation functions.](./imgs/lec2_4.png){width=30%}
-
-![ReLU and Leaky ReLU/PReLU](./imgs/lec2_3.png){width=30%}
-
-![SiLU and SoftPlus activation functions.](./imgs/lec2_2.png){width=30%}
+![Perceptron activation function.](./imgs/lec2_5.png){width=25%}
+![Sigmoid activation functions.](./imgs/lec2_4.png){width=25%}
+![ReLU and Leaky ReLU/PReLU](./imgs/lec2_3.png){width=25%}
+![SiLU and SoftPlus activation functions.](./imgs/lec2_2.png){width=25%}
 
 ### Training Neural Networks
 

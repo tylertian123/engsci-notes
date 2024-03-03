@@ -5,7 +5,7 @@
 * `int execlp(const char *path, const char *arg, ...);` is a more convenient alternative to `execve()`
 	* Instead of having to build an argument array we can use varargs to specify program arguments
 	* Will also search `PATH` for the executable, so we don't have to specify the full path
-* `int dup(int oldfd);` and `int dup(int oldfd, int newfd);` duplicates a file descriptor and returns an independent file descriptor that refers to the same file
+* `int dup(int oldfd);` and `int dup2(int oldfd, int newfd);` duplicates a file descriptor and returns an independent file descriptor that refers to the same file
 	* The `oldfd` and `newfd` file descriptors will refer to the same thing after the call
 	* `dup()` will return the lowest file descriptor
 	* `dup2()` will close the `newfd` file descriptor and then make that file descriptor refer to the same thing as `oldfd`

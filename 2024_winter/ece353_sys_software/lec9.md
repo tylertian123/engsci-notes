@@ -45,7 +45,7 @@
 
 ### Shortest Remaining Time First (SRTF)
 
-* Adapts SJF to wor for preemptions
+* Adapts SJF to work for preemptions
 * Any time a new process arrives, the process with the least remaining runtime gets switched to and executed
 * Further reduces waiting time compared to SJF but again impractical
 

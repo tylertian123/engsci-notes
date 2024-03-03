@@ -24,7 +24,7 @@
 	* If the bottleneck layer is too small, not enough information will be retained to reconstruct the input
 	* Autoencoders are often symmetric, but this is not a requirement
 
-![Illustration of an autoencoder.](./imgs/lec6_1.png){width=70%}
+![Illustration of an autoencoder.](./imgs/lec6_1.png){width=50%}
 
 * To train these models, we use an MSE loss (`nn.MSELoss`) and compare the output against the input
 * Common applications:
@@ -60,7 +60,7 @@
 	* Practically to obtain the input to the decoder, we sample a deviation $\bm\epsilon \sim \mathcal N(0, \bm 1)$, scale this up by the variance, and add it to the mean to produce a sample from the latent space
 	* This allows us to compute the gradient by regarding $\bm\epsilon$ as a constant
 
-![Illustration of a variational autoencoder.](./imgs/lec6_2.png){width=70%}
+![Illustration of a variational autoencoder.](./imgs/lec6_2.png){width=60%}
 
 * We want the latent space to be *regular*: continuous (points that are close should generate outputs that are similar) and complete (points should not generate meaningless data)
 	* The model can overfit and reduce to a simple autoencoder in 2 ways, either by giving very low variances (so the output is essentially a fixed point), or having very different means (so regions corresponding to different inputs are very far apart); both will lead to an irregular latent space
@@ -108,9 +108,10 @@
 		* For this task, the network needs to learn the concepts of the objects in the images to see that they have been rotated
 * In *contrastive learning* we have pairs of samples that are fed to the network, and the loss is computed in latent space, with the embeddings expected to be equal
 	* We train the network so that "similar" input results in similar embeddings and different inputs result in embeddings that are far apart
+		* This forces the model to learn patterns of the input that stayed the same despite the augmentations
 	* The other samples are generated through data augmentation methods from the original samples, e.g. inverting the image, rotating it, etc
-	* This forces the model to learn patterns of the input that stayed the same despite the augmentations
+	* Unlike autoencoders, the embeddings generated are not used to reconstruct the input, but instead used for discriminating between samples
 * Encoder layers trained through self-supervised learning can be used in transfer learning
 
-![SimCLR architecture for contrastive learning.](./imgs/lec6_4.png){width=50%}
+![SimCLR architecture for contrastive learning.](./imgs/lec6_4.png){width=35%}
 

@@ -75,7 +75,7 @@
 * The $O(1)$ scheduler had fairness issues for different priority processes
 * If context switching had no cost, then we'd have an infinitely small timeslice and all processes would be running at the same time and get the same amount of CPU time
 
-![Ideal fair scheduling for 4 processes arriving at time 0, with burst times 8, 4, 16, 4.](./imgs/lec10_2.png){width=%}
+![Ideal fair scheduling for 4 processes arriving at time 0, with burst times 8, 4, 16, 4.](./imgs/lec10_2.png){width=50%}
 
 * In CFS, each runnable process has a "virtual runtime" in nanoseconds
 * At each scheduling point where the process runs for time $t$, the virtual runtime of the process is increased by $t$ multiplied by a weight, which is based on priority

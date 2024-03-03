@@ -17,9 +17,9 @@
 	* The validation dataset is used to tune the hyperparameters
 	* The testing dataset is only used to evaluate the final model
 
-![Stratified sampling without replacement.](./imgs/lec3_1.png){width=80%}
+![Stratified sampling without replacement.](./imgs/lec3_1.png){width=50%}
 
-![Grid vs. random search for hyperparmeter tuning.](./imgs/lec3_2.png){width=50%}
+![Grid vs. random search for hyperparmeter tuning.](./imgs/lec3_2.png){width=40%}
 
 * To tune hyperparameters, we can use either a grid search or a random search
 	* In a grid search, we search over a grid of evenly/regularly spaced values for each hyperparameter
@@ -34,7 +34,7 @@
 * All the optimizers that we use in this course are based on *gradient descent*
 * Pytorch automates the gradient computation
 
-![Comparison of path taken by regular vs stochastic gradient descent.](imgs/lec3_3.png){width=50%}
+![Comparison of path taken by regular vs stochastic gradient descent.](imgs/lec3_3.png){width=35%}
 
 * Stochastic gradient descent (SGD)
 	* In SGD, in each iteration we evaluate a training sample taken from the dataset at random
@@ -101,8 +101,9 @@
 
 ![Batch normalization.](./imgs/lec3_6.png){width=70%}
 
-* Batch normalization: normalize activations batch-wise for each layer
+* Batch normalization: normalize activations batch-wise for each layer, done right before activation, but after multiplying by weights and adding bias
 	* Again we add some amount of noise $\epsilon$ to prevent dividing by zero
+	* This "centers" the data around the active region of the activation function (around zero), which speeds up training
 	* After normalization, we can scale and shift the data as well (not used too often)
 		* This adds more parameters to be learned
 	* We still need to normalize during inference time since the network is used to seeing normalized data
@@ -116,9 +117,9 @@
 		* Less sensitivity to the initialization of the model (initially weights are randomly chosen)
 	* Disadvantages:
 		* Depends on the batch size; has no effect with small batches
-		* Can't work with SGD
+		* Can't work with SGD (since summary statistics are computed over the batch, so SGD with batch size of 1 is useless)
 
-![Layer normalization.](./imgs/lec3_7.png){width=25%}
+![Layer normalization.](./imgs/lec3_7.png){width=20%}
 
 * Layer normalization: normalize across all the neurons for an entire layer
 	* Much simpler to implement and we don't need moving averages or parameters
@@ -127,16 +128,17 @@
 ## Regularization
 
 * Regularization are techniques that reduce overfitting or underfitting
-* Dropout: randomly set weights to 0 with probability $p$
+* Dropout: randomly set weights to 0 with probability $p$ (i.e. drop out connections)
 	* Every time we train, the weights that are dropped out are shuffled
 	* This forces a neural network to learn more robust features since the model is forced to work with less data
 	* During inference, multiply all weights by $(1 - p)$ to keep the same distribution
+	* Dropouts are performed after activation
 * *L2 weight decay* (aka *L2 norm regularization*): adding the L2 norm of the weight vector to the loss function
 	* This reduces each weight multiplicatively in each iteration
 	* Effectively changes the update equation to $W_{t + 1} = W_t - \gamma\left(\alpha W_t + \pdiff{E}{W}\right)$
 	* Prevents the weights from exploding
 
-![Early stopping with patience.](./imgs/lec3_8.png){width=60%}
+![Early stopping with patience.](./imgs/lec3_8.png){width=50%}
 
 * *Early stopping*: stopping the training when loss starts to increase
 	* With "patience", start a counter when the loss starts to increase and reset it when the loss decrease; if it reaches a certain point then stop training
@@ -152,7 +154,9 @@
 		* We take the input and pass through the layers by calling them as functions
 		* To apply activation functions we call methods from `nn.functional`, e.g. `relu()`
 		* Note we don't apply an activation function for the final layer
-			* PyTorch has implementations of loss functions that include the final activation (`nn.BCEWithLogitsLoss()` applies sigmoid internally, `nn.CrossEntropyLoss()` applies softmax internally)
+			* PyTorch has implementations of loss functions that include the final activation
+				* `nn.BCEWithLogitsLoss()` applies sigmoid internally, whereas `nn.BCELoss()` does not
+				* `nn.CrossEntropyLoss()` applies softmax internally, whereas `nn.NLLLoss()` expects a proper distribution
 			* For numerical stability these are better
 * Calling the model like a function allows us to do the forward pass 
 * To compute gradients, we call `backward()` on the loss function (e.g. `nn.BCEWithLogitsLoss`, `nn.CrossEntropyLoss`)
@@ -171,7 +175,7 @@
 	* Do this with a small amount of data to do it quickly
 * Ensure that the model is training at all -- check that loss is actually going down
 
-![Confusion matrix.](./imgs/lec3_9.png){width=70%}
+![Confusion matrix.](./imgs/lec3_9.png){width=60%}
 
 * The confusion matrix can be used to check the model performance and the data balance
 	* True positive/negative: when prediction and true label agree
@@ -181,7 +185,7 @@
 		* *Accuracy*: probability of output being correct (sum of true positives and negatives over all samples)
 		* *Precision*: probability of true positive, given positive prediction (true positives over sum of true and false positives)
 		* *Recall*: probability of true positive, given positive label (true positives over sum of true positives and false negatives)
-		* *F1 score*: $2 \times \frac{\text{recall} \times \text{precision}}{\text{recall} \times \text{precision}}$
+		* *F1 score*: $2 \times \frac{\text{recall} \times \text{precision}}{\text{recall} + \text{precision}}$
 * We can also take data from later layers and plot the data to see if there are patterns
 	* Using t-SNE for a 2D projection and visualization of the data structure
 	* We should expect to see that different classes are clumped together

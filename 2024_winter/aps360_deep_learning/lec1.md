@@ -6,6 +6,7 @@
 	* Requires labelled data
 	* To select the appropriate model we need to make assumptions about the problem; this is known as *inductive bias* or *learning bias*
 		* "No free lunch" theorem says that we need to make assumptions to learn
+		* Without proper assumptions, all models tend to perform equally if averaged over all possible tasks
 	* We also need to quantify the model's performance; this is done through a *loss function*
 	* More complex models have greater capacity to learn, but are more prone to overfitting -- the model can learn the peculiarities about the specific training data and fail to generalize
 		* To combat this, we partition the dataset into training and testing subsets; we evaluate model performance by running the model on the testing dataset

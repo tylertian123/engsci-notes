@@ -23,7 +23,8 @@
 	* The pipe is managed by the kernel using an internal buffer
 	* Returns 0 on success, -1 and sets `errno` on failure
 * One usage of this is to create a pipe and then fork, which will also give the child access to the pipe, allowing IPC between the child and parent
-* The pipe closes if no process has the read or write end of the pipe open; however if a process has both the read and end of the pipe, it will not close
+* The pipe closes if no process has the read or write end of the pipe open
+	* If both ends of the pipe are open by at least one process, the pipe won't close, even if both ends are opened by the same process
 	* Best practice is to close the file descriptors when we no longer need them, otherwise the pipe won't close
 	* e.g. if the parent needs to send data to the child, the parent should close the read end of the pipe and the child close the write end of the pipe
 

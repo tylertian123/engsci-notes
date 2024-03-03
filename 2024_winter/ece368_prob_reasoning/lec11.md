@@ -30,13 +30,14 @@
 
 ![Illustration of the different kinds of Gaussian discriminant analysis.](imgs/lec11_1.png){width=80%}
 
-## Conditional Gaussian Distributions
+## Gaussian Parameter Estimation
 
 * Let $\bm X, \bm Y$ be jointly Gaussian and let $\bm w = \cvec{\bm X}{\bm Y}$; we want to find the MAP estimator for $\bm X$ given $\bm Y$
 	* i.e. we want to find the distribution of $\bm X$ conditioned on $\bm Y$
 	* We will make use of the covariances between elements of $\bm X$ and $\bm Y$
+	* Strategy: expand out the exponent of the joint PDF and rearrange it into a form with $\bm X$ as the variable
 * The mean of $\bm w$ is $\bm\mu = \cvec{\bm\mu _X}{\bm\mu _Y}$
-* The covariance is $\bm\Sigma _w = E[(\bm w - \mu _w)(\bm w - \mu _w)^T] = E[\cvec{\bm X - \bm\mu _X}{\bm Y - \bm\mu _Y}\cvec{(\bm X - \mu _X)^T}{(\bm Y - \bm\mu _Y)^T} = \mattwo{\bm\Sigma _{\bm X\bm X}}{\bm\Sigma _{\bm X\bm Y}}{\bm\Sigma _{\bm Y\bm X}}{\bm\Sigma _{\bm Y\bm Y}}$
+* The covariance is $\bm\Sigma _w = E[(\bm w - \bm\mu _w)(\bm w - \bm\mu _w)^T] = E\left[\cvec{\bm X - \bm\mu _X}{\bm Y - \bm\mu _Y}\cvec{(\bm X - \bm\mu _X)^T}{(\bm Y - \bm\mu _Y)^T}\right] = \mattwo{\bm\Sigma _{\bm X\bm X}}{\bm\Sigma _{\bm X\bm Y}}{\bm\Sigma _{\bm Y\bm X}}{\bm\Sigma _{\bm Y\bm Y}}$
 	* The overall dimension is $N \times N$; the $\bm\Sigma _{\bm X\bm Y}, \bm\Sigma _{\bm Y\bm X}$ matrices are in general rectangular
 	* Let the *precision matrix* $\bm\Lambda = \bm\Sigma _w^{-1} = \mattwo{\bm\Lambda _{\bm X\bm X}}{\bm\Lambda _{\bm X\bm Y}}{\bm\Lambda _{\bm Y\bm X}}{\bm\Lambda _{\bm Y\bm Y}}$
 		* This is the opposite of variance; the larger the precision, the more tightly concentrated the distribution
@@ -53,6 +54,6 @@
 * Using the Schur complement on $\bm\Sigma^{-1}$ we can find a general expression for each of the $\bm\Lambda$
 	* $\bm\Lambda _{\bm X\bm X} = (\bm\Sigma _{\bm X\bm X} - \bm\Sigma _{\bm X\bm Y}\bm\Sigma _{\bm Y\bm Y}^{-1}\bm\Sigma _{\bm Y\bm X})^{-1}$
 	* $\bm\Lambda _{\bm X\bm Y} = (\bm\Sigma _{\bm X\bm X} - \bm\Sigma _{\bm X\bm Y}\bm\Sigma _{\bm Y\bm Y}^{-1}\bm\Sigma _{\bm Y\bm X})^{-1}\bm\Sigma _{\bm X\bm Y}\bm\Sigma _{\bm Y\bm Y}^{-1}$
-	* Therefore $\bm\mu _{X|Y} = \bm\mu _X - \bm\Sigma _{\bm X\bm X}\bm\Sigma _{\bm Y\bm Y}^{-1}(\bm y - \bm\mu _Y)$, $\bm\Sigma _{X|Y} = \bm\Sigma _{\bm X\bm X} - \bm\Sigma _{\bm X\bm Y}\bm\Sigma _{\bm Y\bm Y}^{-1}\bm\Sigma _{\bm Y\bm X}$
-	* We get both the mean of the estimate and its spread
- 
+	* Therefore $\bm\mu _{X|Y} = \bm\mu _X + \bm\Sigma _{\bm X\bm Y}\bm\Sigma _{\bm Y\bm Y}^{-1}(\bm y - \bm\mu _Y)$, $\bm\Sigma _{X|Y} = \bm\Sigma _{\bm X\bm X} - \bm\Sigma _{\bm X\bm Y}\bm\Sigma _{\bm Y\bm Y}^{-1}\bm\Sigma _{\bm Y\bm X}$
+	* We get both the mean of the estimate and its sprea
+

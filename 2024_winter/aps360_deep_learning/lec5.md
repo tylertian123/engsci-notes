@@ -93,6 +93,9 @@
 * *Global average pooling*: instead of flattening the final feature maps, take an average cross the entire feature map for each channel
 	* The result is fed to ANN layers or directly to softmax
 	* This effectively reduces each feature map's dimensions to just $1 \times 1$
+	* To implement in PyTorch we can use an `nn.AdaptiveAvgPool2d(1)` layer
+		* Argument is the desired output size, which is 1 for GAP
+		* Kernel size is computed automatically, which makes it average across the entire input
 
 ![Illustration of global average pooling.](./imgs/lec5_7.png){width=35%}
 

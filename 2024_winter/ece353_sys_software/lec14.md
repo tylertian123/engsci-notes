@@ -10,12 +10,15 @@
 		* If another process with lower priority becomes ready, switch to that process and preempt the original one
 	* The time each process executes for during the time slice is recorded as $C_n$
 	* At the end of the time slice, the priority of the process is updated as $P_n \gets \frac{P_n}{2} + C_n$, and then $C_n \gets 0$
-		* Note priorities are only updated at the end of time slices
+		* Note priorities are only *updated* at the end of time slices or priority intervals
 		* When a process with lower priority is ready, we compare the current priorities without updating first
+* Example below shows dynamic priority scheduling for processes X, Y, A, B arriving in order
+	* X and Y are I/O bound processes that execute for 1 time unit and block for 5
+	* Timer interrupts occurs every time unit, time slices are 10, priority interval is 10
 
-![](./imgs/lec14_1.png){width=%}
+![Scheduling for the case above if all processes start with priority 0.](./imgs/lec14_1.png){width=50%}
 
-![](./imgs/lec14_2.png){width=%}
+![Scheduling for the case above if A and B have priority 6, X and Y have 0.](./imgs/lec14_2.png){width=50%}
 
 ## Memory Mapping
 
