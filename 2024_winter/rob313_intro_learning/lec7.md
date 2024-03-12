@@ -13,7 +13,7 @@
 * Using the loss in terms of $\bm K$, we take $\nabla _{\bm\alpha}J = 0$ leads to $\bm\alpha = (\bm K + \lambda\bm 1)^{-1}\bm y$
 	* With this solution for $\bm\alpha$ we have $\hat f(\bm x, \bm w) = \bm\phi(\bm x)^T\bm w = \bm\phi(\bm x)^T\bm\Phi^T(\bm K + \lambda\bm 1)^{-1}\bm y$
 	* Note the $i$th entry of $\bm\Phi\bm\phi(\bm x)$ is $\bm\phi(\bm x^{(i)})\bm\phi(\bm x) = k(\bm x^{(i)}, \bm x)$
-	* Let $\bm k(\bm x) = \set{k(\bm x^{(1)}, \bm x), \dots, k(\bm x^{(1)}, \bm x)}^T \in \reals^N$
+	* Let $\bm k(\bm x) = \set{k(\bm x^{(1)}, \bm x), \dots, k(\bm x^{(N)}, \bm x)}^T \in \reals^N$
 * The model can then be rewritten as $\hat f(\bm x, \bm w) = \bm k(\bm x)^T(\bm K + \lambda\bm 1)^{-1}\bm y = \sum _{i = 1}^N \alpha _ik(\bm x, \bm x^{(i)})$
 	* This is known as the *dual representation*
 	* We've defined our model entirely in terms of the kernel; we don't actually need to evaluate the basis functions themselves, and only the inner products between the bases are needed

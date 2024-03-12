@@ -12,7 +12,7 @@
 	* This expression is in the exponent, so we can split it up into a product of exponentials
 	* The resulting distribution is a product of distributions in each $X$, so they are all independent
 * Consider some linear transformation $\bm A$ so that $\bm Y = \bm A\bm X$ is the transformed version of $\bm X$, which are jointly Gaussian
-	* $f_{\bm Y}(\bm y_) = \frac{f_{\bm X}(\bm x)}{\det\bm A} = \frac{f_{\bm X}(\bm A^{-1}\bm y)}{\det\bm A}$
+	* $f_{\bm Y}(\bm y) = \frac{f_{\bm X}(\bm x)}{\det\bm A} = \frac{f_{\bm X}(\bm A^{-1}\bm y)}{\det\bm A}$
 	* Substitute this into the Gaussian for $\bm X$, in the exponent we get $(\bm A^{-1}\bm y - \bm m_{\bm X})^T\bm K_{\bm X}^{-1}(\bm A^{-1}\bm y - \bm m_{\bm X})$
 	* Factor out $\bm A$: $(\bm y - \bm A\bm m_{\bm X})^T\bm A^{-T}\bm K_{\bm X}^{-1}\bm A^{-1}(\bm y - \bm A\bm m_{\bm X}) = (\bm y - \bm A\bm m_{\bm X})^T(\bm A\bm K_{\bm X}\bm A^T)^{-1}(\bm y - \bm A\bm m_{\bm X})$
 	* Therefore $\bm A\bm K_{\bm X}\bm A^T$ is the new covariance matrix and $\bm A\bm m_{\bm X}$ is the new mean; the result is still Gaussian

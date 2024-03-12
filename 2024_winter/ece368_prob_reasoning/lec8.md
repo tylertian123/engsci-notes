@@ -12,17 +12,17 @@
 	* Compare $\frac{1}{\sqrt{2\pi}\sigma}e^{-(x - 1)^2}{2\sigma^2}\pi _1$ and $\frac{1}{\sqrt{2\pi}\sigma}e^{-(x + 1)^2}{2\sigma^2}\pi _0$
 	* The threshold is $e^{\frac{4x}{2\sigma^2}} \LessGtr \frac{\pi _0}{\pi 1}$ or $x \LessGtr \frac{\sigma^2}{2}\log \frac{\pi _0}{\pi _1}$
 	* If we assume that the bits are balanced, i.e. $\pi _0 = \pi _1$, then we're simply seeing if $x$ is positive or negative
-* We can use different metrics, e.g. the probability of error, as a cost metric
-	* Minimum probability of error $P_E = \int _R f_X(x | H_0)\pi _0\,\dx + \int _{R^c} f_X(x | H_1)\pi _1\,\dx$
-	* Or minimum cost detection $C_{00}P[\text{Accept }H_0 | H_0]\pi _0 + C_{01}P[\text{Reject }H_0 | H_0]\pi _0 + C_{10}P[\text{Accept }H_1 | H_1]\pi _1 + C_{11}P[\text{Reject }H_1 | H_1]\pi _1$
+* Assign different costs, $C_{ij}$ being the cost of accepting $H_i$ if $H_j$ is true
+	* The expected cost is $C_{00}P[\text{Accept }H_0 | H_0]\pi _0 + C_{01}P[\text{Reject }H_0 | H_0]\pi _0 + C_{10}P[\text{Accept }H_1 | H_1]\pi _1 + C_{11}P[\text{Reject }H_1 | H_1]\pi _1$
+	* Define the likelihood $\Lambda(x) = \frac{f_X(x | H_1)}{f_X(x | H_0)}$
+	* Optimal decision rule: accept $H_0$ if $\Lambda(x) < \frac{\pi _0(C_{01} - C_{00})}{\pi _1(C_{10} - C_{11})}$
+		* We can derive this using the same procedure as above
+		* A special case is to minimize the probability of error in which case $C_{00} = C_{11} = 0, C_{01} = C_{10} = 1$
+		* Equivalent to minimizing $P_E = \int _R f_X(x | H_0)\pi _0\,\dx + \int _{R^c} f_X(x | H_1)\pi _1\,\dx$
 * Consider the Gaussian example with minimum error probability as the cost
 	* $P_E = \int _R \frac{1}{\sqrt{2\pi}\sigma}e^\frac{-{(x + 1)^2}{2\sigma^2}}\pi _0\,\dx + \int _{R^c} \frac{1}{\sqrt{2\pi}\sigma}e^\frac{-{(x - 1)^2}{2\sigma^2}}\pi _1\,\dx = 1 + \int _{R^c} \frac{1}{\sqrt{2\pi}\sigma}\left(e^{-\frac{(x - 1)^2}{2\sigma^2}}\pi _1 - e^{-\frac{(x + 1)^2}{2\sigma^2}}\pi _0\right)\,\dx$
 	* To minimize this we want to pick the expression inside brackets so it is always negative
 	* Making the expression negative gives us back the MAP rule!
-* Define the likelihood $\Lambda(x) = \frac{f_X(x | H_1)}{f_X(x | H_0)}$
-	* The decision rule is to accept $H_0$ if $\Lambda(x) < \frac{\pi _0(C_{01} - C_{00})}{\pi _1(C_{10} - C_{11})}$
-	* We can derive this using the same procedure as above
-	* A special case is to minimize the probability of error in which case $C_{00} = C_{11} = 0, C_{01} = C_{10} = 1$
 * For multiple hypotheses:
 	* Probability of correct is $\sum _{k = 1}^K \int _{R_k} P[X = x, H_k]\,\dx$
 	* Min cost: $\sum _j \int _{R_j} \sum _{k = 1}^K L_{kj}P[X = x, H_k]\,\dx$

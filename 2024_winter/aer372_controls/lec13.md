@@ -82,10 +82,12 @@
 	* $T_{ol} + \delta T_{ol} = D_{ol}(G + \delta G) = D_{ol}G + D_{ol}\delta G = T_{ol} + D_{ol}\delta G = T_{ol} + \frac{T_{ol}}{G}\delta G \implies \delta T_{ol} = \frac{T_{ol}}{G}\delta G$
 		* $\frac{\delta T_{ol}}{T_{ol}} = \frac{\delta G}{G}$ so the sensitivity is 1
 	* i.e. whatever change happens in the plant, it will be immediately reflected in the entire system
-* For closed-loop control, $\mathcal S_G^{T_{cl}} = \frac{G}{T_{cl}}\frac{\delta T_{cl}}{\delta G}$
-	* $\mathcal S_G^{T_{cl}} = \frac{1}{1 + HGD_{cl}}$
-	* This is why we define the sensitivity transfer function as $\mathcal S = \frac{1}{1 + HGD_{cl}}$
-	* Define the *complementary sensitivity* transfer function as $\mathcal T = \frac{GD_{cl}}{1 + HGD_{cl}}$
-	* For the case of a perfect sensor $H(s) = 1$, $\mathcal S + \mathcal T = 1$
-	* The larger the controller, the more robust it is to changes in the plant
+* For closed-loop control, $\mathcal S_G^{T_{cl}} = \frac{G}{T_{cl}}\frac{\delta T_{cl}}{\delta G} = \frac{G}{T_{cl}} \cdot \diff{T_{cl}}{G}$
+	* We can show that $\mathcal S_G^{T_{cl}} = \frac{1}{1 + HGD_{cl}}$
+		* This is why we define the sensitivity transfer function as $\mathcal S = \frac{1}{1 + HGD_{cl}}$
+		* The sensitivity is not 1 but is mitigated by the additional term in the denominator
+		* The larger the controller $D_{cl}$, the more robust it is to changes in the plant
+	* The complementary sensitivity transfer function is $\mathcal T = \frac{GD_{cl}}{1 + HGD_{cl}}$
+		* Notice that this is just the closed-loop transfer function
+		* This is named so because for the case of a perfect sensor $H(s) = 1$, $\mathcal S + \mathcal T = 1$
 

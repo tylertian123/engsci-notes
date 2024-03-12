@@ -49,6 +49,9 @@
 			* Replace this element by some small positive value $\var\epsilon$ and construct the rest of the array
 			* Take the limit $\var\epsilon \to 0^+$ and check the sign of the first column
 		* An entire row is zero
+			* Take the contents of the row above this, and create an auxiliary polynomial with only even powers, using the row as coefficients
+			* e.g. if the row above the zero row has 3 and 12, then the auxiliary polynomial is $p(s) = 3s^2 + 12$
+			* Differentiate this polynomial and use the coefficients in the derivative as the new contents for the zero row
 * Example: unity feedback system, with a PI controller $K + \frac{K_I}{s}$, and a plant $\frac{1}{(s + 1)(s + 2)}$
 	* For what values of $K$ and $K_I$ is the closed-loop system stable?
 	* $H(s) = \frac{\left(K + \frac{K_I}{s}\right)\left(\frac{1}{(s + 1)(s + 2)}\right)}{1 + \left(K + \frac{K_I}{s}\right)\left(\frac{1}{(s + 1)(s + 2)}\right)} = \frac{Ks + K_I}{s^3 + 3s^2 + (2 + K)s + K_I}$

@@ -42,5 +42,7 @@
 	* This means that we can always compute $P(x_1, \dots, x_n)$ just by looking at the conditional probabilities stored in the network
 		* There are multiple ways to expand this joint probability, but there will always be one order that works
 		* The order that works is determined by the topological sorting of the graph
+	* To compute the joint probability over all the events in the network, compute the product of each event conditioned on its immediate parents
+		* Always guaranteed to work due to the existence of a topological sort as above
 * Using Bayesian networks, we can compute the probability of $2^n$ events using only $n \cdot 2^q$ entries
 

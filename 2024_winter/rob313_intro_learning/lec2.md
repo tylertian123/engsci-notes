@@ -46,7 +46,7 @@
 * Let the optimal predictor be $h_*(\bm x) = \mathbb E[y|\bm x]$; for any dataset we can run our learning algorithm to get a particular $h(\bm x; \mathcal D)$
 	* Let's take the expectation of the error over all choices of datasets
 	* We can rewrite $\mathbb E_{\mathcal D}[(h(\mathcal D) - h_*)^2 + \Var(y)] = (\mathbb E_{\mathcal D}[h] - h_*)^2 + \Var(h) + \Var(y)$
-	* So $\mathbb E_{\mathcal D}[\mathbb E_y[(h(\bm x; \mathcal D) - y)^2 | \bm x] = \underbrace{(\mathbb E_{\mathcal D}[h] - h_*)^2}_\text{bias} + \underbrace{\Var(h)}_\text{variance} + \underbrace{\Var(y)}_\text{Bayes error}$
+	* So $\mathbb E_{\mathcal D}[\mathbb E_y[(h(\bm x; \mathcal D) - y)^2 | \bm x]] = \underbrace{(\mathbb E_{\mathcal D}[h] - h_*)^2}_\text{bias} + \underbrace{\Var(h)}_\text{variance} + \underbrace{\Var(y)}_\text{Bayes error}$
 	* The loss is now decomposed into 3 terms:
 		* The *bias* indicates how the average prediction over all datasets differs from the optimal predictor
 		* The *variance* indicates how sensitive $h(\bm x)$ is to the choice of a particular dataset

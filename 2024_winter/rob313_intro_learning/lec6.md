@@ -51,7 +51,7 @@
 * *Regularization* tries to keep the magnitudes of the weights reasonably small, as a way to prevent overfitting
 * To keep the weight small, we can introduce the norm of the weights to the loss function, so the model is penalized for having weights that are too large
 
-\noteDefn{\textit{Ridge Regression Method}: Choose the weights as $$\hat{\bm w} = \argmin _{\bm w \in \reals^{M + 1}} \abs{\bm y - \bm \Phi\bm w}_2^2 + \lambda\norm{\bm w}_2^2$$where $\lambda$ is the \textit{regularization parameter}.}
+\noteDefn{\textit{Ridge Regression Method}: Choose the weights as $$\hat{\bm w} = \argmin _{\bm w \in \reals^{M}} \abs{\bm y - \bm \Phi\bm w}_2^2 + \lambda\norm{\bm w}_2^2$$where $\lambda$ is the \textit{regularization parameter}.}
 
 * Note $w_0$ is often excluded from the regularization term
 * The regularized loss function is also quadratic in $\bm w$, so we can use the same steps as before

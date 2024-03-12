@@ -28,7 +28,7 @@
 
 \noteThm{\textit{Weak Law of Large Numbers}: $$\lim _{n \to \infty} P[\abs{M_n - E[X]} < \epsilon] = 1$$That is, as the sample size $N$ increases, the probability of the sample mean being within $\epsilon$ of the true mean approaches 1, where $\epsilon$ is any arbitrarily small positive number.
 \tcblower
-\textit{Strong Law of Large Numbers}: Given IID $X_i$ with finite mean, $$P\left[\lim _{n \to \infty} \abs{M_n - E[X]} < 0\right] = 1$$}
+\textit{Strong Law of Large Numbers}: Given IID $X_i$ with finite mean, $$P\left[\lim _{n \to \infty} \abs{M_n - E[X]} < \epsilon\right] = 1$$}
 
 * SLLN asserts a much stronger form of convergence to $E[X]$
 	* Notice that for SLLN the limit is outside the probability

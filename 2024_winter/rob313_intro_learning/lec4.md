@@ -43,7 +43,7 @@
 	* Cost: $\textstyle O(2N(D + 1)^2 + \frac{2}{3}(D + 1)^3)$ (approximate)
 		* QR factorization costs about $2mn^2$ flops; for $m \gg n$ Cholesky is faster, but only a factor of 2 at most
 * Singular value decomposition: $\bm X = \bm U\bm\Sigma\bm V^T$ where $\bm U \in \reals^{N \times N}, \bm V \in \reals^{(D + 1) \times (D + 1)}$ are orthogonal and $\bm\Sigma \in \reals^{N \times (D + 1)}$ is rectangular diagonal
-	* Note we can write this as $\bm X = \rvec{\bm U_1}{\bm U_2}{\cvec{\bm\Sigma _1}{\bm 0}}{\bm V^T}$ or $\bm X = \bm U_1\bm\Sigma _1\bm V^T$
+	* Note we can write this as $\bm X = \rvec{\bm U_1}{\bm U_2}\cvec{\bm\Sigma _1}{\bm 0}\bm V^T$ or $\bm X = \bm U_1\bm\Sigma _1\bm V^T$
 	* $\norm{\bm y - \bm X\bm w}_2^2 = \norm{\bm U^T(\bm y - \bm X\bm w)}_2^2 = \norm*{\cvec{\bm U_1^T\bm y}{\bm U_2\bm y} - \cvec{\bm\Sigma _1\bm V^T\bm w}{\bm 0}}_2^2 = \norm{\bm U_1^T\bm y - \bm\Sigma _1\bm V^T\bm w}_2^2 + \norm{\bm U_2^T\bm y}_2^2$
 		* Since $\bm U$ is orthogonal, we can multiply any vector by it and not change the norm
 	* We can now minimize this by choosing $\hat{\bm w} = \bm V\bm\Sigma _1^{-1}\bm U_1^T\bm y = \sum _{i = 1}^{D + 1} \bm v_i\frac{\bm u_i^T\bm y}{\sigma _i}$
@@ -89,7 +89,7 @@
 	* Therefore $\hat{\bm w} = \bm X^T(\bm X\bm X^T)^{-1}\bm y$
 		* Note in practice we do not calculate this inverse explicitly but instead use a factorization scheme for better stability
 	* Other options for constraints also exist such as minimizing the 1-norm
-* Using QR factorization: factorize $\bm X^T\bm Q\bm R$, then $\hat{\bm w} = \bm Q\bm R^{-T}\bm y$
+* Using QR factorization: factorize $\bm X^T = \bm Q\bm R$, then $\hat{\bm w} = \bm Q\bm R^{-T}\bm y$
 * Using economy SVD: $\bm X^T = \bm U_1\bm\Sigma _1\bm V^T$, then $\hat{\bm w} = \bm U_1\bm\Sigma _1^{-1}\bm V^T\bm y$
 	* If $\bm X^T$ is not full rank we can use the same thresholding technique as overdetermined least squares (ignoring nearly zero singular values)
 

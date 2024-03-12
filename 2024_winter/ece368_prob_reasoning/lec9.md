@@ -2,7 +2,7 @@
 
 ## Joint Gaussian Distributions
 
-\noteThm{\textit{Central Limit Theorem}: Let $X_1, \dots, X_n$ be a sequence of IDD RVs from any distribution with finite mean $\mu$ and variance $\sigma^2$, and let $S_n = X_1 + \dots + X_n$ be their sum; and let $$Z_n = \frac{S_n - n\mu}{\sigma\sqrt n}$$which is zero-mean and unit variance, then $$\lim _{n \to \infty} P[Z_n \leq z] = \frac{1}{\sqrt{2\pi}}\intlinf{z} e^{-\frac{x^2}{2}}\,\dx$$i.e. the distribution of $Z_n$ approaches $\mathcal N(0, 1)$.}
+\noteThm{\textit{Central Limit Theorem}: Let $X_1, \dots, X_n$ be a sequence of i.i.d. RVs from any distribution with finite mean $\mu$ and variance $\sigma^2$, and let $S_n = X_1 + \dots + X_n$ be their sum; and let $$Z_n = \frac{S_n - n\mu}{\sigma\sqrt n}$$which is zero-mean and unit variance, then $$\lim _{n \to \infty} P[Z_n \leq z] = \frac{1}{\sqrt{2\pi}}\intlinf{z} e^{-\frac{x^2}{2}}\,\dx$$i.e. the distribution of $Z_n$ approaches $\mathcal N(0, 1)$.}
 
 \noteDefn{$X$ and $Y$ are \textit{jointly Gaussian} if their joint PDF is given by $$f_{X, Y}(x, y) = \frac{1}{2\pi\sigma _1\sigma _2\sqrt{1 - \rho _{X, Y}^2}}e^{-\frac{1}{2(1 - \rho _{X, Y}^2)}\left(\left(\frac{x - \mu _1}{\sigma _1}\right)^2 - 2\rho _{X, Y}\left(\frac{x - \mu _1}{\sigma _1}\right)\left(\frac{y - \mu _2}{\sigma _2}\right) + \left(\frac{y - \mu _2}{\sigma _2}\right)^2\right)}$$where $\mu _1, \mu _2$ are the means, $\sigma _1^2, \sigma _2^2$ are the variances, and $\rho _{X, Y}$ is the correlation coefficient of $X, Y$.}
 
@@ -33,7 +33,7 @@
 		* $f(x, y)\,\dx\,\dy = f(v, w)\,\dd P$ since both are the probability of a small region
 	* For a nonlinear transformation the determinant is replaced by a Jacobian
 	* Note practically to get this in terms of $v, w$ we need to find the inverse mapping from $v, w$ to $x, y$
-* More generally consider $\bm Z = \bm A\bm Z$ where $A \in \reals^{n \times n}$$ and is invertible
+* More generally consider $\bm Z = \bm A\bm Z$ where $A \in \reals^{n \times n}$ and is invertible
 	* The joint PDF is $f_Z(\bm Z) = f(z_1, \dots, z_n) = \frac{f(x_1, \dots, x_n)}{\det{\bm A}} = \frac{f_{\bm X}(\bm A^{-1}\bm z)}{\det\bm A}$
 
 ## Generalization of Expectation and Variance
@@ -54,6 +54,6 @@
 * We can apply an eigendecomposition to the covariance matrix
 	* Often our covariance matrix will be full rank, which makes it positive definite, and makes the decomposition always possible
 	* Find eigenvectors $\bm e_i$ such that $\bm K_{\bm X}\bm e_i = \lambda\bm e_i$ and $\bm e_i^T\bm e_j = \delta _{ij}$ (orthonormal eigenvectors)
-	* Let $\bm P = \rvec{\bm e_1}{\dots}{\bm e_n}$ and $\bm\Lambda = \diag\lambda _i$, then $\bm X = \bm P\bm\Lambda\bm P^T$
+	* Let $\bm P = \rvec{\bm e_1}{\dots}{\bm e_n}$ and $\bm\Lambda = \diag\lambda _i$, then $\bm K_{\bm X} = \bm P\bm\Lambda\bm P^T$
 	* For a general Gaussian, this means that if we first transform the variables by $\bm P^T$, then they will all be independent of each other
 

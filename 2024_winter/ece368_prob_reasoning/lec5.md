@@ -61,6 +61,6 @@
 	* To maximize this we again take $\hat\theta _\text{MAP} = x$
 	* For this problem, the MAP and ML estimates are the same
 * For LMS:
-	* $\hat\theta _\text{LMS} = E[\Theta | x] = \int _x^1 \theta f(\theta | x)\,\dx = \frac{\theta}{\theta\ln \frac{1}{x}}\,\dtheta = \frac{1 - x}{\ln \frac{1}{x}}$
+	* $\hat\theta _\text{LMS} = E[\Theta | x] = \int _x^1 \theta f(\theta | x)\,\dtheta = \int _x^1 \frac{\theta}{\theta\ln \frac{1}{x}}\,\dtheta = \frac{1 - x}{\ln \frac{1}{x}}$
 	* In this case LMS is less conservative
 

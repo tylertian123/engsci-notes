@@ -93,5 +93,7 @@
 * Some critical interrupts cannot be masked (*non-maskable interrupts*, NMIs)
 	* This is used for critical tasks like bootloaders, watchdogs, e-stops, etc
 * If two interrupts occur simultaneously, or we have multiple interrupts waiting after clearing the mask, *interrupt priority* is used to determine which gets handled first
-	* This is often configurable in modern microcontrollers
+	* This is often configurable in modern microcontrollers through a table; older platforms have a fixed table
+	* Note this completely ignores order of arrival; higher priority interrupts are always handled before lower ones
+	* We need to be more careful with high-priority interrupts so they don't monopolize the CPU
 
