@@ -34,8 +34,12 @@
 		* The result is another conditional probability table, like the ones we started with
 * *Factors* are these probability tables, from either the original conditional probabilities in the expression, or the functions produced as a result of the above
 	* Each factor is a function over some variables, e.g. $f(A, C)$ denotes a factor over $A$ and $C$, which could be $P(C | A)$
+		* However, the factors aren't necessarily probabilities; they don't always sum to 1
+		* Factors don't always have a probabilistic interpretation
 	* Factors have the following operations:
 		* Product: if $f(X, Y)$ and $g(Y, Z)$ with $Y$ in common, then the product $h = f * g$ is a factor $h(X, Y, Z) = f(X, Y) \cdot g(Y, Z)$
+			* We look at the column that's the same between the two tables and multiply corresponding entries
+			* Like a database join
 		* Summing out: if $f(X, Y)$, summing out $X$ from $f$ produces the new factor $h = \sum _X f$, where $h(Y) = \sum _X f(X, Y)$
 		* Restricting: if $f(X, Y)$, restricting $f$ to $X = a$ produces $h = f_{X = a}$ where $h(Y) = f(a, Y)$
 	* The summing and restricting operations may produce a factor over no variables, which is a constant that we can take out
@@ -46,4 +50,5 @@
 		2. Compute the new factor $g_j = \sum _{Z_j} f_1 * f_2 * \dots * f_k$ (i.e. take their product and sum out $Z_j$)
 		3. Remove all $f_i$ from $\mathcal F$ and add $g_j$ to $\mathcal F$
 	3. Take the product of the remaining factors (which should refer only to $Q$) and normalize to produce $P(Q | \mathcal E)$
+		* The resulting factor is unnormalized, i.e. $f(Q) + f(\bar Q) \neq 1$, so we need to compute the normalization factor so they sum to 1
 

@@ -32,6 +32,7 @@
 		* Since $\bm\pi$ is a PMF, the first equation only gives $n - 1$ independent equations
 		* i.e. when we have this PMF, it remains unchanged by the Markov chain
 	* These together are known as the *global balance equations*
+* However, not all solution to the global balance equations are true steady-state probabilities
 
 ### Recurrence Relations in Markov Chains
 
@@ -46,8 +47,10 @@
 	* Classes are always disjoint (i.e. one state cannot be in two different classes; in that case the two classes would communicate with each other so they would be the same)
 		* However, states in different classes aren't necessarily independent, since we can still have one-way accessible connections
 * The states of a Markov chain consists of one or more disjoint classes; if it has a single class, it is *irreducible*
+* A state is *periodic* with period $d$ if it can only re-occur at times that are multiples of $d$, i.e. $p_{ii}(n) = 0$ if $n$ is not a multiple of $d$
+	* If the Markov chain is periodic, it's similar to having multiple chains
 
-![State transition diagram for a Markov chain with 3 classes: $\set{0}, \set{1, 2}, \set{3}$.](./imgs/lec15_2.png){width=55%}
+![State transition diagram for a Markov chain with 3 classes: $\set{0}, \set{1, 2}, \set{3}$. This is aperiodic.](./imgs/lec15_2.png){width=55%}
 
 ![State transition diagram for a Markov chain with a single class. This is periodic with period 2.](./imgs/lec15_3.png){width=55%}
 
@@ -60,4 +63,9 @@
 	* State $i$ is recurrent iff $\sum _{n = 1}^\infty p_{ii}(n) = \infty$
 	* State $i$ is transient iff $\sum _{n = 1}^\infty p_{ii}(n) < \infty$
 	* e.g. if $p_{00}(n) = \left(\frac{1}{2}\right)^n$, then the sum converges to 2 so it is finite and the state is transient
+
+![Binomial counting process state transition diagram. Each state is its own class and every class/state is transient.](./imgs/lec15_4.png){width=70%}
+
+![Random walk process state transition diagram. All states are in the same class. This is also periodic.](./imgs/lec15_5.png){width=60%}
+
 

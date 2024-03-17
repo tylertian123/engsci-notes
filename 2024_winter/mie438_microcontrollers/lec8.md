@@ -28,9 +28,7 @@
 
 ![Types of sensor frequency along with preferred handling methods.](./imgs/lec8_2.png){width=55%}
 
-## A/D Conversion
-
-### 1-Bit Conversion
+## 1-Bit A/D Conversion
 
 * This would be used for a signal that changes slowly or takes on only a few fixed values
 * We want to compare the analog voltage level with a threshold to generate a 1 or 0
@@ -65,9 +63,14 @@
 * Multivibrators come in 3 variants:
 	* Astable: an oscillator (not useful for us)
 	* Monostable: a single stable state that the multivibrator will stay in; the state switches to an unstable state on some signal input, and switches back after a set amount of time
-	* Bistable: both states are stable (needs an external reset trigger signal)
+		* The time parameter should be tuned based on actual hardware, long enough to ignore temporary noise but short enough to not miss data that comes after
+		* This effectively makes all pulses at least a certain duration wide
+	* Bistable: both states are stable (needs an external reset trigger signal to reset the state)
 * While hysteresis needs to be implemented in the comparator itself, a multivibrator can be attached after the comparator to have the same effect
 	* This is useful when we have comparators in hardware that we cannot modify
-	
+	* This also makes more sense to do in software, as we do not need true digital filtering
+
 ![Response of a monostable multivibrator trigger.](./imgs/lec8_7.png){width=70%}
+
+![Response of a bistable multivibrator trigger.](./imgs/lec9_1.png){width=60%}
 
