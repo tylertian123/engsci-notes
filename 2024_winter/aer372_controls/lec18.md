@@ -35,6 +35,7 @@
 		* Note that some of the solutions are not actually the breakaway/break-in points, so we need to test
 		* To determine which of the solutions are actually intersection points, we can use geometry or check with the phase angle method for whether the point is on the locus
 		* We can also substitute into $L(s)$ and check that we have a negative real result
+		* If the multiplicity of the root of $\diff{L(s)}{s} = 0$ is $r$, then the multiplicity of the corresponding root in the closed-loop characteristic equation is $q = r + 1$ (i.e. $r + 1$ branches meet)
 
 ![Illustration of Rule 2.](./imgs/lec18_2.png){width=40%}
 
@@ -86,4 +87,7 @@
 	* Now we can find $K$ as $K = \frac{1}{\abs{L(s_0)}} = \abs{s_0 - s_1}\abs{s_0 - s_2}\abs{s_0 - s_3}$
 
 ![Determination of $s_0$ and its associated $K$ value to match $\zeta = 0.5$.](./imgs/lec18_6.png){width=50%}
+
+* Note that this is a third-order system; the additional pole will increase the system's rise time and decrease its overshoot, since it makes the system more sluggish
+	* When we select $\zeta = 0.5$, we are designing for the worst case of the overshoot
 
