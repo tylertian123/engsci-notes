@@ -20,7 +20,7 @@
 	* If PROP is a finite set, then WDF is a countably infinite set
 	* We construct WDF recursively as follows:
 		* $\mathrm{FORM}_0 = \mathrm{PROP}$
-		* $\mathrm{FORM}_{i + 1} = \mathrm{FORM}_i \union \set{(\alpha \circ \beta) | \alpha, \beta \in \mathrm{FORM}_n} \union \set{(\lnot\alpha) | \alpha \in \mathrm{FORM}_i}$
+		* $\mathrm{FORM}_{i + 1} = \mathrm{FORM}_i \union \set{(\alpha \circ \beta) | \alpha, \beta \in \mathrm{FORM}_i} \union \set{(\lnot\alpha) | \alpha \in \mathrm{FORM}_i}$
 		* $\mathrm{FORM} = \bigcup _{i = 0}^\infty \mathrm{FORM}_i$
 	* Note that this excludes things like $(\alpha \circ \beta \circ \gamma)$
 * Every formula is either:
@@ -48,17 +48,6 @@
 	* If $\forall \tau, \tau \notmodels \varphi$, then $\varphi$ is *unsatisfiable* -- they are always false
 	* If $\exists\tau, \tau \models \varphi$, then $\varphi$ is *satisfiable* -- they are sometimes true
 * Propositional logic is limited to only boolean variables, which makes cross-references between individuals in statements impossible
+	* e.g. we can't model statements like "if $x$ likes $y$ and $y$ plays golf then $x$ watches golf", because we don't have variables or statements that are only sometimes true
 * We also have no quantifiers; to state a property for all or some members of the domain, we have to explicitly list them
-
-### First-Order Logic
-
-* We generalize propositional logic to have the notion of variables, which can be true or false
-* *First-order logic* consists of the following components:
-	* A set of *predicate/relation symbols* $P$
-	* A set of *variables*, $V$
-	* A set of *function symbols* $F$
-		* These define functions based on the variables, returning a value
-	* The *quantifiers* $\forall$ and $\exists$
-* Define the set of all well-formed formulas:
-	* $\on{FORM}_{i + 1} = \alignedlines[t]{\union}{\on{FORM}_i}{\set{(\alpha \circ \beta) | \alpha, \beta \in \mathrm{FORM}_n}}{\set{(\lnot\alpha) | \alpha \in \mathrm{FORM}_i}}{\set{\forall x \varphi | x \in V, \varphi \in \on{FORM}_i}}{\set{\exists x \varphi | x \in V, \varphi \in \on{FORM}_i}}$
 

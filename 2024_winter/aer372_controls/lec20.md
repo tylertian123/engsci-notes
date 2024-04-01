@@ -39,6 +39,7 @@
 	* Enhances stability for plants with lightly damped flexible modes (cancels them out)
 	* Typically has two complex zeros, which can capture problematic poles
 		* Also has two real poles, but typically $\omega _0$ is large, so they are far out in the LHP and usually has little effect
+* Note that all 3 compensator do not have any poles at the origin, so the type of the plant is unchanged by adding a compensator
 * Consider the example plant $G(s) = \frac{1}{s(s + 1)}$, e.g. a servo mechanism
 
 ![Root locus plots for a P (solid line) and PD (dashed line) controller.](./imgs/lec20_3.png){width=40%}

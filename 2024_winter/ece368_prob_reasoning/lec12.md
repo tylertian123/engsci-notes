@@ -12,7 +12,7 @@
 * $\bm\mu _{\bm Y} = E[\bm A\bm X + \bm b + \bm Z] = \bm A\bm\mu _{\bm X} + \bm b$
 * $\alignedeqntwo[t]{\bm\Sigma _{\bm X\bm Y}}{E[(\bm X - \bm\mu _{\bm X})(\bm A\bm X + \bm b + \bm Z - \bm A\bm\mu _{\bm X} - \bm b)^T]}{E[(\bm X - \bm\mu _{\bm X})(\bm X - \bm\mu _{\bm X})^T\bm A^T] + E[(\bm X - \bm\mu _{\bm X}) + \bm Z]}{\bm\Sigma _{\bm X}\bm A^T}$
 * $\alignedeqntwo[t]{\bm \Sigma _{\bm Y\bm Y}}{E[(\bm A(\bm X - \bm \mu _{\bm X}) + \bm Z)(\bm A(\bm X - \bm \mu _{\bm X}) + \bm Z)^T]}{\bm A\bm\Sigma _{\bm X}\bm A^T + \bm\Sigma _{\bm Z}}$
-* Substituting these in we get $\alignedeqntwo[t]{\hat{\bm x}_\text{MAP/LMS}}{\bm\mu _{\bm X} + \bm\Sigma _{\bm X}\bm A^T(\bm A\bm\Sigma _{\bm X}\bm A^T + \bm\Sigma _{\bm Z})^{-1}(\bm y - \bm A\bm\mu _{\bm X} - \bm b)}{(\bm\Sigma _{\bm X}^{-1} + \bm A^T\bm\Sigma _{\bm Z}^{-1}\bm A)^{-1}(\bm A^T\bm\Sigma _{\bm Z}^{-1}(\bm y - \bm b) + \bm\Sigma _{\bm X}^{-1}\bm\mu _{\bm X})^{-1}}$
+* Substituting these in we get $\alignedeqntwo[t]{\hat{\bm x}_\text{MAP/LMS}}{\bm\mu _{\bm X} + \bm\Sigma _{\bm X}\bm A^T(\bm A\bm\Sigma _{\bm X}\bm A^T + \bm\Sigma _{\bm Z})^{-1}(\bm y - \bm A\bm\mu _{\bm X} - \bm b)}{(\bm\Sigma _{\bm X}^{-1} + \bm A^T\bm\Sigma _{\bm Z}^{-1}\bm A)^{-1}(\bm A^T\bm\Sigma _{\bm Z}^{-1}(\bm y - \bm b) + \bm\Sigma _{\bm X}^{-1}\bm\mu _{\bm X})}$
 	* Note the second form can be derived using the matrix inversion formula
 		* It only uses the inverse covariance (precision) matrices
 	* Also $\bm\Sigma _{X | y} = (\bm\Sigma _{\bm X}^{-1} + \bm A^T\bm\Sigma _{\bm Z}^{-1}\bm A)^{-1}$
