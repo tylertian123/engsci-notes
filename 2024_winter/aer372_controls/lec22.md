@@ -26,6 +26,7 @@
 * The gain and phase for a range of values of $\omega$ can be summarized in a *Bode plot*
 	* The top plot is the magnitude plot; the bottom plot is the phase plot
 	* The bode plot is log-log for magnitude and semi-log for phase
+		* Using a log-log plot for gain allows us to cover a wide range of $\omega$ and gain, and also allows us to simply add up the magnitude plots of transfer functions to get the final plot, since multiplication of gains is just addition of logs
 	* The vertical axis of the magnitude plot often uses decibels, $\si{dB} = 20\log\abs{G(j\omega)}$
 * Note in MATLAB, `bode(sys, w)` gives `[mag, phase]`, which we can plot to get the Bode plot
 	* Use `logspace()` to get the points for `w`

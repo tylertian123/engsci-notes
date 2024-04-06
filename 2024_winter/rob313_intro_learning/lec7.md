@@ -20,7 +20,7 @@
 	* The choice of a kernel implicitly characterizes the feature space mapping $\phi$
 * Using the kernel is often much more efficient than using the basis functions explicitly
 	* e.g. for the polynomial features, $k(\bm x, \bm z) = \bm\phi(\bm x)^T\bm\phi(\bm z) = 1 + x_1z_1 + x_2z_2 + x_1x_2z_1z_2 + \dots + x_1\dots x_Dz_1\dots z_D = \prod _{i = 1}^D (1 + x_iz_i)$
-	* The original features would need $O(2^D)$ computation time, but using the kernel this is reduced to $O(D)$ for the simple product
+	* The original features would need $\mathcal O(2^D)$ computation time, but using the kernel this is reduced to $\mathcal O(D)$ for the simple product
 * The kernel can also be interpreted as a similarity metric, since it takes two points from $\mathcal X$ and returns a real scalar
 
 \noteDefn{\textit{The kernel trick}: Any linear method that can be written in terms of dot products ${\bm x^{(i)}}^T\bm x^{(j)}$ can be \textit{kernelized} by replacing ${\bm x^{(i)}}^T\bm x^{(j)} \to k(\bm x^{(i)}, \bm x^{(j)})$, which results in a nonlinear generalization of the linear method.}
@@ -82,7 +82,7 @@
 	* When $\lambda = 0$, $\bm K$ is guaranteed to be non-singular if and only if the training data points are unique
 * When $\lambda > 0$, $\bm K + \lambda\bm 1$ is symmetric positive definite, so we can compute the Cholesky factorization without worrying about singularities
 	* Since we never formed normal equations, we never squared the condition number, so this is stable
-* Computing this will take $O(N^2)$ memory and $O(N^3)$ time, which makes it very difficult to scale up
+* Computing this will take $\mathcal O(N^2)$ memory and $\mathcal O(N^3)$ time, which makes it very difficult to scale up
 	* We can improve this by choosing only a subset of the basis functions, which gives us a *sparse* regression model
 	* Alternatively, we can use $k$-means clustering to extract a set of representative points
 		* Then the model is $\hat f(\bm x, \bm\alpha) = \sum _{i = 1}^M \alpha _ik(\bm x, \bm z^{(i)})$ and $\bm\alpha$ is computed with the $\bm z$ vectors

@@ -50,6 +50,10 @@
   {\ooalign{\raisebox{.2\height}{\scalebox{.6}{$\scriptstyle\sum$}}\cr$\scriptstyle\int$\cr}}
 }
 
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+\newcommand{\indep}{\independent}
+
 \DeclareMathOperator*{\LessGtr}{\lessgtr}
 \DeclareMathOperator*{\GtrLess}{\gtrless}
 

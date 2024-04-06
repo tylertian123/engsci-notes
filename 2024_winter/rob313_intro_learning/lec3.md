@@ -33,11 +33,11 @@
 	* Normalize as $x_i \gets \frac{x_i - \mu _i}{\sigma _i}, i = 1, 2, \dots, D$
 	* $\mu _i, \sigma _i$ are the mean and standard deviations of the $i$-th feature
 	* Note we should not normalize in a problem where the units/scale of the axes matter
-* Each prediction has a runtime complexity of $O(ND + N\log N)$ where $N$ is the number of training samples, $D$ is the number of features (dimensionality)
+* Each prediction has a runtime complexity of $\mathcal O(ND + N\log N)$ where $N$ is the number of training samples, $D$ is the number of features (dimensionality)
 	* This includes both distance calculations and sorting
 		* Distance calculations can be parallelized
 	* Lots of research exists on efficient implementation of this algorithm
-		* Using $k$-d trees reduces the cost to $O(D\log N)$ but only if $D \ll N$
+		* Using $k$-d trees reduces the cost to $\mathcal O(D\log N)$ but only if $D \ll N$
 		* Randomized approximate NN calculations are more appropriate for sparse, high-dimensional problems
 * All training points are required to be stored in order to make predictions, since the model doesn't learn
 	* Can use automatic clustering and pick only the center of each cluster

@@ -1,8 +1,6 @@
 # Lecture 11, Mar 26, 2024
 
-## Communication Protocols (Continued)
-
-### Software I2C Implementation Example
+## Software I2C Implementation Example
 
 * We want to write a software I2C implementation to interface a 24C02 EEPROM chip and write a single byte
 * The payload consists of:

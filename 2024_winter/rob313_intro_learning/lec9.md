@@ -4,7 +4,7 @@
 
 * Given $f(\bm \theta)$ where $\bm\theta \in \reals^n$ and $f \colon \reals^n \mapsto \reals$, we want to find $\bm\theta^* = \argmin _{\bm\theta} f(\bm\theta)$
 * Let $\bm\theta^*$ be a local minimum of $f$, then $f(\bm\theta^* + \epsilon\bm p) \geq f(\bm\theta^*)$ for any arbitrary $\bm p$ and small $\epsilon$
-	* $f(\bm\theta^* + \epsilon\bm p) = f(\bm\theta^*) + \epsilon\bm p^T\bm g(\bm\theta^*) + \frac{1}{2}\epsilon^2\bm p^T\bm H(\bm\theta^*)\bm p + O(\epsilon^3)$ where $\bm g(\bm\theta)$ is the gradient and $\bm H(\bm\theta)$ is the Hessian
+	* $f(\bm\theta^* + \epsilon\bm p) = f(\bm\theta^*) + \epsilon\bm p^T\bm g(\bm\theta^*) + \frac{1}{2}\epsilon^2\bm p^T\bm H(\bm\theta^*)\bm p + \mathcal O(\epsilon^3)$ where $\bm g(\bm\theta)$ is the gradient and $\bm H(\bm\theta)$ is the Hessian
 	* The middle two terms must be greater than or equal to zero due to the local minimum condition
 	* This means that $\bm g(\bm\theta^*) = \bm 0$, and $\bm H(\bm\theta^*)$ is symmetric positive definite, since $\bm p$ is arbitrary
 * KKT conditions:

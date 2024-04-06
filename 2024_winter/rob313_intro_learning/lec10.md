@@ -34,7 +34,7 @@
 \noteThm{\textit{Sherman-Morrison-Woodbury (SMW) Formula}: Given $\bm A \in \reals^{n \times n}, \bm u, \bm v \in \reals^{n \times p}$, then $$(\bm A + \bm u\bm v^T)^{-1} = \bm A^{-1} - \bm A^{-1}\bm u(\bm 1 + \bm v^T\bm A^{-1}\bm u)^{-1}\bm v^T\bm A^{-1}$$}
 
 * Using the SMW formula: $\bm B_{k + 1}^{-1} = \bm B_k^{-1} + \frac{(\bm s_k - \bm B_k^{-1}\bm y_k)(\bm s_k - \bm B_k^{-1}\bm y_k)^T}{(\bm s_k - \bm B_k^{-1}\bm y_k)^T\bm y_k}$
-	* This gives a cost of $O(n^2)$ (compared to $O(n^3)$ for matrix inversion)
+	* This gives a cost of $\mathcal O(n^2)$ (compared to $\mathcal O(n^3)$ for matrix inversion)
 * An alternative approach to compute $\bm B_{k + 1}$ is to formulate it as a constrained optimization problem
 	* $\bm B_{k + 1} = \min _{\bm B} \norm{\bm B - \bm B_k}$ subject to $\bm B = \bm B^T, \bm B(\bm\theta _k - \bm\theta _{k + 1}) = \del f(\bm\theta _k) - \del f(\bm\theta _{k + 1})$
 	* The choice of matrix norm to use leads to different variations of the method:
@@ -45,7 +45,7 @@
 		* Broyden–Fletcher–Goldfarb–Shanno (BFGS):
 			* $\bm B_{k + 1}^{-1} = \left(\bm 1 - \frac{\bm s_k\bm y_k^T}{\bm s_k^T\bm y_k}\right)\bm B_k^{-1}\left(\bm 1 - \frac{\bm s_k\bm y_k^T}{\bm s_k^T\bm y_k}\right) + \frac{\bm s_k\bm s_k^T}{\bm s_k^T\bm y_k}$
 * Quasi-Newton methods generally have between linear and quadratic convergence; we calls this *superlinear*
-* In problems where $n$ is very large such that $O(n^2)$ is impractical, limiting-memory quasi-Newton methods compute the search step directly
+* In problems where $n$ is very large such that $\mathcal O(n^2)$ is impractical, limiting-memory quasi-Newton methods compute the search step directly
 
 ## Constrained Optimization -- Penalty Methods
 
@@ -103,8 +103,8 @@
 	* This works because the gradient using one datapoint is an unbiased estimator of the full gradient
 	* Let $\bm g_t = l(\bm \theta _k; \bm x^{(t)}, y^{(t)})$, we have that $\mathbb E[\bm g_t] = \mathcal L(\bm\theta _k; \mathcal D)$
 * Consider gradient descent over a GLM with $M$ terms
-	* The cost of full-batch gradient descent is $O(NM)$, and converges in $O\left(\log\frac{1}{\rho}\right)$
-	* The cost of stochastic gradient descent is only $O(M)$, and converges in $O\left(\frac{1}{\rho}\right)$ iterations
+	* The cost of full-batch gradient descent is $\mathcal O(NM)$, and converges in $\mathcal O\left(\log\frac{1}{\rho}\right)$
+	* The cost of stochastic gradient descent is only $\mathcal O(M)$, and converges in $\mathcal O\left(\frac{1}{\rho}\right)$ iterations
 		* Even though SGD takes more iterations to converge (sub-linearly), it's cheaper overall when factoring in the cost per iteration
 		* Sometimes it's not practical to do full-batch gradient descent due to the size of the dataset
 * In *mini-batch gradient descent* we compute the gradient over a mini-batch that is smaller than the full dataset, but more than 1 sample, in each iteration
