@@ -79,5 +79,13 @@
 	* Choose the break point to be $1/4$ of $\omega _c$, so have $\omega _1 = 0.05$ and $T_D = 20$
 * Plot $\abs{D_cG(j\omega)}$ for $K = 1$, and notice the magnitude at $0.2$ -- in this case we have 100
 * Therefore we choose $K = \frac{1}{\abs{D_cG(j\omega _c}} = 0.01$
+* Validate our assumption that the bandwidth is around $0.2$:
+	* $\abs{\mathcal T(j\omega)} = \frac{\abs{KD_cG}}{\abs{1 + KD_cG}}$
+	* From the plot we can see that the bandwidth is around $0.25$ (when magnitude reaches around 0.7), which is close to $\omega _c$
+* For a unity feedback system, $\mathcal S(s) = \frac{E(s)}{\Theta(s)}$ (in general $1 - \mathcal T(s)$)
+	* We want the sensitivity function to be low at the frequencies we work with, so the system is insensitive to an error in the reference
+* The *disturbance rejection bandwidth*, $\omega _{DRB}$, is the max frequency at which the disturbance rejection (i.e. sensitivity $\mathcal S$) is below a certain amount, usually -3 decibels
+	* We always want to maximize this
 
+![Bode magnitude plots of the closed-loop transfer function and sensitivity transfer function.](./imgs/lec24_6.png){width=50%}
 

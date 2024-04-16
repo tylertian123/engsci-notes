@@ -50,9 +50,16 @@
   {\ooalign{\raisebox{.2\height}{\scalebox{.6}{$\scriptstyle\sum$}}\cr$\scriptstyle\int$\cr}}
 }
 
+\DeclarePairedDelimiterX{\infdivx}[2]{(}{)}{%
+  #1\;\delimsize\|\;#2%
+}
+\newcommand{\infdiv}{D\infdivx}
+
 \newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
 \def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
 \newcommand{\indep}{\independent}
+
+\newcommand{\expectation}[2]{\mathbb E_{#1}\left[#2\right]}
 
 \DeclareMathOperator*{\LessGtr}{\lessgtr}
 \DeclareMathOperator*{\GtrLess}{\gtrless}
