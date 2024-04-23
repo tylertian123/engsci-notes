@@ -65,8 +65,8 @@
 * For $x_1, \dots, x_n$, consider $x_i$ given all others $x_j$
 	* $p(x_i | \bm x_{j \neq i}) = \frac{p(x_1, \dots, x_n)}{\sum _{x_i} p(x_1, \dots, x_n)} = \frac{\prod _k p(x_k | \text{pa}\{x_k\})}{\sum _{x_i} \prod _{k'} p(x_k' | \text{pa}\{x_k'\})}$
 	* Any factor in the denominator that does not depend on $x_i$ can be taken out of the summation, which cancels a corresponding term in the numerator
-	* The terms that remain are $p(x_i | \text{pa}\{x_i\})$, and all descendants of $x_i$, and co-parents of these descendants
+	* The terms that remain are $p(x_i | \text{pa}\{x_i\})$, and all (direct) children of $x_i$, and co-parents of these descendants
 	* These terms are known as the *Markov blanket* and separates $x_i$ from the rest of the nodes
 
-![Illustration of the Markov blanket.](./imgs/lec17_6.png){width=30%}
+![Illustration of the Markov blanket.](./imgs/lec17_8.png){width=30%}
 

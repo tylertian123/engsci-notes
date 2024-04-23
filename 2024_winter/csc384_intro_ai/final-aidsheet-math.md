@@ -1,3 +1,43 @@
+# Game Tree Search
+
+DFS: $\mathcal O(b^d)$ time, $\mathcal O(bd)$ space (best and worst).  
+Searches entire tree; needs finite search space.  
+Estimate utils for non-terminal states if too deep.
+
+$\alpha$: Best value for MAX along path to root (init $-\infty$). $\beta$: Best value for MIN along path to root (init $\infty$).  
+If $\alpha \geq \beta$, prune remaining children.
+$\mathcal O(b^{\frac{d}{2}})$ time (best), $\mathcal O(b^{\frac{3}{4}d})$ (average), $\mathcal O(b^d)$ (worst).
+
+# Probability
+
+$P(A \union B) = P(A) + P(B) - P(A \intersection B) \qquad P(A | B) = \sum _{C_i} P(A | B, C_i)P(C_i | B)$  
+**Independence**: $P(A | B) = P(A) \iff P(B | A) = P(B) \iff P(A, B) = P(A)P(B)$  
+**Conditional Independence**: $P(A | B, C) = P(A | C) \iff P(B | A, C) = P(B | C) \iff P(A, B | C) = P(A | C)P(B | C)$
+
+**Bayesian Network Law**: Given all parents, the probability of any node is independent of its non-descendants.
+
+$P(X_1, \dots, X_N) = \prod _{i = 1}^N P(X_i | \on{parents}(X_i))$
+
+$\mathcal E$ d-separates $X$ and $Y$ if it blocks every undirected path between $X$ and $Y$  
+$\mathcal P$ is any undirected path from $X$ to $Y$ in the network; $\mathcal E$ blocks $\mathcal P$ iff $\exists Z \in \mathcal P$ s.t. one of:
+
+1. $Z \in \mathcal E$ and one arc on $\mathcal P$ enters $Z$ and another leaves $Z$
+2. $Z \in \mathcal E$ and both arcs on $\mathcal P$ leave $Z$
+3. Both arcs on $\mathcal P$ enter $Z$, and $Z, \on{descendants}(Z) \notin \mathcal P$
+
+**Restrict**: $f_{E = e}$ takes only rows that have value $e$ for $E$; $E$ is no longer a variable in the factor.
+
+**Multiply**: $f_1 * f_2$ combines tables, multiplying rows with the same values for shared variables.
+
+**Sum out**: $\sum _{Z_j} f$ sums rows with the same values for all other variables; $Z_j$ is no longer a variable.
+
+Complexity: Exponential in time and space to **elimination width** $k$.  
+**Polytree**: single path between any pair of nodes; there exists a VE order that never increases factor size.  
+**Min-fill heuristic**: always eliminate the variable that creates the smallest factor.  
+Guarantees linear time for polytrees in the network size (not # of vars).
+
+\pagebreak
+
 # Propositional Logic
 
 **Operators**: $\lnot A$ (negation), $A \land B$ (conjunction/and), $A \lor B$ (disjunction/or), $A \rightarrow B$ (implication; $\lnot A \lor B$), $A \leftrightarrow B$ (bi-implication).
@@ -50,6 +90,6 @@ Procedures are **sound** if it only produces logical consequences of the KB, and
 7. Distribute $\lor$ over $\land$: $A \lor (B \land C) \iff (A \lor B) \land (A \lor C)$.
 8. Convert to clauses: remove all $\forall$ quantifiers (implicit) and break apart $\land$.
 
-Resolution is **refutation complete**: it can eventually prove that a clausal theory is unsatisfiable, but may not terminate when it is.
+Resolution is **refutation complete**: it can eventually prove that a clausal theory is unsatisfiable, but may not terminate when it is satisfiable.
 In general first-order unsatisfiability is semi-decidable (there exists an algorithm that correctly gives positive answers), but not decidable.
 

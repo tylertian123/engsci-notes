@@ -79,7 +79,7 @@
 	* $c_n\hat\alpha(z_n) = p(x_n | z_n)\sum _{z_{n - 1}}\hat\alpha(z_{n - 1})p(z_n | z_{n - 1})$
 * For $\beta$ we have $c_{n + 1}\hat\beta(z_n) = \sum _{z_{n + 1}}\hat\beta(z_{n + 1})p(x_{n + 1} | z_{n + 1})p(z_{n + 1} | z_n)$
 * Using the fact that $\sum _{z_n} \hat\alpha(z_n) = 1$, we obtain an expression for $c_n$
-	* $c_n = \left[\sum _{z_n}\left(p(x_n | z_n)\sum _{z_{n - 1}} \hat\alpha(z_{n - 1})p(z_n | z_{n - 1})\right)\right]^{-1}$
+	* $c_n = \sum _{z_n}\left(p(x_n | z_n)\sum _{z_{n - 1}} \hat\alpha(z_{n - 1})p(z_n | z_{n - 1})\right)$
 * For each node $n$, we first calculate $\hat\alpha(z_n)$ for all values of $z_n$, and then find $c_n$ through the summation; do this for all nodes up until $z_{N}$, and then go in the reverse direction to calculate $\hat\beta(z_n)$
 	* We need to go in reverse for $\hat\beta$ since it requires $c_{n + 1}$, which we can only get through the forward pass
 	* This is called the *forward-backward algorithm*

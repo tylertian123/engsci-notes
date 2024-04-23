@@ -25,7 +25,7 @@
 
 * Lag compensator design procedure:
 	1. Determine the gain $K$ required to get the desired PM without compensation, with a $5\degree$ to $10\degree$ margin to account for the PM reduction of the compensator
-	2. Draw the Bode plot of the uncompensated open-loop TV and check the low-frequency gain, which gives the steady-state error
+	2. Draw the Bode plot of the uncompensated open-loop TF and check the low-frequency gain, which gives the steady-state error
 	3. Determine the value of $\alpha$ to meet the steady-state error requirement -- $\alpha$ is how much more we need to multiply the low-frequency gain by in order to meet the steady-state error requirement
 	4. Choose the upper corner frequency $\frac{1}{T_I}$ (the zero) to be one octave to multiple decades below the uncompensated $\omega _c$
 	5. Iterate on the design and verify that it meets requirements

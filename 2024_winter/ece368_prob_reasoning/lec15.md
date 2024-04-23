@@ -22,7 +22,7 @@
 ![State transition diagram for example.](./imgs/lec15_1.png){width=40%}
 
 * The transition probability matrix after $n$ steps, $P(n)$, is the original single-step transition matrix raised to the power $n$; $p_{ij}(n)$ denotes the probability of transition for $n$ steps
-	* $P(n) = P(n - 1)P = = P^n$
+	* $P(n) = P(n - 1)P = P^n$
 	* Suppose we start with some initial state PMF $\bm p(0)$, then after $n$ steps the new distribution will be $\bm p(n) = \bm p(0)P^n$
 	* To find a closed-form expression we can diagonalize $P$
 * Some Markov chains will have $\lim _{n \to \infty} P(n)$ exist; this will give the asymptotic or steady-state PMF
@@ -32,7 +32,6 @@
 		* Since $\bm\pi$ is a PMF, the first equation only gives $n - 1$ independent equations
 		* i.e. when we have this PMF, it remains unchanged by the Markov chain
 	* These together are known as the *global balance equations*
-* However, not all solution to the global balance equations are true steady-state probabilities
 
 ### Recurrence Relations in Markov Chains
 
@@ -47,8 +46,12 @@
 	* Classes are always disjoint (i.e. one state cannot be in two different classes; in that case the two classes would communicate with each other so they would be the same)
 		* However, states in different classes aren't necessarily independent, since we can still have one-way accessible connections
 * The states of a Markov chain consists of one or more disjoint classes; if it has a single class, it is *irreducible*
+	* Intuitively this means that we can go from one state to any other state
 * A state is *periodic* with period $d$ if it can only re-occur at times that are multiples of $d$, i.e. $p_{ii}(n) = 0$ if $n$ is not a multiple of $d$
 	* If the Markov chain is periodic, it's similar to having multiple chains
+	* Let $\tau(x)$ be all the possible times that we can visit $x$ (starting from $x$ at time 0); the period of $x$ is the GCD of $\tau(x)$ (same across an entire class)
+	* If all states/classes have period 1, the chain is *aperiodic*
+* A Markov chain that is irreducible and aperiodic will converge to a stationary distribution (we see this later)
 
 ![State transition diagram for a Markov chain with 3 classes: $\set{0}, \set{1, 2}, \set{3}$. This is aperiodic.](./imgs/lec15_2.png){width=55%}
 

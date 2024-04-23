@@ -28,7 +28,7 @@
 	3. If more damping is needed, choose $z$ to be 1/4 to 1 times the desired $\omega _n$ and pick $p$ to be 5 to 25 times $z$
 	4. If less damping is needed, decrease $p$; if more damping is needed, increase $p$ and/or decrease $z$
 		* The ratio $p / z$ should be as low as possible (less than 25) in order to minimize the effects of noise from a derivative controller
-	5. When values of $z$ and $p$ are found so that the root locus passes through the desired region, select the value of $K$, plot the step response and check that the desired performance is ace hived
+	5. When values of $z$ and $p$ are found so that the root locus passes through the desired region, select the value of $K$ and check the step response
 	6. Determine if the value of $K$ meets the steady-state error requirements; if a value of $K$ that meets the requirements cannot be found, add integral control or a lag compensator
 * The lead compensator will make the steady-state error worse (for the same value of $K$)
 	* The position constant is $K_p = \lim _{s \to 0} K\frac{s + z}{s + p}G(s) = K\frac{z}{p}\lim _{s \to 0} G(s)$

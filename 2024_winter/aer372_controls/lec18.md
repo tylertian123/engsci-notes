@@ -25,9 +25,9 @@
 		* Geometrically this means that the asymptotes evenly divide the $360\degree$ and are always symmetric about the real axis; for an odd number of branches, there is always an asymptote towards the negative real axis
 	4. Each branch departs at an angle of $\phi _{l, d} = \sum _i \psi _i - \sum _{i \neq l} \phi _i - 180\degree$ from an open-loop pole, where $\psi _i$ are the angles from zeros to the pole, and $\phi _i$ are angles from the other poles to the pole
 		* Note this is exactly the phase condition we need for a point to be on the root locus
-		* If the pole is repeated $q$ times, $q\phi _{l, d} = \sum _i \psi _i - \sum _{i \neq l} \phi _i - 180\degree - 360\degree(l - 1)$ for $l = 1, 2, \dots, q$
+		* If the pole is repeated $q$ times, $\phi _{l, d} = \sum _i \psi _i - \sum _{i \neq l} \phi _i - 180\degree - 360\degree(l - 1)$ for $l = 1, 2, \dots, q$
 			* The directions are again spaced evenly apart
-		* Similarly, the angles of arrival at a zero are $q\psi _{l, a} = \sum \phi _i - \sum _{i \neq l} \psi + 180\degree + 360\degree(l - 1)$
+		* Similarly, the angles of arrival at a zero are $\psi _{l, a} = \sum \phi _i - \sum _{i \neq l} \psi + 180\degree + 360\degree(l - 1)$
 	5. At points where branches intersect (where the characteristic polynomial has repeated roots), if $q$ branches intersect at the point, then their departure angles are $\frac{180\degree + 360\degree(l - 1)}{q}$ plus an offset; together the $q$ branches arriving and $q$ branches departing should form an array of $2q$ evenly spaced rays
 		* If the intersection is on the real axis, use Rule 2 to determine the orientation, otherwise use Rule 4
 		* Note that it doesn't matter which branch breaks out at which angle

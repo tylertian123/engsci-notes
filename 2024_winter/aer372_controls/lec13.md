@@ -2,13 +2,15 @@
 
 ## Control System Performance
 
-![Open-loop control.](./imgs/lec13_1.png){width=40%}
 
 * In open-loop control, we control the plant without using feedback from its output
 * For open-loop control, $Y_{ol} = GD_{ol}R + GW$
 	* $E_{ol} = R - Y_{ol} = (1 - GD_{ol})R - GW$
 	* Assuming no disturbance so $W(s) = 0$, we can define the open-loop transfer function
 	* $T_{ol}(s) = \frac{Y(s)}{R(s)} = G(s)D_{ol}(s)$
+
+![Closed-loop control.](./imgs/lec13_1.png){width=40%}
+
 * For closed-loop control, $Y_{cl} = \mathcal TR + G\mathcal SW - H\mathcal TV$
 	* $E_{cl} = R - Y_{cl} = (1 - \mathcal T)R - G\mathcal SW + H\mathcal TV$
 		* Notice the negative sign in front of the $W$ term, since the output is subtracted from reference

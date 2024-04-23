@@ -36,7 +36,7 @@
 	* Laplace transform: $m(s^2Y(s) - sy(0^-) - \dot y(0^-)) + b(sY(s) - y(0^-)) + kY(s) = kF(s)$
 	* $Y(s) = \frac{\frac{k}{m}}{s^2 + \frac{b}{m}s + \frac{k}{m}}F(s) + \frac{s + \frac{b}{m}}{s^2 + \frac{b}{m}s + \frac{k}{m}}y(0^-) + \frac{1}{s^2 + \frac{b}{m}s + \frac{k}{m}}\dot y(0^-)$
 	* Assuming zero state, $H(s) = \frac{Y(s)}{F(s)} = \frac{\frac{k}{m}}{s^2 + \frac{b}{m}s + \frac{k}{m}} = \frac{\omega _n^2}{s^2 + 2\zeta\omega _n s + \omega _n^2}$
-		* $\omega _n = \sqrt{\frac{k}{m}}$ is the damping ratio
+		* $\omega _n = \sqrt{\frac{k}{m}}$ is the natural frequency
 		* $\zeta = \frac{b}{2\sqrt{km}}$ is the damping ratio
 	* The poles are at $-\zeta\omega _n \pm \omega _n\sqrt{\zeta^2 - 1}$
 		* Depending on $\zeta$ we can get real or imaginary poles

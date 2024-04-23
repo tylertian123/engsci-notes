@@ -2,7 +2,7 @@
 
 ## Laplace Transform
 
-\noteDefn{The \textit{Laplace transform} for a generic function $f(t)$ is defined as $$F(s) \equiv f(t)e^{-s}\,\dt$$The \textit{unilateral} (one-sided) Laplace transform is defined as $$F(s) = \laplace{f(t)} \equiv \intuinf{0^-} f(t)e^{-st}\,\dt$$where $s = \sigma + j\omega$ is a complex frequency variable with units of inverse time.}
+\noteDefn{The \textit{Laplace transform} for a generic function $f(t)$ is defined as $$F(s) \equiv \intinf f(t)e^{-s}\,\dt$$The \textit{unilateral} (one-sided) Laplace transform is defined as $$F(s) = \laplace{f(t)} \equiv \intuinf{0^-} f(t)e^{-st}\,\dt$$where $s = \sigma + j\omega$ is a complex frequency variable with units of inverse time.}
 
 * The Laplace transform transforms linear ODEs into algebraic equations
 * For our purposes since we only consider $t \geq 0$, we consider all functions to be 0 for $t < 0$ and so the unilateral transform suffices

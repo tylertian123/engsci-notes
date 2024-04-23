@@ -20,7 +20,7 @@
 
 ![Illustration of the characteristics of second-order system response.](./imgs/lec10_2.png){width=60%}
 
-* DC gain: $y_ss = \lim _{s \to 0} sY_s(s) = \lim _{s \to 0} s\frac{1}{s}H(s) = \frac{\omega _n^2}{\omega _n^2} = 1$
+* DC gain: $y_{ss} = \lim _{s \to 0} sY_s(s) = \lim _{s \to 0} s\frac{1}{s}H(s) = \frac{\omega _n^2}{\omega _n^2} = 1$
 	* The DC gain here is 1 because when we derived the system, we multiplied $u$ by $k$
 	* Without this scaling the DC gain would be $k$ instead
 * Peak time:
@@ -46,5 +46,5 @@
 	* For $\zeta = 0.5$, we can approximate $t_r \approx \frac{1.8}{\omega _n}$
 	* We typically choose $\zeta$ between $0.5$ and $0.7$ for a balance between overshoot and rise time
 * For settling time we can approximate the deviation of the response by the exponential only
-	* Therefore $e^{-\zeta\omega _nt_s} \approx 0.01 \implies t_s \approx \frac{4.6}{\zeta\omega _n} = \frac{4.6}{\zeta}$
+	* Therefore $e^{-\zeta\omega _nt_s} \approx 0.01 \implies t_s \approx \frac{4.6}{\zeta\omega _n} = \frac{4.6}{\sigma}$
 

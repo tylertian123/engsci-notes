@@ -33,7 +33,7 @@
 * Lag compensator: $D_c(s) = K\frac{s + z}{s + p}$ where $z > p$
 	* For a sinusoidal input, the output lags the input (negative phase shift)
 	* The amplitude of the output is now larger than the input
-	* Approximates PI control, decreasing steady-state controller
+	* Approximates PI control, decreasing steady-state error
 * Notch compensator: $D_c(s) = K\frac{s^2 + 2\zeta\omega _0s + \omega _0^2}{(s + \omega _0)^2}$
 	* Attenuates the input around some unwanted frequency, acting as a band-stop filter
 	* Enhances stability for plants with lightly damped flexible modes (cancels them out)
