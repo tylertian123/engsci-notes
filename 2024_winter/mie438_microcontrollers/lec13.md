@@ -4,7 +4,7 @@
 
 * The *state machine* is a model of the dynamic behaviour of a system, represented by:
 	* *States*: physical or logical states of the program, e.g. different ranges of variable values, program flow locations, etc that hold a certain meaning
-	* *Transitions*: pre-define paths between states, triggered by specific actions or conditions
+	* *Transitions*: pre-defined paths between states, triggered by specific actions or conditions
 * State machines are an abstract but functionally equivalent representation of an underlying program or hardware
 	* They can be used as a design pattern
 	* Can be used as a diagnostic tool for existing code, e.g. automatic state minimization/optimization, consistency checking, etc
@@ -35,5 +35,5 @@
 		* This has diminishing returns
 	* Since state machines are easy for code to understand, many automated systems exist for state machine minimization
 		* These systems are capable of optimizing as much as we want, so we need to specify the correct level of optimization
-* Note that state machine minimization does not necessarily get us faster code; the smaller state diagram can lead to faster execution, or less complexity and code size, etc
+* Note that state machine minimization does not necessarily get us faster code; the smaller state diagram can lead to faster execution, or less complexity and code size, etc., up till a certain point
 

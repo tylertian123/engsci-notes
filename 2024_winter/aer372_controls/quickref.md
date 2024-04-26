@@ -87,6 +87,7 @@
 * Type: the maximum order $k$ of a polynomial reference $r(t) = t^k$ that the system can follow with $e_{ss}$ being constant
 	* For tracking and $H(s) = 1, W(s) = V(s) = 0$, the type is the number of poles $GD_{cl}(s)$ has at $s = 0$
 	* For regulation and $R(s) = V(s) = 0$, the type is the number of zeros $\frac{E_{cl}(s)}{W(s)} = -T_w(s) = -\frac{G(s)}{1 + H(s)G(s)D_{cl}(s)}$ has at $s = 0$
+* $E(s) = (1 - \mathcal T(s))R(s) \implies e_{ss} = \lim _{s \to 0} sE(s)$ assuming stability
 * Error constants (wrt tracking):
 	* Type 0: $K_p = \lim _{s \to 0} GD_{cl}(s) \implies e_{ss} = \frac{1}{1 + K_p}$
 	* Type 1: $K_v = \lim _{s \to 0} sGD_{cl}(s) \implies e_{ss} = \frac{1}{K_v}$
@@ -138,6 +139,18 @@
 
 ## Frequency Design Method
 
+* Process for plotting a composite Bode plot:
+	1. Manipulate the transfer function into Bode form to identify all break point frequencies
+	2. Plot the low-frequency asymptote: Determine the value of $n$ for the class 1 term and plot its magnitude as a line with slope of $n$ passing through $K_0$ at $\omega = 1$
+	3. Draw the asymptotes for the magnitude plot: Extend the low-frequency asymptote until the next break point, then change the slope by $\pm 1$ or $\pm 2$ depending on the class of the break point and whether it is numerator or denominator; repeat until all break points are accounted for
+	4. Correct the magnitude values at break points:
+		* For class 2, increase the magnitude by a factor of $1.41$ (numerator) or decrease by a factor of $0.707$ (denominator)
+		* For class 3, change by a factor of $(2\zeta)$ (numerator) or a factor of $\frac{1}{2\zeta}$ (denominator)
+		* Note these values may change of break points are close together; if break points are less than a factor of 10 away, the break point offsets are inaccurate
+	5. Plot the low-frequency asymptote of the phase curve: $\phi = n \cdot 90\degree$
+	6. Draw the horizontal asymptotes for phase: Change the value of the phase asymptote by $\pm 90\degree$ for class 2 break points and $\pm 180\degree$ for class 3 break points for each break point in ascending order
+	7. Determine intermediate asymptotes for each break point
+	8. Add each phase curve together graphically
 * Bandwidth $\omega _{BW}$: the highest frequency where the output still tracks the input in a satisfactory manner, typically when gain hits $\sqrt{2}/2 = 0.707$
 	* A higher bandwidth means a faster response -- the larger $\omega _{BW}$ is, the larger $\omega _n$ is and the shorter our rise and peak times
 * Resonant peak $M_r$: the maximum value of the amplitude ratio

@@ -71,7 +71,7 @@
 			* By changing the number of samples we average, we can change the corner frequency of this filter
 		* To high-pass the input, we take the difference between the last two samples and scale it up (i.e. a first order derivative)
 			* `Y[i] = K * (E[i] - E[i - 1])`
-		* An IIR (infinite impulse response, also known as non-windows low-pass) filter can be implemented with a recursive summation
+		* An IIR (infinite impulse response, also known as non-windowed low-pass) filter can be implemented with a recursive summation
 			* `Y[i] = K * (k * Y[i - 1] + (1 - k) * E[i])`
 			* `K` is a proportionality constant and `k` is a weight from 0 to 1 (typically 0.25 to 0.5)
 			* This gives us finer control over the corner frequency and does not require a large buffer of past values to average over
