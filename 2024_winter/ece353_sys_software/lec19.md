@@ -16,7 +16,7 @@
 	* If the reads and writes are interleaved, one thread may read the value of the counter before the other is done incrementing it, so they will overwrite each other's results
 	* Depending on the specific ordering of reads and writes, the result may be different
 
-![All possible orderings and results of two concurrent threads incrementing a counter, starting at 0.](./imgs/lec19_1.png){width=%}
+![All possible orderings and results of two concurrent threads incrementing a counter, starting at 0.](./imgs/lec19_1.png){width=40%}
 
 * To avoid data races, we need to prevent two threads from accessing the variable at the same time
 * We can use a *mutex* (stands for Mutual Exclusion)

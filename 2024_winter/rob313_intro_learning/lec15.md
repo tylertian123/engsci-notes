@@ -11,8 +11,8 @@
 	* Since we assume both Gaussian weights and noise, the distribution of targets will also be Gaussian
 	* $y = \bm w^T\bm\phi(\bm x) + \varepsilon \implies \alignedeqntwo[t]{p\left(\cvec{y'}{\bm y}\right)}{\mathcal N\left(\bm 0, \alpha\cvec{\bm\phi^T(\bm x')}{\bm\Phi}\rvec{\bm\phi(\bm x')}{\bm\Phi^T} + \sigma^2\bm 1\right)}{\mathcal N\left(\bm 0, \alpha\mattwo{\bm\phi^T(\bm x')\bm\phi(\bm x')}{\bm\phi^T(\bm x')\bm\Phi^T}{\bm\Phi\bm\phi(\bm x')}{\bm\Phi\bm\Phi^T} + \sigma^2\bm 1\right)}$
 		* $\bm x'$ is the test point and $y'$ is our prediction for it
-		* Note $\bm w \mathcal N(\bm 0, \alpha\bm 1)$ is our prior (regularization) and $\varepsilon \sim \mathcal N(0, \sigma^2)$ is the noise
-	* Let the Gram matrix $\bm K_{\bm X, \bm X} = \bm\Phi\bm\Phi^T \in \reals^{N \times N}$, where entry $ij$ is $\alpha\bm\phi^T(\bm x^{(i)})\bm\phi(\bm x^{(j)}) = k(\bm x^{(i)}, \bm x^{(j)})$, where $k \colon \mathcal X \times \mathcal X \mapsto \reals$ is the kernel
+		* Note $\bm w \sim \mathcal N(\bm 0, \alpha\bm 1)$ is our prior (regularization) and $\varepsilon \sim \mathcal N(0, \sigma^2)$ is the noise
+	* Let the Gram matrix $\bm K_{\bm X, \bm X} = \alpha\bm\Phi\bm\Phi^T \in \reals^{N \times N}$, where entry $ij$ is $\alpha\bm\phi^T(\bm x^{(i)})\bm\phi(\bm x^{(j)}) = k(\bm x^{(i)}, \bm x^{(j)})$, where $k \colon \mathcal X \times \mathcal X \mapsto \reals$ is the kernel
 	* Let $\bm k_{\bm X, \bm x'} = \rvec{k(\bm x^{(1)}, \bm x')}{k(\bm x^{(2)}, \bm x')}{\dots}{k(\bm x^{(N)}, \bm x')}^T$
 	* Then $p\left(\cvec{y'}{\bm y}\right) = \mathcal N\left(\bm 0, \mattwo{k_{\bm x', \bm x'}}{\bm k_{\bm x', \bm X}}{\bm k_{\bm X, \bm x'}}{\bm K_{\bm X, \bm X}} + \sigma^2\bm 1\right)$
 		* The Gram matrix is a covariance matrix
@@ -52,9 +52,9 @@
 * Kernels also have hyperparameters, e.g. in Gaussian kernel $k(x, y) = \sigma^2e^{-\frac{(x - y)^2}{2\theta}}$ the output variance $\sigma^2$ and lengthscale $l = 1/\theta$ are important hyperparameters
 * These hyperparameters can be selected through a number of means, like with Bayesian linear regression, e.g. prior knowledge, cross validation, full Bayesian inference and type-II maximum likelihood
 	* Recall that in type-II maximum likelihood we try to maximize $p(\bm y | \bm X)$ as a function of hyperparameters
-	* $\log p(\bm y | \bm X) = -\frac{N}{2}\log\alpha - \frac{N}{2}\log(\sigma^2) - \frac{1}{2\sigma^2}\bm y^T\bm y + \frac{1}{2}\bm\mu^T\bm\Sigma^{-1}\bm\mu + \frac{1}{2}\log\det(\bm\Sigma) - \frac{N}{2}\log(2\pi)$
+	* $\log p(\bm y | \bm X, \alpha, \sigma^2) = -\frac{N}{2}\log\alpha - \frac{N}{2}\log(\sigma^2) - \frac{1}{2\sigma^2}\bm y^T\bm y + \frac{1}{2}\bm\mu^T\bm\Sigma^{-1}\bm\mu + \frac{1}{2}\log\det(\bm\Sigma) - \frac{N}{2}\log(2\pi)$
 		* Used for weight space
-	* $\log(\bm y | \bm X) = -\frac{N}{2}\log(2\pi) - \frac{1}{2}\log\det(\bm K_{\bm X, \bm X} + \sigma^2\bm 1) - \frac{1}{2}\bm y^T(\bm K_{\bm X, \bm X} + \sigma^2\bm 1)^{-1}\bm y$
+	* $\log(\bm y | \bm X, \alpha, \sigma^2) = -\frac{N}{2}\log(2\pi) - \frac{1}{2}\log\det(\bm K_{\bm X, \bm X} + \sigma^2\bm 1) - \frac{1}{2}\bm y^T(\bm K_{\bm X, \bm X} + \sigma^2\bm 1)^{-1}\bm y$
 		* Used for function space
 
 ## Approximate Bayesian Methods

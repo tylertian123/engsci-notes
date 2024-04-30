@@ -55,12 +55,12 @@
 * Likelihood: $\log p(\bm y | \bm w, \bm X, \sigma^2) = \sum _{i = 1}^N \log\mathcal N(y^{(i)} | \bm w^T\bm\phi(\bm x^{(i)}), \sigma^2)$
 * Prior: $p(\bm w | \alpha) = \mathcal N(\bm w | \bm 0, \alpha\bm 1)$
 	* This is the conjugate prior
-* Posterior: $\alignedeqntwo[t]{\log p(\bm w | \mathcal D)}{\log p(\bm w) + \log p(\mathcal D | \bm w) + \text{const}}{-\frac{1}{2\alpha}\bm w^T\bm w - \frac{1}{2\sigma^2}(\bm w^T\bm\Phi^T\bm\Phi\bm w - 2\bm w^T\bm\Phi^T\bm y + \bm y^T\bm y)}{-\frac{1}{2}(\bm w - \bm\mu)^T\bm\Sigma^{-1}(\bm w - \bm\mu) + \text{const}}$
+* Posterior (for weights): $\alignedeqntwo[t]{\log p(\bm w | \mathcal D)}{\log p(\bm w) + \log p(\mathcal D | \bm w) + \text{const}}{-\frac{1}{2\alpha}\bm w^T\bm w - \frac{1}{2\sigma^2}(\bm w^T\bm\Phi^T\bm\Phi\bm w - 2\bm w^T\bm\Phi^T\bm y + \bm y^T\bm y)}{-\frac{1}{2}(\bm w - \bm\mu)^T\bm\Sigma^{-1}(\bm w - \bm\mu) + \text{const}}$
 	* Exponentiate this and we get a Gaussian, so $p(\bm w | \mathcal D, \alpha, \sigma) = \mathcal N(\bm w | \bm\mu, \bm\Sigma)$
 	* $\bm\mu = \frac{1}{\sigma^2}\bm\Sigma\bm\phi^T y$
-	* $\bm\Sigma^{1} = \frac{1}{\sigma^2}\bm\Phi^T\bm\Phi + \frac{1}{\alpha}\bm 1$
+	* $\bm\Sigma^{-1} = \frac{1}{\sigma^2}\bm\Phi^T\bm\Phi + \frac{1}{\alpha}\bm 1$
 * Since the posterior is a Gaussian, its mean is the MAP estimate $\bm\mu = \left(\bm\Phi^T\bm\Phi + \frac{\sigma^2}{\alpha}\bm 1\right)^{-1}\bm\Phi^T\bm y$
-* Posterior predictive: $\alignedeqntwo[t]{p(y' | \bm x', \mathcal D)}{\int p(y' | \bm x', \bm w)p(\bm w | \mathcal D)\,\dd\bm w}{\int \mathcal N(y' | \bm w^T\bm\phi(\bm x'), \sigma^2)\mathcal (\bm w | \bm\mu, \bm\Sigma)\,\dd\bm w}{\mathcal N(y' | \bm\mu^T\bm\phi(\bm x'), \bm\phi(\bm x')^T\bm\Sigma\bm\phi(\bm x') + \sigma^2)}$
+* Posterior predictive (for $y'$): $\alignedeqntwo[t]{p(y' | \bm x', \mathcal D)}{\int p(y' | \bm x', \bm w)p(\bm w | \mathcal D)\,\dd\bm w}{\int \mathcal N(y' | \bm w^T\bm\phi(\bm x'), \sigma^2)\mathcal N(\bm w | \bm\mu, \bm\Sigma)\,\dd\bm w}{\mathcal N(y' | \bm\mu^T\bm\phi(\bm x'), \bm\phi(\bm x')^T\bm\Sigma\bm\phi(\bm x') + \sigma^2)}$
 	* The last line is obtained because we have a convolution of two Gaussians
 * Bayesian linear regression considers all possible explanations of how the data was generated, and predicts using all possible regression weights, weighted by the posterior probability
 

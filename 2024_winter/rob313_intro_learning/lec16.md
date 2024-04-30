@@ -32,10 +32,10 @@
 	* $\mathcal L(\bm\theta, \bm x) = -\expectation{\bm z \sim q}{\log\frac{q(\bm z | \bm\theta)}{p(\bm z, \bm x)}}$ is the *evidence lower bound* (ELBO)
 	* Since $-\mathcal L(\bm\theta, \bm x) + \log p(\bm x) \geq 0$ (since KL is positive), the ELBO is a lower bound for $\log p(\bm x)$
 	* As $\log p(\bm x)$ is constant, to minimize the KL divergence we have to maximize the ELBO; therefore we do not have to compute the normalization, which is infeasible to do
-* The ELBO gradient is $\del _{\bm\theta} = \del _{\bm\theta}\int q(\bm z | \bm\theta)\log\frac{p(\bm x, \bm z)}{q(\bm z | \bm \theta)}\,\dd\bm z$, which must be estimated since we cannot compute this high-dimension integral
+* The ELBO gradient is $\del _{\bm\theta} \mathcal L(\bm\theta, \bm x) = \del _{\bm\theta}\int q(\bm z | \bm\theta)\log\frac{p(\bm x, \bm z)}{q(\bm z | \bm \theta)}\,\dd\bm z$, which must be estimated since we cannot compute this high-dimension integral
 	* The *score function* (aka *REINFORCE*) gradient estimator
 		* $\del _{\bm\theta}\mathcal L(\bm\theta, \bm x) = \expectation{\bm z \sim q}{\del _{\bm\theta} \log q(\bm z | \bm\theta)\log\frac{p(\bm x, \bm z)}{q(\bm z | \bm\theta)}}$
-		* Using Monte Carlo, $\del _{\bm\theta}\mathcal L(\bm\theta, \bm x) \approx \frac{1}{B}\sum _{i = 1}^B \del _{\bm\theta}\log q(\bm z^{(i)} | \bm\theta)\log\frac{p(\bm x, \bm z^{(i)})}{q(\bm z^{(i)} | \bm\theta}$
+		* Using Monte Carlo, $\del _{\bm\theta}\mathcal L(\bm\theta, \bm x) \approx \frac{1}{B}\sum _{i = 1}^B \del _{\bm\theta}\log q(\bm z^{(i)} | \bm\theta)\log\frac{p(\bm x, \bm z^{(i)})}{q(\bm z^{(i)} | \bm\theta)}$
 			* $B$ is the number of samples
 			* This is an unbiased estimator and easy to compute
 		* In practice, this has higher variance than the pathwise gradient estimator
@@ -43,7 +43,7 @@
 	* The *pathwise* (aka *reparametrization*) gradient estimator factors out all the randomness of the distribution into a parameterless fixed source of noise, $p(\bm\varepsilon)$
 		* Find $T(\bm\varepsilon, \bm\theta)$ such that for $\bm\varepsilon \sim p(\bm\varepsilon)$, then $\bm z = T(\bm\varepsilon, \bm\theta) \implies \bm z \sim q(\bm z | \bm\theta)$
 			* e.g. for a Gaussian, $\bm\theta = \set{\mu, \sigma}$, let $\varepsilon \sim \mathcal N(\varepsilon | 0, 1)$ and $T(\varepsilon, \bm\theta) = \sigma\varepsilon + \mu$, then $z \sim \mathcal N(z | \mu, \sigma)$
-		* Using the above, $\del _{\bm\theta} \mathcal (\bm\theta, \bm x) = \expectation{\bm\varepsilon \sim p(\bm\varepsilon)}{\del _{\bm\theta}\log \frac{p(\bm x, T(\bm\varepsilon, \bm\theta))}{q(T(\bm\varepsilon, \bm\theta) | \bm\theta)}}$
+		* Using the above, $\del _{\bm\theta} \mathcal L(\bm\theta, \bm x) = \expectation{\bm\varepsilon \sim p(\bm\varepsilon)}{\del _{\bm\theta}\log \frac{p(\bm x, T(\bm\varepsilon, \bm\theta))}{q(T(\bm\varepsilon, \bm\theta) | \bm\theta)}}$
 		* This can then be estimated using Monte Carlo
 * The main drawback of SVI is the challenge of determining how good the approximation is after the optimization terminates
 
@@ -57,7 +57,7 @@
 * *Importance sampling* is a method for approximating the expectation when we only have the unnormalized distribution
 	* A notable example is the particle filter for state estimation in robotics
 * Let $q(\bm x)$ be the *sampler density*, a simpler density function that we can easily sample from
-	* $\alignedeqntwo[t]{I}{\int p(\bm x)\phi(\bm x)\,\dd\bm x}{\int \phi(\bm x)\frac{p(\bm x)}{q(\bm x)}q(\bm x)\,\dd\bm x}{\frac{\int \frac{\phi(\bm x)p(\bm x)}{q(\bm x)}q(\bm x)\,\dd\bm x}{\int \frac{p(\bm x)}{q(\bm x)}q(\bm x)\,\dd\bm x}}{\frac{\int \frac{\phi(\bm x)\frac{1}{Z}\tilde p(\bm x)}{q(\bm x)}q(\bm x)\,\dd\bm x}{\int \frac{\frac{1}{Z}\tilde p(\bm x)}{q(\bm x)}q(\bm x)\,\dd\bm x}}{\frac{\int \frac{\phi(\bm x)p(\bm x)}{q(\bm x)}q(\bm x)\,\dd\bm x}{\int \frac{\tilde p(\bm x)}{q(\bm x)}q(\bm x)\,\dd\bm x}}{\frac{\expectation{\bm x \sim q(\bm x)}{\frac{\phi(\bm x)p(\bm x)}{q(\bm x)}}}{\expectation{\bm x \sim q(\bm x)}{\frac{\tilde p(\bm x)}{q(\bm x)}}}}$
+	* $\alignedeqntwo[t]{I}{\int p(\bm x)\phi(\bm x)\,\dd\bm x}{\int \phi(\bm x)\frac{p(\bm x)}{q(\bm x)}q(\bm x)\,\dd\bm x}{\frac{\int \frac{\phi(\bm x)p(\bm x)}{q(\bm x)}q(\bm x)\,\dd\bm x}{\int \frac{p(\bm x)}{q(\bm x)}q(\bm x)\,\dd\bm x}}{\frac{\int \frac{\phi(\bm x)\frac{1}{Z}\tilde p(\bm x)}{q(\bm x)}q(\bm x)\,\dd\bm x}{\int \frac{\frac{1}{Z}\tilde p(\bm x)}{q(\bm x)}q(\bm x)\,\dd\bm x}}{\frac{\int \frac{\phi(\bm x)\tilde p(\bm x)}{q(\bm x)}q(\bm x)\,\dd\bm x}{\int \frac{\tilde p(\bm x)}{q(\bm x)}q(\bm x)\,\dd\bm x}}{\frac{\expectation{\bm x \sim q(\bm x)}{\frac{\phi(\bm x)\tilde p(\bm x)}{q(\bm x)}}}{\expectation{\bm x \sim q(\bm x)}{\frac{\tilde p(\bm x)}{q(\bm x)}}}}$
 	* Now we can use Monte Carlo to approximate the expectations
 	* $\hat I = \frac{\frac{1}{R}\sum _{r = 1}^R \frac{\phi(\bm x^{(r)})\tilde p(\bm x^{(r)})}{q(\bm x^{(r)})}}{\frac{1}{R}\sum _{r = 1}^R \frac{\tilde p(\bm x^{(r)})}{q(\bm x^{(r)})}} = \frac{\sum _r w_r\phi(\bm x^{(r)})}{\sum _r w_r}$
 	* Each $w_r = \frac{\tilde p(\bm x^{(r)})}{q(\bm x^{(r)})}$ is referred to as the *importance weight*

@@ -73,7 +73,7 @@
 	* Cross entropy (CE): $-\frac{1}{N}\sum _{n = 1}^N\sum _{k = 1}^K t_{n,k}\log(y_{n,k})$
 		* $N$ training samples, $K$ classes ($t_{n,k}$ is the probability of training sample $n$ being in category $k$)
 		* Used for classification tasks since it works on probabilities
-	* Binary cross entropy (BCE): $\frac{1}{N}\sum _{n = 1}^N \left(t_n\log(y_n) + (1 - t_n)\log(1 - y_n)\right)$
+	* Binary cross entropy (BCE): $-\frac{1}{N}\sum _{n = 1}^N \left(t_n\log(y_n) + (1 - t_n)\log(1 - y_n)\right)$
 		* Used for binary classification tasks, where the output can either be 0 or 1
 		* A special case of the cross entropy loss function
 
