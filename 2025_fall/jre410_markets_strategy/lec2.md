@@ -34,12 +34,16 @@
 		* How appealing are the substitutes? (Ease of use, cost, quality, etc.)
 	4. Threat of new entrants
 		* Is it hard to enter the industry?
+		* Is the industry attractive (growing, high profits, etc)?
+		* Are there a lot of entry candidates?
+		* Are incumbents are unwilling or unable to challenge newcomers' entry?
 	5. Rivalry among existing competitors
 * To perform an analysis, define the industry, identify the parties involved for each force and how they contribute to the force, assess the strength of each force, and assess whether it is conducive to sustained profits
 	* For a firm, there are different ways to define the industry (e.g. for Starbucks, we can define it as the coffee industry, the non-alcoholic drinks industry, etc)
+	* When defining the industry, you also need to define the geography (e.g. country), since the macro-environment can vary significantly
 	* Try the analysis at different levels to see if they agree
 * Porter's 5 forces is an industry-level analysis as it doesn't really consider the differences between competing firms
-	* Use this when you are the incumbent
+	* The analysis is performed from the perspective of the incumbents (hence why they are placed in the middle)
 * Example: Starbucks, coffee industry
 	1. Identify the agents in each of the forces:
 		* Suppliers: coffee producers, dairy farms, paper cup producers, syrup producers

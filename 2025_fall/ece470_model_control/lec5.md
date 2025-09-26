@@ -2,8 +2,8 @@
 
 ## Euler Angle Parameterization of Rotations
 
-* We will parametrize rotations using $zyz$ Euler angles, i.e. $R_1^0 = R_{z,\phi}R_{y,\theta}R_{z,\varphi}$
-	* Expanded: $R_1^0 = \matthreeb{\cos\phi\cos\theta\cos\varphi - \sin\phi\sin\varphi}{-\cos\phi\cos\theta\sin\varphi - \sin\phi\cos\varphi}{\cos\phi\sin\theta}{\sin\phi\cos\theta\cos\varphi + \cos\phi\sin\varphi}{-\sin\phi\cos\theta\sin\varphi + \cos\phi\cos\varphi}{\sin\phi\sin\theta}{-\sin\theta\cos\varphi}{\sin\theta\sin\varphi}{\cos\theta}$
+* We will parametrize rotations using $zyz$ Euler angles, i.e. $R_1^0 = R_{z,\phi}R_{y,\theta}R_{z,\psi}$
+	* Expanded: $R_1^0 = \matthreeb{\cos\phi\cos\theta\cos\psi - \sin\phi\sin\psi}{-\cos\phi\cos\theta\sin\psi - \sin\phi\cos\psi}{\cos\phi\sin\theta}{\sin\phi\cos\theta\cos\psi + \cos\phi\sin\psi}{-\sin\phi\cos\theta\sin\psi + \cos\phi\cos\psi}{\sin\phi\sin\theta}{-\sin\theta\cos\psi}{\sin\theta\sin\psi}{\cos\theta}$
 	* This is the representation we choose to use since it directly coincides with the joint angles of a spherical wrist, e.g. on the KUKA robot
 * Given $R$, we can do the inverse and find $(\phi, \theta, \varphi)$
 	* Assuming $\sin\theta \neq 0$:

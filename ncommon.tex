@@ -41,6 +41,7 @@
 \newcommand{\rmodels}{\ensuremath{\mathrel{=\!\!\!|}}}
 \newcommand{\on}{\operatorname}
 \newcommand{\atantwo}{\operatorname{atan2}}
+\newcommand{\suchthat}{\enspace\mathrm{s.t.}\enspace}
 
 % Thanks stack exchange
 \DeclareMathOperator*{\sumint}{%
@@ -270,12 +271,15 @@
 \newcommand{\dtau}{\dd \tau}
 
 \newcommand{\Vbar}{\msout{V}}
-\newcommand{\ReN}{\text{Re}} % Reynolds number
-\newcommand{\FoN}{\text{Fo}} % Fourier number
-\newcommand{\BiN}{\text{Bi}} % Biot number
-\newcommand{\NuN}{\text{Nu}} % Nusselt number
-\newcommand{\PrN}{\text{Pr}} % Prandtl number
-\newcommand{\FrN}{\text{Fr}} % Froude number
+\newcommand{\ReN}{\mathrm{Re}} % Reynolds number
+\newcommand{\FoN}{\mathrm{Fo}} % Fourier number
+\newcommand{\BiN}{\mathrm{Bi}} % Biot number
+\newcommand{\NuN}{\mathrm{Nu}} % Nusselt number
+\newcommand{\PrN}{\mathrm{Pr}} % Prandtl number
+\newcommand{\FrN}{\mathrm{Fr}} % Froude number
+
+\newcommand{\Rot}{\mathrm{Rot}}
+\newcommand{\Trans}{\mathrm{Trans}}
 
 \newcommand{\union}{\cup}
 \newcommand{\intersect}{\cap}
@@ -300,12 +304,36 @@
 \newcommand{\mattwo}[5][b]{\begin{#1matrix} {#2} & {#3} \\ {#4} & {#5} \end{#1matrix}}
 \newcommand{\mattwothree}[7][b]{\begin{#1matrix} {#2} & {#3} & {#4} \\ {#5} & {#6} & {#7} \end{#1matrix}}
 \newcommand{\matthreetwo}[7][b]{\begin{#1matrix} {#2} & {#3} \\ {#4} & {#5} \\ {#6} & {#7} \end{#1matrix}}
-% Because TeX can't take more than 9 arguments in a macro...
-\newcommand{\matthree}[9]{\begin{matrix} {#1} & {#2} & {#3} \\ {#4} & {#5} & {#6} \\ {#7} & {#8} & {#9} \end{matrix}}
+
 \newcommand{\matthreeb}[9]{\begin{bmatrix} {#1} & {#2} & {#3} \\ {#4} & {#5} & {#6} \\ {#7} & {#8} & {#9} \end{bmatrix}}
 \newcommand{\matthreev}[9]{\begin{vmatrix} {#1} & {#2} & {#3} \\ {#4} & {#5} & {#6} \\ {#7} & {#8} & {#9} \end{vmatrix}}
 \newcommand{\matthreep}[9]{\begin{pmatrix} {#1} & {#2} & {#3} \\ {#4} & {#5} & {#6} \\ {#7} & {#8} & {#9} \end{pmatrix}}
 \newcommand{\matthreeB}[9]{\begin{Bmatrix} {#1} & {#2} & {#3} \\ {#4} & {#5} & {#6} \\ {#7} & {#8} & {#9} \end{Bmatrix}}
+% For 3x3 and up, since normal macros cannot take more than 9 arguments, we need to break it up into two parts and use some magic
+\newcommand{\matthree}[7][b]{%
+  \def\matthreematrixtype{#1}%
+  \csname #1matrix\endcsname
+  {#2} & {#3} & {#4} \\%
+  {#5} & {#6} & {#7} \\%
+  \matthreecontinued
+}
+\newcommand{\matthreecontinued}[3]{%
+  {#1} & {#2} & {#3}
+  \csname end\matthreematrixtype matrix\endcsname
+}
+
+\newcommand{\matfour}[9][b]{%
+  \def\matfourmatrixtype{#1}%
+  \csname #1matrix\endcsname
+  {#2} & {#3} & {#4} & {#5} \\%
+  {#6} & {#7} & {#8} & {#9} \\%
+  \matfourcontinued
+}
+\newcommand{\matfourcontinued}[8]{%
+  {#1} & {#2} & {#3} & {#4} \\%
+  {#5} & {#6} & {#7} & {#8}
+  \csname end\matfourmatrixtype matrix\endcsname
+}
 
 \newcommand{\diagthree}[4][b]{\begin{#1matrix} {#2} & & \\ & {#3} & \\ & & {#4} \end{#1matrix}}
 \newcommand{\diagfour}[5][b]{\begin{#1matrix} {#2} & & & \\ & {#3} & & \\ & & {#4} & \\ & & & {#5} \end{#1matrix}}
@@ -315,6 +343,15 @@
 }{%
 \end{array}\right]
 }
+
+% Shorthand for matrix environment
+\newcommand{\mat}[2][b]{\begin{#1matrix} #2 \end{#1matrix}}
+% For more complex matrices use this: \mat{\mrow{a}{b}{c} ...}
+\makeatletter % Matrix row
+\newcommand{\mrow}[1]{#1 \mrowchecknextarg}
+\newcommand{\mrowchecknextarg}{\@ifnextchar\bgroup{\mrownextarg}{\\}}
+\newcommand{\mrownextarg}[1]{& #1 \@ifnextchar\bgroup{\mrownextarg}{\\}}
+\makeatother
 
 \makeatletter % Column vector (variadic), \cvec[bracket_type]{x1}{x2}{x3}...
 \newcommand{\cvec}[2][b]{\begin{#1matrix} #2 \cvecchecknextarg{#1}}
@@ -338,11 +375,13 @@
 \newcommand{\alignedlinestwonextarg}[2]{\\ &#1 #2 \@ifnextchar\bgroup{\alignedlinestwonextarg{#1}}{\end{aligned}}}
 \makeatother
 
+% Optional argument is alignment option
 \newcommand{\alignedeqn}[1][]{\alignedlines[#1]{=}}
 \newcommand{\alignedimp}[1][]{\alignedlines[#1]{\implies}}
 \newcommand{\alignedeqntwo}[1][]{\alignedlinestwo[#1]{=}}
 \newcommand{\alignedimptwo}[1][]{\alignedlinestwo[#1]{\implies}}
 
+% For inserting text tags at the end of each line
 \newcommand{\Tag}{& \qquad &}
 \newcommand{\Ttag}[1]{\Tag \text{#1}}
 \newcommand{\Tagcal}[1]{\Tag \mathcal{#1}}
