@@ -2,13 +2,15 @@
 
 ## Market Positioning
 
+* Studies have found that on average, 10-20% of the profit variability of a firm comes from the industry, but 30-40% comes from strategic choices, so choosing the correct strategy is very important!
 * Firms compete on two dimensions -- the cost/uniqueness and the scope of operation (appeal to mass market)
+	* The first dimension is about the value stick -- pushing down the production cost or pushing up the customer's willingness to pay
 * This breaks down into 3 general strategies:
 	1. Low cost (cost leadership): the firm becomes the lowest cost producer, appealing to the widest audience
 	2. Broad differentiation: the firm offers a premium product, often with a higher cost
 	3. Focus: deliberately serving only a subset of the market, focusing either on cost or uniqueness
 
-![Porter's generic competitive strategies.](./imgs/lec4_1.png){width=50%}
+![Porter's generic competitive strategies.](./imgs/lec4_1.png){width=60%}
 
 ![The competitive approaches illustrated with the value stick framework.](./imgs/lec4_2.png){width=60%}
 
@@ -53,6 +55,7 @@
 	* The niche is large enough to be profitable
 	* The niche is stable, so buyers don't flock to the mainstream
 	* The firm as the R&C to serve the niche successfully
+* The focused strategies are often more suitable for new firms to enter, since there is less pressure from the larger incumbent firms which have a lot of resources to retaliate
 * Examples include Porter Airlines (focused differentiation), Air Transat (focused low cost, operates only to vacation destinations)
 * The hazards of a focused strategy include:
 	* Competitors find ways to match the focuser's capabilities in serving the niche

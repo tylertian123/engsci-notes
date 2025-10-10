@@ -27,7 +27,7 @@
 * In matrix form, $y = \rvec{x}{1}\cvec{m}{b} = \bm J(x)\bm\theta$ where $\bm J(x) = \pdiff{f(x; \bm\theta)}{\bm\theta}$ is the model Jacobian with respect to the parameters (this is possible since we have a linear model)
 	* Substitute and expand: $E_{LS} = \bm\theta^T\left[\sum _i \bm J^T(x_i)\bm J(x_i)\right]\bm\theta - 2\bm\theta^T\left[\sum _i\bm J^T(x)\tilde y_i\right] + \sum _i \tilde y_i^2$
 	* Since $\sum _i \tilde y_i^2$ is constant, we minimize the other part
-	* By differentiation we get $\hat{\bm \theta}\left[\sum _i\bm J^T(x_i)\bm J(x_i)\right]^{-1}\left[\sum _i \bm J^T(x_i)\tilde y_i\right]$ (*normal equation*)
+	* By differentiation we get $\hat{\bm \theta} = \left[\sum _i\bm J^T(x_i)\bm J(x_i)\right]^{-1}\left[\sum _i \bm J^T(x_i)\tilde y_i\right]$ (*normal equation*)
 * If data points are weighted differently, we change the loss to $E_{WLS} = \sum _i \sigma _i^{-2}\norm{r_i}^2$
 	* This is known as the *Mahalanobis distance*
 * But notice due to the quadratic cost function, this method is sensitive to outliers; the model is distorted significantly to account for just a few outliers

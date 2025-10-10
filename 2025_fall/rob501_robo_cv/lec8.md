@@ -14,15 +14,20 @@
 	* The nonlinear algorithm uses an initial guess and iterates to find the solution
 	* We often start from the linear algorithm and then use nonlinear algorithm to refine
 * Solving for $\bm P = \bm K\rvec{\bm C}{\bm t}$ requires at least 6 correspondences (since there are 6 degrees of freedom), but if we have intrinsics already we only need 3
-* The linear algorithm for solving PnP is the *direct linear transform*, which stacks a system of equations
+* The linear algorithm for solving PnP is the *direct linear transform* (DLT), which stacks a system of equations
 	* We have $\bm P \in \reals^{3 \times 4}$ (the combination of the extrinsic and intrinsic matrices) with 12 unknowns
 	* For each correspondence we can construct 2 equations from it; with 6 correspondences we can solve the whole system
 		* $x_i = \frac{p_{00}X_i + p_{01}Y_i + p_{02}Z_i + p_{03}}{p_{20}X_i + p_{21}Y_i + p_{22}Z_i + p_{23}}$
 		* $y_i = \frac{p_{10}X_i + p_{11}Y_i + p_{12}Z_i + p_{13}}{p_{20}X_i + p_{21}Y_i + p_{22}Z_i + p_{23}}$
 		* Note the division due to normalization
 	* Because the intrinsics matrix $\bm K$ is upper-triangular, we can do a QR factorization on $\bm P$ to recover the separate intrinsic and extrinsic matrices
+* However, DLT does not impose constraints on the structure of the resulting matrices, namely the structure of the rotation matrix, so after QR factorization we often end up with a result that does not fit into our camera models, forcing us to make an approximation; this is why DLT is not an exact solution
+
+### Nonlinear Least Squares
+
 * Nonlinear least squares (Gauss-Newton optimization) is an optimization approach we can use to solve this system
 	* For nonlinear least squares, we wish to optimize $E(\bm x) = \frac{1}{2}\bm e(\bm x)^T\bm e(\bm x)$ where $\bm e(\bm x)$ is some nonlinear function
+		* Note $\bm e(\bm x) = \bm f(\bm x) - \bm y$, i.e. the prediction minus the observation; the order is important, otherwise we end up maximizing the error instead!
 		* In the linear case we can substitute $\bm e(\bm x) = \bm A\bm x - \bm b$ and expand the error function, then take a derivative to obtain the normal equation
 	* For the nonlinear case we linearize around an initial guess (the operating point) $\bm x_{op}$
 	* $\bm e(\bm x) \approx \bm e(\bm x_{op}) + \bm J_e\delta\bm x$ where $\bm J_e = \eval{\pdiff{\bm e}{\bm x}}{\bm x_{op}}$ is the Jacobian and $\delta\bm x$ is a small deviation
@@ -34,7 +39,7 @@
 	* Choosing good initial guesses is important, otherwise the optimization process can get trapped in a local minimum
 	* The states we are solving for must exist in a vector space (i.e. we cannot apply constraints, since then the vector space is no longer closed)
 * For multiple errors, we sum over all the errors, so in the normal equation we sum over $\bm J^T\bm J$ and $\bm J^T\bm e$ and multiply in the end
-	* $E(\bm x) = \frac{1}{2}\sum _{i = 1}^N \bm e_i(\bm x)^T\bm e_i(\bm x)$$
+	* $E(\bm x) = \frac{1}{2}\sum _{i = 1}^N \bm e_i(\bm x)^T\bm e_i(\bm x)$
 	* $\delta\bm x^* = -\left(\sum _{i = 1}^N \bm J_{e_i}^T\bm J_{e_i}\right)^{-1}\left(\sum _{i = 1}^N \bm J_{e_i}^T\bm e_i(\bm x_{op})\right)$
 	* Note we need to reevaluate the Jacobian for each measurement $i$, since the linearization point is all different!
 * Often we have associated uncertainties for each error, so we can do a weighted version of least squares, so $E(\bm x) = \frac{1}{2}\sum _{i = 1}^N \bm e_i(\bm x)^T\bm W_i\bm e_i(\bm x)$

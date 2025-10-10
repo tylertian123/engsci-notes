@@ -38,10 +38,10 @@
 		* This is the most noticeable
 	* *Tangential distortion*: pixels are shifted one direction, with further pixels shifted more, due to the lens and imaging plane not being perfectly parallel
 * The most common distortion model is the *plumb bob model*, which uses a polynomial to model the distortion effects; this is a function that maps where the pixels should be to where they would appear due to distortion
-	* $\cvec{x_d}{y_d} = \underbrace{(1 + \kappa _1r^2 + \kappa _2r^4 + \kappa _3r^6)\cvec{x_n}{y_n}}_{\text{radial distortion}} + \underbrace{\cvec{2\tau _1x_ny_n + \tau _2(r^2 + 2x_n^2)}_{2\tau_2 x_ny_n + \tau _1(r^2 + 2y_n^2)}}{\text{tangential distortion}}$
+	* $\cvec{x_d}{y_d} = \underbrace{(1 + \kappa _1r^2 + \kappa _2r^4 + \kappa _3r^6)\cvec{x_n}{y_n}}_{\text{radial distortion}} + \underbrace{\cvec{2\tau _1x_ny_n + \tau _2(r^2 + 2x_n^2)}{2\tau_2 x_ny_n + \tau _1(r^2 + 2y_n^2)}}_{\text{tangential distortion}}$
 		* $r = \sqrt{x_n^2 + y_n^2}$ is the distance from the image center; note all coordinates are in the normalized image plane coordinate system
 	* Often $\kappa _1$ and $\kappa _2$ are enough to model the radial distortion, while tangential distortion might be negligible
-* For radial distortion, we can have a "barrel" distortion (points pulled out) or "pincushion" distortion (points pushed in), or "mustache" distortion (straight line curves like a mustache)
+* For radial distortion, we can have a "barrel" distortion (corner points pushed in) or "pincushion" distortion (corner points pushed out), or "mustache" distortion (straight line curves like a mustache)
 	* Note for the "barrel" distortion, all pixels are being pushed inward, but the ones on the sides of the barrel are pushed in less; conversely for pincushion all pixels are being pulled out, but the ones on the corners are pulled out more
 
 ![Visualization of two types of radial distortion.](./imgs/lec4_5.png){width=80%}
