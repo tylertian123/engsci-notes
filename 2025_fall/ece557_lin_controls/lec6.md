@@ -54,7 +54,7 @@
 	* The block diagonal form means $e^{\bm Jt} = \diagthree{e^{\bm J_{\lambda _1}t}}{\ddots}{e^{\bm J_{\lambda _k}t}}$
 	* Similarly $e^{\bm J_{\lambda _i}t} = \diagthree{e^{\bm J_{\lambda _i}^1}}{\ddots}{e^{\bm J_{\lambda _i}^{l_i}}}$
 	* $\bm J_{\lambda _i}^jt = \left(\lambda _i\bm I + \bm N\right)t$ where $\bm N$ is a matrix with 1s above the diagonal
-	* Therefore $e^{\bm J_{\lambda _i}^j} = e^{\lambda _it}e^{\bm Nt}$
+	* Therefore $e^{\bm J_{\lambda _i}^jt} = e^{\lambda _it}e^{\bm Nt}$
 		* $\bm N$ is a nilpotent matrix, so we can show that eventually the higher order terms in the infinite series expansion for $e^{\bm Nt}$ all go to zero
 	* We can show that $e^{\bm Nt}$ has form $\begin{bmatrix}1 & t & \cdots & \frac{t^{p - 1}}{(p - 1)!} \\ & \ddots & \ddots & \vdots \\ & & 1 & t \\ & & & 1 \end{bmatrix} \in \complex^{p \times p}$
 		* Here $p$ is the size of the block $\bm J_{\lambda _i}^j$ (i.e. the size of the chain of generalized eigenvectors corresponding to $\lambda _i$), which is not unique

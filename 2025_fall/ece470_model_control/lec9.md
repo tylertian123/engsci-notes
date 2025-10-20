@@ -9,7 +9,7 @@
 	1. Link twist $\alpha _i$: the signed angle between $z_{i - 1}$ and $z_i$, about $x_i$
 	2. Link length $a_i$: the signed distance between $z_{i - 1}$ and $z_i$, along $x_i$
 	3. Link offset $d_i$: the signed distance between $O_{i - 1}$ and $O_i$, along $z_{i - 1}$
-	4. Link angle $\theta _i$: the signed angle between $x_{i - 1}$ and $x_i$, about $z_{i - 1}$
+	4. Joint angle $\theta _i$: the signed angle between $x_{i - 1}$ and $x_i$, about $z_{i - 1}$
 * The angles can be better illustrated if we bring frame $i - 1$ and frame $i$ together
 * This allows us to form a *DH table*, which lists out $a_i, \alpha _i, d_i, \theta _i$ for each $i \in [1, n]$
 * Notice that each of the parameters corresponds to a single operation about a single axis, so we can get the overall homogeneous transformation for each stage of the manipulator by combining the 4 operations

@@ -12,6 +12,8 @@
 * The firm can manipulate the consumer's willingness to pay or the cost to produce the item
 	* The goal of any action is ultimately to affect one of these two levers
 	* The "wider" this value stick, the bigger the firm's competitive advantage
+* Competitive advantage is the gap between the customer WTP and the cost of producing the item
+	* Note it is the cost, not the price that matters; the price is often a consequence of the market, but the price and WTP are influenced by the firm's strategy
 * If a firm's value stick looks exactly like another's, this will drive down profit due to competition
 	* The point of strategy is to have a different value stick than another firm
 * Orthogonal to this, the size of the market (how many units can you sell?) also matters -- is the firm targeting a mainstream market (WTP is lower, but you can sell more), or a niche market (WTP higher, but sells less)
@@ -44,6 +46,8 @@
 	* Try the analysis at different levels to see if they agree
 * Porter's 5 forces is an industry-level analysis as it doesn't really consider the differences between competing firms
 	* The analysis is performed from the perspective of the incumbents (hence why they are placed in the middle)
+* Generally, the more parties are in a category, the weaker the power of that category
+	* e.g. lots of customers means generally weaker buyer power, lots of suppliers means weaker supplier power
 * Example: Starbucks, coffee industry
 	1. Identify the agents in each of the forces:
 		* Suppliers: coffee producers, dairy farms, paper cup producers, syrup producers

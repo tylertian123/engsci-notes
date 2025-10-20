@@ -44,7 +44,7 @@
 	* For the angular velocity, we make the assumption that the helicopter always flying forward, i.e. the direction of $x_1$ is the same as the direction of the linear velocity $\dot O_1^0$
 	* Since the angular velocity Jacobian is trivial, we can simply compute $\alignedeqntwo[t]{w_1^0}{J_w(q)\dot q}{J_w(q_1)\dot q_1}{\rvec{\rho _1z_0^0}\dot q_1}{\cvec{0}{0}{1/3}}$
 	* The brute-force approach is to find $R_1^0$, compute its derivative $\dot R_1^0$, and extract $w_1^0$ from $S(w_1^0) = \dot R_1^0(R_1^0)^T$
-		* Find $x_1^0$ by normalizing $\dot O_1^0$, so $x_1^0 = \cvec{-\sin(t/3)}{\cos(t/3}{0}$
+		* Find $x_1^0$ by normalizing $\dot O_1^0$, so $x_1^0 = \cvec{-\sin(t/3)}{\cos(t/3)}{0}$
 		* We also have $z_1$ parallel to $z_0$ so $z_1^0 = \cvec{0}{0}{1}$
 		* Finally to get $y_1^0$ we need to take a cross product, so its normal to the other 2 and the right hand rule holds
 		* $R_1^0 = \rvec{x_1^0}{y_1^0}{z_1^0} = \matthree{-\sin(t/3)}{-\cos(t/3)}{0}{\cos(t/3)}{-\sin(t/3)}{0}{0}{0}{1}$

@@ -22,6 +22,6 @@
 		* Intuitively, the revolute joint's angular velocity affects all links down the chain
 		* Using this, we can show that the coefficient of $\dot q_k$ in $\dot O_n^0$ is $z_{k - 1}^0 \times \left(\sum _{i = k}^n R_{i - 1}^0O_i^{i - 1}\right)$
 			* We also know $O_n^0 = O_{k - 1}^0 + R_{k - 1}^0O_k^{k - 1} + \cdots + R_{n - 1}^0O_n^{n - 1}$ so $\sum _{i = k}^n R_{i - 1}^0O_i^{i - 1} = O_n^0 - O_{k - 1}^0$
-* Finally, $J_v(q) = \rvec{J_{v,1}(q)}{\cdots}{J_{v,1}(q)} \in \reals^{3 \times n}$, where each column can be written as:
+* Finally, $J_v(q) = \rvec{J_{v,1}(q)}{\cdots}{J_{v,n}(q)} \in \reals^{3 \times n}$, where each column can be written as:
 	* $J_{v,i}(q) = \twocond{z_{i - 1}^0}{\text{joint }i\text{ is prismatic}}{z_{i - 1}^0 \times (O_n^0 - O_{i - 1}^0)}{\text{joint }i\text{ is revolute}}$
 

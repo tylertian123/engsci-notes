@@ -3,6 +3,7 @@
 ## Strategy
 
 * *Strategy* is the competitive moves and business approaches used to run a company, and how those moves should deliver competitive advantage and superior performance
+	* It involves the alignment of internal capabilities and external opportunities -- taking advantage of internal resources and capabilities to meet external opportunities (or adapt to threats and changes to the market)
 * Main questions to ask:
 	1. Where are we now? (External and internal situation analysis)
 		* e.g. Tesla has a huge market cap, rapidly growing revenue and profits
@@ -16,7 +17,7 @@
 
 \noteDefn{A firm has a \textit{competitive advantage} if it can sell its products/services for more than what they cost, and the gap is wider than what its competitors have achieved. The competitive advantage is \textit{sustainable} if it cannot be easily matched by competitors.}
 
-* A sustainable competitive advantage is developed when a sufficiently large number of byers prefer a company's products/services over competitors, and this preference persists over time and generates long-term profits
+* A sustainable competitive advantage is developed when a sufficiently large number of buyers prefer a company's products/services over competitors, and this preference persists over time and generates long-term profits
 * To develop a sustainable competitive advantage a company can:
 	1. Develop a cost-based advantage (e.g. Walmart)
 	2. Develop a differentiation-based advantage (e.g. Lululemon)

@@ -5,7 +5,7 @@
 * Consider a system $\dot{\bm x} = \bm A\bm x, \bm x(0) = \bm x_0$
 	* Assume that $\bm A$ is diagonalizable, so the solution is $\bm x(t) = e^{\bm At}\bm x_0 = \bm Pe^{\bm\Lambda t}\bm P^{-1}\bm x_0$
 * Consider the transformed coordinate space $\bm z(t) = \bm P^{-1}\bm x(t)$; how does the system look in this coordinate system?
-	* $\dot{\bm x} = \bm P^{-1}\dot{\bm x}(t) = \bm P^{-1}\bm A\bm x(t) = \bm P^{-1}\bm P\bm\Lambda\bm P^{-1}\bm x(t) = \bm\Lambda\bm z(t)$
+	* $\dot{\bm z} = \bm P^{-1}\dot{\bm x}(t) = \bm P^{-1}\bm A\bm x(t) = \bm P^{-1}\bm P\bm\Lambda\bm P^{-1}\bm x(t) = \bm\Lambda\bm z(t)$
 	* Since $\bm\Lambda$ is diagonal, we get $\dot z_i(t) = \lambda _iz_i(t)$, in other words, a set of $n$ decoupled linear differential equations
 	* Each one is solved by $z_i(t) = e^{\lambda _it}z_i(0)$, resulting in much easier to analyze system behaviour
 	* $\bm x(t) = \bm P\bm z(t) = \sum _{i = 1}^n \bm v_i\bm z_i(t) = \sum _{i = 1}^n \bm v_ie^{\lambda _it}z_i(0)$

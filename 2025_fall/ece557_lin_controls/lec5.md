@@ -26,8 +26,8 @@
 
 * Consider $\dot{\bm x} = \bm A\bm x, \bm x(0) = \bm x_0 \in \reals^n$, taking the Laplace transform:
 	* $\alignedimp[t]{\laplace{\dot{\bm x}} = \laplace{\bm A\bm x}}{s\bm X(s) - \bm x(0) = \bm A\bm X(s)}{s\bm X(s) - \bm A\bm X(s) = \bm x(0)}{(s\bm I - \bm A)\bm X(s) = \bm x_0}{\bm X(s) = (s\bm I - \bm A)^{-1}\bm x_0}{\bm x(t) = \ilaplace{(s\bm I - \bm A)^{-1}}\bm x_0}$
-* Because we know that the unique solution is $\bm x(t) = e^{\bm At}\bm x_0$, $\bm e^{\bm At}\bm x_0 = \ilaplace{(s\bm I - \bm A)^{-1}}\bm x_0$
-	* Since this holds for all $\bm x_0$, it must be that $\bm e^{\bm At} = \ilaplace{(s\bm I - \bm A)^{-1}}$
+* Because we know that the unique solution is $\bm x(t) = e^{\bm At}\bm x_0$, $e^{\bm At}\bm x_0 = \ilaplace{(s\bm I - \bm A)^{-1}}\bm x_0$
+	* Since this holds for all $\bm x_0$, it must be that $e^{\bm At} = \ilaplace{(s\bm I - \bm A)^{-1}}$
 	* Formally, to justify this, consider the case where $\bm x_0 = \bm e_i$, i.e. all zeros except 1 in the $i$th row; substituting this into the equation we get that the $i$th column of the LHS must be equal to the $i$th column of the RHS, so do this for all $n$ columns
 
 ### Matrix Exponential by Modal Decomposition (Eigenvectors & Eigenvalues)
@@ -44,7 +44,7 @@
 	* Since $\bm P$ has all linearly independent columns it is invertible, therefore $\bm P^{-1}\bm A\bm P = \bm\Lambda$
 * Note $\bm A$ is diagonalizable if it has $n$ distinct eigenvalues (but diagonalizability does not always imply distinct eigenvalues); $\bm A$ is also diagonalizable if it is symmetric (the *spectral theorem*)
 
-\noteThm{If $\bm A \in \reals^{n \times n}$ is diagonalizable, then $\bm e^{\bm A} = \bm Pe^{\bm\Lambda}\bm P^{-1}$, where $$e^{\bm\Lambda} = \diagthree{e^{\lambda _1}}{\ddots}{e^{\lambda _n}}$$ and $\lambda _i$ are eigenvalues of $\bm A$.}
+\noteThm{If $\bm A \in \reals^{n \times n}$ is diagonalizable, then $e^{\bm A} = \bm Pe^{\bm\Lambda}\bm P^{-1}$, where $$e^{\bm\Lambda} = \diagthree{e^{\lambda _1}}{\ddots}{e^{\lambda _n}}$$ and $\lambda _i$ are eigenvalues of $\bm A$.}
 
 * We can show by induction that $\bm A^n = (\bm P\bm\Lambda\bm P^{-1})^n = \bm P\bm\Lambda^n\bm P^{-1}$, then we can prove the above by substituting this into the definition of the matrix exponential, and noting that taking a diagonal matrix to a power is equivalent to taking each of the components to that power
 

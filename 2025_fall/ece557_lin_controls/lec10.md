@@ -21,7 +21,7 @@
 
 \noteDefn{A set of vectors $\set{x_1, \dots, x_n}$ is \textit{linearly independent} if $$\forall c_1, \dots, c_m \in \mathbb F,\, \sum _{i = 1}^m c_ix_i = \theta \iff c_1 = \dots = c_m = 0$$ i.e. the only linear combination of the vectors to get the zero vector is all zeros.}
 
-\noteDefn{A set of vectors $\set{x_1, \dots, x_m} \subseteq \mathcal X$ is a \textit{basis} for $\mathcal X$ if $\mathcal X = \Span{x_1, \dots, x_m}$ and all vectors in the set are linearly independent.}
+\noteDefn{A set of vectors $\set{x_1, \dots, x_m} \subseteq \mathcal X$ is a \textit{basis} for $\mathcal X$ if $\mathcal X = \Span\set{x_1, \dots, x_m}$ and all vectors in the set are linearly independent.}
 
 \noteDefn{Let $\mathcal X$ be a vector space over $\mathbb F$ and let $\set{x_1, \dots, x_m}$ be a basis for $\mathcal X$; then any vector $v \in \mathcal X$ can be written as $v = c_1x_1 + \dots + c_mx_m$, where $$\cvec{c_1}{\vdots}{c_m} \in \mathbb F^m$$ is the \textit{coordinate representation} of $v$ under this basis.
 It can be shown that the values of $c_1, \dots, c_m$ are uniquely determined by $v$ and the basis $\set{x_1, \dots, x_m}$.}

@@ -19,7 +19,7 @@
 		* $\bm A = \begin{bmatrix}0 & 1 & 0 & \cdots & 0 \\ 0 & 0 & 1 & \cdots & 0 \\ \vdots & \vdots & \vdots & \ddots & \vdots \\ -a_0 & -a_1 & -a_2 & \cdots & -a_{n - 1}\end{bmatrix}, \bm B = \cvec{0}{0}{\vdots}{0}{1}$
 	* Block 2: $Y(s) = V(s)N(s) = \left(b_ms^m + \cdots + b_1s + b_0\right)V(s)$
 		* Again inverse Laplace assuming zero IC ($v(0) = \dot v(0) = \cdots = \diffn{m - 1}{v}{t}(0) = 0$)
-		* Using the definition of $\bm x$: $y(t) = b_m\diffn{m}{v}{t} + \cdots + b_1\diffn{v}{t} + b_0v = b_mx_{m + 1} + \cdots + b_1x_2 + b_0x_1$
+		* Using the definition of $\bm x$: $y(t) = b_m\diffn{m}{v}{t} + \cdots + b_1\diff{v}{t} + b_0v = b_mx_{m + 1} + \cdots + b_1x_2 + b_0x_1$
 			* Here is where we use the $m < n$ assumption
 		* Therefore: $\bm C = \rvec{b_0}{b_1}{\cdots}{b_m}, \bm D = 0$
 	* Note there are many other sets of $\bm A, \bm B, \bm C, \bm D$ that satisfy this

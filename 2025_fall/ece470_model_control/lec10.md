@@ -23,5 +23,5 @@
 	* Inverse position kinematics problem: given $O_d^0, R_d^0$, solve for $q_1, q_2, q_3$ such that we have the correct $O_c^0$
 	* Inverse orientation kinematics problem: given $R_d^0$ and solutions for $q_1, q_2, q_3$, find $q_4, q_5, q_6$ to get the desired orientation
 		* For this part we decompose as $R_d^0 = R_3^0(q_1, q_2, q_3)R_6^3(q_4, q_5, q_6)$; since $q_1, q_2, q_3$ are known, we can compute the first matrix and invert it
-		* $R_3^6(q_4, q_5, q_6) = (R_3^0)^TR_d^0$
+		* $R_6^3(q_4, q_5, q_6) = (R_3^0)^TR_d^0$
 

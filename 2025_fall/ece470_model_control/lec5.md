@@ -5,15 +5,15 @@
 * We will parametrize rotations using $zyz$ Euler angles, i.e. $R_1^0 = R_{z,\phi}R_{y,\theta}R_{z,\psi}$
 	* Expanded: $R_1^0 = \matthreeb{\cos\phi\cos\theta\cos\psi - \sin\phi\sin\psi}{-\cos\phi\cos\theta\sin\psi - \sin\phi\cos\psi}{\cos\phi\sin\theta}{\sin\phi\cos\theta\cos\psi + \cos\phi\sin\psi}{-\sin\phi\cos\theta\sin\psi + \cos\phi\cos\psi}{\sin\phi\sin\theta}{-\sin\theta\cos\psi}{\sin\theta\sin\psi}{\cos\theta}$
 	* This is the representation we choose to use since it directly coincides with the joint angles of a spherical wrist, e.g. on the KUKA robot
-* Given $R$, we can do the inverse and find $(\phi, \theta, \varphi)$
+* Given $R$, we can do the inverse and find $(\phi, \theta, \psi)$
 	* Assuming $\sin\theta \neq 0$:
 		* If $\sin\theta > 0$:
 			* $\theta = \cos^{-1}(r_{33})$
-			* $\varphi = \atantwo(r_{32}, -r_{31})$
+			* $\psi = \atantwo(r_{32}, -r_{31})$
 			* $\phi = \atantwo(r_{23}, r_{13})$
 		* If $\sin\theta < 0$:
 			* $\theta = -\cos^{-1}(r_{33})$
-			* $\varphi = \atantwo(-r_{32}, r_{31})$
+			* $\psi = \atantwo(-r_{32}, r_{31})$
 			* $\phi = \atantwo(-r_{23}, -r_{13})$
 	* Explanation:
 		* We can recover $\theta$ from $r_{33}$, but since $\cos^{-1}$ is not unique, this gives rise to 2 different solutions
