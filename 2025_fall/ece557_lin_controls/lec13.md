@@ -19,7 +19,7 @@
 * We will see that coordinate and feedback transformations do not affect the controllability of a system
 	* This is useful because we can see the system under a different transformation, which may lead to more insights, and obtain information applicable to the original system
 
-\noteThm{For any nonsingular $\bm P$, the system $(\bm A, \bm B)$ is completely controllable if and only if $(\bm P^{-1}\bm A\bm P, \bm P^{-1}\bm P)$ is completely controllable. \\ For any $\bm K$, the system $(\bm A, \bm B)$ is completely controllable if and only if $(\bm A + \bm B\bm K, \bm B)$ is completely controllable. \tcblower In other words, controllability is invariant under coordinate and feedback transformations.}
+\noteThm{For any nonsingular $\bm P$, the system $(\bm A, \bm B)$ is completely controllable if and only if $(\bm P^{-1}\bm A\bm P, \bm P^{-1}\bm B)$ is completely controllable. \\ For any $\bm K$, the system $(\bm A, \bm B)$ is completely controllable if and only if $(\bm A + \bm B\bm K, \bm B)$ is completely controllable. \tcblower In other words, controllability is invariant under coordinate and feedback transformations.}
 
 * Proof for coordinate transform invariance:
 	* From the lemma, completely controllable $(\bm A, \bm B)$ means $\mathcal R(L_c) = \reals^n$

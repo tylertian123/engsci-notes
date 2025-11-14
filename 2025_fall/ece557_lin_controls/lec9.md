@@ -46,7 +46,7 @@ This theorem also applies for negative (semi-)definite matrices and negative (no
 	* Recall that we get bigger Jordan blocks when the algebraic multiplicity is greater than the geometric multiplicity for some eigenvalue
 	* This is the intuition for the next theorem
 
-\noteThm{$\dot{\bm x} = \bm A\bm x$ is stable if and only if $\Re(\lambda _i) \geq 0$ for all $i$, and if for all eigenvalues that have $\Re(\lambda _i) = 0$, the algebraic multiplicity equals the geometric multiplicity for that eigenvalue.}
+\noteThm{$\dot{\bm x} = \bm A\bm x$ is stable if and only if $\Re(\lambda _i) \leq 0$ for all $i$, and if for all eigenvalues that have $\Re(\lambda _i) = 0$, the algebraic multiplicity equals the geometric multiplicity for that eigenvalue.}
 
 * To prove this, we equate stability to $e^{\bm At}$ being bounded, which is equal to $e^{\bm Jt}$ being bounded, which we can consider separately for negative and zero eigenvalues:
 	* $\Re(\lambda _j) < 0$: then all $\lim _{t \to \infty} e^{\bm J_{\lambda _j}t} = 0$ since the exponential grows faster than all polynomials

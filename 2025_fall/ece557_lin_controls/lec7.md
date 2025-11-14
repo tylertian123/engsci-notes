@@ -28,7 +28,7 @@
 	* If $a < 0$, we get a *stable focus* as solutions spiral in towards zero
 	* If $a > 0$, we get an *unstable focus* as solutions spiral outwards from zero towards infinity
 	* If $a = 0$, we get a *centre* since all solutions stay orbiting the origin in a circle, not converging or diverging
-	* In all cases, the sign of $b$ determine the direction of the spiral (positive is counterclockwise) and the magnitude determines the rate of spiral
+	* In all cases, the magnitude determines the rate of spiral
 * Case 3: One nonzero eigenvalue
 	* The eigenvector with zero eigenvalue forms a line, where every point on the line is an equilibrium
 	* If the other eigenvalue is less than zero, all solutions converge towards that line; if the other eigenvalue is greater than zero then all solutions diverge from the line

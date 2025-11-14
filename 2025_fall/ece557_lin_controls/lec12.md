@@ -11,6 +11,7 @@
 
 \noteThm{\textit{Representation theorem}: Let $\mathcal X$ be a finite dimensional vector space over $\mathbb F$ ($\dim(\mathcal X) = n$) and let $L: \mathcal X \mapsto \mathcal X$ be a linear map, and let $\mathcal V$ be an $L$-invariant subspace of $\mathcal X$ ($\dim(\mathcal V) = k$). Then there exists a basis $\set{\bm x^1, \dots, \bm x^n}$ for $\mathcal X$ such that the matrix representation of $L$ in this basis has the form $$\bm A = \mattwo{\bm A_{11}}{\bm A_{12}}{\bm 0_{(n - k) \times k}}{\bm A_{22}} \qquad \bm A_{11} \in \mathbb F^{k \times k}, \bm A_{12} \in \mathbb F^{k \times (n - k)}, \bm A_{22} \in \mathbb F^{(n - k) \times (n - k)}$$}
 
+* Note that if $L$ has a matrix representation $\bm B$ in the standard basis, then $\bm A = \bm P^{-1}\bm B\bm P$, where $\bm P = \rvec{\bm x^1, \dots, \bm x^n}$
 * Proof:
 	* $\mathcal V$ is a subspace so it has an independent complement $\mathcal W$
 	* Let $\set{\bm v^1, \dots, \bm v^k}$ be a basis for $\mathcal V$ and $\set{\bm v^{k + 1}, \dots, \bm v^n}$ be a basis for $\mathcal W$, then $\set{\bm v^1, \dots, \bm v^n}$ is a basis for $\mathcal X$
@@ -30,5 +31,5 @@
 	* Then $\cvec{\dot{\bm z}^1}{\dot{\bm z}^2} = \mattwo{\hat{\bm A}_{11}}{\hat{\bm A}_{12}}{\bm 0}{\hat{\bm A}_{22}}\cvec{\bm z^1}{\bm z^2}$
 	* Now $\dot{\bm z}^1 = \hat{\bm A}_{11}\bm z^1 + \hat{\bm A}_{12}\bm z^2$ and $\dot{\bm z}^2 = \hat{\bm A}_{22}\bm z^2$
 	* Notice now that the $\bm z^2$ subsystem is decoupled
-	* We will later make use of this to define the notion of controllability
+	* We will later make use of this to define the Kalman decomposition and the notion of stabilizability
 
