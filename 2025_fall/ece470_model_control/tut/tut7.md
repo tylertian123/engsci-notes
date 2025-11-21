@@ -26,10 +26,4 @@
 	* What are valid cases of virtual displacements?
 		* Two virtual displacements of the same magnitude pointing in the same direction on both point masses is valid since $\delta r_1^0 - \delta r_2^0 = 0$ (the direction does not have to be perpendicular to the rod)
 		* Two virtual displacements pointing in different directions on the point masses is valid if and only if both virtual displacement vectors are perpendicular to the rod (i.e. one of them pointing up, the other one pointing down)
-* Example: point mass with mass $m$ with position $r = (r_x, r_y, r_z)$ on a saddle surface $r_z = r_x^2 - r_y^2$, with gravity acting in $-z$
-	* Verify $g(r) = r_z - (r_x^2 - r_y^2)$ is a holonomic constraint and determine the degrees of freedom of this constraint
-	* Find a set of generalized coordinates and $r = r(q)$
-	* Given an applied force $f_a = \rvec{f_x}{f_y}{0}^T$, find the generalized force $\tau$
-	* Find expressions for the kinetic and potential energy and the Lagrangian
-	* Find all possible virtual displacements on the constraint surface for a mass at $r = \rvec{-1}{1}{0}^T$
 

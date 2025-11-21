@@ -8,7 +8,7 @@
 ### 2D Transformations
 
 * Points may also be represented in *homogeneous form*: $\tilde{\bm x} = (\tilde x, \tilde y, \tilde w) \in \mathbb{P}^2$
-	* $\mathbb P^2 = \reals^3 \backslash (0, 0, 0)$ is a *projective space*
+	* $\mathbb P^2 = \reals^3 \setminus (0, 0, 0)$ is a *projective space*
 	* This can be converted back to an inhomogeneous vector by dividing by $\tilde w$: $\tilde{\bm x} = \tilde w(x, y, 1) = \tilde w\bar{\bm x}$
 	* $\bar{\bm x} = (x, y, 1)$ is the *augmented vector* (note the bar), with a canonical scale of 1
 	* $\tilde w = 0$ represent *points at infinity* (aka *ideal points*); hence $(0, 0, 0)$ is undefined and excluded from $\mathbb P^2$

@@ -1,6 +1,6 @@
 # Lecture 17, Nov 7, 2025
 
-## Pole Stabilization Problem (Stabilizability)
+## Stabilizability
 
 * Last lecture we showed that we can place the poles of a closed-loop system arbitrarily if it is controllable; what if the system is not controllable? Can we make it stable?
 

@@ -19,7 +19,7 @@
 	* In the end we get a linear system in the form $Ax = b$, very easy to solve
 	* e.g. the first constraint translates to $\rvec{t_i^3}{t_i^2}{t_i}{1}\cvec{a_3^i}{a_2^i}{a_1^i}{a_0^i} = q^i$ and so on
 
-## Independent Joint Control
+## Independent Joint Control (Decentralized Robot Control)
 
 * To actually execute the motion, we need to track a reference signal $q^r(t)$, such that $e(t) = q^r(t) - q(t) \to 0$ as $t \to \infty$ by generating inputs $U(t)$
 	* One way to do this is to fully model the dynamics of the robot, which is used for high-precision manipulators or large manipulators like industrial robots (*computed torque control*)

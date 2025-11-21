@@ -17,6 +17,7 @@ A function that is both injective and surjective is called \textit{bijective}.}
 		* $\alignedimp[t]{L(x) = y}{L\left(\sum _{i = 1}^n c_ix^i\right) = \sum _{j = 1}^m d_jy^j}{\sum _{i = 1}^n c_iL(x^i) = \sum _{j = 1}^m d_jy^j}{\sum _{i = 1}^n c_i\sum _{j = 1}^m a_{ji}y^j = \sum _{j = 1}^m d_jy^j}{\sum _{j = 1}^m\left(\sum _{i = 1}^n a_{ji}c_i\right)y^j = \sum _{j = 1}^m d_jy^j}{\sum _{i = 1}^n a_{ji}c_i = d_i}{\bm A\cvec{c_1}{\vdots}{c_n} = \cvec{d_1}{\vdots}{d_n}}$
 			* Note the last step uses the uniqueness of coordinate representations
 * The key idea is that we can perform a linear transformation between the abstract vector spaces $\mathcal X$ and $\mathcal Y$ by first going from $\mathcal X$ to $\reals^n$ using a coordinate representation, then performing the transformation $\reals^n \mapsto \reals^m$ through a matrix multiplication by $\bm A$ to obtain coordinates for a vector in $\mathcal Y$, then mapping back to $\mathcal Y$ through the basis
+* Note that a transformation has a matrix representation if and only if it is linear and maps between finite dimensional vector spaces
 
 ![A matrix $\bm A$ as the representation of a linear transformation $L$ between two abstract vector spaces represented with coordinates.](./imgs/lec11_1.png){width=70%}
 
@@ -51,7 +52,7 @@ The \textit{range} or \textit{image} of $L$ is $$\mathcal R(L) = \set{\bm y \in 
 	* Complete the basis such that $\Span{\bm x^1, \dots, \bm x^k, \bm x^{k + 1}, \dots, \bm x^n}$ be a basis for $\mathcal X$
 	* Let $\bm x \in \mathcal X$, which has a unique coordinate representation $\bm x = \sum _{i = 1}^n c_i\bm x^i$ with respect to this basis
 	* $\alignedeqntwo[t]{L(\bm x)}{L\left(\sum _{i = 1}^n c_i\bm x^i\right)}{\sum _{i = 1}^k c_iL(\bm x^i) + \sum _{i = k + 1}^n c_iL(\bm x^i)}{\sum _{i = k + 1}^n c_iL(\bm x^i)}$
-	* This suggests $\set{L(\bm x^i)}$ for $i \in [k + 1, n]$ forms a basis for $\mathcal R(L)$
+	* This suggests $\set{L(\bm x^i)}$ for $i = k + 1, \dots, n$ forms a basis for $\mathcal R(L)$
 		* To do this, we need to prove that they span $\mathcal R(L)$ and that they are linearly independent (in the notes)
 
 \noteThm{Let $L: \mathcal X \mapsto \mathcal Y$, then for any matrix representation $\bm A$ of the linear map $L$,
