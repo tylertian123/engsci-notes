@@ -16,10 +16,10 @@
 	* *Feedback linearization* (aka *computed torque method*)
 	* PD control with gravity compensation
 	* *Passivity-based control*
-		* Unlike the previous two methods, we don't actually need to know the system parameters
+	* Passivity-based control with *parameter adaptation*
+		* Unlike the previous methods, we don't actually need to know the system parameters
 		* This algorithm uses an adaptive controller where the system parameters are learned
 		* This results in a controller that can operate without system parameters, but results in bad transient behaviour
-	* Passivity-based control with *parameter adaptation*
 
 ### Feedback Linearization
 

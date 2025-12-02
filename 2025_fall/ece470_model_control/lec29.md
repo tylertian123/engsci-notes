@@ -23,7 +23,7 @@
 \end{enumerate}}
 
 * The Lyapunov function can be thought of as a measure of energy
-	* Consider a solution $x(t)$, then if $\diff{}{t}V(x(t))) = \pdiff{V}{x}\dot x = \pdiff{V}{x}f(x) \leq 0$, then this "energy" either stays the same or decreases to zero
+	* Consider a solution $x(t)$, then if $\diff{}{t}V(x(t)) = \pdiff{V}{x}\dot x = \pdiff{V}{x}f(x) \leq 0$, then this "energy" either stays the same or decreases to zero
 	* If $V(x)$ is positive definite, then $V(x) = 0 \implies x = 0$, so as $V(x)$ converges to 0, $x$ must also converge to its equilibrium
 	* We essentially converted all the high-dimensional dynamics of the system in $x$ to the dynamics of a single scalar measure $V(x)$
 

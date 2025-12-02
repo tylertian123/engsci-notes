@@ -1,6 +1,6 @@
 # Lecture 30, Nov 21, 2025
 
-## Lyapunov Stability Example
+## Lyapunov Stability Example and LaSalle Invariance Principle
 
 * Example: dampened mass-spring system with $\dot x_1 = x_2, \dot x_2 = -\frac{k}{m}x_1 - \frac{b}{m}x_2$, where we take $k = m = b = 1$; prove that the equilibrium $\cvec{x_1}{x_2} = 0$ is asymptotically stable
 	* For linear systems, we always have a quadratic Lyapunov function
@@ -20,9 +20,15 @@
 	* $\dot V(x) = kx_1\dot x_1 + mx_2\dot x_2 = kx_1x_2 + mx_2\left(-\frac{k}{m}x_1 - \frac{b}{m}x_2\right) = -bx_2^2$
 	* This is negative for $x_2 \neq 0$, but it does not say anything about $x_1$, so it's not negative definite!
 
-\noteThm{\textit{LaSalle Invariance Principle}: Suppose there exists $V: \reals^n \mapsto \reals$ positive definite at the equilibrium $\bar x$, and $\dot V(x) = \pdiff{V}{x}f(x) \leq 0$, then $\dot V(x(t)) \to 0$ as $t \to 0$.
+\noteThm{\textit{LaSalle Invariance Principle}: Suppose there exists $V: \reals^n \mapsto \reals$ positive definite at the equilibrium $\bar x$, and $\dot V(x) = \pdiff{V}{x}f(x) \leq 0$, then $\dot V(x(t)) \to 0$ as $t \to \infty$.
 
-Furthermore, if the only solution to $\dot V(x) = 0, \forall t$ is $x(t) = \bar x$ for all time, then the equilibrium $\bar x$ is asymptotically stable.}
+Furthermore, if $\dot V(x) = 0,\,\forall t \implies x(t) = \bar x,\,\forall t$, then the equilibrium $\bar x$ is asymptotically stable.}
 
-* Applied to our example, $\dot V(x) = 0 \implies x_2 = 0$, and if we plug that into the equation, we see that this forces $x_1 = 0$
+* The first part says that as we are going down the level sets of $V$, we are going to either hit zero or reach a point where the derivative is flat and get stuck; the second part says that if the only place we can get stuck forever is at the equilibrium, then we will always end up at the equilibrium
+* Returning to our mass-spring example, we can use the LaSalle invariance principle to show that the equilibrium is asymptotically stable
+	* If $\dot V = 0$ for all $t$, then $-bx_2(t)^2 = 0 \implies x_2(t) = 0 \implies \dot x_2(t) = 0$
+	* Recall our equations of motion: $\dot x_1 = x_2, \dot x_2 = -\frac{k}{m}x_1 - \frac{b}{m}x_2$
+	* Therefore we have $-\frac{k}{m}x_1(t) = 0$ from the second equation, so it must be that $x_1(t) = 0$
+	* We have shown that $\dot V = 0 \implies x = \bar x$, so by the LaSalle invariance principle this equilibrium is indeed asymptotically stable
+* As with the example, often when we use a physically meaningful Lyapunov function (e.g. potential + kinetic energy), we end up with $\dot V$ being only negative semidefinite, so we need to use the LaSalle invariance principle to make it work
 

@@ -20,7 +20,7 @@
 	* Notice how this directly pulls towards $\bar O_i^0$ in a straight line, with a strength proportional to the distance times a weight
 	* Practically, we want to avoid very large gradients, so we often cap the magnitude of the gradient at some value, or normalize the gradient past a certain point
 	* $F_{i,att}(O_i^0) = \twocond{-c_i(O_i^0 - \bar O_i^0)}{\norm{O_i^0 - \bar O_i^0} \leq d}{-c_i\frac{(O_i^0 - \bar O_i^0)}{\norm{O_i^0 - \bar O_i^0}}d}{\norm{O_i^0 - \bar O_i^0} > d}$
-* Define the repulsive potential $\mathcal U_{i, rep} = \twocond{\frac{\eta _i}{2}\left(\frac{1}{\norm{O_i^0 - \pi(O_i^0)}} - \frac{1}{\rho _0}\right)^2}{\norm{O_i^0 - \pi(O_i^0)} \leq \rho _0}{0}{\norm{O_i^0 - \pi(O_i^0} > \rho _0}$
+* Define the repulsive potential $\mathcal U_{i, rep} = \twocond{\frac{\eta _i}{2}\left(\frac{1}{\norm{O_i^0 - \pi(O_i^0)}} - \frac{1}{\rho _0}\right)^2}{\norm{O_i^0 - \pi(O_i^0)} \leq \rho _0}{0}{\norm{O_i^0 - \pi(O_i^0)} > \rho _0}$
 	* $\mathcal O$ is a convex set representing an obstacle ($\forall p, q \in \mathcal O, \overline{pq} \in \mathcal O$) in frame 0, and $\pi(p)$ is the orthogonal projection of $p$ onto $\mathcal O$
 		* Note for all convex $\mathcal O \in \reals^3$, for each $p \in \reals^3$ where $p \notin \mathcal O$, there exists a unique $\pi(p) \in \mathcal O$ such that $\norm{p - \pi(p)}$ is minimum, i.e. there is a unique closest point in $\mathcal O$ to $p$
 		* The line joining $p$ and $\pi(p)$ is orthogonal to the boundary of $\mathcal O$

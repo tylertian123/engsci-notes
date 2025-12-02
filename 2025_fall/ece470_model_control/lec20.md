@@ -10,7 +10,7 @@
 	1. Interpolation constraints: $P_i(t_i) = q^i$ for $i = 0, 1, \dots, N - 1$ (all intermediate points) and $P_{N - 1}(t_N) = q^N$ (for the final endpoint)
 	2. Continuity constraint: $P_i(t_{i + 1}) = P_{i + 1}(t_{i + 1})$ for $i = 0, 1, \dots, N - 2$
 	3. Differentiability constraint: $\dot P_i(t_{i + 1}) = \dot P_{i + 1}(t_{i + 1})$ for $i = 0, 1, \dots, N - 2$
-	4. Twice-differentiability constraint: $\ddot P_i(t_{i + 1}) = \ddot P_{i + 1}(t_{i + 1})$
+	4. Twice-differentiability constraint: $\ddot P_i(t_{i + 1}) = \ddot P_{i + 1}(t_{i + 1})$ for $i = 0, 1, \dots, N - 2$
 * In total we have $N + 1$ constraints from interpolation, and $3(N - 1)$ constraints from continuity, giving $4N - 2$ constraints
 	* To get the same number of constraints as unknowns, we add the constraints that in the beginning and end of motion, the robot has acceleration of 0
 	* This translates to $\ddot P_0(t_0) = \ddot P_{N - 1}(t_N) = 0$

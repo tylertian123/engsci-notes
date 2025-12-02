@@ -32,7 +32,7 @@ A function that is both injective and surjective is called \textit{bijective}.}
 	* We want to find $\bm M$ such that $\cvec{\xi _1}{\xi _2} = \bm M\cvec{\bar\xi _1}{\bar\xi _2} \implies \bm M = \rvec{\bm e_1}{\bm e_2}^{-1}\rvec{\bm b_1}{\bm b_2}$
 	* Therefore $\bm M = \mattwo{1}{0}{1}{1}$ and we can use this to find $\bar{\bm A}$
 
-\noteDefn{Let $L: \mathcal X \mapsto \mathcal Y$ be a linear transformation. The \textit{null space} or \textit{kernel} of $L$ is $$\mathcal N(L) = \set{\bm x \in \mathcal X | L(\bm x) = \theta}$$ i.e. all the vectors that map to zero. This is a subspace.
+\noteDefn{Let $L: \mathcal X \mapsto \mathcal Y$ be a linear transformation. The \textit{null space} or \textit{kernel} of $L$ is $$\mathcal N(L) = \set{\bm x \in \mathcal X | L(\bm x) = \bar{0}}$$ i.e. all the vectors that map to zero. This is a subspace.
 \tcblower
 The \textit{range} or \textit{image} of $L$ is $$\mathcal R(L) = \set{\bm y \in \mathcal Y | \exists \bm x \in \mathcal X,\,\bm y = L(\bm x)}$$ i.e. all the vectors that can be reached via $L$. This is another subspace.}
 
@@ -42,13 +42,13 @@ The \textit{range} or \textit{image} of $L$ is $$\mathcal R(L) = \set{\bm y \in 
 
 \noteThm{$L: \mathcal X \mapsto \mathcal Y$ for finite dimensional $\mathcal X, \mathcal Y$ satisfies the following properties:
 \begin{enumerate}
-	\item $L$ is injective if and only if $\mathcal N(L) = \set{\theta}$
+	\item $L$ is injective if and only if $\mathcal N(L) = \set{\bar{0}}$
 	\item $\dim(\mathcal R(L)) + \dim(\mathcal N(L)) = \dim(\mathcal X)$
 \end{enumerate}}
 
 * The second property (rank-nullity) can be proven as follows:
 	* Let $k = \dim(\mathcal N(L))$ and $n = \dim(\mathcal X)$; we want to show $n - k = \dim(\mathcal R(L))$
-	* Let $\Span{\bm x^1, \dots, \bm x^k}$ be a basis for $\mathcal N(L)$, and so $L(\bm x^i) = \theta$ for $i \in [1, k]$
+	* Let $\Span{\bm x^1, \dots, \bm x^k}$ be a basis for $\mathcal N(L)$, and so $L(\bm x^i) = \bar{0}$ for $i \in [1, k]$
 	* Complete the basis such that $\Span{\bm x^1, \dots, \bm x^k, \bm x^{k + 1}, \dots, \bm x^n}$ be a basis for $\mathcal X$
 	* Let $\bm x \in \mathcal X$, which has a unique coordinate representation $\bm x = \sum _{i = 1}^n c_i\bm x^i$ with respect to this basis
 	* $\alignedeqntwo[t]{L(\bm x)}{L\left(\sum _{i = 1}^n c_i\bm x^i\right)}{\sum _{i = 1}^k c_iL(\bm x^i) + \sum _{i = k + 1}^n c_iL(\bm x^i)}{\sum _{i = k + 1}^n c_iL(\bm x^i)}$

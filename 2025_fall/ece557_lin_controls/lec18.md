@@ -1,6 +1,6 @@
 # Lecture 18, Nov 14, 2025
 
-## Observability and State Estimation
+## Observability, State Estimation, and Output Feedback Control
 
 * Previously we discussed how to design controllers to stabilize a system given the full system state $\bm x$; however in practice we rarely have the full system state, so we have to estimate $\bm x$ using the system output $\bm y$
 	* Given $\bm y(t), \bm u(t)$ for $0 \leq t \leq T$, we want to estimate $\bm x(t)$
@@ -19,18 +19,18 @@
 	* Therefore, obtaining $\bm x_0$ is possible if and only if $L_o$ is injective ($\mathcal N(L_o)$ contains only the zero vector)
 	* Note in this case, a function in $\mathcal N(L_o)$ needs to be zero for all time
 
-\noteThm{Let $f: \mathcal X \mapsto \mathcal Y$ be a linear map and let $\bm y \in \mathcal R(f)$; then $f(\bm x) = \bm y$ has a unique solution if and only if $\mathcal N(f) = \set{\theta}$, i.e. the null space is trivial. This is equivalent to $f$ being injective.}
+\noteThm{Let $f: \mathcal X \mapsto \mathcal Y$ be a linear map and let $\bm y \in \mathcal R(f)$; then $f(\bm x) = \bm y$ has a unique solution if and only if $\mathcal N(f) = \set{\bar{0}}$, i.e. the null space is trivial. This is equivalent to $f$ being injective.}
 
 * Proof:
-	* Forward direction: take contrapositive: $\mathcal N(f) \neq \set{\theta} \implies f(\bm x) = \bm y$ does not have a unique solution
+	* Forward direction: take contrapositive: $\mathcal N(f) \neq \set{\bar{0}} \implies f(\bm x) = \bm y$ does not have a unique solution
 		* Let $\bm x \in \mathcal X$ be a solution, i.e. $f(\bm x) = \bm y$
-		* Let $\bm u \in \mathcal N(f)$ and $\bm u \neq \theta$, so that $f(\bm u) = \theta$
-		* Then $f(\bm x + \bm u) = f(\bm x) + f(\bm u) = \bm y + \theta = \bm y$
+		* Let $\bm u \in \mathcal N(f)$ and $\bm u \neq \bar{0}$, so that $f(\bm u) = \bar{0}$
+		* Then $f(\bm x + \bm u) = f(\bm x) + f(\bm u) = \bm y + \bar{0} = \bm y$
 		* Therefore both $\bm x$ and $\bm x + \bm u$ are solutions, and so the solution is not unique
-	* Reverse direction: again take the contrapositive: $f(\bm x) = \bm y$ does not have a unique solution $\implies \mathcal N(f) \neq \set{\theta}$
+	* Reverse direction: again take the contrapositive: $f(\bm x) = \bm y$ does not have a unique solution $\implies \mathcal N(f) \neq \set{\bar{0}}$
 		* Let $\bm x_1 \neq \bm x_2$ and $f(\bm x_1) = f(\bm x_2)$
-		* Then $\theta = f(\bm x_1) = f(\bm x_2) = f(\bm x_1 - \bm x_2)$
-		* Therefore $\bm x_1 - \bm x_2 \in \mathcal N(f)$, and $\bm x_1 - \bm x_2 \neq \theta$, so $\mathcal N(f)$ is nontrivial
+		* Then $\bar{0} = f(\bm x_1) = f(\bm x_2) = f(\bm x_1 - \bm x_2)$
+		* Therefore $\bm x_1 - \bm x_2 \in \mathcal N(f)$, and $\bm x_1 - \bm x_2 \neq \bar{0}$, so $\mathcal N(f)$ is nontrivial
 * Note the relation between controllability and observability:
 	* In controllability:
 		* $L_c(\bm u(\cdot)) = \int _0^T e^{\bm A(T - \tau)}\bm B\bm u(\tau)\,\dtau$
@@ -41,7 +41,7 @@
 		* We want $L_o$ to be injective, so that for any output we want to be able to find a unique initial condition (and therefore system state)
 		* Likewise, we will formulate a $\bm Q_o$ from $(\bm A, \bm C)$ and check its rank
 
-\noteDefn{The system $(\bm A, \bm B, \bm C, \bm D)$ is observable if $L_o: \reals^n \mapsto \mathcal C([0, \infty], \reals^p)$ is injective, or equivalently $\mathcal N(L_o) = \set{\theta}$, where $L_o(\bm x_0) = \bm Ce^{\bm At}\bm x_0$.}
+\noteDefn{The system $(\bm A, \bm B, \bm C, \bm D)$ is observable if $L_o: \reals^n \mapsto \mathcal C([0, \infty], \reals^p)$ is injective, or equivalently $\mathcal N(L_o) = \set{\bar{0}}$, where $L_o(\bm x_0) = \bm Ce^{\bm At}\bm x_0$.}
 
 * Example: consider $\dot{\bm x} = \mattwo{1}{0}{1}{1}\bm x$ and $y = \rvec{1}{0}\bm x$
 	* We have $\dot x_1(t) = x_1(t) \implies x_1(t) = e^tx_1(0)$
@@ -76,8 +76,8 @@
 	* Therefore $\bm x \in \mathcal N(\bm Q_o) \implies \bm A\bm x \in \mathcal N(\bm Q_o)$ and so $\mathcal N(\bm Q_o)$ is $\bm A$-invariant
 	* Also, since $\bm C\bm x = 0$ from the first row of $\bm Q_o\bm x = 0$, $\bm x \in \mathcal N(\bm C)$, so $\mathcal N(\bm Q_o) \subseteq \mathcal N(\bm C)$
 * By the representation theorem, we can find a coordinate transformation $\bm P$ by taking the first $k = n - \rank(\bm Q_o)$ vectors as a basis for $\mathcal N(\bm Q_o)$, then the rest such that $\bm P$ is invertible, and let $\bm z = \bm P^{-1}\bm x$
-* Then we get $\dot{\bm z} = \cvec{\dot{\bm z}^1}{\dot{\bm z}_2} = \mattwo{\hat{\bm A}_{11}}{\hat{\bm A}_{12}}{0}{\hat{\bm A}_{22}}\bm z + \cvec{\hat{\bm B}_1}{\hat{\bm B}_2}, \bm y = \rvec{0}{\hat{\bm C}_1}\bm z + \bm D\bm u$
-	* The subsystem $\dot{\bm z}^2 = \hat{\bm A}_{22}\bm z^2 + \hat{\bm B}_2\bm u, \bm y = \hat{\bm C}_1\bm z^2 + \bm D\bm u$ is observable, while the subsystem pertaining to $\bm z^1$ is unobservable
+* Then we get $\dot{\bm z} = \cvec{\dot{\bm z}^1}{\dot{\bm z}^2} = \mattwo{\hat{\bm A}_{11}}{\hat{\bm A}_{12}}{0}{\hat{\bm A}_{22}}\bm z + \cvec{\hat{\bm B}_1}{\hat{\bm B}_2}, \bm y = \rvec{0}{\hat{\bm C}_2}\bm z + \bm D\bm u$
+	* The subsystem $\dot{\bm z}^2 = \hat{\bm A}_{22}\bm z^2 + \hat{\bm B}_2\bm u, \bm y = \hat{\bm C}_2\bm z^2 + \bm D\bm u$ is observable, while the subsystem pertaining to $\bm z^1$ is unobservable
 
 ### Kalman Decomposition for Controllability and Observability
 
@@ -163,5 +163,11 @@ $(\bm A^T, \bm C^T)$ is known as the \textit{dual system} of $(\bm C, \bm A)$.}
 
 * Putting it all together, how do we stabilize a system if we only know the output $\bm y(t)$ and input $\bm u(t)$ but not the state?
 * Given a stabilizable and detectable system, our goal is to design $\bm K$ and $\bm L$ such that the eigenvalues of $(\bm A + \bm B\bm K)$ and $(\bm A - \bm L\bm C)$ have real part less than zero, then we can implement the control law $\bm u = \bm K\hat{\bm x}$ and observer $\alignedlines[t]{}{\dot{\hat{\bm x}} = \bm A\hat{\bm x} + \bm B\bm u + \bm L(\bm y - \hat{\bm y})}{\hat{\bm y} = \bm C\hat{\bm x} + \bm D\bm u}$
-* We can show that this results in the dynamics $\cvec{\dot{\bm x}}{\dot{\bm e}} = \mattwo{\bm A + \bm B\bm K}{-\bm B\bm K}{0}{\bm A - \bm L\bm C}\cvec{\bm x}{\bm e}$, so if we have the eigenvalues of $(\bm A + \bm B\bm K)$ and $(\bm A - \bm L\bm C)$ both negative, then the overall system is stable
+* We will show that this indeed results in an asymptotically stable system
+	* Let $\bm e = \bm x - \hat{\bm x}$
+	* $\alignedeqntwo[t]{\dot{\bm x}}{\bm A\bm x + \bm B\bm u}{\bm A\bm x + \bm B\bm K\hat{\bm x} + \bm B\bm K\bm x - \bm B\bm K\bm x}{\bm A\bm x + \bm B\bm K\bm x - \bm B\bm K(\bm x - \hat{\bm x})}{(\bm A + \bm B\bm K)\bm x - \bm B\bm K\bm e}$
+	* Also, $\dot{\bm e} = (\bm A - \bm L\bm C)\bm e$ (shown previously)
+	* Therefore $\cvec{\dot{\bm x}}{\dot{\bm e}} = \mattwo{\bm A + \bm B\bm K}{-\bm B\bm K}{0}{\bm A - \bm L\bm C}\cvec{\bm x}{\bm e}$, so if we have the eigenvalues of $(\bm A + \bm B\bm K)$ and $(\bm A - \bm L\bm C)$ both negative, then the overall system is stable
+
+\noteThm{\textit{Separation Principle}: To stabilize a system $(\bm A, \bm B, \bm C, \bm D)$ through output feedback, we can design separately an asymptotically stable state feedback controller to place the eigenvalues of $\bm A + \bm B\bm K$, and an asymptotically stable observer to place the eigenvalues of $\bm A - \bm L\bm C$, then using the observer estimate for state feedback. The resulting control law $\bm u = \bm K\hat{\bm x}$ makes the system asymptotically stable.}
 
