@@ -76,7 +76,7 @@
 	* Therefore $\bm x \in \mathcal N(\bm Q_o) \implies \bm A\bm x \in \mathcal N(\bm Q_o)$ and so $\mathcal N(\bm Q_o)$ is $\bm A$-invariant
 	* Also, since $\bm C\bm x = 0$ from the first row of $\bm Q_o\bm x = 0$, $\bm x \in \mathcal N(\bm C)$, so $\mathcal N(\bm Q_o) \subseteq \mathcal N(\bm C)$
 * By the representation theorem, we can find a coordinate transformation $\bm P$ by taking the first $k = n - \rank(\bm Q_o)$ vectors as a basis for $\mathcal N(\bm Q_o)$, then the rest such that $\bm P$ is invertible, and let $\bm z = \bm P^{-1}\bm x$
-* Then we get $\dot{\bm z} = \cvec{\dot{\bm z}^1}{\dot{\bm z}^2} = \mattwo{\hat{\bm A}_{11}}{\hat{\bm A}_{12}}{0}{\hat{\bm A}_{22}}\bm z + \cvec{\hat{\bm B}_1}{\hat{\bm B}_2}, \bm y = \rvec{0}{\hat{\bm C}_2}\bm z + \bm D\bm u$
+* Then we get $\dot{\bm z} = \cvec{\dot{\bm z}^1}{\dot{\bm z}^2} = \mattwo{\hat{\bm A}_{11}}{\hat{\bm A}_{12}}{0}{\hat{\bm A}_{22}}\bm z + \cvec{\hat{\bm B}_1}{\hat{\bm B}_2}\bm u, \bm y = \rvec{0}{\hat{\bm C}_2}\bm z + \bm D\bm u$
 	* The subsystem $\dot{\bm z}^2 = \hat{\bm A}_{22}\bm z^2 + \hat{\bm B}_2\bm u, \bm y = \hat{\bm C}_2\bm z^2 + \bm D\bm u$ is observable, while the subsystem pertaining to $\bm z^1$ is unobservable
 
 ### Kalman Decomposition for Controllability and Observability

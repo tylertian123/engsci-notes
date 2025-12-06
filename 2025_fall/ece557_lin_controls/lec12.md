@@ -7,7 +7,7 @@
 * Note this is equivalent to $\forall \bm x_0 \in \mathcal V, e^{\bm At}\bm x_0 \in \mathcal V$
 * Some examples:
 	* $\mathcal N(\bm A), \mathcal R(\bm A)$ are both $\bm A$-invariant
-	* If $\bm w_1, \dots, \bm w_n \in \reals^n$ are eigenvectors of $\mathcal N$, then $\Span{\bm w_1, \dots, \bm w_n}$ is $\bm A$-invariant
+	* If $\bm w_1, \dots, \bm w_n \in \reals^n$ are eigenvectors of $\mathcal N$, then $\Span\set{\bm w_1, \dots, \bm w_n}$ is $\bm A$-invariant
 
 \noteThm{\textit{Representation theorem}: Let $\mathcal X$ be a finite dimensional vector space over $\mathbb F$ ($\dim(\mathcal X) = n$) and let $L: \mathcal X \mapsto \mathcal X$ be a linear map, and let $\mathcal V$ be an $L$-invariant subspace of $\mathcal X$ ($\dim(\mathcal V) = k$). Then there exists a basis $\set{\bm x^1, \dots, \bm x^n}$ for $\mathcal X$ such that the matrix representation of $L$ in this basis has the form $$\bm A = \mattwo{\bm A_{11}}{\bm A_{12}}{\bm 0_{(n - k) \times k}}{\bm A_{22}} \qquad \bm A_{11} \in \mathbb F^{k \times k}, \bm A_{12} \in \mathbb F^{k \times (n - k)}, \bm A_{22} \in \mathbb F^{(n - k) \times (n - k)}$$}
 

@@ -35,6 +35,6 @@
 	* We can check that around $(0, 0)$ this is positive definite if we restrict the angle to $(-\pi, \pi)$
 	* $\alignedeqntwo[t]{\dot V}{x_2\dot x_2 + \frac{g}{r}\sin(x_1)\dot x_1}{x_2\left(-\frac{k}{mr^2}x_2 - \frac{g}{r}\sin x_1\right) + \frac{g}{r}\sin(x_1)x_2}{-\frac{k}{mr^2}x_2^2}$
 	* This is negative semidefinite; by Lyapunov's theorem, this equilibrium is at least stable, but we need LaSalle to conclude that it is asymptotically stable
-	* $\dot V \equiv 0, \forall t \implies \dot\theta = 0 \implies \ddot\theta = 0 \implies mgr\sin\theta = 0 \implies \theta = 0$
-	* Therefore the equilibrium is asymptotically stable
+	* LaSalle invariance principle: $\dot V \equiv 0, \forall t \implies x_2 = \dot\theta = 0 \implies \ddot\theta = 0 \implies mgr\sin\theta = 0 \implies \theta = 0$ if we restrict the angle
+	* Therefore the equilibrium $(x_1, x_2) = (0, 0)$ is asymptotically stable
 

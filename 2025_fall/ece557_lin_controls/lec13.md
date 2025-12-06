@@ -2,7 +2,7 @@
 
 ## Controllability
 
-\noteDefn{An LTI system $\dot{\bm x} = \bm A\bm x + \bm B\bm u$ is \textit{completely controllable} (or just controllable) if, for some positive time $T$, for all possible initial and final states $\bm x_0, \bm x_f \in \reals^n$, there exists some piecewise continuous input $\bm u(t), t \in [0, T]$ that brings the system from the initial state to the final state, i.e. $$\bm x_f = \bm x(T) = e^{\bm AT}\bm x_0 + \int _0^T e^{\bm A(T - \tau)}\bm B\bm u(\tau)\,\dtau = e^{\bm A\bm T} + L_c(\bm u(\cdot))$$}
+\noteDefn{An LTI system $\dot{\bm x} = \bm A\bm x + \bm B\bm u$ is \textit{completely controllable} (or just controllable) if, for all possible initial and final states $\bm x_0, \bm x_f \in \reals^n$, there exists some piecewise continuous input $\bm u(t), t \in [0, T]$ that brings the system from the initial state to the final state in some time $T$, i.e. $$\bm x_f = \bm x(T) = e^{\bm AT}\bm x_0 + \int _0^T e^{\bm A(T - \tau)}\bm B\bm u(\tau)\,\dtau = e^{\bm AT}\bm x_0 + L_c(\bm u(\cdot))$$}
 * $L_c(\bm u(\cdot))$ is a map from real piecewise continuous functions to $\reals^n$, the impact of the input on the final state (compared to just an autonomous system)
 * Let $\bar{\mathcal R}_T(\bm x_0) = \set{\bm x_f \in \reals^n | \exists u: [0, T] \mapsto \reals^m, \bm x_f = e^{\bm AT}\bm x_0 + L_c(\bm u(\cdot))}$
 	* This denotes the set of all possible final states $\bm x_f$ that we can reach from an initial state $\bm x_0$ with piecewise continuous inputs $\bm u$
