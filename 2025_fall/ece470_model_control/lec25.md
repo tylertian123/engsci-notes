@@ -34,5 +34,5 @@
 	\item $G(q) = \nabla _q\mathcal U(q)$ where $\mathcal U(q) = -\sum _{i = 1}^n m_i\bar g^Tr_i^0(q)$
 \end{itemize}
 where $\bar I_i$ are the inertias of each link measured about its centre of mass in a body-fixed frame, $r_i^0$ are the centres of mass, $\bar g = \rvec{0}{0}{-g}^T$ points in the direction of gravitational acceleration, and the Jacobians are given by
-$$\alignedlines{}{J_{v_i} = \twocond{\rvec{z_0^0 \times (r_i^0)}{z_1^0 \times (r_i^0 - O_1^0)}{\cdots}{z_{i - 1}^0 \times (r_i^0 - O_{i - 1}^0)}{0_{3 \times 3(n - i)}}}{\text{joint }i\text{ is revolute}}{\rvec{z_0^0}{z_1^0}{\cdots}{z_{i - 1}^0}{0_{3 \times 3(n - i)}}}{\text{joint }i\text{ is prismatic}}}{J_{w_i} = \rvec{\rho _1z_0^0}{\rho _2z_1^0}{\cdots}{\rho _iz_{i - 1}^0}{0_{3 \times 3(n - i)}}}$$}
+$$\alignedlines{}{J_{v_i} = \twocond{\rvec{z_0^0 \times (r_i^0)}{z_1^0 \times (r_i^0 - O_1^0)}{\cdots}{z_{i - 1}^0 \times (r_i^0 - O_{i - 1}^0)}{0_{3 \times (n - i)}}}{\text{joint }i\text{ is revolute}}{\rvec{z_0^0}{z_1^0}{\cdots}{z_{i - 1}^0}{0_{3 \times (n - i)}}}{\text{joint }i\text{ is prismatic}}}{J_{w_i} = \rvec{\rho _1z_0^0}{\rho _2z_1^0}{\cdots}{\rho _iz_{i - 1}^0}{0_{3 \times (n - i)}}}$$}
 

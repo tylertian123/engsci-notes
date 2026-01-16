@@ -23,7 +23,9 @@
 	* The idea is to use dropout to get different predictions, and using the difference between predictions as an estimate of uncertainty (or difficulty of estimating an object), and fusing these to get a distribution
 	* Other approaches either directly generate uncertainty or output a set of samples directly
 * *Domain adaptation* involves transferring knowledge from a labelled source dataset to an unlabelled target dataset, e.g. making a network trained mainly on clear weather handle adverse weather conditions
-	* We can create pseudo labels generated using the teacher network
-	* The student network is taught to ignore variations between the datasets
-	* We can also use foundation models such as DINOv2
+	* This can be done through a student-teacher architecture, where the teacher provides pseudo-labels and the student is taught to adapt to the new domain
+	* The student network is trained to ignore variations between the datasets: an image is taken from the source dataset, corrupted to look like the target dataset, and the student is trained to produce the same output for both of them, so it only focuses on the part that don't change
+	* The teacher network can use the same architecture as the student, trained on the source dataset; we use it to predict labels on the target dataset, and we only take the ones with the highest confidence, which are most likely still correct
+	* The student network learns to both ignore dataset variations and recover the labels produced by the teacher network at the same time
+	* We can also use foundation models such as DINOv2, which exhibit strong domain adaptation performance due to their large training dataset; this can be used as the teacher network
 

@@ -15,7 +15,7 @@
 		* Using a Taylor expansion, $I(x + \Delta x, y + \Delta y, t + \Delta t) \approx I(x, y, t) + \pdiff{I}{x}\Delta x + \pdiff{I}{y}\Delta y + \pdiff{I}{t}\Delta t$
 		* Therefore $\pdiff{I}{x}\frac{\Delta x}{\Delta t} + \pdiff{I}{y}\frac{\Delta y}{\Delta t} + \pdiff{I}{t}\frac{\Delta t}{\Delta t} = 0$
 	* The flow equation is $\pdiff{I}{x}v_x + \pdiff{I}{y}v_y + \pdiff{I}{t} = 0$ where $v_x, v_y$ are the pixel velocities
-	* In vector form, $I_xv_x + Iyv_y = \Delta I^T\bm v = -I_t$
+	* In vector form, $I_xv_x + I_yv_y = \Delta I^T\bm v = -I_t$
 		* Physically we can interpret this as looking at the "flow of intensity" into and out of a pixel
 * Due to the aperture problem, this is ill-posed, so we need some additional information in the neighbourhood to actually compute this
 	* The *Lucas-Kanade method* assumes that a local patch has the same flow, so we compute the velocity for an entire patch
@@ -32,7 +32,7 @@
 				* This would be a very large problem so we'd need to exploit the problem structure as with bundle adjustment
 		* This imposes a smoothness constraint, which means adjacent pixels influence each other; large changes in the flow vector at adjacent points is penalized
 		* Can help fill in homogeneous (featureless) regions, at the cost of blurring some boundaries
-* Optical flow can give us information about the relative depth of objects, since objects further away move
+* Optical flow can give us information about the relative depth of objects, since objects further away move slower
 	* This can be exploited for e.g. UAV navigation in urban canyons, where GPS is denied
 	* Apparently bees use optical flows for navigation
 * A simple navigation rule, if we have 2 cameras pointed towards 2 walls on either side, is to simply steer so that the optical flows on the two sides are equal, since if we're closer to a wall it'll have higher optical flow

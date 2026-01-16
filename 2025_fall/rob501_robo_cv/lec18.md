@@ -16,7 +16,7 @@
 
 * For PBVS, we need to know the 3D positions of the feature points on the target and the camera intrinsics
 * We want to drive the end-effector pose to some $\bm T_{TE}^*$ relative to the target
-* Estimate the current pose of the target in the camera frame using camera pose estimation; then we minimize the error function $\bm e_i = \bm x_i - \bm f(\bm p_i; \bm C, \bm t, \bm K)$
+* Estimate the current pose of the target in the camera frame using camera pose estimation by minimizing the error function $\bm e_i = \bm x_i - \bm f(\bm p_i; \bm C, \bm t, \bm K)$
 	* This is commonly done with fiducial markers like ArUco or AprilTag
 * The target motion can be estimated using filtering approaches such as Kalman filtering or particle filtering, either in an inertial frame or a frame relative to the moving camera
 * The controller can take one of two approaches:

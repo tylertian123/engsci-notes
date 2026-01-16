@@ -14,8 +14,8 @@
 * The robot has kinetic energy $T = \sum _{i = 1}^n \frac{1}{2}m_i(\dot r_i^0)^T(\dot r_i^0) + \frac{1}{2}(w_i^0)^TI_i(w_i^0)$
 	* Note $I_i$ is the inertia matrix of link $i$ in an inertial frame attached at the centre of mass of link $i$
 * Define the partial Jacobian $J_{v_i}$, where we regard $r_i^0$ as a virtual "end-effector"
-	* For revolute joints, $J_{v_i} = \rvec{z_0^0 \times (r_i^0)}{z_1^0 \times (r_i^0 - O_1^0)}{\cdots}{z_{i - 1}^0 \times (r_i^0 - O_{i - 1}^0)}{0_{3 \times 3(n - i)}}$
-	* $J_{w_i} = \rvec{\rho _1z_0^0}{\rho _2z_1^0}{\cdots}{\rho _iz_{i - 1}^0}{0_{3 \times 3(n - i)}}$
+	* For revolute joints, $J_{v_i} = \rvec{z_0^0 \times (r_i^0)}{z_1^0 \times (r_i^0 - O_1^0)}{\cdots}{z_{i - 1}^0 \times (r_i^0 - O_{i - 1}^0)}{0_{3 \times (n - i)}}$
+	* $J_{w_i} = \rvec{\rho _1z_0^0}{\rho _2z_1^0}{\cdots}{\rho _iz_{i - 1}^0}{0_{3 \times (n - i)}}$
 	* We saw a similar concept when we did potential fields, except in that case we treat $O_i$ as the end-effector (see those notes for the formula for prismatic joints)
 * We can now rewrite $\alignedeqntwo[t]{T}{\sum _{i = 1}^n \frac{1}{2}m_i\dot q^TJ_{v_i}^TJ_{v_i}\dot q + \frac{1}{2}\dot q^TJ_{w_i}^TI_i(q)J_{w_i}\dot q}{\frac{1}{2}\dot q^T\left(\sum _{i = 1}^n m_iJ_{v_i}^T(q)J_{v_i}(q) + J_{w_i}^T(q)I_i(q)J_{w_i}(q)\right)\dot q}{\frac{1}{2}\dot q^TD(q)\dot q}$
 	* $D(q) = \sum _{i = 1}^n m_iJ_{v_i}^T(q)J_{v_i}(q) + J_{w_i}^T(q)I_i(q)J_{w_i}(q)$ is a symmetric positive definite matrix

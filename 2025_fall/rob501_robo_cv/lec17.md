@@ -22,7 +22,7 @@
 
 * The simplest segmentation approach is to just to apply a threshold to the intensity levels (or to a specific channel in some colour space), then finding connected components to get the regions
 * *Active contours* is an energy-minimization approach that fits a spline $\bm f(s) = (u(s), v(s))$ to minimize an energy function
-	* Smoothness cost: $\mathcal E_\text{int} = \int \alpha(s)\norm{\bm f_s(s)}^2 + \beta(s)\norm{\bm f_{ss}(s)}^2\,\dd\epsilon$
+	* Smoothness cost: $\mathcal E_\text{int} = \int \alpha(s)\norm{\bm f_s(s)}^2 + \beta(s)\norm{\bm f_{ss}(s)}^2\,\dd s$
 		* Penalizes sharp changes/kinks
 	* Image energy: $\mathcal E_\text{image} = w_\text{line}\mathcal E_\text{line} + w_\text{edge}\mathcal E_\text{edge} + w_\text{term}\mathcal E_\text{term}$
 		* The terms attract the spline to dark ridges, strong gradients (edges), and line terminations respectively
@@ -37,7 +37,7 @@
 		* Interpret the grayscale image as a topographic image, i.e. darker regions are "valleys"
 		* The idea is to fill the local minima with "water", i.e. propagate outward from the minima until we hit a high-intensity boundary
 		* This assumes that the boundaries are similar in intensity
-		* Locality constraints can be applied so that the regions to close off the regions
+		* Locality constraints can be applied so that the regions are closed off, instead of open on one side
 
 ![Example of the watershed algorithm.](./imgs/lec17_3.png){width=60%}
 

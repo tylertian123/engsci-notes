@@ -31,3 +31,6 @@
 [submodule "2023_winter/esc204_praxis/esc204"]
 	path = 2023_winter/esc204_praxis/esc204
 	url = git@github.com:tylertian123/esc204.git
+[submodule "2025_fall/esc499_thesis"]
+	path = 2025_fall/esc499_thesis
+	url = git@github.com:tylertian123/thesis.git

@@ -8,6 +8,8 @@
 * Substituting the above: $\alignedimp[t]{M(q)(\dot r + a) + C(q, \dot q)(r + v) + B(q)\dot q + G(q) = u}{M(q)\dot r + C(q, \dot q)r = u - (M(q)a + C(q, \dot q)v + B(q)\dot q + G(q))}$
 	* The left hand side is the same as what we had for the original passivity-based control, but now we have an extra term on the right
 * Recall the linear parametrization: $M(q)a + C(q, \dot q)v + B(q)\dot q + G(q) = Y(q, \dot q, a, v)\Theta$, where $Y$ is the known regressor matrix, and $\Theta$ is the minimal set of parameters for the system
+	* Note this is slightly different than the $Y(q, \dot q, \ddot q)$ that we saw before, because here we have $a$ and $v$ after the first 2 terms, and we are basically parametrizing our estimate of the state instead of the true state
+	* Practically to get $Y(q, \dot q, a, v)$ from $Y(q, \dot q, \ddot q)$, we replace $\ddot q$ with $a$, and replace one of the instances of $\dot q$ (the one multiplying $C(q, \dot q)$) by $v$, and leave the rest the same
 	* The model becomes $M(q)\dot r + C(q, \dot q)r = u - Y(q, \dot q, a, v)\Theta$
 * Choose a controller $u = u_s + u_a = -Kr + Y(q, \dot q, a, v)\hat\Theta$ consisting of a stabilizing and an adaptive term, where $\hat\Theta$ is our estimate of the system parameters
 	* This results in the closed-loop system $M(q)\dot r + (C(q, \dot q) + K)r = Y(q, \dot q, a, v)\tilde\Theta$ where $\tilde\Theta = \hat\Theta - \Theta$ is the parameter estimation error

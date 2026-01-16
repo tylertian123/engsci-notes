@@ -11,13 +11,13 @@
 * VO algorithms can be grouped into 4 categories, depending on whether they use monocular or stereo images, and whether they use image features or directly use pixel intensities
 	* Feature-based VO algorithms run feature extraction and matching, while intensity based methods directly try to match pixel intensities from one image to the next
 	* Importantly, stereo measurements have an invertible observation model, so we can take points in one frame and use the inverse model to calculate where we should expect it in the next frame
-* Define the combined stereo camera model (note the origin is defined as the middle of the cameras, so the cameras centres are at $x = \pm b/2$
+* Define the combined stereo camera model (note the origin is defined as the middle of the cameras, so the cameras centres are at $x = \pm b/2$)
 	* Assuming same intrinsics for both cameras, $\bm M = \matfour{f_u}{0}{c_u}{f_u\frac{b}{2}}{0}{f_v}{c_v}{0}{f_u}{0}{c_u}{-f_u\frac{b}{2}}{0}{f_v}{c_v}{0}, \bm p = \cvec{x}{y}{z}{1}$
 	* The forward model is $\rvec{u_l}{v_l}{u_r}{v_r}^T = \bm f(\bm p) = \bm M\frac{1}{z}\bm p$ where $(u_l, v_l)$ and $(u_r, v_r)$ are the rectified pixel coordinates
 		* Jacobian given by $\pdiff{\bm f}{\bm p} = \bm M\frac{1}{p_3}\matfour{1}{0}{-{p_1}/{p_3}}{0}{0}{1}{-{p_2}/{p_3}}{0}{0}{0}{0}{0}{0}{0}{-{p_4}/{p_3}}{1}$
 	* Inverse model: $\bm\rho = \cvec{x}{y}{z} = \bm g(y) = \frac{b}{u_l - u_r}\cvec{\frac{1}{2}(u_l + u_r) - c_u}{\frac{f_u}{f_v}\left(\frac{1}{2}(v_l + v_r) - c_v\right)}{f_u}$
 		* This is only possible to do for a stereo camera since we have depth information
-		* Jacobian: $\pdiff{\bm g}{\bm y} = \frac{b}{(u_l - u_r)^2}\mat{\mrow{-u_r + c_u}{0}{u_l - c_u}{0}\mrow{-\frac{f_u}{f_v}\left(\frac{1}{2}(v_l + v_r) - c_v\right)}{\frac{f_u}{2f_v}}{\frac{f_u}{f_v}\left(\frac{1}{2}(v_l + v_r) - c_v\right)}\mrow{\frac{f_u}{2f_v}}{-f_u}{0}{f_u}{0}}$
+		* Jacobian: $\pdiff{\bm g}{\bm y} = \frac{b}{(u_l - u_r)^2}\mat{\mrow{-u_r + c_u}{0}{u_l - c_u}{0}\mrow{-\frac{f_u}{f_v}\left(\frac{1}{2}(v_l + v_r) - c_v\right)}{\frac{f_u}{2f_v}}{\frac{f_u}{f_v}\left(\frac{1}{2}(v_l + v_r) - c_v\right)}{\frac{f_u}{2f_v}}\mrow{-f_u}{0}{f_u}{0}}$
 * The VO problem involves finding the relative transformation between frames $\bm T_{ba}$, given an image captured in frame $a$ and an image in frame $b$
 * In a feature-based stereo VO pipeline, we run the standard stereo matching, then feature detection and matching of features between frames; then we can do outlier rejection (very important) and then solve for the pose transformation, potentially incorporating other sensors into the mix
 

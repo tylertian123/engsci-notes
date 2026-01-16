@@ -36,7 +36,7 @@
 		* Modified camera matrix and homogeneous coordinates: $\bm M = \mat{\mrow{f_u}{0}{c_u}{0}\mrow{0}{f_v}{c_v}{0}\mrow{0}{0}{0}{f_ub}}, \bm p = \cvec{sx}{sy}{sz}{s}$
 		* $\pdiff{\bm f}{\bm p} = \frac{1}{p_3}\bm M\matfour{1}{0}{-p_1/p_3}{0}{0}{1}{-p_2/p_3}{0}{0}{0}{0}{0}{0}{0}{-p_4/p_3}{1}$
 	* Inverse model: $\bm\rho = \cvec{x}{y}{z} = \bm g(\bm y) = \frac{b}{d}\cvec{u_l - c_u}{\frac{f_u}{f_v}(v_l - c_v)}{f_u}$
-		* $\pdiff{\bm g}{\bm y} = \frac{b}{d^2}\matthree{b}{0}{c_u - u_l}{0}{\frac{f_u}{f_v}d}{\frac{f_u}{f_v}(c_v - v_l)}{0}{0}{-f_u}$
+		* $\pdiff{\bm g}{\bm y} = \frac{b}{d^2}\matthree{d}{0}{c_u - u_l}{0}{\frac{f_u}{f_v}d}{\frac{f_u}{f_v}(c_v - v_l)}{0}{0}{-f_u}$
 * From the input, we select keyframes (based on e.g. spatial/temporal changes, information estimates, etc) and incorporate pointclouds from keyframes into the map
 * Given a transformation between frames $\bm T_{k, k - 1}$, we can map pixels in the previous frame $(u_{k - 1}, v_{k - 1})$ to the next frame $(u_k, v_k)$ as $\cvec{u_k}{v_k}{d_k} = \bm f\left(\bm T_{k, k - 1}\bm g\left(\cvec{u_{k - 1}}{v_{k - 1}}{d_{k - 1}}\right)\right)$
 	* Use the inverse camera model to get 3D points from pixels, transform into the new frame, and project it through the forward camera model to get the expected pixel location and disparity
@@ -48,7 +48,7 @@
 	* Solve for $\hat{\bm T}_{k, k - 1} = \argmin _{\bm T_{k, k - 1}}\sum _{i = 1}^N\left(\frac{1}{\sigma}e_i\right)^2$
 * The disparity map of keyframes can be included in the optimization to generate better maps, combining the pixel intensity error, disparity difference in the active frame (actual vs. predicted disparity in next frame), and disparity difference from the original observation
 	* $\bm e_i = \cvec{I_{k - 1}(\bm u_{k - 1}^i) - I_k'(\bm u_k^i)}{d_k^i - \bar D_k'(\bm u_k^i)}{d_{k - 1}^i - \bar d_{k - 1}^i}$
-		* Note $d_{k - 1}$ is the disparity to be optimized (function of $\bm T_{k, k - 1}$), $\bar d_{k - 1}$ is the actual observed disparity (from stereo matching) and $\bar D_k'$ is the interpolated disparity in the current frame
+		* Note $d_{k - 1}$ is the disparity to be optimized, $\bar d_{k - 1}$ is the actual observed disparity (from stereo matching) and $\bar D_k'$ is the interpolated disparity in the current frame
 		* First term is the usual photometric error term
 		* Second term is the difference between the observed disparities in the next frame and the predicted disparities based on $\bm T_{k, k - 1}$ and $d_{k - 1}$
 		* Third term is the difference between the optimized disparity map and original disparity observations, so the optimized map is not too different from the observed map
