@@ -34,3 +34,4 @@
 [submodule "2025_fall/esc499_thesis"]
 	path = 2025_fall/esc499_thesis
 	url = git@github.com:tylertian123/thesis.git
+	update = none
