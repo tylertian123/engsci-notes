@@ -23,5 +23,4 @@
 			* $x(k + 1) = \cvec{x_2(k)}{u(k) - 3x_1(k) + 4x_2(k)} = \mattwo{0}{1}{-3}{4}x(k) + \cvec{0}{1}u(k)$
 		* Measurement equation: $y(k) = v(k + 1) + 2v(k) = x_2(k) + 2x_1(k) = \rvec{2}{1}\cvec{x_1(k)}{x_2(k)}$
 * For a system in controllable canonical form, $A = \mat{\mrow{0}{1}{0}{\cdots}{0}\mrow{0}{0}{1}{\cdots}{0}\mrow{\vdots}{\vdots}{\vdots}{\ddots}{\vdots}\mrow{0}{0}{0}{\cdots}{1}\mrow{-a_n}{-a_{n - 1}}{-a_{n - 2}}{\cdots}{-a_1}}$, it has characteristic polynomial $s^n + a_1s^{n - 1} + \cdots + a_{n - 1}s + a_n$
-* Matrix powers can be found using the inverse Z-transform: $A^k = \iztf{(zI - A)^{-1}z}$
 
