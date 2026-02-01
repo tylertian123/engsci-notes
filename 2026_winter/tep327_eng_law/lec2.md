@@ -42,6 +42,7 @@
 * The Professional Engineers Act sets the Code of Ethics
 * Bulletins are more lightweight than guidelines and services to provide best practices to the engineer; guidelines carry more weight
 	* Guidelines or bulletins are best practices but are not always obligatory since each situation is unique
+		* However, deviations from guidelines should be justified and the reason documented
 	* Standards must be followed or the engineer risks disciplinary action
 	* PEO establishes performance standards and sets out practice bulletins
 

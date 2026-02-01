@@ -24,13 +24,3 @@
 	* Note that this is only an issue for time-dependent systems; for time-invariant systems we never have this $k_0$ dependence, but adaptive control is time-dependent
 * In general GUAS is the best outcome
 
-## Lyapunov's Method
-
-* Note: assume without loss of generality that $\bar x = 0$ in the definitions below
-
-\noteDefn{A continuous function $V: \reals^n \mapsto \reals$ is \textit{positive definite} at $x = 0$ if $V(0) = 0$ and $V(x) > 0$ for all $x \neq 0$.
-\tcblower
-$V$ is \textit{positive semidefinite} at $x = 0$ if $V(0) = 0$ and $V(x) \geq 0$ for all $x$, i.e. the function can be zero at nonzero locations.}
-
-* Note that these definitions can be adjusted accordingly if studying a nonzero $\bar x$ equilibrium
-

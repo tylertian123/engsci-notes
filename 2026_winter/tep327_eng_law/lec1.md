@@ -18,8 +18,8 @@
 		* Authority can be delegated to organizations, e.g. government agencies (CRTC), municipalities (Toronto), or professional regulators (PEO)
 	* Territories are not established by the constitution, but have powers to pass their own laws; they are similar to how provinces makes municipalities
 	* *Bijural*: Canada has both common law (in most of Canada) and civil law (in Quebec)
-		* Common law is unwritten and based on precedent set by judges, while civil law is codified and judges only interpret the law
-		* Case law is often set by judges in higher courts (e.g. appeals courts, supreme court)
+		* Common law has unwritten parts and based on precedent set by judges (and written statutes), while civil law is codified and judges only interpret the law
+			* Often set by judges in higher courts (e.g. appeals courts, supreme court)
 	* Treaties govern the relationship between the federal government and indigenous peoples
 * Other countries have different structures, e.g. the US has constitutional divisions of power between branches of the government (which Canada does not have in its constitution), Britain's constitution is completely uncodified
 * Types of law:
@@ -28,10 +28,14 @@
 * Law can come from many sources:
 	* Statutes/Acts passed by parliament
 		* Note *bills* are statutes before they are passed, as they are being discussed in parliament
-	* Regulations stemming from statutes (e.g. specific requirements on toxic chemical levels)
+	* Regulations derived from statutes (e.g. specific requirements on toxic chemical levels)
+		* Statutes create regulatory bodies, which can handle matters under the statute and often have administrative tribunals to handle issues and disputes
+		* Regulations are laws passed by the regulatory body that allows it to do its work, which is like a very narrow and specific version of a statute
 	* Municipal by-laws
 	* Codes of conduct from professional organizations (e.g. PEO Code of Ethics)
-	* Case law (precedent in common law) and tribunal decisions (delegated courts)
+	* Case law (precedent in common law)
+	* Tribunal decisions (delegated courts)
+		* These are considered less when reviewing precedent but can still be valuable in their interpretation
 * e.g. for a pipeline, the federal government controls natural resources, First Nations control resources on treaty lands, and various different provincial regulatory bodies exist depending on where
 * The Charter of Rights and Freedoms protects individuals from actions of the government, while the provincial Human Rights Code protects individuals from the action of others
 
