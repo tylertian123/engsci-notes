@@ -19,12 +19,21 @@
 * The general *dynamic error model* is $x_e(k + 1) = Ax_e(k) + B\tilde\psi^T(k)w(k)$, $e(k) = B^TPx_e(k)$, where $x_e(k)$ is a measurable error state, $(A, B)$ is known, $A$ is Schur stable, $w(k)$ is a known regressor, $\tilde\psi(k) = \hat\psi(k) - \psi$, and $P$ is a symmetric positive definite matrix which solves the Lyapunov equation $A^TPA - P = -I$
 	* Note that $A$ being Schur stable guarantees that a solution exists for $A^TPA - P = -I$, as we have derived with Lyapunov analysis of LTI systems
 	* The MRAC problem reduces to this
-	* The use of $e(k)$ comes from Lyapunov theory, which we will see later
+	* The use of $e(k)$ comes from Lyapunov theory, which we will see later; the idea is that we need a scalar error measure for stability analysis
+		* This process of working backwards from a Lyapunov argument is known as *Lyapunov-based design*
 * Consider the transfer function for the system, using $e(k)$ as the output and $\tilde\psi^Tw(k)$ as the input, we get $H(z) = B^TP(zI - A)^{-1}B$
-	* Using the transfer function, $e(k) = H(z)\left[\tilde\psi^T(k)w(k)\right]$
-		* Note that the notation here mixes time and Z-domain, with $[\ ]$ denoting a domain change
-	* Notice the similarity between this and our static error model; can we redefine our regressor to incorporate $H(z)$?
-* Let the *augmented error* $e_a(k) = e(k) - \hat y(k) - \hat\psi^T(k)w_a(k)$ where $w_a(k) = H(z)I\left[w(k)\right]$ is the *augmented regressor*, and $\hat y(k) = H(z)\left[\hat\psi^T(k)w(k)\right]$
-	* Note $H(z)I\left[w(k)\right] = \diagthree{H(z)}{\ddots}{H(z)}\cvec{w_1(k)}{\vdots}{w_q(k)} = \cvec{H(z)\left[w_1(k)\right]}{\vdots}{H(z)\left[w_q(k)\right]}$
-		* This can be interpreted as "filtering" the regressor signal by our plant
+	* Using the transfer function, we can write $e(k) = H(z)\left[\tilde\psi^T(k)w(k)\right]$
+		* Note that the notation here is a shorthand which mixes time and Z-domain, with $[\ ]$ denoting a domain change
+	* Notice the similarity between this and our static error model, $e(k) = \tilde\psi^T(k)w(k)$, which suggests we can redefine our regressor to incorporate $H(z)$ to turn the error model into a static one, where we can apply the gradient law
+	* $\alignedeqntwo[t]{e(k)}{H(z)\left[\tilde\psi^T(k)w(k)\right]}{H(z)\left[\hat\psi^T(k)w(k) - \psi^Tw(k)\right]}{H(z)\left[\hat\psi^T(k)w(k)\right] - H(z)\left[\psi^Tw(k)\right]}{H(z)\left[\hat\psi^T(k)w(k)\right] - \psi^TH(z)I\left[w(k)\right]}{\hat y(k) - \psi^TH(z)I\left[w(k)\right]}$
+		* In the step where we split the $[\ ]$ we rely on the fact that both subsystems are stable, so we can split it up and get the same steady-state response
+		* In the next step, we rely on the *swapping lemma*: since $\psi^Tw(k)$ is taking a linear combination and $H(z)$ is linear, we can do the filtering first and then take the linear combination
+			* Note that the swapping lemma can only be applied since $\psi^T$ is a constant, which is why we cannot pull out a $\hat\psi(k)$ from the first term
+			* Note $H(z)I\left[w(k)\right] = \diagthree{H(z)}{\ddots}{H(z)}\cvec{w_1(k)}{\vdots}{w_q(k)} = \cvec{H(z)\left[w_1(k)\right]}{\vdots}{H(z)\left[w_q(k)\right]}$
+			* Practically, for each $H(z)\left[w_1(k)\right]$ we have to build a state-space model to generate this signal (recall that $H(z)$ is the transfer function of the system we had at the beginning, so we have to duplicate this system $q$ times, one for each component of $w(k)$)
+	* We also define $\hat e(k) = \hat y(k) - \hat\psi^T(k)H(z)I\left[w(k)\right]$ which we can measure
+* We now have the *augmented error* $\alignedeqntwo[t]{e_a(k)}{e(k) - \hat e(k)}{-\psi^TH(z)I\left[w(k)\right] + \hat\psi^T(k)H(z)I\left[w(k)\right]}{\tilde\psi^T(k)H(z)I\left[w(k)\right]}{\tilde\psi^T(k)w_a(k)}$
+	* $w_a$ is the *augmented regressor*
+	* The error model is now static, so we can use the same gradient law: $\hat\psi(k + 1) = \hat\psi(k) - \gamma(k)e_a(k)w_a(k)$, with $\gamma(k) = \frac{\bar\gamma}{1 + \norm{w_a(k)}^2}, \bar\gamma \in (0, 2)$
+	* Note we've only shown that $\hat e(k) \to e(k)$, and more work is needed to show that $e(k) \to 0$
 

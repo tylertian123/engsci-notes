@@ -1,5 +1,13 @@
 #!/bin/fish
 
 set header_file (realpath (dirname (status --current-filename)))"/ncommon.tex"
-find . -maxdepth 1 -type f -name "lec*.md" | sort -V | xargs cat | pandoc -o all_lecs.pdf -V geometry=margin=1in -H $header_file
+set lec_files (find . -maxdepth 1 -type f -name "lec*.md")
+set tut_files (find . -maxdepth 1 -type f -name "tut*.md")
+
+if test -n "$lec_files"
+ 	echo $lec_files | sort -V | xargs cat | pandoc -o all_lecs.pdf -H $header_file -V geometry=margin=1in
+end
+if test -n "$tut_files"
+ 	echo $tut_files | sort -V | xargs cat | pandoc -o all_tuts.pdf -H $header_file -V geometry=margin=1in
+end
 
