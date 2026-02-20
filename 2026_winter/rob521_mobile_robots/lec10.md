@@ -12,7 +12,7 @@
 			* The idea is that we bias retained samples to those that are near the boundaries of free space and occupied space
 			* Less likely to get samples in the middle of free space
 			* One variation is to sample uniformly within a ball centred at the first sample, with the size of the ball determined by sampling a 1D Gaussian, which may be faster
-		* *Bridge sampling*: sample 2 configurations using the Gaussian technique; if both are in collision, find the midpoint between the samples, and retain that sample if it's in free space
+		* *Bridge sampling*: sample 2 configurations, using the same procedure as Gaussian sampling; if both are in collision, find the midpoint between the samples, and retain that sample if it's in free space
 			* This biases the samples even further to narrow passages
 		* Gaussian sampling covers all surfaces while bridge sampling focuses on narrow passages, which may scale better in higher dimensions
 	* Adaptive strategies: adjusting the sampling distribution on the fly by considering collisions

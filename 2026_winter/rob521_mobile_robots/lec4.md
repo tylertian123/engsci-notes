@@ -44,6 +44,6 @@
 		* Notice that in the case of $a = b$, the last column is cleared out and we no longer have control over $\omega$; intuitively this is because when the wheels are symmetric about the centre, the vehicle can be rotated freely regardless of wheel rotation
 	* Using the second configuration we can avoid the degeneracy:
 		* $\cvec{\dot\varphi _1}{\dot\varphi _2}{\dot\varphi _3}{\dot\varphi _4} = \frac{1}{r}\mat{\mrow{1}{-1}{-(a + b)}\mrow{1}{1}{-(a + b)}\mrow{1}{-1}{(a + b)}{1}{1}{(a + b)}}\cvec{v}{u}{\omega}$
-	* Since we can individually control all 4 wheels but the vehicle only has 3 degrees of freedom, the forward kinematics are not unique; we can use the psuedoinverse to recover the forward model:
+	* Since we can individually control all 4 wheels but the vehicle only has 3 degrees of freedom, the forward kinematics are not unique; we can use the pseudoinverse to recover the forward model:
 		* $\cvec{v}{u}{\omega} = \frac{r}{4}\mat{\mrow{1}{1}{1}{1}\mrow{-1}{1}{-1}{1}\mrow{-\frac{1}{a + b}}{-\frac{1}{a + b}}{\frac{1}{a + b}}{\frac{1}{a + b}}}\cvec{\dot\varphi _1}{\dot\varphi _2}{\dot\varphi _3}{\dot\varphi _4}$
 

@@ -5,7 +5,7 @@
 * Given a reference path $\bm x_d$, we want to design controllers which output a vehicle command $\bm u$ input to the robot, which results in the actual state $\bm x$ subject to a disturbance $\bm w$; we measure the state with sensors which produce readings $\bm y$, corrupted by noise $\bm n$, and a state estimator produces the estimate $\hat{\bm x}$ used in the controller
 	* For now we take sensing and state estimation for granted, i.e. $\hat{\bm x} = \bm x$
 * This problem is complicated by the fact that our vehicle models are usually nonlinear (e.g. differential drive) and are working with a MIMO system
-* Note that *trajectory control* involves commanding the robot to a specific state at a specific time, while *path-Tracking control* cares only about how the robot gets to the state and not the time
+* Note that *trajectory control* involves commanding the robot to a specific state at a specific time, while *path-tracking control* cares only about how the robot gets to the state and not the time
 	* Trajectory control is more useful for e.g. synchronized drone swarms
 	* When trajectory control falls behind it needs to cut corners to catch up, which is bad since it might hit hazards in the way
 
@@ -58,7 +58,7 @@
 	* Steer to align heading with desired heading, proportional to heading error: $\delta(t) = \varepsilon _H(t)$
 	* Steer to eliminate crosstrack error, inversely proportional to speed and soft-capped with inverse tangent: $\delta(t) = \tan^{-1}\left(\frac{k\varepsilon _L(t)}{v_f(t)}\right)$
 	* Keep steering angle between a maximum and minimum $\delta(T) \in [\delta _\text{min}, \delta _\text{max}]$
-* The error dynamics can be derive as $\dot\varepsilon _L(t) = \frac{-k\varepsilon _L(t)}{\sqrt{1 + \left(\frac{k\varepsilon _L(t)}{v_f}\right)^2}}$
+* The error dynamics can be derived as $\dot\varepsilon _L(t) = \frac{-k\varepsilon _L(t)}{\sqrt{1 + \left(\frac{k\varepsilon _L(t)}{v_f}\right)^2}}$
 	* Notice that when the crosstrack error is small, this approximately results in exponential decay
 * In practice, there are several improvements we can make:
 	* Add a softening constant $k_s$ to $v_f(t)$ to prevent aggressive steering when the vehicle is moving slowly

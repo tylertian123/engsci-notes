@@ -8,12 +8,12 @@
 * For small perturbations, we have approximately $\bm C = 1 - \bm\theta^\times$ where $\bm\theta = \phi\bm a$
 	* In this case the product of the principal rotations (Euler angles) is approximately their sum
 	* This is used a lot in optimization
-* Time derivatives of vectors seen in different frames is related as $\uvec r^\dota = \uvec r^\dotb + \uvec\omega _{21} \times \uvec r \iff \dot{\bm r}_1$
+* Time derivatives of vectors seen in different frames is related as $\uvec r^\dota = \uvec r^\dotb + \uvec\omega _{21} \times \uvec r$
 	* In terms of coordinates, $\bm C_{12}(\dot{\bm r}_2 + {\bm\omega _2^{21}}^\times\bm r_2)$
 	* We often have $\uvec r$ denoting some position, $\vcx F_1$ being an inertial frame and $\vcx F_2$ being a moving frame (e.g. vehicle frame)
 * We can show that the rotation matrix obeys Possion's equation: $\dot{\bm C}_{21} = -{\bm\omega _2^{21}}^\times\bm C_{21}$
 	* This means we can obtain the rotation matrix in a navigation scenario by integrating the equation, with $\bm\omega$ obtained from a sensor attached to the vehicle
-* Consider a point $P$, which is $\uvec r^{pi}$ in frame $i$ and $\uvec r^{pv}$ in frame $v$; given the pose of frame $v$, $\set{\bm r_i^{vi}, \bm C_{iv}}$, the vectors can be related as $\bm r_i^{pi} = \bm C_{iv}r_v^{pv} + r_i^{vi}$
+* Consider a point $P$, which is $\uvec r^{pi}$ in frame $i$ and $\uvec r^{pv}$ in frame $v$; given the pose of frame $v$, $\set{\bm r_i^{vi}, \bm C_{iv}}$, the vectors can be related as $\bm r_i^{pi} = \bm C_{iv}\bm r_v^{pv} + \bm r_i^{vi}$
 	* $\bm r_a^{bc}$ denotes the coordinates of the vector from $c$ to $b$, expressed in frame $a$
 	* Notice that the indices of the translation $\bm r_i^{vi}$ look reversed, since we need to add the coordinates of frame $v$ relative to frame $i$ to get from $v$ to $i$
 * As a homogeneous transformation, $\cvec{\bm r_i^{pi}}{1} = \mattwo{\bm C_{iv}}{\bm r_i^{vi}}{\bm 0^T}{1}\cvec{\bm r_v^{pv}}{1} = \bm T_{iv}\cvec{\bm r_v^{pv}}{1}$
@@ -24,7 +24,7 @@
 ![Illustration of the unicycle model.](./imgs/lec3_1.png){width=50%}
 
 * Example: we can derive the unicycle model by considering a 2D robot with position $(x, y)$ and angle $\theta _{vi}$, where axis $z$ comes out of the plane
-	* $\bm r_i^{vi} = \cvec{x}{y}{0}, \bm C_{vi} = \bm C_3(\theta _{vi}) = \mattwo{\cos\theta _{vi}}{\sin\theta _{vi}}{0}{-\sin\theta _{vi}}{\cos\theta _{vi}}{0}{0}{0}{1}$
+	* $\bm r_i^{vi} = \cvec{x}{y}{0}, \bm C_{vi} = \bm C_3(\theta _{vi}) = \matthree{\cos\theta _{vi}}{\sin\theta _{vi}}{0}{-\sin\theta _{vi}}{\cos\theta _{vi}}{0}{0}{0}{1}$
 		* Note the notation for elementary rotations is different; $\bm C_3(\theta)$ does not denote a rotational transformation by $\theta$, rather it denotes the transformation from the current frame to a frame obtained by rotating by $\theta$, so the formula for the rotation matrices is transposed compared to the usual ones
 	* For the pose we want $\bm T_{iv} = \mattwo{\bm C_{iv}}{\bm r_i^{vi}}{\bm 0^T}{1} = \matfour{\cos\theta _{vi}}{-\sin\theta _{vi}}{0}{x}{\sin\theta _{vi}}{\cos\theta _{vi}}{0}{y}{0}{0}{1}{0}{0}{0}{0}{1}$
 		* Note this is not $\bm T_{vi}$, so we use $\bm C_{iv}$ and not $\bm C_{vi}$!
