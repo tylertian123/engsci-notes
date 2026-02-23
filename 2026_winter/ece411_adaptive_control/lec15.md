@@ -1,6 +1,6 @@
 # Lecture 15, Feb 6, 2026
 
-# Theoretical Justification of the Dynamic Error Model
+## Theoretical Justification of the Dynamic Error Model
 
 * Consider the general dynamic error model: $\twopiece{x(k + 1) = Ax(k) + B\tilde\psi^T(k)w(k)}{e(k) = Cx(k)}$, where $(A, B)$ is controllable and $(C, A)$ is observable, and $A$ is Schur stable
 	* Let $H(z) = C(zI - A)^{-1}B$
