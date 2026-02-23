@@ -5,9 +5,9 @@ set lec_files (find . -maxdepth 1 -type f -name "lec*.md")
 set tut_files (find . -maxdepth 1 -type f -name "tut*.md")
 
 if test -n "$lec_files"
- 	echo $lec_files | sort -V | xargs cat | pandoc -o all_lecs.pdf -H $header_file -V geometry=margin=1in
+	printf '%s\n' $lec_files | sort -V | xargs cat | pandoc -o all_lecs.pdf -H $header_file -V geometry=margin=1in
 end
 if test -n "$tut_files"
- 	echo $tut_files | sort -V | xargs cat | pandoc -o all_tuts.pdf -H $header_file -V geometry=margin=1in
+ 	printf '%s\n' $tut_files | sort -V | xargs cat | pandoc -o all_tuts.pdf -H $header_file -V geometry=margin=1in
 end
 
