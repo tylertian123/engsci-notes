@@ -31,20 +31,20 @@ The \textit{Linear Quadratic Optimal Control} problem is to find some $\bm\phi \
 * Propose a trial solution $V(\bm x) = \bm x^T\bm P\bm x$, where $\bm P^T = \bm P$ is positive semidefinite, so $\pdiff{V}{\bm x}(\bm x) = 2\bm x^T\bm P$ and $\bm u^* = -\bm R^{-1}\bm B^T\bm P\bm x$
 	* Substitute into the HJB equation to get $\bm x^T(-\bm P\bm B\bm R^{-1}\bm B^T\bm P + \bm P\bm A + \bm A^T\bm P + \bm Q)\bm x = 0$
 	* Since this holds for any arbitrary $\bm x \in \reals^n$, this means that $-\bm P\bm B\bm R^{-1}\bm B^T\bm P + \bm P\bm A + \bm A^T\bm P + \bm Q = 0$
-	* $-\bm P\bm B\bm R^{-1}\bm B^T\bm P + \bm P\bm A + \bm A^T\bm P + \bm Q = 0$ is known as the *algebraic Ricatti equation*
+	* $-\bm P\bm B\bm R^{-1}\bm B^T\bm P + \bm P\bm A + \bm A^T\bm P + \bm Q = 0$ is known as the *algebraic Riccati equation*
 * Now we need to show that our candidate optimal control law $\bm\phi(t) = -\bm R^{-1}\bm B^T\bm P\bm x(t)$ does lead to the lowest cost, and stabilizes the system so it is admissible
 * We will use the result that if $\bm Q$ is symmetric positive semidefinite, then there exists a matrix square root $\bm Q^\frac{1}{2}$ such that $(\bm Q^\frac{1}{2})^T\bm Q^\frac{1}{2} = \bm Q$
 	* Since $\bm Q$ is PSD, $\bm Q = \bm M^T\bm\Lambda\bm M$ where $\bm M$ is an orthogonal matrix, so $\bm Q^\frac{1}{2} = \bm\Lambda^\frac{1}{2}\bm M$ where $\bm\Lambda^\frac{1}{2}$ has square roots on the diagonal
 * Also, all principal sub-matrices of $\bm Q$, i.e. any sub-matrix on the diagonal of $\bm Q$, must also be positive semidefinite (this can be shown by noting $\bm x^T\bm Q\bm x \geq 0$ and we can choose $\bm x$ to isolate any sub-matrix)
 
-\noteThm{If $(\bm A, \bm B)$ is stabilizable and $(\bm Q^\frac{1}{2}, \bm A)$ is detectable, then the algebraic Ricatti equation $$-\bm P\bm B\bm R^{-1}\bm B^T\bm P + \bm P\bm A + \bm A^T\bm P + \bm Q = 0$$ has a unique symmetric positive semidefinite solution $\bm P$, and the control policy $$\bm\phi^*(t) = -\bm R^{-1}\bm B^T\bm P\bm x(t)$$ is the optimal controller for the linear quadratic optimal control problem, and the optimal cost is given by $V(\bm x) = J(\bm x, \bm\phi^*) = \bm x^T\bm P\bm x$.}
+\noteThm{If $(\bm A, \bm B)$ is stabilizable and $(\bm Q^\frac{1}{2}, \bm A)$ is detectable, then the algebraic Riccati equation $$-\bm P\bm B\bm R^{-1}\bm B^T\bm P + \bm P\bm A + \bm A^T\bm P + \bm Q = 0$$ has a unique symmetric positive semidefinite solution $\bm P$, and the control policy $$\bm\phi^*(t) = -\bm R^{-1}\bm B^T\bm P\bm x(t)$$ is the optimal controller for the linear quadratic optimal control problem, and the optimal cost is given by $V(\bm x) = J(\bm x, \bm\phi^*) = \bm x^T\bm P\bm x$.}
 
-* Note that since the algebraic Ricatti equation is quadratic, it will have more than 1 solution, but if the above conditions are satisfied then only one solution will be symmetric positive semidefinite
-* Proof: Let $\bm\phi \in \mathcal U$ and $\bm x(0) = \bm x$, we substitute the algebraic Ricatti equation for $\bm Q$ into the cost, then complete the square and use $\dot{\bm x}(t) = \bm A\bm x(t) + \bm B\bm\phi(t)$
+* Note that since the algebraic Riccati equation is quadratic, it will have more than 1 solution, but if the above conditions are satisfied then only one solution will be symmetric positive semidefinite
+* Proof: Let $\bm\phi \in \mathcal U$ and $\bm x(0) = \bm x$, we substitute the algebraic Riccati equation for $\bm Q$ into the cost, then complete the square and use $\dot{\bm x}(t) = \bm A\bm x(t) + \bm B\bm\phi(t)$
 	* $\alignedeqntwo[t]{J(\bm x, \bm\phi)}{\int _0^\infty \bm x(t)^T\bm Q\bm x(t) + \bm\phi(t)^T\bm R\bm\phi(t)\,\dt}{\int _0^\infty \bm x(t)^T(\bm P\bm B\bm R^{-1}\bm B^T\bm P - \bm P\bm A - \bm A^T\bm P)\bm x(t) + \bm\phi(t)^T\bm R\bm\phi(t)\,\dt}{\int _0^\infty (\bm\phi(t) + \bm R^{-1}\bm B^T\bm P\bm x(t))^T\bm R(\bm\phi(t) + \bm R^{-1}\bm B^T\bm P\bm x(t)) - \left(\dot{\bm x}(t)^T\bm P\bm x(t) + \bm x(t)\bm P\dot{\bm x}(t)\right)\,\dt}{\int _0^\infty (\bm\phi(t) + \bm R^{-1}\bm B^T\bm P\bm x(t))^T\bm R(\bm\phi(t) + \bm R^{-1}\bm B^T\bm P\bm x(t))\,\dt - \int _0^\infty \diff{}{t}(\bm x(t)^T\bm P\bm x(t))\,\dt}{\bm x^T\bm P\bm x + \int _0^\infty (\bm\phi(t) + \bm R^{-1}\bm B^T\bm P\bm x(t))^T\bm R(\bm\phi(t) + \bm R^{-1}\bm B^T\bm P\bm x(t))\,\dt}$
 	* By the positive semidefiniteness of $\bm R$, the term inside the integral is always nonnegative, and it is minimized when $\bm\phi(t) + \bm R^{-1}\bm B^T\bm P\bm x(t)$, i.e. $\bm\phi^*(t) = -\bm R^{-1}\bm B^T\bm P\bm x(t)$, which gives us the optimal cost $\bm x^T\bm P\bm x$
 
-\noteSummary{For a system $\dot{\bm x} = \bm A\bm x + \bm B\bm u$, linear quadratic optimal control seeks to optimize a cost functional $$J(\bm x, \bm\phi) = \int _0^\infty \bm x(t)^T\bm Q\bm x(t) + \bm\phi(t)^T\bm R\bm\phi(t)\,\dt$$ where $\bm u = \bm\phi, \bm x(0) = \bm x$, assuming that $(\bm A, \bm B)$ is stabilizable and $(\bm Q^\frac{1}{2}, \bm A)$ is detectable. Then the optimal control law is given by $$\bm\phi^*(t) = -\bm R^{-1}\bm B^T\bm P\bm x(t)$$ where $\bm P$ is the unique positive semidefinite solution to the algebraic Ricatti equation, $$-\bm P\bm B\bm R^{-1}\bm B^T\bm P + \bm P\bm A + \bm A^T\bm P + \bm Q = 0$$}
+\noteSummary{For a system $\dot{\bm x} = \bm A\bm x + \bm B\bm u$, linear quadratic optimal control seeks to optimize a cost functional $$J(\bm x, \bm\phi) = \int _0^\infty \bm x(t)^T\bm Q\bm x(t) + \bm\phi(t)^T\bm R\bm\phi(t)\,\dt$$ where $\bm u = \bm\phi, \bm x(0) = \bm x$, assuming that $(\bm A, \bm B)$ is stabilizable and $(\bm Q^\frac{1}{2}, \bm A)$ is detectable. Then the optimal control law is given by $$\bm\phi^*(t) = -\bm R^{-1}\bm B^T\bm P\bm x(t)$$ where $\bm P$ is the unique positive semidefinite solution to the algebraic Riccati equation, $$-\bm P\bm B\bm R^{-1}\bm B^T\bm P + \bm P\bm A + \bm A^T\bm P + \bm Q = 0$$}
 
 * Example 1: Use LQR to stabilize the system $\dot x = x + u, Q = R = 1$
 	* $Q_c = B = 1$ with rank 1, so this system is controllable and stabilizable
@@ -60,7 +60,7 @@ The \textit{Linear Quadratic Optimal Control} problem is to find some $\bm\phi \
 	* This gives us $\phi^*(t) = 0$, which does minimize the cost functional but does not stabilize the system
 * Example 3: $\dot x = x + u, Q = 0, R = 1$
 	* Again $(Q^\frac{1}{2}, A)$ is not detectable
-	* The algebraic Ricatti equation gives $2P - P^2 = 0 \implies P = 0, 2$; we have 2 positive semidefinite solutions since our assumptions didn't hold
+	* The algebraic Riccati equation gives $2P - P^2 = 0 \implies P = 0, 2$; we have 2 positive semidefinite solutions since our assumptions didn't hold
 	* $\phi(t) = -R^{-1}B^TPx(t) = -2x(t)$ does stabilize the system, but is not optimal with regards to the cost
 * Example 4: $\ddot y = u$, we want to minimize $\int _0^\infty y^2(t) + ru^2(t)\,\dt$
 	* $\bm x = \cvec{y}{\dot y} \implies \dot{\bm x} = \mattwo{0}{1}{0}{0}\bm x + \cvec{0}{1}u$
@@ -70,7 +70,7 @@ The \textit{Linear Quadratic Optimal Control} problem is to find some $\bm\phi \
 	* Note we may not need to find every entry in $\bm P$ to find the optimal controller:
 		* $\phi^*(t) = -R^{-1}\bm B^T\bm P\bm x(t) = -\frac{1}{r}\rvec{0}{1}\mattwo{p_1}{p_2}{p_2}{p_3}\bm x(t) = -\frac{1}{r}\rvec{p_2}{p_3}\bm x(t)$
 		* Here we only need $p_2, p_3$ due to $\bm B$
-	* Solve the algebraic Ricatti equation:
+	* Solve the algebraic Riccati equation:
 		* $-\bm P\bm B\bm R^{-1}\bm B^T\bm P + \bm P\bm A + \bm A^T\bm P + \bm Q = 0 \implies \mattwo{-\frac{1}{r}p_2^2 + 1}{p_1 - \frac{1}{r}p_2p_3}{p_1 - \frac{1}{r}p_2p_3}{2p_2 - \frac{1}{r}p_3^2} = \mattwo{0}{0}{0}{0}$
 		* $-\frac{1}{r}p_2^2 + 1 = 0 \implies p_2 = \pm\sqrt{r}$
 		* $2p_2 - \frac{1}{r}p_3^2 = 0 \implies 2p_2 = \frac{1}{r}p_3^2$ so we need to pick $p_2 \geq 0 \implies p_2 = \sqrt r$
