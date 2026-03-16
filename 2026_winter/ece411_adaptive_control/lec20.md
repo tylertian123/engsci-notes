@@ -19,7 +19,7 @@
 	2. Value iteration: $V^{j + 1} = TV^j \iff V^{j + 1}(x) = \inf _{u \in \mathcal U(x)}\set{r(x, u) + \gamma V^j(f(x, u))}$
 		* Practically, to do this we require discretization of the state space $\mathcal X$ or some other technique, since $\mathcal X$ is often infinite
 * Policy iteration algorithm:
-	1. Initialization: select with any admissible feedback $\mu^0 = \mathcal M$
+	1. Initialization: select any admissible feedback $\mu^0 = \mathcal M$
 	2. Policy evaluation: compute $V^{\mu^j}$ by solving the Bellman equation, $V^{\mu^j}(x) = r(x, \mu^j(x)) + \gamma V^{\mu^j}(f(x, \mu^j(x)))$
 		* We have techniques to make this computationally tractable
 	3. Policy improvement: $\mu^{j + 1}(x) = \argmin _{u \in \mathcal U(x)} \set{r(x, u) + \gamma V^{\mu^j}(f(x, u))}$

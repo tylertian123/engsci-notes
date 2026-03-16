@@ -26,8 +26,9 @@
 	* Intuitively the Q-function is similar to $V^\mu$, but we can choose the input that we apply in the current step, rather than being locked into the stationary policy $\mu$; it contains more information than $V^\mu$
 	* Therefore the Q-function for $\mu$ also satisfies its own Bellman equation $Q^\mu(x, u) = r(x, u) + \gamma Q^\mu(f(x, u), \mu(f(x, u)))$
 * Let the optimal Q-function $Q^*(x, u) = r(x, u) + \gamma V^*(f(x, u))$
-	* The corresponding HJB equation is $Q^*(x, u) = r(x, u) + \gamma\min _{u' \in \mathcal U(f(x, u))} Q^*(f(x, u), u')$
 	* Note that $V^*(x) = \min _{u \in \mathcal U(x)} Q^*(x, u)$ and $\mu^*(x) = \argmin _{u \in \mathcal U(x)} Q^*(x, u)$
+		* The first an be obtained by applying $\inf _{u \in \mathcal U(x)}$ to the definition for $Q^*$
+	* Substituting $V^*(x)$, we get the HJB equation is $Q^*(x, u) = r(x, u) + \gamma\min _{u' \in \mathcal U(f(x, u))} Q^*(f(x, u), u')$
 * Our main objective is to do the iterations online, but we can still do our offline searches with the Q-function:
 	* Policy iteration with Q-functions:
 		1. Initialize: select any $\mu^0 \in \mathcal M$

@@ -4,7 +4,7 @@
 
 * In infinite horizon, we have the additional problem of convergence
 * For simplicity, consider a nonlinear time-invariant system $x(k + 1) = f(x(k), u(k))$
-* As with before, assume inputs can be selected from $\mathcal U_k(x) = U(x)$, and states are $x \in \mathcal X$; we want to select a *policy* $\pi = \set{\mu _0, \mu _1, \dots}$, but now we consider an infinite horizon
+* As with before, assume inputs can be selected from $\mathcal U_k(x) = \mathcal U(x)$, and states are $x \in \mathcal X$; we want to select a *policy* $\pi = \set{\mu _0, \mu _1, \dots}$, but now we consider an infinite horizon
 	* Note that each $\mu _k(x)$ is a function of $x$ since it's a feedback; we use $\mu$ to denote a feedback and $u$ to denote a particular input
 	* Usually we will work with *stationary policies*, i.e. policies which do not vary in time, so the policy is the same $\mu(x)$
 * Let $\mathcal M = \set{\mu | \mu(x) \in \mathcal U(x), x \in \mathcal X}$ be the set of admissible feedbacks
