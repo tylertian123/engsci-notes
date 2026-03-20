@@ -24,9 +24,13 @@
 	* The formulation can be changed to use the inverse covariance matrix (i.e. an *information filter*), which has a sparse structure for a single timestep (i.e. before the robot starts to move)
 		* Once the robot moves however, correlations between landmarks observed in successive steps slowly fill in the inverse covariance
 		* This leads to the *sparse extended information filter* (SEIF) approximation, which ignores the nearly zero entries
-* EKF can be swapped out for UKF, which has the same computational constraints
 
 ![Structure of the sparse inverse covariance matrix.](./imgs/lec27_2.png){width=70%}
+
+* The information filter tracks $\bm P_k^{-1}$ instead:
+	* Prediction: $\twopiece{\check{\bm x}_k = \bm A_{k - 1}\hat{\bm x}_{k - 1} + \bm v_k}{\check{\bm P}_k = \bm Q_k + \bm A_{k - 1}\hat{\bm P}_{k - 1}\bm A_{k - 1}^T}$
+	* Correction: $\twopiece{\hat{\bm P}_k^{-1} = \check{\bm P}_k^{-1} + \bm C_k^T\bm R_k^{-1}\bm C_k}{\hat{\bm P}_k^{-1}\hat{\bm x}_k = \check{\bm P}_k^{-1}\check{\bm x}_k + \bm C_k^T\bm R_k^{-1}\bm y_k}$
+* EKF can be swapped out for UKF, which has the same computational constraints
 
 ### FastSLAM
 

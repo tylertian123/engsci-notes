@@ -1,6 +1,6 @@
 # Lecture 26, Mar 13, 2026
 
-## Control Design for Tracking and Disturbance Rejection
+## The Regulator Problem
 
 \noteDefn{\textit{Regulator Problem}: Given a model $$\begin{aligned}[t] x(k + 1) &= Ax(k) + Bu(k) + Ew(k) \\ w(k + 1) &= Sw(k) \\ e(k) &= Cx(k) + Dw(k) \end{aligned}$$ where $x(k) \in \reals^n, u(k) \in \reals^m, e(k) \in \reals^p, w(k) \in \reals^q$, we want to design a controller (\textit{regulator}) $u(k)$ to satisfy 2 requirements:
 \begin{enumerate}
