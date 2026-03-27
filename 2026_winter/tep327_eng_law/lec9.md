@@ -14,6 +14,15 @@
 * The tort of contract breach by unlawful means is when a party deliberately interferes with a contract between two other parties; the interfering party can be sued for damages
 	* Requires that the defendant used unlawful means and intended to harm the plaintiff (not accidentally)
 		* e.g. deliberately spreading bad information about a party to make them lose their contract
+* The *limitation period* is the period within which the injured party can commence legal action
+	* Limitation periods typically start from the time of reasonable discovery of the cause of legal action
+	* Contracts can change the limitation period
+	* All provinces have their own statues which govern this; for most things in Ontario this is 2 years (Limitations Act)
+* Duties in tort and contract can coexist, i.e. one can be sued for both contract and tort damages (concurrent liability)
+	* Tort damages can be claimed even after the contract ends
+	* The contract can define the duty of care
+	* Indemnity clauses are often laid out
+* International treaties are contracts between countries; however parties often have no real power to enforce rights in case of a breach
 
 ## Property Law
 

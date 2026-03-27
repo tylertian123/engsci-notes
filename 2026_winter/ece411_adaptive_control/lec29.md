@@ -14,6 +14,7 @@
 * We have to figure out a suitable parametrization of the disturbance into a single parameter vector -- known as the *Nikiforov canonical representation*
 	* Let $d(k) = \Gamma\xi(k)$, then we have a system $\begin{aligned}[t] \xi(k + 1) &= S\xi(k) \\ d(k) &= \Gamma\xi(k) \end{aligned}$ (note that $d(k)$ is scalar)
 	* Pick $(F, G)$ controllable and $F$ Schur stable, then if $(\Gamma, S)$ is observable and $\sigma(S) \cap \sigma(F) = \emptyset$, then the *Sylvester equation* $MS = FM + G\Gamma$ has a unique, nonsingular solution $M \in \reals^{q \times q}$
+		* Note we cannot actually compute $M$; we just know that it exists
 		* As previously mentioned, if $(\Gamma, S)$ is not observable then we can get rid of the extra states
 		* Note that if $F$ is Schur stable then it must have $\abs{\lambda} < 1$, but if $\xi(k)$ contains only persistent signals then it must have $\abs{\lambda} = 1$ (otherwise it would decay), so their spectra are naturally disjoint
 	* Define a coordinate transformation $w(k) = M\xi(k)$, then $\alignedeqntwo[t]{w(k + 1)}{M\xi(k + 1)}{MS\xi(k)}{(FM + G\Gamma)\xi(k)}{Fw(k) + Gd(k)}$
@@ -21,7 +22,6 @@
 	* This gives us the new exosystem $\begin{aligned}[t] w(k + 1) &= Fw(k) + Gd(k) \\ d(k) &= \psi^Tw(k) \end{aligned}$
 		* Note that if we substitute the second equation into the first, $w(k + 1) = (F + G\psi^T)w(k)$, so $\psi^T$ decides the frequency content of the disturbance
 	* Now we substitute this back to get $\begin{aligned}[t] z(k + 1) &= Az(k) + Bu(k) - Bd(k) \\ e(k) &= Cz(k) \end{aligned}$
-* However, $w(k)$ is still not known, so we need to estimate it as well, using the idea of a *disturbance observer*
-	* $\begin{aligned}[t] \hat z_d(k + 1) &= A\hat z_d(k) + Bu(k) + L_d(e(k) - \hat e(k)) \\ \hat e(k) &= C\hat z_d(k) \end{aligned}$
-	* To be continued...
+* Let $u(k) = \hat\psi^T(k)w(k)$, then $z(k + 1) = Az(k) + \tilde\psi^T(k)w(k)$ where $\tilde\psi(k) = \hat\psi(k) - \psi$, which is exactly the dynamic error model
+* However, $w(k)$ is still not known, so we need to estimate it as well
 
