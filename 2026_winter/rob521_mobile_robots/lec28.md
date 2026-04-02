@@ -43,6 +43,7 @@
 		* This is similar to a hybrid between EKF-SLAM/filtering based methods and batch SLAM
 		* However loop closure is still a problem
 	* The adaptive relative bundle adjustment approach applies optimization to a local window of active landmarks and poses, without making a consistent global map
+		* Use coordinates relative to the current pose instead of global poses, so we can do locally consistent optimization
 		* The size of the active window adapts based on which poses have seen the current landmarks and agreement between poses and landmarks
 		* Old poses can still be activated to perform a loop closure		
 

@@ -1,4 +1,4 @@
-# Lecture 30, Mar 23, 2026
+# Lecture 30/31, Mar 23, 2026
 
 ## LiDAR and RGB-D SLAM
 
