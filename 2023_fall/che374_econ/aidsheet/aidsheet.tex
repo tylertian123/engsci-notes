@@ -1,0 +1,597 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{textcomp}
+\usepackage{mathtools}
+\usepackage{cancel}
+\usepackage{gensymb}
+\usepackage{esint}
+\usepackage{esvect}
+\usepackage{braket}
+\usepackage{siunitx}
+\usepackage{pifont}
+%\usepackage{MnSymbol}
+\usepackage{mathrsfs}
+\usepackage{mhchem}
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage[american, siunitx, cuteinductors]{circuitikz}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{diagbox}
+\usepackage{ulem}
+\usepackage{accents}
+\usepackage{clrscode3e}
+\usepackage{wasysym}
+\usepackage{sansmath}
+
+\let\savedegree\degree
+\let\degree\relax
+%\usepackage{mathabx}
+\let\degree\savedegree
+
+\let\oldemptyset\emptyset
+\let\emptyset\varnothing
+
+\normalem
+
+
+% Thanks stack exchange
+\DeclareMathOperator*{\sumint}{%
+\mathchoice%
+  {\ooalign{$\displaystyle\sum$\cr\hidewidth$\displaystyle\int$\hidewidth\cr}}
+  {\ooalign{\raisebox{.14\height}{\scalebox{.7}{$\textstyle\sum$}}\cr\hidewidth$\textstyle\int$\hidewidth\cr}}
+  {\ooalign{\raisebox{.2\height}{\scalebox{.6}{$\scriptstyle\sum$}}\cr$\scriptstyle\int$\cr}}
+  {\ooalign{\raisebox{.2\height}{\scalebox{.6}{$\scriptstyle\sum$}}\cr$\scriptstyle\int$\cr}}
+}
+
+\newcommand\com{\text{%
+    \tikz[radius=0.3em] {%
+        \fill (0,0) -- ++(0.3em,0) arc [start angle=0,end angle=90] -- ++(0,-0.6em) arc [start angle=270, end angle=180];%
+        \draw (0,0) circle;%
+    }%
+}}
+\newcommand\scom{\text{%
+    \tikz[radius=0.2em] {%
+        \fill (0,0) -- ++(0.2em,0) arc [start angle=0,end angle=90] -- ++(0,-0.4em) arc [start angle=270, end angle=180];%
+        \draw (0,0) circle;%
+    }%
+}}
+
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+
+\ctikzset{
+	bipoles/length=1.0cm,
+	bipoles/vsourceam/inner plus={\fontsize{5}{7}\selectfont $+$},
+	bipoles/vsourceam/inner minus={\fontsize{5}{7}\selectfont $-$},
+	logic ports=ieee,
+	logic ports/scale=0.8
+}
+
+\everymath{\displaystyle} % Always use display style math, even when inline
+
+\newcommand{\msout}[1]{\text{\sout{\ensuremath{#1}}}}
+
+\mathchardef\arr="017E % character 7E from textfont 1 is the vector arrow 
+\newcommand\undervec[1]{\underaccent{\vec}{#1}}
+\newcommand{\uvec}{\undervec}
+
+\newcommand{\vectrix}[1]{\undervec{\bm{\mathcal{#1}}}}
+\newcommand{\vcx}{\vectrix}
+
+\newcommand{\dota}{{\mbox{\large $\cdot$}}}
+\newcommand{\ddota}{{\dota\dota}}
+\newcommand{\dotb}{{\mbox{\tiny $\circ$}}}
+\newcommand{\ddotb}{{\dotb\dotb}}
+\newcommand{\dotc}{{\mbox{\tiny $\triangle$}}}
+\newcommand{\ddotc}{{\dotc\dotc}}
+
+\newcommand{\tarc}{\mbox{\large$\frown$}}
+\newcommand{\overarc}[2][-3ex]{{#2}{\kern #1{\raisebox{1.5ex}{\tarc}}}}
+
+\newcommand{\sans}[1]{\begin{sansmath}\text{${#1}$}\end{sansmath}}
+
+\newcommand{\ssquare}{{\scalebox{0.5}{$\square$}}}
+\newcommand{\striangle}{{\scalebox{0.5}{$\triangle$}}}
+
+% Increase maximum list nesting depth
+\usepackage{enumitem}
+\renewlist{itemize}{itemize}{9}
+\setlist[itemize,1]{label=\textbullet}
+\setlist[itemize,2]{label=--}
+\setlist[itemize,3]{label=*}
+\setlist[itemize,4]{label=\textbullet}
+\setlist[itemize,5]{label=--}
+\setlist[itemize,6]{label=*}
+\setlist[itemize,7]{label=\textbullet}
+\setlist[itemize,8]{label=--}
+\setlist[itemize,9]{label=*}
+
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+
+\newcommand{\dbar}{d\hspace*{-0.08em}\bar{}\hspace*{0.1em}}
+\newcommand{\ddbar}{\mathrm{d}\hspace*{-0.08em}\bar{}\hspace*{0.1em}}
+\newcommand{\grad}{\vec\nabla}
+\newcommand{\del}{\vec\nabla}
+\newcommand{\udel}{\uvec\nabla}
+\newcommand{\bv}[1]{\vec{\bm{#1}}}
+\newcommand{\dotvec}[1]{\dot{\vec{#1}}}
+
+\newcommand{\equal}{=} % Because tikz does not like plain equal signs in labels
+
+\newcommand{\xor}{\oplus}
+
+\newtcolorbox{note-note}{title=Note,colback=blue!5!white,colframe=blue,fonttitle=\bfseries}
+\newtcolorbox{note-important}{title=Important,colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries}
+\newtcolorbox{note-theorem}{title=Theorem,colback=green!5!white,colframe=green!75!black,fonttitle=\bfseries}
+\newtcolorbox{note-definition}{title=Definition,colback=green!5!white,colframe=green!75!black,fonttitle=\bfseries}
+\newtcolorbox{note-equation}{title=Equation,colback=green!5!white,colframe=green!75!black,fonttitle=\bfseries}
+\newtcolorbox{note-summary}{title=Summary,colback=yellow!10!white,colframe=yellow!75!black,fonttitle=\bfseries}
+\newcommand{\noteNote}[1]{\begin{note-note}#1\end{note-note}}
+\newcommand{\noteImportant}[1]{\begin{note-important}#1\end{note-important}}
+\newcommand{\noteThm}[1]{\begin{note-theorem}#1\end{note-theorem}}
+\newcommand{\noteDefn}[1]{\begin{note-definition}#1\end{note-definition}}
+\newcommand{\noteEqn}[1]{\begin{note-equation}#1\end{note-equation}}
+\newcommand{\noteSummary}[1]{\begin{note-summary}#1\end{note-summary}}
+
+\DeclareMathOperator{\rank}{rank} % Rank of a matrix
+\DeclareMathOperator{\tr}{tr} % Trace of a matrix
+\DeclareMathOperator{\diag}{diag} % Diagonal matrix
+\DeclareMathOperator{\im}{im} % Image
+\DeclareMathOperator{\proj}{proj} % Projection
+\DeclareMathOperator{\Span}{span} % Note \span is already defined
+\DeclareMathOperator{\Null}{null}
+\DeclareMathOperator{\row}{row}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\curl}{curl} % Curl of vector field
+\DeclareMathOperator{\divergence}{div} % Divergence of vector field
+\DeclareMathOperator{\erf}{erf}
+% Hyperbolic trig functions
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\Coth}{coth} % note coth is already defined
+\DeclareMathOperator{\adj}{adj}
+% div for divergence is defined as \divergence because \div is already used for the division symbol; uncomment the code below to redefine it
+%\let\divsymb\div
+%\let\div\relax
+%\DeclareMathOperator{\div}{div}
+\DeclareMathOperator{\erfc}{erfc} % complementary error function
+\DeclareMathOperator{\var}{var}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\cov}{cov}
+\DeclareMathOperator{\Cov}{Cov}
+
+\DeclareMathOperator{\argmin}{argmin}
+\DeclareMathOperator{\argmax}{argmax}
+
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\sgn}{sgn}
+
+\let\argmax\relax
+\let\argmin\relax
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\argmin}{argmin}
+
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert} % Proper absolute values etc
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+
+\newcommand{\diff}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}} % Derivative, \diff{func}{var}
+\newcommand{\diffn}[3]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}} % Multi-derivative, \diffn{power}{func}{var}
+\newcommand{\pdiff}[2]{\frac{\partial#1}{\partial#2}} % Partial derivative, \pdiff{func}{var}
+\newcommand{\pdiffc}[3]{\left(\pdiff{#1}{#2}\right)_{#3}} % Partial derivative keeping a variable constant, \pdiffc{func}{var}{var}
+\newcommand{\pdiffn}[3]{\frac{\partial^{#1}#2}{\partial{#3}^{#1}}} % Partial multi-derivative, \pdiffn{power}{func}{var}
+\newcommand{\ppdiff}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
+\newcommand{\pppdiff}[4]{\frac{\partial^3 #1}{\partial #2 \partial #3 \partial #4}}
+\newcommand{\Diff}[2]{\frac{\mathrm{D}#1}{\mathrm{D}#2}}
+\newcommand{\laplace}[1]{\mathcal{L}\left\{ #1 \right\}} % Laplace transform
+\newcommand{\ilaplace}[1]{\mathcal{L}^{-1}\left\{ #1 \right\}} % Inverse Laplace transform
+\newcommand{\fourier}[1]{\mathcal{F}\left\{ #1 \right\}}
+\newcommand{\ifourier}[1]{\mathcal{F}^{-1}\left\{ #1 \right\}}
+
+% Derivative and other things evaluated at
+\newcommand{\eval}[2]{\left.#1\right\rvert_{#2}}
+\newcommand{\inteval}[3]{\left[#1\right]_{#2}^{#3}}
+\newcommand{\integral}[5][\int]{#1_{#2}^{#3}#4\,\mathrm{d}#5}
+
+% Cross product because I always forget that \cross isn't a thing
+\newcommand{\cross}{\times}
+
+\newcommand{\intinf}{\int_{-\infty}^{\infty}}
+\newcommand{\intuinf}[1]{\int_{#1}^{\infty}}
+\newcommand{\intlinf}[1]{\int_{-\infty}^{#1}}
+
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\complex}{\mathbb{C}}
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\rationals}{\mathbb{Q}}
+
+\newcommand{\funcip}[2]{\left(#1\middle|#2\right)}
+
+\newcommand{\matdim}[3][\mathbb{R}]{{}^{#2} #1 ^{#3}}
+
+% Differential d
+\newcommand{\dd}[1]{\mathrm{d}#1}
+\newcommand{\da}{\dd a}
+\newcommand{\db}{\dd b}
+\newcommand{\dc}{\dd c}
+\newcommand{\de}{\dd e}
+\newcommand{\df}{\dd f}
+\newcommand{\dm}{\dd m}
+\newcommand{\dk}{\dd k}
+\newcommand{\dr}{\dd r}
+\newcommand{\ds}{\dd s}
+\newcommand{\dt}{\dd t}
+\newcommand{\du}{\dd u}
+\newcommand{\dv}{\dd v}
+\newcommand{\dw}{\dd w}
+\newcommand{\dx}{\dd x}
+\newcommand{\dy}{\dd y}
+\newcommand{\dz}{\dd z}
+\newcommand{\dA}{\dd A}
+\newcommand{\dB}{\dd B}
+\newcommand{\dC}{\dd C}
+\newcommand{\dV}{\dd V}
+\newcommand{\dR}{\dd R}
+\newcommand{\dS}{\dd S}
+\newcommand{\dT}{\dd T}
+\newcommand{\dtheta}{\dd \theta}
+\newcommand{\drho}{\dd \rho}
+\newcommand{\dphi}{\dd \phi}
+\newcommand{\dvarphi}{\dd \varphi}
+\newcommand{\dtau}{\dd \tau}
+
+\newcommand{\Vbar}{\msout{V}}
+\newcommand{\ReN}{\text{Re}} % Reynolds number
+\newcommand{\FoN}{\text{Fo}} % Fourier number
+\newcommand{\BiN}{\text{Bi}} % Biot number
+\newcommand{\NuN}{\text{Nu}} % Nusselt number
+\newcommand{\PrN}{\text{Pr}} % Prandtl number
+\newcommand{\FrN}{\text{Fr}} % Froude number
+
+\newcommand{\union}{\cup}
+\newcommand{\intersect}{\cap}
+\newcommand{\intersection}{\cap}
+
+% Basis vectors
+\newcommand{\ihat}{\hat{i}}
+\newcommand{\jhat}{\hat{j}}
+\newcommand{\khat}{\hat{k}}
+
+% Shorthand for 2 or 3 piecewise
+\newcommand{\twopiece}[2]{\begin{cases} {#1} \\ {#2} \end{cases}}
+\newcommand{\threepiece}[3]{\begin{cases} {#1} \\ {#2} \\ {#3} \end{cases}}
+\newcommand{\fourpiece}[4]{\begin{cases} {#1} \\ {#2} \\ {#3} \\ {#4} \end{cases}}
+\newcommand{\fivepiece}[5]{\begin{cases} {#1} \\ {#2} \\ {#3} \\ {#4} \\ {#5} \end{cases}}
+% Because for some reason you can't use & inside the macro
+\newcommand{\twocond}[4]{\begin{cases} {#1} & {#2} \\ {#3} & {#4} \end{cases}}
+\newcommand{\threecond}[6]{\begin{cases} {#1} & {#2} \\ {#3} & {#4} \\ {#5} & {#6} \end{cases}}
+\newcommand{\fourcond}[8]{\begin{cases} {#1} & {#2} \\ {#3} & {#4} \\ {#5} & {#6} \\ {#7} & {#8} \end{cases}}
+
+% Matrices
+\newcommand{\mattwo}[5][b]{\begin{#1matrix} {#2} & {#3} \\ {#4} & {#5} \end{#1matrix}}
+\newcommand{\mattwothree}[7][b]{\begin{#1matrix} {#2} & {#3} & {#4} \\ {#5} & {#6} & {#7} \end{#1matrix}}
+\newcommand{\matthreetwo}[7][b]{\begin{#1matrix} {#2} & {#3} \\ {#4} & {#5} \\ {#6} & {#7} \end{#1matrix}}
+% Because TeX can't take more than 9 arguments in a macro...
+\newcommand{\matthree}[9]{\begin{matrix} {#1} & {#2} & {#3} \\ {#4} & {#5} & {#6} \\ {#7} & {#8} & {#9} \end{matrix}}
+\newcommand{\matthreeb}[9]{\begin{bmatrix} {#1} & {#2} & {#3} \\ {#4} & {#5} & {#6} \\ {#7} & {#8} & {#9} \end{bmatrix}}
+\newcommand{\matthreev}[9]{\begin{vmatrix} {#1} & {#2} & {#3} \\ {#4} & {#5} & {#6} \\ {#7} & {#8} & {#9} \end{vmatrix}}
+\newcommand{\matthreep}[9]{\begin{pmatrix} {#1} & {#2} & {#3} \\ {#4} & {#5} & {#6} \\ {#7} & {#8} & {#9} \end{pmatrix}}
+\newcommand{\matthreeB}[9]{\begin{Bmatrix} {#1} & {#2} & {#3} \\ {#4} & {#5} & {#6} \\ {#7} & {#8} & {#9} \end{Bmatrix}}
+
+\newcommand{\diagthree}[4][b]{\begin{#1matrix} {#2} & & \\ & {#3} & \\ & & {#4} \end{#1matrix}}
+\newcommand{\diagfour}[5][b]{\begin{#1matrix} {#2} & & & \\ & {#3} & & \\ & & {#4} & \\ & & & {#5} \end{#1matrix}}
+
+\newenvironment{amatrix}[1]{%
+  \left[\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+\end{array}\right]
+}
+
+\makeatletter % Column vector (variadic), \cvec[bracket_type]{x1}{x2}{x3}...
+\newcommand{\cvec}[2][b]{\begin{#1matrix} #2 \cvecchecknextarg{#1}}
+\newcommand{\cvecchecknextarg}[1]{\@ifnextchar\bgroup{\cvecnextarg{#1}}{\end{#1matrix}}}
+\newcommand{\cvecnextarg}[2]{\\ #2 \@ifnextchar\bgroup{\cvecnextarg{#1}}{\end{#1matrix}}}
+\makeatother
+
+\makeatletter % Row vector (variadic), \rvec[bracket_type]{x1}{x2}{x3}...
+\newcommand{\rvec}[2][b]{\begin{#1matrix} #2 \rvecchecknextarg{#1}}
+\newcommand{\rvecchecknextarg}[1]{\@ifnextchar\bgroup{\rvecnextarg{#1}}{\end{#1matrix}}}
+\newcommand{\rvecnextarg}[2]{& #2 \@ifnextchar\bgroup{\rvecnextarg{#1}}{\end{#1matrix}}}
+\makeatother
+
+\makeatletter
+\newcommand{\alignedlines}[3][]{\begin{aligned}[#1] &\hphantom{{}#2{}} #3 \alignedlineschecknextarg{#2}}
+\newcommand{\alignedlineschecknextarg}[1]{\@ifnextchar\bgroup{\alignedlinesnextarg{#1}}{\end{aligned}}}
+\newcommand{\alignedlinesnextarg}[2]{\\ &#1 #2 \@ifnextchar\bgroup{\alignedlinesnextarg{#1}}{\end{aligned}}}
+
+\newcommand{\alignedlinestwo}[4][]{\begin{aligned}[#1] #3 &#2 #4 \alignedlinestwochecknextarg{#2}}
+\newcommand{\alignedlinestwochecknextarg}[1]{\@ifnextchar\bgroup{\alignedlinestwonextarg{#1}}{\end{aligned}}}
+\newcommand{\alignedlinestwonextarg}[2]{\\ &#1 #2 \@ifnextchar\bgroup{\alignedlinestwonextarg{#1}}{\end{aligned}}}
+\makeatother
+
+\newcommand{\alignedeqn}[1][]{\alignedlines[#1]{=}}
+\newcommand{\alignedimp}[1][]{\alignedlines[#1]{\implies}}
+\newcommand{\alignedeqntwo}[1][]{\alignedlinestwo[#1]{=}}
+\newcommand{\alignedimptwo}[1][]{\alignedlinestwo[#1]{\implies}}
+
+\newcommand{\Tag}{& \qquad &}
+\newcommand{\Ttag}[1]{\Tag \text{#1}}
+\newcommand{\Tagcal}[1]{\Tag \mathcal{#1}}
+
+\usepackage[margin=0.25in]{geometry}
+\everymath{}
+
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3333}}@{}}
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+Name
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Factor
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Expression
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Notes
+\end{minipage} \\
+\midrule()
+\endhead
+Future & \((P/F, i, N)\) & \((1 + i)^{-N}\) & \\
+Annuity & \((P/A, i, N)\) & \(\frac{1}{i} - \frac{1}{i(1 + i)^N}\) &
+First payment at end of year 1 \\
+Arith. Grad. & \((P/G, i, N)\) &
+\(\frac{1}{i^2}\left(1 - \frac{1 + iN}{(1 + i)^N}\right)\) & Starts at 0
+at end of year 1; \(P = A(P/A, i, N) + G(P/G, i, N)\) \\
+Geom. Grad. & \((P/Geom, i, g, N)\) &
+\(\frac{1 - \left(\frac{1 + g}{1 + i}\right)^N}{i - g}\) & Starts at
+\(A\) at end of year 1; grows by \((1 + g)\) per year \\
+\bottomrule()
+\end{longtable}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2174}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2174}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.5652}}@{}}
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+Name
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Expression
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Notes
+\end{minipage} \\
+\midrule()
+\endhead
+Current & \(\frac{\text{curr. assets}}{\text{curr. liab.}}\) & Ability
+to pay current liabilities; below 1 could be a sign of distress \\
+Acid Test &
+\(\frac{\splitfrac{\scriptstyle\text{cash} + \text{curr. receivables}}{\scriptstyle + \text{short term investments}}}{\text{curr. liabilities}}\)
+& Ability to pay liabilities if due immediately; better if
+\textgreater{} 1 \\
+Inventory Turnover & \(\frac{\text{COGS}}{\text{avg. inventory}}\) & How
+many times per time period the average inventory is sold. Higher is more
+efficient; tends to be smaller for larger companies \\
+Days' Inventory &
+\(\frac{\text{avg. inventory}}{\text{avg. COGS per day}}\) & Days to
+sell average inventory; lower is more efficient \\
+Acc. Receivable Turnover &
+\(\frac{\text{net credit sales}}{\text{net acc. payable}}\) & Number of
+times credit is collected per period \\
+Days' Receivables &
+\(\frac{\text{avg. acc. receivables}}{\text{avg. sales per day}}\) & How
+many days it takes to collect credit; lower is more efficient \\
+Days' Payables &
+\(\frac{\text{avg. acc. payables}}{\text{avg. COGS per day}}\) & How
+many days it takes to pay creditors; higher means more funds are
+retained, too high might be problematic \\
+Debt Ratio & \(\frac{\text{total liabilities}}{\text{total assets}}\) &
+Proportion of assets financed with debt; higher is more risky \\
+Equity Ratio & \(\frac{\text{total equity}}{\text{total assets}}\) &
+Proportion of assets financed with equity; higher is less risky \\
+Times Interest Earned &
+\(\frac{\text{income or EBIT}}{\text{interest expense}}\) & How many
+times income can cover interest \\
+Profit Margin & \(\frac{\text{net income}}{\text{net sales}}\) & How
+many dollars of profit per dollar of sales \\
+Return on Assets (ROA) &
+\(\frac{\text{net income}}{\text{total assets}}\) & How profitably the
+company uses its assets \\
+Return on Equity (ROE) &
+\(\frac{\text{net income}}{\text{total equity}}\) & How profitably the
+company uses equity \\
+Earnings Per Share (EPS) &
+\(\frac{\text{net income}}{\text{\# of shares}}\) & Amount of profit per
+share \\
+Price To Earnings (P/E) & \(\frac{\text{share price}}{\text{EPS}}\) &
+(Inverse) Relative value in shares; higher means stock is overvalued or
+high growth \\
+Dividend Yield & \(\frac{\text{dividend per share}}{\text{EPS}}\) &
+Dividends relative to stock price ; mature companies tend to pay more
+dividends \\
+Market Capitalization & market value of all shares & Measure of size of
+company (large-cap (10B+), mid-cap (2-10B), small-cap (300M-2B)) \\
+\bottomrule()
+\end{longtable}
+
+\begin{itemize}
+\tightlist
+\item
+  Interest: \(i_e = \left(1 + \frac{i}{m}\right)^m - 1\) for \(m\)
+  subperiods per compounding period
+\item
+  Mortgage: \(A = P(A/P, i, N)\) where \(A\) is the monthly payment,
+  \(P\) is the principal, \(i\) is the monthly interest rate
+
+  \begin{itemize}
+  \tightlist
+  \item
+    To recalculate monthly payment after a term:
+    \(P(F/P, i, n) - A(F/P, i, n)(P/A, i, n)\), then calculate new
+    payment
+  \end{itemize}
+\item
+  Bond: \(P = C(P/A, i, N) + F(P/F, i, N)\) where \(P\) is the sell
+  price, \(C\) is the coupon payment, \(F\) is the face value, \(i\) is
+  the yield
+
+  \begin{itemize}
+  \tightlist
+  \item
+    First coupon paid 1 period later; higher yield makes bond sell for
+    cheaper
+  \item
+    If yield is higher than coupon, \(P < F\); if yield is lower than
+    coupon, \(P > F\)
+  \item
+    When maturity period is not aligned with coupon payments, calculate
+    price in the past and apply interest forward
+  \end{itemize}
+\item
+  CAPM: \(\mathbb E[R_i] = r_f + \beta _i(\mathbb E[R_{MP}] - r_f)\)
+  where \(r_f\) is the risk-free rate,
+  \(\displaystyle\beta _i = \frac{\sigma _{i,MP}}{\sigma _{MP}^2} = \frac{\rho _{i,MP}\sigma _i}{\sigma _{MP}}\)
+\item
+  \(R_\text{WACC} = \frac{E}{E + D}R_E + \frac{D}{E + D}R_D(1 - t)\)
+\item
+  If projects have different time horizons: use LCM of project lifetimes
+  (repeated lives), or use annual worth
+\item
+  IRR: The interest (discount) rate that makes present worth 0; higher
+  is more profitable, but note investment time/size
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Simple investments have a unique IRR, non-simple ones may have
+    multiple solutions
+  \end{itemize}
+\item
+  (Discounted) payback period: time taken to recoup an investment; does
+  not account for earnings after payback
+\item
+  Incremental analysis (mutually exclusive projects): order by
+  increasing first costs (starting with do nothing); calculate
+  incremental IRR between new option and current option using
+  \(\Delta PW\) and \(\Delta A\); if lower than MARR, keep current
+  option; otherwise switch
+\item
+  Depreciation:
+  \(BV_0 = B, BV_t = BV_{t - 1} - D_t = B - \sum _{k = 1}^t D_k\);
+  \textbf{do not include in cash-flow analysis}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Straight line: \(D_t = \frac{B - S}{N}\)
+  \item
+    Declining balance:
+    \(D_t = BV_{t - 1}d, d = 1 - \left(\frac{S}{B}\right)^\frac{1}{N}\)
+    or \(d = \frac{200\%}{N}\) (double declining balance)
+  \item
+    Sum of the years' digits:
+    \(D_t = \frac{N - t + 1}{SOYD}(B - S), SOYD = \frac{N(N + 1)}{2}\)
+  \item
+    Units of production:
+    \(D_t = \frac{\text{Production in year }t}{\text{Total production}}(B - S)\)
+  \end{itemize}
+\item
+  Accounting: each transaction has a debit (increase to left/decrease to
+  right) and credit (decrease to left/increase to right)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Net income = revenue - COGS - SG\&A - depreciation - interest -
+    taxes; retained earnings (equity) = net income - dividends
+  \item
+    Primary accounts: assets (left), liabilities (right), equity
+    (right); expenses (left), revenue (right)
+  \item
+    Label transactions!
+  \end{itemize}
+\item
+  Taxes:
+  \(CTF = 1 - \frac{td}{i_A + d}\left(\frac{1 + \frac{i_A}{2}}{1 + i_A}\right), CSF = 1 - \frac{td}{i_A + d}, PW = -FC \cdot CTF + S \cdot CSF \cdot (P/F, i_R, N) + (1 - t) \cdot PW_{\text{Cash Flows}}\)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(PW = -FC + A(P/A, i, N) + S(P/F, i, N), AW = PW(A/P, i, N)\)
+    (without taxes)
+  \end{itemize}
+\item
+  Inflation: \((1 + i_R)(1 + f) = 1 + i_A\)
+\end{itemize}
+
+\end{document}

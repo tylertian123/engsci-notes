@@ -1,0 +1,184 @@
+\documentclass[twocolumn]{article}
+
+\usepackage[letterpaper,margin=0.5in,footskip=0.25in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{tabularx}
+\usepackage{siunitx}
+\usepackage{textcomp}
+\usepackage{gensymb}
+
+\everymath{\displaystyle}
+
+\renewcommand{\arraystretch}{1.5}
+
+\newcommand{\diff}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}}
+\newcommand{\diffn}[3]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\dd}[1]{\mathrm{d}#1}
+
+\newcommand{\formulasection}[1]{\multicolumn{2}{c}{\textbf{#1}}}
+
+\renewcommand\tabularxcolumn[1]{m{#1}}% for vertical centering text in X column
+
+\title{CIV102 Formula Sheet}
+\author{Tyler Tian}
+
+\begin{document}
+
+\begin{tabularx}{\linewidth}{l X}
+    Formula & Description \\
+    \hline
+    \hline
+    \formulasection{Suspension Bridges} \\
+    \rule{0pt}{4ex}\(T_y = \frac{wL}{2}, T_x = \frac{wL^2}{8h}\) & Main cable tension in suspension bridge \\
+    \hline
+    \formulasection{Basic Material Properties} \\
+    \rule{0pt}{4ex}\(\sigma = \frac{P}{A}\) & Definition: Stress \\
+    \rule{0pt}{4ex}\(\varepsilon = \frac{\Delta l}{l_0}\) & Definition: Strain \\
+    \rule{0pt}{4ex}\(E = \frac{\sigma}{\varepsilon}, \sigma = E\varepsilon\) & Definition: Young's Modulus \\
+    \(\mu = \nu = -\frac{\varepsilon_y}{\varepsilon_x}\) & Definition: Poisson's Ratio \\
+    \rule{0pt}{4ex}\(k = \frac{AE}{L_0}\) & Spring constant from Young's modulus \\
+    \(\varepsilon_{th} = \alpha\Delta T\) & Strain from thermal expansion \\
+    \hline
+    \formulasection{Energy} \\
+    \rule{0pt}{4ex}\(W = \int F\dd\Delta l\) & Definition: Strain energy \\
+    \rule{0pt}{4ex}\(U = \int \sigma\dd\varepsilon, W = U \cdot V_0\) & Definition: Strain energy density \\
+    \(W = \frac{1}{2}\sigma\varepsilon V_0\) & Strain energy when material is linear elastic \\
+    \hline
+    \formulasection{Second Moment of Area and Centroid} \\
+    \rule{0pt}{4ex}\(I = \int_A y^2\dd A\) & Definition: Second moment of area \\
+    \(I_m = \int_A y^2\,\dd m = \rho I\) & Definition: Moment of inertia \\
+    \rule{0pt}{4ex}\(I = \frac{bh^3}{12}\) & \(I\) for rectangular cross section \\
+    \rule{0pt}{4ex}\(I = \frac{\pi d^4}{64}\) & \(I\) for circular cross section (\(d\) is diameter, horizontal axis) \\
+    \(I = \sum_{i = 1}^n (I_{0,i} + A_id_i^2)\) & Parallel axis theorem; \(I_0\) is \(I\) about the local centroid,
+        \(A\) is the area, and \(d_i\) is the distance between the local and global centroids \\
+    \(\bar{y} = \frac{1}{A}\sum_{i = 1}^n y_iA_i\) & Centroidal axis location \\
+    \hline
+    \formulasection{Oscillations and Dynamic Effects} \\
+    \rule{0pt}{4ex}\(\omega_n = \sqrt{\frac{k}{m}}\) & Natural angular frequency \\
+    \rule{0pt}{4ex}\(f_n = \frac{15.76}{\sqrt{\Delta_0}}\) & Natural frequency, point load \\
+    \rule{0pt}{4ex}\(f_n = \frac{17.76}{\sqrt{\Delta_0}}\) & Natural frequency, distributed load \\
+    \(\frac{1}{\sqrt{\left(1 - \alpha^2\right)^2 + \left(2\beta \alpha\right)^2}}\) & Dynamic amplification factor;
+        \(\alpha = \frac{f}{f_n}\); \(\beta\) is the damping ratio \\
+    \(w_{eq} = w_{sta} + \text{DAF} \cdot w_0\) & Equivalent dynamic load \\
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{l X}
+    Formula & Description \\
+    \hline
+    \hline
+    \formulasection{Trusses} \\
+    \(P_e = \frac{\pi^2 EI}{L^2}\) & Euler buckling load \\
+    \rule{0pt}{4ex}\(r = \sqrt{\frac{I}{A}}\) & Definition: Radius of gyration \\
+    \(\frac{L}{r}\) & Definition: Slenderness ratio \\
+    %\(\sigma_e = \frac{\pi^2 E}{\left(\frac{L}{r}\right)^2}\) & Euler buckling stress in terms of slenderness ratio \\
+    \(F^*\Delta = \sum_{i = 1}^n P_i^*\Delta l_i\) & Virtual work; \(F^*\) is the \textbf{virtual} force applied,
+        \(\Delta\) is the \textbf{real} displacement in the same direction, \(P_i^*\) are the loads caused by the
+        \textbf{virtual} force, \(\Delta l_i\) are the \textbf{real} changes in length. \\
+    \hline
+    \formulasection{Factors of Safety} \\
+    \(\text{FoS} = \frac{\text{Capacity}}{\text{Demand}}\) & Definition: Factor of Safety \\
+    \rule{0pt}{4ex}\(A \geq \text{FoS}_y\frac{P}{\sigma_y}\) & Cross-sectional area requirement against yield;
+        \(\text{FoS}_y\) typically \(2.0\) \\
+    \(I \geq \text{FoS}_b\frac{PL^2}{\pi^2 E}\) & Second moment of area requirement against buckling; \(\text{FoS}_b\)
+        typically \(3.0\) \\
+    \(r \geq \frac{L}{200}\) & Radius of gyration requirement to prevent slender members \\
+    \hline
+    \formulasection{Bending of Beams} \\
+    \(\phi = \diff{\theta}{x} = \diffn{2}{y}{x}\) & Definition: Curvature (small angles) \\
+    \(M = EI \cdot \phi, \phi = \frac{M}{EI}\) & Bending moment and flexural stiffness \(EI\) \\
+    \(\sigma = \frac{My}{I}\) & Navier's Equation (flexural stresses); \(y\) is distance from centroidal axis \\
+    \(\Delta V_{AB} = \int_A^B w(x)\,\dd x\) & Relationship between shear force and vertical loads \\
+    \(\Delta M_{AB} = \int_A^B V(x)\,\dd x\) & Relationship between bending moment and shear force \\
+    \(\Delta \theta_{AB} = \int_A^B \phi(x)\,\dd x\) & Moment Area Theorem 1 \\
+    \(\delta_{BA} = \bar{x}_{BA}\int_A^B \phi(x)\,\dd x\) & Moment Area Theorem 2; \(\delta_{BA}\) is the tangential
+        deviation at point \(B\) from a tangent at \(A\), \(\bar{x}_{BA}\) is the horizontal distance of point \(B\)
+        from the centroid of the area under \(\phi(x)\) from \(A\) to \(B\) \\
+    \hline
+    \formulasection{Shear Stresses} \\
+    \(\tau = \frac{V}{A}\) & Definition: Shear stress \\
+    \rule{0pt}{4ex}\(\tau = \frac{VQ}{Ib}\) & Jourawski's Equation; \(b\) is the width of the cross section at the
+        depth of interest, \(Q\) is a first moment of area about the centroid \\
+\end{tabularx}
+    
+\begin{tabularx}{\linewidth}{l X}
+    Formula & Description \\
+    \hline
+    \hline
+    \formulasection{Shear Stresses (Contd.)} \\
+    \rule{0pt}{4ex}\(\begin{aligned}
+        Q &= \int_{y_{bot}}^{y_0} y\,\dd A \\
+        &= \int_{y_0}^{y_{top}} y\,\dd A
+    \end{aligned}\) & First moment of area in Jourawski's Equation; \(y_0\) is the depth of interest \\
+    \(Q = \sum_{i = 1}^n A_id_i\) & Calculating \(Q\) by breaking it up into smaller areas \\
+    \hline
+    \formulasection{Local Buckling} \\
+    \(\sigma = \frac{\pi^2E}{12}\left(\frac{t}{L}\right)^2\) & Euler buckling of a plate with thickness \(t\)
+        length \(L\) and Young's modulus \(E\), with both sides unrestrained \\
+    \(\sigma = \frac{k\pi^2E}{12(1 - \mu^2)}\left(\frac{t}{b}\right)^2\) & General local buckling equation for
+        a plate with thickness \(t\), width \(b\) (\(b > t\)), and Poisson's ratio \(\mu\); \(k\) depends on boundary
+        conditions \\
+    \(k = 4\) & When both edges of the plate are restrained from buckling out of plane (middle flange) \\
+    \(k = 0.425\) & When only one edge of the plate is restrained from buckling out of plane (side flange) \\
+    \(k = 6\) & When stress is linear from 0 to \(\sigma_{crit}\) and both sides of the plate are restrained (webs) \\
+    \(\begin{aligned}
+        &\tau = \frac{5\pi^2E}{12(1 - \mu^2)} \\
+        &\cdot\left(\left(\frac{t}{h}\right)^2 + \left(\frac{t}{a}\right)^2\right)
+    \end{aligned}\) & Shear buckling stress; \(h\) is the height of the plate, \(a\) is the horizontal distance
+        between stiffeners (diaphragms) \\
+    \hline
+    \formulasection{Stone and Concrete\footnote{For all equations involving \(\sqrt{f_c'}\), standard units of
+        \(\si{MPa}\), \(\si{mm}\) and \(\si{N}\) \textbf{must} be used.}} \\
+    \(\begin{aligned}
+        M &= Pe \\
+        \sigma &= \frac{P}{A} + \frac{My}{I}
+    \end{aligned}\) & Combined axial and bending stress from load \(P\) misaligned from the centroidal axis by distance
+        \(e\) \\
+    \(f_t' = 0.33\sqrt{f_c'}\) & Tensile strength of concrete from compressive strength \\
+    \(E_c = 4730\sqrt{f_c'}\) & Young's modulus of concrete from compressive strength \\
+    \(n = \frac{E_s}{E_c}\) & Definition: Modular ratio; \(E_s\) is the Young's modulus of steel, \(E_c\) is the Young's
+        modulus of concrete \\
+    \(\rho = \frac{A_s}{bd}\) & Definition: Longitudinal reinforcement density; \(A_s\) is the total area of reinforcing steel,
+        \(b\) is the width of the compression side of the member, \(d\) is the effective depth of the rebar \\
+\end{tabularx}
+    
+\begin{tabularx}{\linewidth}{l X}
+    Formula & Description \\
+    \hline
+    \hline
+    \formulasection{Stone and Concrete (Contd.)\footnotemark[\value{footnote}]} \\
+    \(k = \sqrt{(n\rho)^2 + 2n\rho} - n\rho\) & Neutral axis location of cracked reinforced concrete; \(kd\) is the
+        distance from the compression side of the member to the neutral axis \\
+    \(j = 1 - \frac{1}{3}k\) & Flexural lever arm; \(jd\) is the distance between the compressive and tensile forces \\
+    \(f_s = \frac{M}{A_sjd}\) & Tensile stress in the steel rebar under bending \\
+    \(f_c = \frac{k}{1 - k}\frac{M}{nA_sjd}\) & Compressive stress in the concrete under bending; \(n\) is the modular
+        ratio \\
+    \(v = \frac{V}{b_wjd}\) & Maximum shear stress in cracked concrete; \(V\) is the shear force, \(b_w\) is the
+        effective web width (may consider adjacent webs) \\
+    \(\begin{aligned}
+        v_{max} &= 0.25f_c' \\
+        V_{max} &= 0.25f_c'b_wjd
+    \end{aligned}\) & Shear stress/force that causes failure by diagonal crushing of the concrete \\
+    \(\begin{aligned}
+        v_c &= \frac{230\sqrt{f_c'}}{1000 + 0.9d} \\
+        V_c &= \frac{230\sqrt{f_c'}}{1000 + 0.9d}b_wjd
+    \end{aligned}\) & Shear strength of concrete without shear reinforcement (aggregate interlock only) \\
+    \(\begin{aligned}
+        v_s &= \frac{A_vf_y}{b_ws}\cot 35\degree \\
+        V_s &= \frac{A_vf_yjd}{s}\cot 35\degree
+    \end{aligned}\) & Shear strength of shear reinforcement; \(A_v\) is the total area of shear reinforcement, \(s\) is
+        the spacing between shear reinforcement bars, \(f_y\) is the yield strength of the steel \\
+    \(\frac{A_vf_y}{b_ws} \geq 0.06\sqrt{f_c'}\) & Threshold for shear reinforcement, above which the equations below
+        should be used for \(v_c\) and \(V_c\) instead \\
+    \(\begin{aligned}
+        v_c &= 0.18\sqrt{f_c'} \\
+        V_c &= 0.18\sqrt{f_c'}b_wjd
+    \end{aligned}\) & Shear strength of concrete if there is enough shear reinforcement to satisfy the equation above \\
+    \(\begin{aligned}
+        V_r &= 0.5V_c + 0.6V_s \\
+            & \leq 0.5V_{max}
+    \end{aligned}\) & Overall shear strength including factors of safety (concrete terms are
+        multiplied by \(0.5\), steel terms \(0.6\)); \(V_{max}\) is the shear force causing concrete crushing \\
+\end{tabularx}
+\end{document}

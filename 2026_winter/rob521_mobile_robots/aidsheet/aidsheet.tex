@@ -1,0 +1,421 @@
+\documentclass[twocolumn, 8pt]{extarticle}
+
+% Uncomment to squeeze everything onto one side
+%\usepackage{pgfpages}
+%\pgfpagesuselayout{2 on 1}[letterpaper, landscape]
+
+\usepackage[letterpaper,margin=0.25in]{geometry}
+\input{ncommon}
+\everymath{}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{multicol}
+
+\usepackage[english]{babel}
+\usepackage[autostyle]{csquotes}
+\MakeOuterQuote{"}
+
+% Options: [subtle], [moderate], or [extreme]
+\usepackage[extreme, mathspacing=normal]{savetrees} 
+% Restore space between operators (sin, cos, log) and variables
+% \thinmuskip=3mu       % Readable sin/cos
+% \medmuskip=2mu        % Tight + and -
+% \thickmuskip=3mu      % Tight =
+
+\titleformat{\section}
+  {\normalfont\fontsize{12}{14}\bfseries}{\thesection}{1em}{}
+\titlespacing\section{0pt}{5pt plus 2pt minus 2pt}{2pt plus 1pt minus 1pt}
+\titlespacing\subsection{0pt}{5pt plus 2pt minus 2pt}{2pt plus 1pt minus 1pt}
+\titlespacing\subsubsection{0pt}{5pt plus 2pt minus 2pt}{2pt plus 1pt minus 1pt}
+%\renewcommand{\arraystretch}{1.5}
+\setlist{nosep}
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+\setlength{\abovedisplayshortskip}{0pt}
+\setlength{\belowdisplayshortskip}{3pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2pt}
+\raggedbottom
+\raggedcolumns
+
+\title{ECE470 Exam Aidsheet}
+\author{Tyler Tian}
+
+\begin{document}
+
+\section{History} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textbf{Notable Robots:}
+
+\begin{small}
+Hephaestus: Golden tripods (Illiad, 800 BCE).
+
+Hero of Alexandria: Programmable cart (70 CE).
+
+Leonardo da Vinci: Humanoid knight (1495).
+
+Nikola Tesla: Teleautomaton, radio controlled boat (1898).
+
+Grey Walter: Machina Speculatrix (tortoises) Elmer and Elsie, seeks out light sources using an analog 2-celled brain.
+First mobile robot and autonomous behaviour (1948).
+
+John Hopkins University: Beast, seeks out wall socket using analog voltages with transistors (cybernetic); first to have
+deliberate, coordinated actions (1961).
+
+James Adams/Paul Braisted/Rodney Schmidt/Hans Moravec: Stanford cart, predictive display, line following, teleoperation;
+first to have camera and computer (1971); stereo with slider, map building, planning; first to have 3D vision (1971-79).
+
+Charles Rosen/Stanford: Shakey, with cameras, range sensors, bump sensors, computers, RC, resulting in A*; first to
+reason about its own actions (1966-72).
+
+Mowbot, autonomous lawn mower; first outdoor robot and field application (1969).
+
+Lunokhod, teleoperated RTG powered lunar rovers; first robot off Earth (1971/73).
+
+CMU/SRI/DARPA/Hughes Research Labs: Autonomous land vehicle (ALV); first AV using LiDAR, first off-road navigation (1980s).
+
+Valentin von Braitenberg: Braitenberg vehicles. Proposed 14 vehicles with increasingly complex behaviour (1984).
+
+Rodney Brooks: Gengis, hexapod using subsumption architecture; first behaviour-based walking robot (1988).
+
+S. Tsugawa: first autonomous car.
+
+Ernst Dickmanns: VaMoRs, VaMP, Vita-2 using cameras; first infrastructure-free autonomous car (1987-95).
+
+CMU: Navlab; Navlab 5 drove from Pittsburgh to LA mostly autonomously; first robot to drive across the US (1986-1997).
+
+NASA: Sojourner, using stereo; first mobile robot on Mars (1997).
+
+iRobot: PackBot, for military use; first to enter Fukushima (1999).
+
+Honda: Asimo, humanoid robot (2000).
+
+iRobot: Roomba; first commercially successful consumer robot (2002).
+
+NASA: MERs Spirit and Opportunity, using stereo to detect and plan around obstacles; first robot with on-board autonomy
+on another planet (2004).
+
+CMU: Sandstorm, furthest in DARPA Grand Challenge desert race (2004).
+
+Sebastian Thrun/Stanford: Stanley, winner of DARPA Grand Challenge (2005).
+
+Boston Dynamics: BigDog, quadruped for rugged terrain transport (2005).
+
+Red Whittaker/CMU: Boss, winner of DARPA Urban Grand Challenge (2007).
+
+Kiva Systems: Autonomous warehouse robots, bought by Amazon (2003-2009).
+
+Google/Waymo: First fully autonomous vehicle on public roads (2009).
+
+NASA: Mars Science Laboratory, Curiosity (2012).
+
+DARPA: DARPA Robotics Challenge; first humanoid competition (2015).
+
+Boston Dynamics: Atlas; first outdoor-capable humanoid (2015).
+
+Boston Dynamics: SpotMini, quadruped (2017).
+
+Waymo: First true driverless robotaxi service (2018).
+\end{small}
+
+\textbf{Behaviourism:} Behaviours are reactions to stimuli or history.
+
+\textbf{Physical Grounding Hypothesis/Subsumption Architecture:} Decomposition of intelligence into individual
+behaviours with multiple layers; lower layers do not depend on higher layers; higher layers subsume but don't modify
+lower layers (Brooks, 1986). Robots are fast, responsive, need no high level representation, simplifies design of
+complex behaviour, but difficult to do high-level long-term planning or optimize behaviours from interacting layers.
+
+\textbf{Physical Symbol System Hypothesis:} Intelligence is some kind of symbol manipulation process. Perception
+generates symbols and feeds to reasoning.
+
+\section{Mathematical Foundations} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textbf{Skew-Symmetric Operator:}
+\begin{gather*}
+\bm r^\times = \matthree[bsmall]{0}{-r_3}{r_2}{r_3}{0}{-r_1}{-r_2}{r_1}{0} \quad \bm x^T\bm w^\times\bm x = 0 \quad
+\bm C\bm w^\times\bm C^T = [\bm C\bm w]^\times, \bm C \in SO(3)
+\end{gather*}
+
+\textbf{Singularity/Constraint Dilemma:} There is no representation of rotations that has exactly 3 parameters
+(i.e. no constraints) and also no singularities.
+
+\textbf{Rotation Matrices:} \(\bm C_{21} = \vcx F_2 \cdot \vcx F_1^T \implies \bm r_2 = \bm C_{21}\bm r_1\).
+\(\bm C^T\bm C = \bm 1, \det\bm C = 1\).
+
+\textbf{Principal Rotations:} Transforms between this frame and a frame obtained by rotating about an axis by an
+angle. \emph{Note the notation here is the opposite of what's used in most other courses. The matrices used to rotate a
+vector about a coordinate axis are the inverse of the matrices here.}
+\[
+\bm C_1(\theta) = \matthree[bsmall]{1}{0}{0}{0}{\cos\theta}{\sin\theta}{0}{-\sin\theta}{\cos\theta} \quad
+\bm C_2(\theta) = \matthree[bsmall]{\cos\theta}{0}{-\sin\theta}{0}{1}{0}{\sin\theta}{0}{\cos\theta} \quad
+\bm C_3(\theta) = \matthree[bsmall]{\cos\theta}{\sin\theta}{0}{-\sin\theta}{\cos\theta}{0}{0}{0}{1}
+\]
+\textbf{Euler Angles:} One of 12 compositions of principal rotations. Has singularities.
+
+\textbf{Axis-Angle:} \(\bm C = \cos(\phi)\bm 1 + (1 - \cos\phi)\bm a\bm a^T - \sin\phi\bm a^\times\) constraint \(\bm a^T\bm a = 1\).
+
+\textbf{Quaternion:} \(\bm q = q_0 + \brm q = q_0 + q_1i + q_2j + q_3k \in \mathbb H\) are normalized to be unit length on \(\mathbb S^3\),
+which forms a \textbf{double cover} of \(SO(3)\).
+\(\bm q\) is the same rotation as \(-\bm q\). \(\bar{\bm q}\) (conjugate) is the opposite rotation.
+% Multiply as \[\bm p \otimes \bm q = (p_0 + \bm{\mathrm p}) \otimes (q_0 + \bm{\mathrm q}) = p_0q_0 - \bm{\mathrm p}^T\bm{\mathrm q} + p_0\bm{\mathrm q} + q_0\bm{\mathrm p} + \bm{\mathrm p} \times \bm{\mathrm q}\]
+\(\bm q = \cvec{\eta}{\bm\varepsilon} = \cvec{\cos(\phi/2)}{\bm a\sin(\phi/2)}\).
+\(\bm C = (\eta^2 - \bm\varepsilon^T\bm\varepsilon)\bm 1 + 2\bm\varepsilon\bm\varepsilon^T - 2\eta\bm \varepsilon^\times\).
+
+\textbf{Gibbs Vector:} \(\bm C = (1 + \bm g^\times)^{-1}(1 - \bm g^\times), \bm g = \bm a\tan\frac{\phi}{2}\)
+
+\textbf{Infinitesimal Rotations:} \(\bm C = 1 - \bm\theta^\times\) where \(\bm\theta = \phi\bm a\).
+
+\textbf{Velocity in Another Frame:} \(\uvec r^\dota = \uvec r^\dotb + \uvec\omega _{21} \times \uvec r \iff
+\dot{\bm r}_1 = \bm C_{12}(\dot{\bm r}_2 + {\bm\omega _2^{21}}^\times\bm r_2)\)
+
+\textbf{Poisson's Equation:} \(\dot{\bm C}_{21} = -{\bm\omega _2^{21}}^\times\bm C_{21}\)
+
+\textbf{Transforms:} \(\bm r_i^{pi} = \bm C_{iv}\bm r_v^{pv} + \bm r_i^{vi} \Leftrightarrow \cvec{\bm r_i^{pi}}{1} = \mattwo{\bm C_{iv}}{\bm r_i^{vi}}{\bm 0^T}{1}\cvec{\bm r_v^{pv}}{1} = \bm T_{iv}\cvec{\bm r_v^{pv}}{1}\)
+
+Note vehicle pose is \(\bm T_{iv}\) (vehicle-to-inertial), not \(\bm T_{vi}\)!
+
+\textbf{Inversion:} \(\bm T_{iv}^{-1} = \mattwo{\bm C_{iv}^T}{-\bm C_{iv}^T\bm r_i^{vi}}{\bm 0^T}{1} = \mattwo{\bm C_{vi}}{-\bm r_v^{vi}}{\bm 0^T}{1} = \mattwo{\bm C_{vi}}{\bm r_v^{iv}}{\bm 0^T}{1} = \bm T_{vi}\)
+
+\textbf{Combined Velocity:} \(\bm\varpi _v^{vi} = \cvec{\bm\nu ^{vi}}{\bm\omega _v^{vi}}, \dot{\bm T}_{vi} = \mattwo{{\bm\omega _v^{vi}}^\times}{-\bm\nu _v^{vi}}{\bm 0^T}{0}\bm T_{vi}\)
+
+\section{Vehicle Modelling} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Wheel Kinematics}
+
+\begin{center}
+  \includegraphics[width=0.3\linewidth]{imgs/diffkine.png}
+  \includegraphics[width=0.2\linewidth]{imgs/swedish.png}
+\end{center}
+
+For a standard wheel with radius \(r\), rotation \(\varphi\):
+\begin{align*}
+  \rvec{\cos(\alpha + \beta)}{\sin(\alpha + \beta)}{d\sin\beta}\dot{\bm\xi} &= \dot\varphi r \\
+  \rvec{-\sin(\alpha + \beta)}{\cos(\alpha + \beta)}{d\cos\beta}\dot{\bm\xi} &= 0
+\end{align*}
+where \(\dot{\bm\xi} = \rvec{v}{u}{\omega}^T\) is the vehicle-frame pose rate.
+Solving for \(\dot\varphi\) yields \textbf{inverse differential kinematics}.
+Solving for \(\dot{\bm\xi}\) (by pseudoinverse \((\bm A^T\bm A)^{-1}\bm A^T\)) yields \textbf{forward differential kinematics}.
+
+For Swedish wheels with rollers at angle \(\gamma\) (\(\dot\varphi _s\) usually unconstrained):
+\begin{align*}
+  \rvec{\cos(\alpha + \beta + \gamma)}{\sin(\alpha + \beta + \gamma)}{d\sin(\beta + \gamma)}\dot{\bm\xi} &= \dot\varphi r\cos\gamma + \dot\varphi _sr_s \\
+	\rvec{-\sin(\alpha + \beta + \gamma)}{\cos(\alpha + \beta + \gamma)}{d\cos(\beta + \gamma)}\dot{\bm \xi} &= -\dot\varphi r\sin\gamma
+\end{align*}
+
+\textbf{Differential Drive Kinematics:} Origin halfway between wheels (\(b\) from wheels).
+\[
+\cvec{\dot\varphi _r}{\dot\varphi _l} = \frac{1}{r}\mattwo{1}{b}{1}{-b}\cvec{v}{\omega} \qquad \cvec{v}{\omega} = \frac{1}{2}\mattwo{r}{r}{r/b}{-r/b}\cvec{\dot\varphi _r}{\dot\varphi _l}
+\]
+
+\subsection{Euler-Lagrange}
+
+Nonholonomic constraints written as \(\bm H(\bm q)^T\dot{\bm q} = \bm 0\) where \(\bm q = \rvec{x}{y}{\theta}^T\).
+Null space of \(\bm H(\bm q)^T\) are admissible velocities \(\dot{\bm q} = \bm G(\bm q)\bm p\) where \(\bm p\) is
+generalized velocity and \(\bm H(\bm q)^T\bm G(\bm q) = \bm 0\).
+
+\textbf{Euler-Lagrange Equation:} \(\displaystyle \diff{}{t}\left(\pdiff{^TL}{\dot{\bm q}}\right) - \pdiff{^TL}{\bm q} = \bm\tau + \bm H(\bm q)\bm\lambda\)
+where \(L = T - V\), \(\bm\tau = \bm G(\bm q)\bm\nu\) (generalized forces), \(\bm\lambda\) are Lagrange multipliers.
+To eliminate the Lagrange multiplier term, premultiply by \(\bm G(\bm q)^T\).
+
+\subsection{Vehicle Dynamics Models}
+
+\textbf{Generalized Vehicle Model:} \(\dot{\bm x} = \bm A(\bm x)\bm x + \bm B(\bm x)\bm u\) where \(\bm x = \rvec{\bm q}{\bm p}^T\);
+with kinematics only, \(\bm A = \bm 0\).
+
+\textbf{Unicycle Model:} \(\cvec{\dot{\bm q}}{\dot{\bm p}} = \mattwo{\bm 0}{\bm G(\bm q)}{\bm 0}{-\bm M^{-1}\bm D}\cvec{\bm q}{\bm p} + \cvec{\bm 0}{\bm M^{-1}}\bm u\)
+where
+\[\bm p = \cvec{v}{\omega} \quad \bm G(\bm q) = \matthreetwo{\cos\theta}{0}{\sin\theta}{0}{0}{1} \quad
+\bm M = \mattwo{m}{0}{0}{I} \quad \bm u = \cvec{f}{g} \quad \bm\nu = -\bm D\bm p + \bm u\]
+for some damping \(\bm D\), thrust \(f\), steering torque \(g\).
+
+\textbf{Bicycle Model:} \(\cvec{\dot{\bm q}}{\dot{\bm p}} = \mattwo{\bm 0}{\bm G(\bm q)}{\bm 0}{-\bm M(\bm q)^{-1}\bm D(\bm q, \bm p)}\cvec{\bm q}{\bm p} + \cvec{\bm 0}{\bm M(\bm q)^{-1}}\bm u\)
+where
+\[\bm q = \cvec{x}{y}{\theta}{\gamma} \quad \bm p = \cvec{v}{\varsigma} \quad \bm G(\bm q) = \mat{\mrow{\cos\theta}{0}\mrow{\sin\theta}{0}\mrow{\frac{\tan\gamma}{d}}{0}\mrow{0}{1}} \quad
+\bm M = \matfour{m}{0}{0}{0}{0}{m}{0}{0}{0}{0}{I + I_f}{I_f}{0}{0}{I_f}{I_f}\]
+and \(\bm M(\bm q) = \bm G(\bm q)^T\bm M\bm G(\bm q), \bm D(\bm q, \bm p) = \bm G(\bm q)^T\bm M\dot{\bm G}(\bm q) + \bm D\)
+for front wheel steering angle \(\gamma\), rear wheel velocity \(v\), steering speed \(\varsigma\), distance \(d\)
+between wheels.
+
+\section{Path-Tracking Control} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textbf{Errors:} Crosstrack error \(\varepsilon _L = y_d - y\) (distance between vehicle and closest point on path) and
+heading error \(\varepsilon _H = \theta _d - \theta\) (based on path tangent at closest point).
+
+\textbf{Feedback Linearization:} Given a nonlinear system \(\dot x = f(x) + g(x)u\), define new input \(\eta\) and find
+input mapping \(u = a(x) + b(x)\eta\) such that \(\dot x = f(x) + g(x)(a(x) + b(x)\eta) = Ax + B\eta\), i.e. find \(A, B\)
+such that \(f(x) + g(x)a(x) = Ax, g(x)b(x)\eta = B\eta\).
+
+Applied to unicycle model: \(\cvec{\dot\varepsilon _L}{\dot\varepsilon _H} = \cvec{v\sin\varepsilon _H}{\omega}\)
+(tangent approximation), change variables \(\cvec{z_1}{z_2} = \cvec{\varepsilon _l}{v\sin\varepsilon _H}\) to get
+\(\cvec{\dot z_1}{\dot z_2} = \mattwo{0}{1}{0}{0}\cvec{z_1}{z_2} + \cvec{0}{1}\eta\) where \(\eta = v\omega\cos\varepsilon _H\).
+Let output \(y = \rvec{\alpha}{1}\cvec{z_1}{z_2}\) and proportional controller \(\eta = K(y_d - y)\), take \(K = 4\alpha\)
+to get \(\omega = -\frac{4\alpha^2}{v}\frac{\varepsilon _L}{\cos\varepsilon _H} - 4\alpha\tan\varepsilon _H\).
+
+This has singularities at \(\varepsilon _H = \pm\pi / 2\) or \(v = 0\), and overshoots turns.
+
+\textbf{Pure Pursuit:} Steer the robot towards a target lookahead point. Lookahead is hard to select for varying speeds;
+too short results in oscillation; too long results in slow convergence.
+
+\textbf{Stanley Controller:} For bicycle models, using front axle centre as origin,
+\(\displaystyle \delta(t) = \varepsilon _H(t) + \tan^{-1}\left(\frac{k\varepsilon _L(t)}{k_s + v_f(t)}\right)\)
+for some steering \(\delta(t)\) and forward velocity \(v_f(t)\), gain \(k\) and softening \(k_s\).
+
+Error dynamics: using \(\dot\varepsilon _H(t) = \frac{-v_f(t)\sin(\delta(t))}{l}, \dot\varepsilon _L(t) = v_f(t)\sin(\varepsilon _H(t) - \delta(t))\),
+crosstrack error has \(\dot\varepsilon _L(t) = \frac{-k\varepsilon _L(t)}{\sqrt{1 + \left(\frac{k\varepsilon _L(t)}{v_f}\right)^2}}\),
+like exponential decay for small \(\varepsilon _L\).
+
+\textbf{Model Predictive Control:} At each step, predict all future errors for some horizon, find optimal sequence of
+control inputs, apply the first step (or for a short time) and iterate again.
+
+Parametrize control over horizon: \(\cvec{v(t)}{\omega(t)} = \cvec{v_0}{\omega _0} + \cvec{v_1}{\omega _1}t + \cvec{v_2}{\omega _2}t^2 + \cvec{v_3}{\omega _3}t^3\)
+with \(v_{0..3}, \omega _{0..3}\) as parameters. Simulate with full model to minimize cost function
+\(\displaystyle J(\bm u) = \frac{1}{2}\sum _i w_i\varepsilon _{L,i}^2 + \frac{1}{2}\sum _k \left(w_{v,k}v_k^2 + w_{\omega,k}\omega _k^2\right)\).
+
+\section{Planning} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textbf{General Approach:} A strategic/high-level (global) planner, planning an optimal route based on a priori
+knowledge, and a tactical/low-level (reactive) planner that handles real-time obstacle avoidance.
+
+\textbf{Standard Planning Sequence:} Compute a simple path, smooth the path to account for kinematics, design a
+trajectory to account for dynamics (i.e. adding a velocity profile), and design a controller to track the trajectory.
+
+\subsection{Reactive Planners}
+
+\textbf{Potential Fields:} Define a potential \(V(x_t) = V_\text{att}(x_t) + V_\text{rep}(x_t)\) where
+\(V_\text{att}(q) = K_\text{att}\rho(q, q^g)^2\) and \(V_\text{rep}(q) = K_\text{rep}\sum _{i = 1}^n \frac{1}{\rho(q, O^i)^2}\)
+and use gradient descent (move in the direction of \(-\nabla V\)).
+Can get stuck in local minima; non-optimal; does not account for vehicle constraints.
+
+\textbf{Extended Potential Fields:} Incorporate vehicle heading by adding a rotation potential, which increases if
+heading towards obstacles.
+
+\textbf{Trajectory Rollout:} A basic form of MPC; simulates a discrete number of trajectories in a short window,
+checking each for collisions and scoring based on progress to goal, distance to obstacles, similarity to previous choice,
+etc. Accounts for vehicle constraints but can still get stuck.
+
+\subsection{Global Planners}
+
+Ideal graph-based planners should be complete, optimal, and efficient.
+
+\textbf{Resolution Completeness:} For grid-based planners, if a path exists it will always be found given a fine enough
+grid resolution.
+
+\textbf{Probabilistic Completeness:} For probabilistic planners, if a path exists, the failure probability asymptotically approaches zero as more work is performed.
+
+\textbf{Anytime Optimality:} As more work is performed, better paths are found, i.e. planning can be terminated early for a feasible but less optimal path.
+
+\subsubsection{Graph Search Methods}
+
+\textbf{Backward Value Iteration:} Working backwards from the final state using dynamic programming to find optimal
+cost-to-go. At each step for each node iterate as \(G^*(x) = \min _u \set{l(x, u) + G^*(f(x, u))}\).
+
+\textbf{Generic Forward Search Algorithm:} At each step, take the next state from the queue, mark it as visited,
+discover all unvisited nodes reachable from this node, and add each reachable unvisited node to the queue. Queue
+prioritization leads to different algorithms: LIFO (stack) --- DFS; FIFO (queue) --- BFS; lowest cost-to-come ---
+Dijkstra's algorithm.
+
+\textbf{A* Algorithm:} Prioritize with cost-to-come plus lower bound heuristic (necessary for optimality). After
+reaching the goal, prune all nodes in queue with a priority worse than the goal and run until queue is empty.
+
+\textbf{Lifelong Planning A* (LPA*):} Reuse results from previous A* runs when only a few edge costs have changed. All
+cells that have an incoming edge cost change are checked for inconsistency, by recomputing the cost-to-come based on
+predecessors. Inconsistent cells are set to infinite cost and successors are checked, until all cells are consistent,
+when the search can be restarted.
+
+\textbf{Other Improvements:} Focused Dynamic A* (D*), D*-Lite are faster than LPA*; Field D* makes smoother paths.
+
+\subsection{Probabilistic Roadmaps}
+
+\textbf{PRM Algorithm:} Initialize with start and goal nodes. Repeatedly sample configurations randomly and check if
+they are feasible, and add as milestones if so. For each milestone try to connect to neighbours; if path is
+collision-free add it as an edge.
+
+\textbf{Visibility Set:} \(V(q) = \set{q' | (q, q') \in F}\), i.e. the set of all configurations that can be connected
+to \(q\) by a straight line edge. Size of \(V(q)\) is called \textbf{expansiveness}. Summing over all \(q \in C\)
+produces expansiveness of the entire configuration space. High expansiveness indicates open spaces, wider, and
+straighter passages.
+
+\textbf{Visibility Graph:} Each vertex on each obstacle is a milestone and connected to each other possible vertex.
+Produces theoretically optimal paths in 2D but not higher dimensions.
+
+\textbf{Workspace-Guided Sampling:} Find narrow passages in workspace and map into the configuration space to sample
+those areas more.
+
+\textbf{Gaussian Sampling:} First sample uniformly, then another configuration with a Gaussian distribution centered at
+the first; if one sample is in free space and the other is in collision, retain the one in free space, otherwise skip.
+Samples tend to be near the boundaries of free space.
+
+\textbf{Bridge Sampling:} Sample 2 configurations using the same procedure as Gaussian sampling; if both are in
+collision, find the midpoint between the samples, and retain that sample if it's in free space. Samples tend to be in
+narrow passages, which may scale better in higher dimensions.
+
+\textbf{Bounding Volume Hierarchy:} Enclose objects into successively tighter bounding volumes, and checking collisions
+starting from the largest. If in collision, check again with all sub-volumes enclosed within until the desired level
+of accuracy is reached. Bounding volumes can be computed in advance in static environments.
+
+\textbf{Adaptive Collision Checks:} Each point checked along the path eliminates a section of the path based on distance
+to closest obstacle. Check end points first, then bisect any remaining sections.
+
+\textbf{Lazy Collision Checks:} Delay collision checking until path has been found; if in collision, recompute the path.
+
+\subsection{RRT and RRT*}
+
+\textbf{RRT Algorithm:} Sample a point in space, identify the closest node and the input that drives from the node
+towards the sampled point. Forward simulate for a short time to determine the new vehicle configuration. If no
+collision, add the new node to the tree. Probabilistically complete but not optimal.
+
+Probability of expanding each vertex is proportional to its Voronoi region, which heavily favours expansion over
+refinement. Sample within an expanding box of the origin to encourage more refinement.
+
+\textbf{RRT* Algorithm:} Each node carries a cost-to-come. After connecting the new node, consider nodes within a ball
+of the new node. If the new node can be connected to another node within the neighbourhood to get a lower cost, connect
+to this node instead. Then, check all other nodes within the ball to see if going from the new node to the other node
+results in a lower cost. If so, rewire the node so its parent becomes the new node. Results in asymptotically optimal
+paths.
+
+\textbf{Informed RRT*:} After finding an initial solution, use a heuristic to form an ellipse where possible path
+improvements can be, and sample only within this space.
+
+\subsection{Planning for Autonomous Driving}
+
+\textbf{Structure:} Roadmap level mission planner, action-level behavioural planner (FSM, rule-based, reinforcement
+learning), path and velocity-level local planner (lattice in structured scenes, sampling-based in unstructured scenes,
+variational \(\min _{\delta x} J(x + \delta x)\) for optimality, init with global planner solution).
+
+\textbf{Conformal Lattice Planner:} Fits control actions/grid to the road. Solve with boundary conditions \((x, y,
+\theta, \kappa)\) with max curvature, min velocity constraints.
+
+\textbf{Cubic Spirals:} Numerically integrate \(\kappa(s) = a_3s^3 + a_2s^2 + a_1s + a_0 \implies \theta(s) = \theta _0
++ \int _0^s \kappa(s')\ds', x(s) = x_0 + \int _0^s \cos(\theta(s'))\,\ds', y(s) = y_0 + \int _0^s
+\sin(\theta(s'))\,\ds'\). Specify boundary constraints, check curvature at 1/3, 2/3 points. For optim remap params to 4
+control points and arc length and use soft constraints.
+
+\textbf{Objectives:} Path length \(s_f = \int _{x_i}^{x_f} \sqrt{1 + \left(\diff{y}{x}\right)^2}\,\dx\), time \(T_f =
+\int _0^{s_f} \frac{1}{v(s)}\,\ds\), bending energy \(\int _0^{s_f} \norm{\kappa(s)}^2\,\ds\) (distributes curvature).
+
+\textbf{Velocity Generation:} Track reference and minimize \(\int _0^{s_f} \norm{v(s) - v_{ref}(s)}\,\ds\) or Hinge
+loss (penalize too fast, not too slow). Penalize jerk \(\int _0^{s_f} \norm{\dddot x(s)}^2\,\ds\) for smoothness.
+Get desired \(v_f\) based on minimum of \(v_{ref}\), lead vehicle speed, and acceleration within friction
+ellipse/comfort rectangle (\(a_{lat} = v^2\kappa\)). Connect to current \(v_0\) with linear (\(v_f = \sqrt{2as +
+v_0^2}\)) or trapezoidal ramp.
+
+\section{Useful Identities} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{gather*}
+    % {\textstyle\sin\left(x + \frac{\pi}{2}\right) = \cos(x) \quad \sin\left(x - \frac{\pi}{2}\right) = -\cos(x) \quad \sin\left(\frac{3\pi}{2} - x\right) = -\cos(x)} \\
+    % {\textstyle\cos\left(x + \frac{\pi}{2}\right) = -\sin(x) \quad \cos\left(x - \frac{\pi}{2}\right) = \sin(x) \quad \cos\left(\frac{3\pi}{2} - x\right) = \sin(x)} \\
+    \sin(x + y) = \sin x\cos y + \cos x\sin y \quad \sin(x - y) = \sin x\cos y - \cos x\sin y \\
+    \cos(x + y) = \cos x\cos y - \sin x\sin y \quad \cos(x - y) = \cos x\cos y + \sin x\sin y \\
+    \sin(\tan^{-1} x) = \frac{x}{\sqrt{1 + x^2}} \qquad \cos(\tan^{-1} x) = \frac{1}{\sqrt{1 + x^2}} \\
+    \sin(\cos^{-1} x) = \cos(\sin^{-1} x) = \sqrt{1 - x^2} \\
+    % \atantwo(-y, x) = -\atantwo(y, x) \qquad \atantwo(y, -x) = \pi - \atantwo(y, x) \\
+    % \forall a > 0,\,\atantwo(ay, ax) = \atantwo(y, x) \\
+    % \atantwo\left(x, \sqrt{1 - x^2}\right) = \sin^{-1} x \qquad \atantwo\left(\pm\sqrt{1 - x^2}, x\right) = \pm\cos^{-1} x \\
+    % \atantwo\left(x, -\sqrt{1 - x^2}\right) = \twocond{\pi - \sin^{-1}x}{x > 0}{-\pi - \sin^{-1}(x)}{x < 0} \\
+    % \nabla _x f(\bm x) = \left(\pdiff{f(\bm x)}{\bm x}\right)^T \qquad \pdiff{\norm{\bm x}}{\bm x} = \frac{1}{\norm{\bm x}}\bm x^T \\
+    % v_1 \cdot v_2 = \norm{v_1}\norm{v_2}\cos\theta \qquad v_1 \times v_2 = \norm{v_1}\norm{v_2}\sin(\theta)\hat n \\
+    \bm A^{-1} = \frac{1}{\det\bm A}(\on{cof}\bm A)^T \qquad \mattwo{a}{b}{c}{d}^{-1} = \frac{1}{ad - bc}\mattwo{d}{-b}{-c}{a} \\
+    \diff{}{x}\sin^{-1}x = \frac{1}{\sqrt{1 - x^2}} \quad \diff{}{x}\cos^{-1}x = -\frac{1}{\sqrt{1 - x^2}} \quad \diff{}{x}\tan^{-1}x = \frac{1}{1 + x^2}
+\end{gather*}
+
+\end{document}

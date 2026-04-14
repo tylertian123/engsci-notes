@@ -1,0 +1,306 @@
+\documentclass[twocolumn, 8pt]{extarticle}
+
+% Uncomment to squeeze everything onto one side
+%\usepackage{pgfpages}
+%\pgfpagesuselayout{2 on 1}[letterpaper, landscape]
+
+\usepackage[letterpaper,margin=0.25in]{geometry}
+\input{ncommon}
+\everymath{}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{multicol}
+
+\usepackage[english]{babel}
+\usepackage[autostyle]{csquotes}
+\MakeOuterQuote{"}
+
+% Options: [subtle], [moderate], or [extreme]
+\usepackage[extreme, mathspacing=normal]{savetrees} 
+% Restore space between operators (sin, cos, log) and variables
+% \thinmuskip=3mu       % Readable sin/cos
+% \medmuskip=2mu        % Tight + and -
+% \thickmuskip=3mu      % Tight =
+
+% Normal vdots and ddots leave too much space above
+% https://tex.stackexchange.com/questions/207056/wrong-too-much-vertical-space-above-vdots-in-small-matrix
+\newcommand{\newvdots}{\vphantom{\int\limits^x}\smash[t]{\vdots}}
+\newcommand{\newddots}{\vphantom{\int\limits^x}\smash[t]{\ddots}}
+
+\titleformat{\section}
+  {\normalfont\fontsize{12}{14}\bfseries}{\thesection}{1em}{}
+\titlespacing\section{0pt}{5pt plus 2pt minus 2pt}{2pt plus 1pt minus 1pt}
+\titlespacing\subsection{0pt}{5pt plus 2pt minus 2pt}{2pt plus 1pt minus 1pt}
+\titlespacing\subsubsection{0pt}{5pt plus 2pt minus 2pt}{2pt plus 1pt minus 1pt}
+%\renewcommand{\arraystretch}{1.5}
+\setlist{nosep}
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+\setlength{\abovedisplayshortskip}{0pt}
+\setlength{\belowdisplayshortskip}{3pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2pt}
+\raggedbottom
+\raggedcolumns
+
+\title{ECE411 Exam Aidsheet}
+\author{Tyler Tian}
+
+\begin{document}
+
+\section{Dynamical Systems}
+
+\textbf{Z-Transform:} \(\displaystyle \ztf{x(k)} = X(z) = \sum _{k = 0}^\infty x(k)z^{-k}, z \in \complex\)
+
+\textbf{Forward Shift Property:} For zero IC, \(\ztf{x(k + m) = z^mX(z)}\).
+
+\textbf{SS to TF:} \(G(z) = C(zI - A)^{-1}B + D \in \reals^{p \times m}\).
+
+\textbf{TF to SS:} \(G(z) = N(z)/D(z) \implies D(z)V(z) = U(z), N(z)V(z) = Y(z)\); inverse Z-transform to get DE, and
+let \(x(k) = \rvec{v(k)}{v(k + 1)}{\cdots}^T\), rearrange to get state eqn. from first and measurement eqn. from second.
+
+\textbf{Time Response:} \(\displaystyle x(k) = A^kx(0) + \sum _{i = 0}^{k - 1}A^{k - 1 - i}Bu(i)\), consisting of
+initial state response and input response (\emph{not} transient and steady-state).
+
+\textbf{Matrix Power:} \(A^k = \iztf{(zI - A)^{-1}z}x(0) = P\Lambda^kP^{-1}, P^{-1}AP = \Lambda\).
+
+\textbf{Poles \& Eigenvalues:} All poles are eigenvalues, but not all eigenvalues are poles (pole-zero cancellation);
+a stable transfer function does not imply stable states.
+
+\textbf{Qualitative Behaviour:} Real distinct poles: \(\iztf{\frac{z}{z - p}} = p^k\); decay if \(\abs{p} < 1\), steady
+if \(\abs{p} = 1\), unstable if \(\abs{p} > 1\), alternating if \(p < 0\).
+
+Conjugate poles: \(\iztf{\frac{z^2}{(z - re^{j\omega})(z - re^{-j\omega})}} = \frac{1}{\sin\omega}r^k\sin(k\omega + \phi)\);
+\(r\) is rate of decay (smaller is faster, \(r > 1\) unstable), \(\omega\) is oscillation frequency.
+
+\section{Stability}
+
+\textbf{Equilibrium:} \(\bar x\) is equilibrium of \(x(k + 1) = f(k, x(k))\) if \(\bar x = f(k, \bar x)\).
+
+\textbf{Stability:} $\forall k_0 \geq 0, \varepsilon > 0, \exists \delta(\varepsilon, k_0) > 0 \suchthat \norm{x_0 - \bar x} < \delta \implies \norm{x(k; k_0, x_0) - \bar x} < \varepsilon, \forall k \geq k_0$.
+
+\textbf{Asymptotic Stability:} Stable and $\exists \delta(k_0) > 0 \suchthat \norm{x_0 - \bar x} < \delta \implies \lim _{k \to \infty} x(k; k_0, x_0) = \bar x$ (attractive).
+
+\textbf{Uniform Asymptotic Stability:} A.S. and \(\delta\) does not depend on \(k_0\).
+
+\textbf{Global Asymptotic Stability:} A.S. and \(\delta(k_0)\) can be arbitrary large, i.e. all initial
+conditions converge to \(\bar x\). G.U.A.S. if also U.A.S.
+
+\textbf{Exponential Stability:} \(\exists c, \delta > 0, \lambda \in (0, 1) \suchthat \norm{x(k_0) - \bar x} < \delta \implies \norm{x(k) - \bar x} \leq c\norm{x(k_0)}\lambda^{k - k_0}, \forall k \geq k_0\).
+Implies U.A.S.; G.E.S. if \(\delta\) can be arbitrarily large.
+
+\textbf{Positive (Semi)Definite:} $V: \reals^n \mapsto \reals$ is positive definite at $x = 0$ if $V(0) = 0$ and $V(x) > 0, \forall x \neq 0$;
+or positive semidefinite if $V(0) = 0$ and $V(x) \geq 0, \forall x$.
+
+\textbf{Class \(\mathcal K_\infty\):} \(\kappa: [0, \infty) \mapsto [0, \infty)\) is class
+\(\mathcal K_\infty\) if \(\displaystyle \kappa(0) = 0, \lim _{x \to \infty} \kappa(s) \to \infty\), and strictly increasing on $[0, \infty)$.
+
+\textbf{Radial Unboundedness:} \(\exists \kappa \in \mathcal K_\infty \suchthat V(k, x) \geq \kappa(\norm{x}), \forall k \geq 0, x \in \reals^n\).
+Usually can just show \(\exists c_1 > 0 \suchthat V(k, x) \geq c_1\norm{x}^2\) (stricter condition).
+
+\textbf{Forward Difference:} For time-invariant systems, $\Delta V(x) = V(f(x)) - V(x)$;
+For time-varying systems, $\Delta V(k, x) = V(k + 1, f(k, x(k))) - V(k, x(k))$.
+
+\textbf{Main Theorem of Lyapunov:} Let the \textit{Lyapunov function} $V: \naturals _0 \times \reals^n \mapsto \reals$
+positive definite such that $V(k, 0) = 0, \forall k$. If $\Delta V(k, x)$ is negative semidefinite in $x$, then $\bar x
+= 0$ is stable. If $\Delta V(k, x)$ is negative definite in $x$, then $\bar x = 0$ is A.S.; if $V$ is also radially
+unbounded, then $\bar x = 0$ is G.A.S.
+
+\textbf{Exponential Stability Theorem:} Let $\mathcal D \subseteq \reals^n$ with $\bar x = 0 \in \mathcal D$;
+$\bar x$ is E.S. $\iff \exists V: \naturals _0 \times \reals^n \mapsto \reals$ and $c_1, c_2, c_3 > 0 \suchthat c_1\norm{x}^2 \leq V(k, x) \leq c_2\norm{x}^2$ and $\Delta V(k, x) \leq -c_3\norm{x}^2, \forall k \leq 0, x \in \mathcal D$.
+If \(\mathcal D = \reals^n\), then \(\bar x = 0\) is G.E.S.
+
+\textbf{Schur Stable:} \(A\) is Schur stable if $\abs{\lambda} < 1, \forall \lambda \in \sigma(A)$, i.e. all eigenvalues
+of $A$ are inside the open unit disk in $\complex$.
+
+\textbf{Stability of LTI Systems:} For $x(k + 1) = Ax(k)$, $\bar x = 0$ is G.E.S. if and only if \(A\) is Schur stable;
+$\bar x = 0$ is stable if and only if $\abs{\lambda} \leq 1, \forall \lambda \in \sigma(A)$, and any eigenvalues
+$\abs{\lambda} = 1$ have a Jordan block of size 1.
+
+\textbf{Lyapunov Equation (LTI):} $\bar x = 0$ is G.E.S. iff $\forall Q \in \reals^{n \times n}, Q = Q^T, Q \succ 0$,
+there exists a unique $P \in \reals^{n \times n}, P = P^T, P \succ 0 \suchthat A^TPA - P = -Q$. G.E.S. can be shown
+with only one \(Q\) using \(V(x) = x^TPx, \Delta V(x) = -x^TQx\), and that
+\(\lambda _\text{min}(P)\norm{x}^2 \leq x^TPx \leq \lambda _\text{max}(P)\norm{x}^2\).
+
+\section{State \& Output Feedback Stabilization}
+
+\textbf{Controllability:} The LTI system $(A, B)$ is controllable if $\rank(Q_c) = n$, where the controllability matrix
+$Q_c = \rvec{B}{AB}{\cdots}{A^{n - 1}B}$.
+
+\textbf{Pole Placement Theorem:} If $(A, B)$ is controllable, then for any desired symmetric spectrum
+$\set{\lambda _{1d}, \dots, \lambda _{nd}}, \lambda _{id} \in \complex$, there exists a state feedback $u(k) = Kx(k)$
+with $K \in \reals^{m \times n}$, such that $\sigma(A + BK) = \set{\lambda _{1d}, \dots, \lambda _{nd}}$.
+
+\textbf{Controllable Canonical Form:} A single-input system \((A, B)\) is controllable if and only if there
+is a coordinate transform \(P = Q_cT, z = P^{-1}x\) where the resulting system
+\(z(k + 1) = P^{-1}APz(k) + P^{-1}Bu(k) = \tilde{A}z(k) + \tilde{B}u(k)\)
+has the form
+\[\begingroup\setlength{\arraycolsep}{2pt}
+\tilde{A} = \mat{\mrow{0}{1}{0}{\cdots}{0}\mrow{0}{0}{1}{\cdots}{0}\mrow{\newvdots}{\newvdots}{\newvdots}{\newddots}{\newvdots}\mrow{0}{0}{0}{\cdots}{1}\mrow{-a_0}{-a_1}{-a_2}{\cdots}{-a_{n - 1}}}
+\quad \tilde{B} = \cvec{0}{\newvdots}{0}{1}
+\quad T = \mat{\mrow{a_1}{a_2}{\cdots}{a_{n - 1}}{1}\mrow{a_2}{a_3}{\cdots}{1}{0}\mrow{\newvdots}{\newvdots}{\newddots}{\newvdots}{\newvdots}\mrow{a_{n - 1}}{1}{\cdots}{0}{0}\mrow{1}{0}{\cdots}{0}{0}}
+\endgroup\]
+where \(a_i\) are coefficients in \(\det(sI - A)\).
+
+\textbf{Deadbeat Control:} If \((A, B)\) is controllable, then by assigning \(\sigma(A + BK)\) to all zeros, \(x(k) \to 0\)
+in exactly \(n\) steps, i.e. \(x(n) = x(n + 1) = \cdots = 0\).
+
+\textbf{Stabilizability:} \((A, B)\) is stabilizable if $\exists K \in \reals^{m \times p} \suchthat \sigma(A + BK)$ is in the open unit disk in $\complex$, i.e. the closed-loop system is asymptotically stable.
+
+\textbf{Controllable Eigenvalue:} $\lambda \in \sigma(A)$ is controllable for the system $(A, B)$ if
+$\rank\left(\rvec{A - \lambda I}{B}\right) = n$.
+
+\textbf{PBH Test:} $(A, B)$ is controllable if and only if every $\lambda \in \sigma(A)$ is controllable.
+$(A, B)$ is stabilizable if and only if every $\abs{\lambda} \geq 1$ is controllable.
+
+\textbf{Observability:} \((C, A)\) is observable if $\rank(Q_o) = n$, where the observability matrix is
+\(Q_o = \cvec[bsmall]{C}{CA}{\vdots}{CA^{n - 1}}\).
+This is equivalent to \(Q_c^T\) for the dual system \((A^T, C^T)\).
+
+\textbf{Detectability:} $(C, A)$ is detectable if there exists $L \in \reals^{n \times p}$ such that $\abs{\lambda} < 1,
+\forall\lambda \in \sigma(A - LC)$.
+
+\textbf{Duality:} The system \((C, A)\) is:
+\begin{enumerate}
+	\item Observable if and only if $(A^T, C^T)$ is controllable.
+	\item Detectable if and only if $(A^T, C^T)$ is stabilizable.
+	\item Observable if and only if $\rank\left(\cvec[bsmall]{A - \lambda I}{C}\right) = n, \forall\lambda \in \sigma(A)$.
+	\item Detectable if and only if $\rank\left(\cvec[bsmall]{A - \lambda I}{C}\right) = n, \forall\lambda \in \sigma(A)$ where $\abs{\lambda} \geq 1$.
+\end{enumerate}
+
+\textbf{State Observer:} \(\hat x(k + 1) = A\hat x(k) + Bu(k) + L(y(k) - \hat y(k)), \hat y(k) = C\hat x(k)\);
+the estimation error $\tilde x(k) = \hat x(k) - x(k)$ has dynamics \(\tilde x(k + 1) = (A - LC)\tilde x(k)\).
+
+\textbf{Separation Principle:} To stabilize \((A, B, C)\) through output feedback, we can separately
+design a state feedback stabilizer and observer, then \(u(k) = K\hat x(k)\) asymptotically stabilizes the system.
+The closed-loop system has dynamics \(\cvec{x(k + 1)}{\tilde x(k + 1)} = \mattwo{A + BK}{BK}{0}{A - LC}\cvec{x(k)}{\tilde x(k)}\).
+
+\section{Adaptive Control}
+
+\textbf{$l_\infty$-Norm:} $\norm{x}_{l_\infty} = \sup _{k \geq 0}\norm{x(k)}$; denote $x(k) \in l_\infty$ if $\norm{x}_{l_\infty}$ exists.
+
+\textbf{$l_2$-Norm:} $\norm{x}_{l_2} = \sqrt{\sum _{k = 0}^\infty \norm{x(k)}^2}$; denote $x(k) \in l_2$ if $\norm{x}_{l_2}$ exists.
+
+\textbf{Persistent Excitation (PE):} $w(k) \in \reals^q$ is PE if
+$\exists \beta _0 > 0, N \in \naturals$ and $N > 0 \suchthat \displaystyle \beta _0I \preccurlyeq W(k, N) = \frac{1}{N}\sum _{\tau = k}^{k + N - 1} w(\tau)w^T(\tau), \forall k \in \naturals _0$
+where $A \preccurlyeq B$ denotes $x^TAx \leq x^TBx, \forall x \in \reals^q$.
+
+\textbf{Gradient Law:} $\hat\psi(k + 1) = \hat\psi(k) - \gamma(k)e(k)w(k), \gamma(k) = \frac{\bar\gamma}{1 + \norm{w(k)}^2}, \bar\gamma \in (0, 2)$.
+\(e(k) \to 0\) is guaranteed but \(\hat\psi(k) \to \psi\) requires the regressor be PE.
+
+\textbf{Static Error Model:} Given measurements \(y(k) \in \reals\), known regressor \(w(k) \in \reals^q\), linear model
+\(y(k) = \psi^Tw(k)\), recover unknown \(\psi \in \reals^q\).
+
+Define parameter estimate \(\hat\psi(k)\), output estimate \(\hat y = \hat\psi^T(k)w(k)\), and prediction error \(e(k) =
+\hat y(k) - y(k) = \hat\psi^T(k)w(k) - \psi^Tw(k) = \tilde\psi^T(k)w(k)\).
+Update \(\hat\psi(k)\) using gradient law.
+
+Error dynamics \(\tilde\psi(k + 1) = (I - \gamma(k)w(k)w^T(k))\tilde\psi(k)\). Assuming \(w \in l_\infty\), then
+\(\tilde\psi(k) = 0\) A.S. by Lyapunov with \(V = \norm{\tilde\psi(k)}^2, \Delta V = -\gamma(k)\left(2 -
+\frac{\bar\gamma\norm{w(k)}^2}{1 + \norm{w(k)}^2}\right)e^2(k)\). \(\tilde\psi \in l_\infty\), \(\hat\psi \in
+l_\infty\), \(e \in l_2\), \(e(k) \to 0\).
+
+\textbf{Model Reference Adaptive Control (MRAC):} Given system \(x(k + 1) = Ax(k) + Bu(k)\), reference \(x_r(k + 1) = A_rx_r(k) + B_rr(k)\),
+with known \(A, B, A_r\), Schur stable \(A_r\), unknown \(B_r\), assume \(r(k) = \psi^Tw(k)\), goal is \(x(k) \to x_r(k)\).
+
+Use controller \(u(k) = Kx(k) + \hat\psi^T(k)w(k)\) for \(K \in \reals^{1 \times n}\), estimate \(\hat\psi(k) \in \reals^q\).
+
+By imposing matching conditions \(A_r = A + BK, B_r = bB, b \in \reals\), the tracking error \(\tilde x(k) = x(k) -
+x_r(k)\) dynamics are \(\tilde x(k + 1) = A_r\tilde x(k) + B(\hat\psi^T(k) - b\psi^T)w(k)\) which converges if
+\(\hat\psi(k) \to b\psi\).
+
+\textbf{Dynamic Error Model:} Given measurable error state \(x_e(k)\) with model \(x_e(k + 1) = Ax_e(k) + B\tilde\psi^T(k)w(k)\)
+with known \(A, B\), Schur stable \(A\), known regressor \(w(k)\), let \(e(k) = B^TPx_e(k)\) where \(P = P^T, P \succ 0, A^TPA - P = I\);
+goal is \(\tilde\psi(k) = \hat\psi(k) - \psi(k) \to 0\).
+
+Let \(H(z)\) be the system transfer function so \(e(k) = H(z)\left[\tilde\psi^T(k)w(k)\right]\).
+Let \(\hat y(k) = H(z)\left[\hat\psi^T(k)w(k)\right]\), then \(e(k) = \hat y(k) - \psi^TH(z)I\left[w(k)\right]\),
+and let \(\hat e(k) = \hat y(k) - \hat\psi^T(k)H(z)I\left[w(k)\right]\).
+Let the augmented regressor \(w_a(k) = H(z)I\left[w(k)\right]\), and the augmented error
+\(e_a(k) = e(k) - \hat e(k) = \tilde\psi^T(k)w_a(k) + \varepsilon(k)\) where \(\varepsilon(k) \to 0\).
+Now use gradient law with \(e_a(k), w_a(k)\) in place of the normal error and regressor.
+
+Assuming \(w \in l_\infty\), then $\hat\psi \in l_\infty, e_a \in l_\infty \cap l_2$, and $e_a(k), e(k) \to 0$.
+
+\textbf{Swapping Lemma:} Let discrete signals $\hat\psi: \naturals _0 \mapsto \reals^q$ and $w: \naturals _0 \mapsto
+\reals^q$, and transfer function $H(z) = C(zI - A)^{-1}B$ be stable with no pole-zero cancellations, then
+\(\hat\psi^T(k)H(z)I\left[w(k)\right] - H(z)\left[\hat\psi^T(k)w(k)\right] = c\tilde\eta(k)\) where \(\eta _1(k + 1) =
+A\eta _1(k) + Bw^T(k), \tilde\eta(k + 1) &= A\tilde\eta(k) + \eta _1(k + 1)(\tilde\psi(k + 1) - \tilde\psi(k))\).
+
+\section{Optimal Control}
+
+\textbf{Finite-Time Optimal Control:} Given a system $x(k + 1) = f(k, x(k), u(k))$ where $x(k) \in \mathcal X$, for $k
+\in {0, 1, \dots, N - 1}$, we want to select a control $\pi = \set{u(0), u(1), \dots, u(N - 1) | u(k) \in \mathcal
+U_k(x(k))} \in \Pi(x(0))$ to minimize the cost $\displaystyle J^\pi(x(0)) = r_N(x(N)) + \sum _{k = 0}^{N - 1} r_k(x(k), u(k))$.
+
+We wish to find the value function $\displaystyle J^*(x(0)) = \min _{\pi \in \Pi(x(0))} J^\pi(x(0))$ and an optimal control
+$\pi^* \in \Pi(x(0))$ such that $J^{\pi^*}(x(0)) = J^*(x(0))$, for each $x(0) \in \mathcal X$.
+
+\textbf{Principle of Optimality:} Suppose $\pi^* = \set{u^*(0), \dots, u^*(N - 1)} \in \Pi(x(0))$, with states
+$\set{x(0), x^*(1), \dots, x^*(N)}$, then for any $j \in \set{1, \dots, N - 1}$, the control $\pi = \set{u^*(j), u^*(j +
+1), \dots, u^*(N - 1)}$ and sequence of states $\set{x^*(j), x^*(j + 1), \dots, x^*(N)}$ is optimal for the sub-problem
+with $x^*(j)$ as initial condition.
+
+\textbf{Dynamic Programming (Finite Time Horizon):} At each time step, compute the optimal cost $\forall x(k) \in
+\mathcal X$, using the principle of optimality and the optimal cost in the next step:
+$J_N(x(N)) = r_N(x(N)), \displaystyle J_k(x(k)) = \min _{u \in \mathcal U(x(k))} \set{r(x(k), u) + J_{k + 1}(f(x(k), u))}$.
+The optimal input sequence $\pi^*$ is recovered by noting which input we chose at each time step.
+
+\textbf{Infinite-Time Optimal Control:} Select a policy \(\pi = \set{\mu _0, \mu _1, \dots}\) to minimize the cost
+\(\displaystyle V^\pi(x_0) = \sum _{k = 0}^\infty \gamma^k r(x(k), \mu _k(x(k)))\) where \(\gamma \in (0, 1)\) is the
+forgetting factor. The optimal cost is \(\displaystyle V^*(x_0) = \inf _{\pi \in \mathcal P} \set{V^\pi(x_0)}\).
+
+\textbf{HJB Equation:} \(\displaystyle V^*(x_0) = \inf _{u \in \mathcal U(x_0)}\set{r(x_0, u) + \gamma V^*(f(x_0, u))}\).
+
+Denote \((T^\mu V)(x) = r(x, \mu(x)) + \gamma V(f(x, \mu(x)))\) so \(V^* = TV^*\).
+
+\textbf{Bellman Equation:} \(\displaystyle V^\mu(x_0) = r(x_0, \mu(x_0)) + \gamma V^\mu(f(x_0, \mu(x_0)))\) (stationary
+policy $\mu$).
+Denote \((T^\mu V)(x) = r(x, \mu(x)) + \gamma V(f(x, \mu(x)))\) so \(V^\mu = T^\mu V^\mu\).
+
+\textbf{Value Iteartion:} Initialize with any $V^0 \geq 0$. Until convergence, do
+$\displaystyle V^{j + 1} = TV^j \iff V^{j + 1}(x) = \inf _{u \in \mathcal U(x)}\set{r(x, u) + \gamma V^j(f(x, u))}$.
+
+\textbf{Policy Iteration:} Initialize with any admissible feedback $\mu^0 = \mathcal M$. Repeat:
+1. Policy evaluation: solve $\displaystyle V^{\mu^j}(x) = r(x, \mu^j(x)) + \gamma V^{\mu^j}(f(x, \mu^j(x))), \forall x \in \mathcal X$.
+2. Policy improvement: $\displaystyle \mu^{j + 1}(x) = \argmin _{u \in \mathcal U(x)} \set{r(x, u) + \gamma V^{\mu^j}(f(x, u))}$.
+
+\textbf{LQR Control:} For an LTI system $x(k + 1) = Ax(k) + Bu(k)$, quadratic cost
+$J(x_0) = \frac{1}{2}\sum _{k = 0}^\infty x^T(k)Qx(k) + u^T(k)Ru(k)$ where \(Q = Q^T, Q \succcurlyeq 0\),
+\(R = R^T, R \succ 0\). \(\displaystyle V^\mu(x(k)) = \frac{1}{2}\left(x^T(k)Qx(k) + \mu^T(k)R\mu(k)\right) + V^\mu(x(k + 1))\).
+
+For \(\mu(x(k)) = -Kx(k)\), \(V^\mu(x(k)) = \frac{1}{2}x^T(k)Px(k)\) where \(P = P^T, P \succ 0\). The Bellman equation
+reduces to \((A - BK)^TP(A - BK) - P + Q + K^TRK = 0\).
+
+Given value function, \(K = (R + B^TPB)^{-1}B^TPA\). Substitute to get discrete algebraic Riccati equation:
+\(P = A^TPA + Q - A^TPB(R + B^TPB)^{-1}B^TPA\).
+
+Unique positive definite solution for \(P\) exists if \((A, B)\) stabilizable and \(Q, A\) detectable.
+
+\section{Useful Identities} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{gather*}
+    % {\textstyle\sin\left(x + \frac{\pi}{2}\right) = \cos(x) \quad \sin\left(x - \frac{\pi}{2}\right) = -\cos(x) \quad \sin\left(\frac{3\pi}{2} - x\right) = -\cos(x)} \\
+    % {\textstyle\cos\left(x + \frac{\pi}{2}\right) = -\sin(x) \quad \cos\left(x - \frac{\pi}{2}\right) = \sin(x) \quad \cos\left(\frac{3\pi}{2} - x\right) = \sin(x)} \\
+    \sin(x + y) = \sin x\cos y + \cos x\sin y \quad \sin(x - y) = \sin x\cos y - \cos x\sin y \\
+    \cos(x + y) = \cos x\cos y - \sin x\sin y \quad \cos(x - y) = \cos x\cos y + \sin x\sin y \\
+    \sin(\tan^{-1} x) = \frac{x}{\sqrt{1 + x^2}} \qquad \cos(\tan^{-1} x) = \frac{1}{\sqrt{1 + x^2}} \\
+    \sin(\cos^{-1} x) = \cos(\sin^{-1} x) = \sqrt{1 - x^2} \\
+	\sin^2(x) = \frac{1 - \cos(2x)}{2} \quad \cos^2(x) = \frac{1 + \cos(2x)}{2} \\
+    % \atantwo(-y, x) = -\atantwo(y, x) \qquad \atantwo(y, -x) = \pi - \atantwo(y, x) \\
+    % \forall a > 0,\,\atantwo(ay, ax) = \atantwo(y, x) \\
+    % \atantwo\left(x, \sqrt{1 - x^2}\right) = \sin^{-1} x \qquad \atantwo\left(\pm\sqrt{1 - x^2}, x\right) = \pm\cos^{-1} x \\
+    % \atantwo\left(x, -\sqrt{1 - x^2}\right) = \twocond{\pi - \sin^{-1}x}{x > 0}{-\pi - \sin^{-1}(x)}{x < 0} \\
+    % \nabla _x f(\bm x) = \left(\pdiff{f(\bm x)}{\bm x}\right)^T \qquad \pdiff{\norm{\bm x}}{\bm x} = \frac{1}{\norm{\bm x}}\bm x^T \\
+    % v_1 \cdot v_2 = \norm{v_1}\norm{v_2}\cos\theta \qquad v_1 \times v_2 = \norm{v_1}\norm{v_2}\sin(\theta)\hat n \\
+    A^{-1} = \frac{1}{\det A}(\on{cof} A)^T \qquad \mattwo{a}{b}{c}{d}^{-1} = \frac{1}{ad - bc}\mattwo{d}{-b}{-c}{a} \\
+    \diff{}{x}\sin^{-1}x = \frac{1}{\sqrt{1 - x^2}} \quad \diff{}{x}\cos^{-1}x = -\frac{1}{\sqrt{1 - x^2}} \quad \diff{}{x}\tan^{-1}x = \frac{1}{1 + x^2}
+\end{gather*}
+
+% Need to add:
+% - Common Z transforms
+% - Diff eq.
+% - How to deal with TFs where degree of numerator and denominator are equal
+% - Jordan forms??
+
+\end{document}
