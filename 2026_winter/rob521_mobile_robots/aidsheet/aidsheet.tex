@@ -1,8 +1,8 @@
 \documentclass[twocolumn, 8pt]{extarticle}
 
 % Uncomment to squeeze everything onto one side
-%\usepackage{pgfpages}
-%\pgfpagesuselayout{2 on 1}[letterpaper, landscape]
+\usepackage{pgfpages}
+\pgfpagesuselayout{2 on 1}[letterpaper, landscape]
 
 \usepackage[letterpaper,margin=0.25in]{geometry}
 \input{ncommon}
@@ -398,6 +398,244 @@ loss (penalize too fast, not too slow). Penalize jerk \(\int _0^{s_f} \norm{\ddd
 Get desired \(v_f\) based on minimum of \(v_{ref}\), lead vehicle speed, and acceleration within friction
 ellipse/comfort rectangle (\(a_{lat} = v^2\kappa\)). Connect to current \(v_0\) with linear (\(v_f = \sqrt{2as +
 v_0^2}\)) or trapezoidal ramp.
+
+\section{Probability} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textbf{Total Probability:} \(\int _{a_N}^{b_N} \cdots \int _{a_1}^{b_1} p(x_1, \dots, x_N) \,\dx_1\cdots\dx_N = 1\)
+
+\textbf{Bayes' Rule:} \(p(\bm x | \bm y) = \frac{p(\bm y | \bm x)p(\bm x)}{p(\bm y)}\)
+
+\textbf{Moments:} 1st (mean): \(\bm\mu = \mathbb E[\bm x] = \int \bm x p(\bm x)\,\dd\bm x\);
+2nd (variance): \(\bm\Sigma = \mathbb E[(\bm x - \bm\mu)(\bm x - \bm\mu)^T]\); 3rd (skewness); 4th (kurtosis).
+
+\textbf{Independence:} \(p(\bm x, \bm y) = p(\bm x)p(\bm y)\); implies uncorrelated.
+
+\textbf{Uncorrelated:} \(\mathbb E[\bm x\bm y^T] = \mathbb E[\bm x]\mathbb E[\bm y]^T \iff \bm\Sigma _{xy} = \bm 0\)
+
+\textbf{Shannon Information:} $H(\bm X) = -\mathbb E[\ln p(\bm x)] = -\int _a^b p(\bm x)\ln p(\bm x)\,\dd\bm x$
+
+\subsection{Gaussians}
+
+\textbf{Multivariate:} \(p(\bm x | \bm\mu, \bm\Sigma) = \frac{1}{\sqrt{(2\pi)^N\det\bm\Sigma}}\exp\left(-\frac{1}{2}(\bm x - \bm\mu)^T\bm\Sigma^{-1}(\bm x - \bm\mu)\right)\)
+
+\textbf{Factoring:}
+\(\begin{aligned}[t]
+  p(\bm x, \bm y) & = \mathcal N\left(\cvec{\bm\mu _x}{\bm\mu _y}, \mattwo{\bm\Sigma _{xx}}{\bm\Sigma _{xy}}{\bm\Sigma _{yx}}{\bm\Sigma _{yy}}\right) = p(\bm x | \bm y)p(\bm y) \\
+	p(\bm x | \bm y) & = \mathcal N(\bm\mu _x + \bm\Sigma _{xy}\bm\Sigma^{-1}_{yy}(\bm y - \bm\mu _y), \bm\Sigma _{xx} - \bm\Sigma _{xy}\bm\Sigma _{yy}^{-1}\bm\Sigma _{yx}) \\
+	p(\bm y) & = \mathcal N(\bm\mu _y, \bm\Sigma _{yy})
+\end{aligned}\)
+
+\textbf{Direct Product:} \(\bm\Sigma^{-1} = \sum _{k = 1}^K\bm\Sigma _k^{-1}, \bm\mu = \bm\Sigma\sum _{k = 1}^K\bm\Sigma _k^{-1}\bm\mu _k\)
+
+\textbf{Linearization:} \(p(\bm y) = \int p(\bm y | \bm x)p(\bm x)\,\dd\bm x \approx \mathcal N(\bm g(\bm\mu _x), \bm R + \bm G\bm\Sigma _{xx}\bm G^T)\)
+where $p(\bm x) = \mathcal N(\bm\mu _x, \bm\Sigma _{xx})$, $p(\bm y | \bm x) = \mathcal N(\bm g(\bm x), \bm R)$, and $\bm G = \eval{\pdiff{\bm g(\bm x)}{\bm x}}{\bm x = \bm\mu _x}$.
+
+\textbf{Shannon Information:} \(H(\bm X) = \frac{1}{2}\ln((2\pi e)^N\det\bm\Sigma)\); \(\sqrt{\det\bm\Sigma}\) is the uncertainty ellipsoid volume.
+
+\section{Sensors} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textbf{Taxonomy:} Interoceptive (measures internal states) or exteroceptive (measures external states); active (emits
+energy) or passive (measures ambient energy).
+
+\subsection{Interoceptive Sensors}
+
+\textbf{Inertial Measurement Unit (IMU):} Measures proper acceleration (relative to freefall) and angular velocity in 3
+axes. MEMS sensors use capacitive spring-mass systems and measures stretching or Coriolis forces of an oscillating mass.
+Sensitive to vibration. Calibration needed to estimate time-varying biases.
+
+\textbf{Compass/Magnetometer:} Measures heading using magnetic field. Must account for geographical variation.
+Easily disrupted by motors etc.
+
+\textbf{Sun Sensor:} Measures angle to a celestial body. Usually used outside Earth.
+
+\textbf{Inclinometer:} Measures pitch and roll using gravity. Affected by acceleration.
+
+\textbf{Encoder:} Measures axial rotation. Absolute: unique binary pattern for each sector; relative: pulse for each
+increment (quadrature uses 2 sensors a half slit apart).
+
+\subsection{Exteroceptive Sensors}
+
+\textbf{LiDAR:} Measures distance using time-of-flight of laser pulses, determined by measuring phase shift of an
+intensity modulated signal. Beams steered using spinning heads, mirrors, or MEMS. Measurement model:
+\(\rho _{ij} = \sqrt{x_{ij}^2 + y_{ij}^2 + z_{ij}^2} + \Delta\rho\),
+\(\theta _{ij} = \tan^{-1}\left(\frac{y_{ij}}{x_{ij}}\right) + \Delta\theta\),
+\(\alpha _{ij} = \tan^{-1}\left(\frac{z_{ij}}{\sqrt{x_{ij}^2 + y_{ij}^2}}\right) + \Delta\alpha\).
+
+\textbf{ToF Camera:} Like LiDAR but captures the entire point cloud at once. Much shorter range; suitable for indoor
+use since sunlight causes problems.
+
+\textbf{Sonic Rangefinder/SODAR:} Measures distance using ToF of ultrasonic pulse. Limited range, resolution, and rate.
+Popular underwater.
+
+\textbf{Radar:} Measures distance and velocity using radio waves. Good for distance, unreliable for angle.
+
+\textbf{GNSS/GPS:} Measures position using distance to satellites. At least 4 for solution (3 position + 1 clock
+offset). Base carrier frequency at \SI{1575}{MHz}, carrying a code at \SI{1.023}{Mcps}; 1023 chips form a unique
+orthogonal gold code identifying the satellite (repeated at \SI{1}{kHz}). Correlation with code determines ToF. 20 code
+repeats encodes 1 bit (\SI{50}{bps}), carrying orbital data, time, etc. Raw distances (pseudoranges) are used to solve
+for position and clock bias using NLLS.
+
+Errors from satellite geometry (dilution of precision), ionospheric/tropospheric effects, multi-path, giving \SI{10}{m}
+accuracy. DGPS uses known base station to eliminate atmospherics and satellite clock error (\SI{10}{cm} relative to
+base). RTK GPS also uses carrier phase (\SI{2}{cm}).
+
+\subsection{Cameras}
+
+\subsubsection{Pinhole Camera Model}
+
+\textbf{Basic Projective Map:} Normalized by focal length,
+\[\bar{\bm x} = \mathcal P_z(\bm p) = \bm p / p_z = \rvec{x/z}{y/z}{1}^T\]
+
+\textbf{Intrinsic Matrix:} For focal lengths \(f_x, f_y\), center \(c_x, c_y\) (pixels), skew \(s\):
+\[
+\cvec{x_s}{y_s}{1} = \matthreeb{f_x}{s}{c_x}{0}{f_y}{c_y}{0}{0}{1}\cvec{x/z}{y/z}{1} = \bm K\frac{\bm p}{z}
+\]
+
+This projects 3D to pixel coords. Note one can also normalize after projection. One can obtain a ray of points that
+project to the same pixel by multiplying the augmented pixel vector by \(\bm K^{-1}\).
+
+\textbf{FoV, Sensor Width, Focal Length:} \(\displaystyle \tan\frac{\theta}{2} = \frac{W}{2f}\)
+
+\textbf{Extrinsic Matrix:} \(\bm E_{CW} \in SE(3)\) contains the world frame to camera frame
+transform. \(\bm E_{CW} = \bm E_{WC}^{-1}\) where \(\bm E_{WC}\) is the camera pose in world frame.
+
+\textbf{Projective Matrix:} \(\tilde{\bm P} = \mattwo{\bm K}{0}{\bm 0^T}{1}\mattwo{\bm C}{\bm t}{\bm 0^T}{1} =
+\tilde{\bm K}\bm E\). Project a world point to image plane as \(\tilde{\bm x}_s = \tilde{\bm P}\bar{\bm p}_w\), then
+normalize by the third element.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{imgs/pinhole_camera.png}
+\end{figure}
+
+\subsubsection{Distortion \& Optical Effects}
+
+\textbf{Plumb Bob Distortion Model:} From normalized image coordinates to distorted coordinates, where
+\(r = \sqrt{x_n^2 + y_n^2}\) and \(x_d, y_d\) normalized by \(f_x, f_y\):
+\[
+\cvec{x_d}{y_d} = (1 + \kappa _1r^2 + \kappa _2r^4 + \kappa _3r^6)\cvec{x_n}{y_n} + \cvec{2\tau _1x_ny_n + \tau _2(r^2 + 2x_n^2)}{2\tau_2 x_ny_n + \tau _1(r^2 + 2y_n^2)}
+\]
+Note distortion is applied after extrinsics \& projective map, but before doing intrinsics.
+
+\textbf{Radial Distortion:} Barrel (corner points pushed in), pincushion (corner points pulled out), or mustache
+(combination).
+
+\textbf{Tangential Distortion:} Pixels shifted in one direction (further pixels shifted more), due to the lens and
+imaging plane not being parallel.
+
+\textbf{Unwarping:} Undoing distortion by precomputing distorted location of each pixel, then using bilinear
+interpolation.
+
+\subsubsection{Image Operations \& Transformations}
+
+\textbf{Histogram Equalization:} \(\displaystyle T(r_k) = \sum _{j = 0}^k p_r(r_j) = \sum _{j = 0}^k \frac{n_j}{n}\)
+where \(T(r_k)\) is the CDF and \(p_r(r_j)\) is the PDF (normalized histogram) as a function of pixel intensity.
+Each pixel value is mapped to the proportion of pixels that it's brighter than, resulting in a flat-ish histogram.
+
+\textbf{Linear Filtering:} \(\displaystyle g(i, j) = f * h = \sum _{k, l} f(i - k, j - l)h(k, l)\) where \(h(k, l)\)
+is the \textbf{kernel}. Note how the kernel is flipped. Separable kernels can be expressed as \(\bm K = \bm v\bm h^T\)
+and is equivalent to convolution by \(\bm v\) then \(\bm h\).
+
+\textbf{Geometric Transform:} Applies to domain, \(g(\bm x) = f(\bm h(\bm x))\). Better to compute the inverse
+transformation and map each pixel in the output to a location in the input, and bilinearly interpolate.
+
+\subsubsection{Stereo Vision}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\linewidth]{imgs/epipolar.png}
+\end{figure}
+
+\textbf{Epipolar Geometry:} Form the epipolar plane from a point and the cameras' optical centres; the intersection
+of the epipolar plane with each imaging plane forms an epipolar line, which is where correspondences lie.
+
+\textbf{Stereo Rectification:} Transforming and unwarping the images so the imaging planes become parallel, at the same
+depth, and rotationally aligned (fronto-parallel or standard rectified geometry). After rectification all epipolar lines
+are horizontal.
+
+\textbf{Disparity:} Difference in \(x\) values of a point between cameras. \(Z = \frac{fb}{d}\) where \(b\) is baseline
+and \(d\) is disparity. Larger disparity indicates a point is closer.
+
+\textbf{Stereo Camera Model:}
+\(\displaystyle\cvec{x_0}{y_0}{d} = \bm f(\bm p_c) = \frac{f}{Z}\cvec{X}{Y}{b} + \cvec{c_x}{c_y}{0}\)
+
+\textbf{Baseline:} Distance between cameras. Larger baseline improves accuracy, but makes matching more difficult as
+overlapping FOV decreases and foreshortening is increased (oblique objects appear as different sizes). Wider baseline
+also makes errors more Gaussian-like (shorter tail); for short baseline, using Gaussian errors biases the points to be
+closer.
+
+\textbf{Combined Stereo Model:} Forward model produces pixel locations in both cameras. Frame origin is halfway between
+two cameras.
+
+\begingroup
+\thinmuskip=3mu       % Readable sin/cos
+\medmuskip=2mu        % Tight + and -
+\thickmuskip=3mu      % Tight =
+Forward: \(\displaystyle f(\bm p) = \bm M\frac{1}{z}\bm p = \matfour{f_u}{0}{c_u}{f_u\frac{b}{2}}{0}{f_v}{c_v}{0}{f_u}{0}{c_u}{-f_u\frac{b}{2}}{0}{f_v}{c_v}{0}\frac{1}{z}\bm p = \cvec{u_l}{v_l}{u_r}{v_r}\). \\
+\endgroup
+Inverse model: \(\displaystyle \bm g(\bm y) = {\displaystyle\frac{b}{u_l - u_r}}\cvec{\frac{1}{2}(u_l + u_r) - c_u}{\frac{f_u}{f_v}\left(\frac{1}{2}(v_l + v_r) - c_v\right)}{f_u}\). \\
+\mbox{Jacobians: forward \(\displaystyle\pdiff{\bm f}{\bm p} = \bm M\frac{1}{p_3}\matfour{1}{0}{-{p_1}/{p_3}}{0}{0}{1}{-{p_2}/{p_3}}{0}{0}{0}{0}{0}{0}{0}{-{p_4}/{p_3}}{1}\),
+inverse \(\displaystyle\pdiff{\bm g}{\bm y} =\)}\\ % FUCK LATEX
+\begingroup
+\setlength{\arraycolsep}{2pt} 
+\[\frac{b}{(u_l - u_r)^2}\mat{\mrow{-u_r + c_u}{0}{u_l - c_u}{0}\mrow{-\frac{f_u}{f_v}\left(\frac{1}{2}(v_l + v_r) - c_v\right)}{\frac{f_u}{2f_v}}{\frac{f_u}{f_v}\left(\frac{1}{2}(v_l + v_r) - c_v\right)}{\frac{f_u}{2f_v}}\mrow{-f_u}{0}{f_u}{0}}\]
+\endgroup
+
+\textbf{Pixel-Disparity Stereo Model:} Forward model produces a pixel location and disparity. Frame origin is at the
+left camera.
+
+\begingroup
+\thinmuskip=3mu       % Readable sin/cos
+\medmuskip=2mu        % Tight + and -
+\thickmuskip=3mu      % Tight =
+Forward: \(\displaystyle \bm y = \bm f(\bm p) = \bm M\frac{1}{p_3}\bm p = \mat{\mrow{f_u}{0}{c_u}{0}\mrow{0}{f_v}{c_v}{0}\mrow{0}{0}{0}{f_ub}}\frac{1}{p_3}\bm p = \cvec{u_l}{v_l}{d}\). \\
+\endgroup
+Inverse model: \(\displaystyle \bm g(\bm y) = \frac{b}{d}\cvec{u_l - c_u}{\frac{f_u}{f_v}(v_l - c_v)}{f_u}\).
+
+Forward Jacobian: \(\displaystyle \pdiff{\bm f}{\bm p} = \frac{1}{p_3}\bm M\matfour{1}{0}{-p_1/p_3}{0}{0}{1}{-p_2/p_3}{0}{0}{0}{0}{0}{0}{0}{-p_4/p_3}{1}\) \\
+Inverse Jacobian: \(\displaystyle \pdiff{\bm g}{\bm y} = \frac{b}{d^2}\matthree{d}{0}{c_u - u_l}{0}{\frac{f_u}{f_v}d}{\frac{f_u}{f_v}(c_v - v_l)}{0}{0}{-f_u}\)
+
+\subsubsection{Image Features}
+
+Features should be salient (distinctive), local, repeatable (can be found in other images) and compact.
+
+\textbf{Weighted Summed Squared Difference:} Images \(I_0, I_1\), displacement \(\bm u\)
+\[
+E_{WSSD}(\bm u) = \sum _i w(\bm x_i)(I_1(\bm x_i + \bm u) - I_0(\bm x_i))^2
+\]
+For \(I_0 = I_1\) this is \textbf{autocorrelation} for a small \(\Delta\bm u\); high autocorrelation means the area is
+distinctive. \(E_{AC}(\Delta\bm u) \approx \Delta\bm u^T\bm A\Delta\bm u\).
+As convolution, \(\bm A = w * \mattwo{I_x^2}{I_xI_y}{I_xI_y}{I_y^2}\).
+
+\textbf{Harris Corner Detector:} \(\det\bm A - \alpha\tr\bm A^2 = \lambda _0\lambda _1 - \alpha(\lambda _0 + \lambda _1)^2\).
+Largest when both eigenvalues are large, indicating distinctiveness in both directions, i.e. a corner.
+
+\textbf{SIFT:} Scale and rotation invariant, capable but slow. Construct scale space representation by repeated blurring
+and downsampling. Find keypoints with Difference of Gaussians (similar to LoG). Reject keypoints using Hessians similar
+to Harris. Assign each keypoint an orientation using gradients of points around the keypoint in a histogram. Assemble
+final descriptor using 4x4 grid of subpatches, each subpatch having a gradient orientation histogram.
+
+\textbf{SURF:} Like SIFT but faster. Uses box filters instead of Gaussians (can use integral images). Smaller descriptor
+size (half as SIFT, 64-dimensional vector).
+
+\textbf{FAST:} Very fast but not scale or rotation invariant. For each pixel look at the 16 pixels in a ring around it,
+if there are 12 contiguous pixels that are brighter or darker than the centre it is a feature. Use non-maximum
+suppression (suppress non-maximum features in an area around each maximum).
+
+\textbf{BRISK:} Sample pairs of points in a circular pattern around the centre (Gaussian applied around each sampled
+point); compare the pairs and generate one bit in the feature for each pair.
+
+\textbf{BRIEF:} Draw points randomly (one of several distributions) around the centre, compare them similarly to BRISK
+to form descriptor. Sampling pattern is decided once and used consistently across images. 512-bit features. Fast but not
+scale/rotation invariant and sensitive to noise.
+
+\textbf{ORB:} Combines FAST and BRIEF to get a fast and reliable feature. Downsample similarly to SIFT and apply FAST at
+all scales to find keypoints. Compute orientation using intensity centroid. Use rotated BRIEF (rotate sampling pattern
+or image subpatch) to form descriptor.
+
+\textbf{Learning-Based Detectors:} Often use classic features to generate training data for supervised methods, or image
++ pose sequences for unsupervised methods. LIFT is one such method using 3 CNNs to detect, estimate orientation, and
+generate descriptor, trained using contrastive learning.
 
 \section{Useful Identities} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
