@@ -3,11 +3,12 @@
 ## LiDAR and RGB-D SLAM
 
 * LiDAR odometry and mapping (LOAM) uses a feature extractor and considers keypoints in the point cloud only
-	* Keypoint selection looks for planes and edges, but avoids oblique planes and edges caused by occlusion (which may change based on viewpoint)
-	* Pipeline consists of using LiDAR frame point cloud registration for odometry, local scan aggregation and mapping
+	* Keypoint selection looks for planes and edges, but avoids oblique planes, and edges caused by occlusion (which may change based on viewpoint)
+	* Tested on a custom-built LiDAR using a spinning 2D scanner, so the first step of the pipeline registers points in the LiDAR frame to form a complete scan
+	* The remaining pipeline consists of a \SI{10}{Hz} LiDAR odometry thread which also does motion compensation, and a \SI{1}{Hz} mapping thread which does finer alignment and builds the map
 * Visual LOAM (VLOAM, 2016) fuses a vision input, in addition to LiDAR and IMU
 	* IMU is used to propagate the pose prediction, then used in a visual-inertial odometry pipeline using feature matching to refine the pose estimate; finally, a LOAM-like feature registration approach is used for scan matching refinement
-* Other LiDAR-camera-inertial approaches:
+* Generally, LiDAR-visual-inertial SLAM takes one of 3 approaches:
 	* LiDAR-enhanced visual SLAM: solving bundle adjustment, using LiDAR depth to initialize feature depths
 	* Vision-enhanced LiDAR SLAM (V-LOAM): pose graph optimization and scan registration with poses initialized with visual SLAM outputs
 	* Tightly coupled (LVI-SLAM): optimize LiDAR and camera measurements simultaneously through bundle adjustment and pose graphs
@@ -19,7 +20,7 @@
 	* For fusing multiple measurements, we can weight observations in a way similar to LiDAR or sonar
 	* Over time, noise cancels out since the depth averages to the correct depth
 
-![Measurement model for SDFs.](./imgs/lec31_1.png){width=50%}
+![Measurement model for range-based sensors for TSDF fusion.](./imgs/lec31_1.png){width=50%}
 
 * Dense Tracking and Mapping (DTAM) builds a TSDF using keyframes with monocular vision, with a frustum like grid model which expands with distance from the camera
 	* Builds detailed dense maps

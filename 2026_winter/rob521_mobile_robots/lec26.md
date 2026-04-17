@@ -5,7 +5,7 @@
 * Standard Kalman filter: assuming a linear model $\twopiece{\bm x_k = \bm A_{k - 1}\bm x_{k - 1} + \bm v_k + \bm w_k}{\bm y_k = \bm C_k\bm x_k + \bm n_k}$
 	* Prediction step: $\twopiece{\check{\bm P}_k = \bm A_{k - 1}\hat{\bm P}_{k - 1}\bm A_{k - 1}^T + \bm Q_k}{\check{\bm x}_k = \bm A_{k - 1}\hat{\bm x}_{k - 1} + \bm v_k}$
 	* Kalman gain: $\bm K_k = \check{\bm P}_k\bm C_k^T(\bm C_k\check{\bm P}_k\bm C_k^T + \bm R_k)^{-1}$
-	* Corrections step: $\twopiece{\hat{\bm P}_k = (\bm 1 - \bm K_k\bm C_k)\check{\bm P}_k}{\hat{\bm x}_k = \check{\bm x}_k + \bm K_k(\bm y_K - \bm C_k\check{\bm x}_k)}$
+	* Corrections step: $\twopiece{\hat{\bm P}_k = (\bm 1 - \bm K_k\bm C_k)\check{\bm P}_k}{\hat{\bm x}_k = \check{\bm x}_k + \bm K_k(\bm y_k - \bm C_k\check{\bm x}_k)}$
 	* Assuming modelling is correct, the Kalman filter is *consistent* (correct covariance) and *unbiased* (correct mean)
 
 ### Extended Kalman Filtering (EKF)
@@ -26,6 +26,10 @@
 	* Taking expectations, $\twopiece{p(\bm x_k | \bm x_{k - 1}, \bm v_k) = \mathcal N(\check{\bm x}_k + \bm F_{k - 1}(\bm x_{k - 1} - \hat{\bm x}_{k - 1}), \bm Q_k')}{p(\bm y_k | \bm x_k) \approx \mathcal N(\check{\bm y}_k + \bm G_k(\bm x_k - \check{\bm x}_k), \bm R_k')}$
 	* Now we substitute the approximated PDFs into the Bayes filter equation, and use the direct product and Gaussian inference identities
 	* We have the new distribution $\mathcal N(\check{\bm x}_k + \bm K_k(\bm y_K - \check{\bm y}_k), (\bm 1 - \bm K_k\bm G_k)(\bm F_{k - 1}\hat{\bm P}_{k - 1}\bm F_{k - 1}^T + \bm Q_k'))$ where the Kalman gain is $\bm K_k = \check{\bm P}_k\bm G_k^T(\bm G_k\check{\bm P}_k\bm G_k^T + \bm R_k')^{-1}$
+	* Final update equations:
+		* Prediction: $\twopiece{\check{\bm P}_k = \bm F_{k - 1}\hat{\bm P}_k\bm F_{k - 1}^T + \bm Q_k'}{\check{\bm x}_k = \bm f(\hat{\bm x}_{k - 1}, \bm v_k, \bm 0)}$
+		* Kalman gain: $\bm K_k = \check{\bm P}_k\bm G_k^T(\bm G_k\check{\bm P}_k\bm G_k^T + \bm R_k')^{-1}$
+		* Correction: $\twopiece{\hat{\bm P}_k = (\bm 1 - \bm K_k\bm G_k)\check{\bm P}_k}{\hat{\bm x}_k = \check{\bm x}_k + \bm K_k(\bm y_k - \bm g(\check{\bm x}_k, \bm 0))}$
 * EKFs only work well for mildly nonlinear non-Gaussian systems, as our approximation breaks down if the model deviates too much
 	* Our linearization point is about the estimate instead of the true state, so as the system becomes more uncertain the approximation gets worse
 	* The distribution also becomes less and less Gaussian as we pass it through the nonlinearity
@@ -50,14 +54,19 @@
 * The *unscented Kalman filter* (UKF) uses the transform:
 	* Prediction step:
 		1. Stack the prior belief and motion noise as $\bm\mu _z = \cvec{\hat{\bm x}_{k - 1}}{\bm 0}, \bm\Sigma _{zz} = \mattwo{\hat{\bm P}_{k - 1}}{\bm 0}{\bm 0}{\bm Q_k}$
-		2. Sample sigma points
-		3. Extract state and motion noise for each sigma point as $\bm z_i = \cvec{\hat{\bm x}_{k - 1, i}}{\bm w_{k, i}}$, and pass through nonlinear motion model
-		4. Compute new predicted mean and covariance from sigma points to get $\check{\bm x}_k, \check{\bm P}_k$
+		2. Sample sigma points $\bm z_i$
+		3. Extract state and motion noise from each sigma point as $\bm z_i = \cvec{\hat{\bm x}_{k - 1, i}}{\bm w_{k, i}}$, and pass through nonlinear motion model $\check{\bm x}_{k,i} = \bm f(\hat{\bm x}_{k-1, i}, \bm v_k, \bm w_{k,i})$
+		4. Compute new predicted mean and covariance from transformed sigma points:
+			* $\check{\bm x}_k = \sum _{i = 0}^{2L} \alpha _i\check{\bm x}_{k,i}$
+        	* $\displaystyle \check{\bm P}_k = \sum _{i = 0}^{2L} \alpha _i(\check{\bm x}_{k,i} - \check{\bm x}_k)(\check{\bm x}_{k,i} - \check{\bm x}_k)^T$
 	* Correction step:
 		1. Stack prediction belief and observation noise as $\bm\mu _z = \cvec{\check{\bm x}_k}{\bm 0}, \bm\Sigma _{zz} = \mattwo{\check{\bm P}_k}{\bm 0}{\bm 0}{\bm R_k}$
 		2. Sample sigma points
 		3. Extract state and measurement noise for each sigma point as $\bm z_i = \cvec{\check{\bm x}_{k,i}}{\bm n_{k,i}}$ and pass through nonlinear measurement model
-		5. Compute new predicted mean and covariance, $\bm\Sigma _{yy,k}$ and $\bm\Sigma _{xy,k}$ (computed using $\check{\bm x}_{k,i}$ and $\check{\bm y}_{k, i}$)
+		5. Compute new predicted mean and covariance
+			* $\bm\mu _{y, k} = \sum _{i = 0}^{2L} \alpha _i\check{\bm y}_{k, i}$
+			* $\bm\Sigma _{yy,k} = \sum _{i = 0}^{2L} \alpha _i(\check{\bm y}_{k, i} - \bm\mu _{y, k})(\check{\bm y}_{k, i} - \bm\mu _{y, k})^T$
+			* $\bm\Sigma _{xy,k} = \sum _{i = 0}^{2L} \alpha _i(\check{\bm x}_{k, i} - \check{\bm x}_k)(\check{\bm y}_{k, i} - \bm\mu _{y, k})^T$
 		6. Update: $\threepiece{\bm K_k = \bm\Sigma _{xy,k}\bm\Sigma _{yy,k}^{-1}}{\hat{\bm P}_k = \check{\bm P}_k - \bm K_k\bm\Sigma _{xy,k}^T}{\hat{\bm x}_k = \check{\bm x}_k + \bm K_k(\bm y_k - \bm\mu _{y,k})}$
 * The UKF still assumes Gaussian beliefs, but the linearization considers a much larger area and captures the resulting distribution much better
 	* The unscented transform is a third-order approximation compared to the first-order approximation of EKF Jacobians

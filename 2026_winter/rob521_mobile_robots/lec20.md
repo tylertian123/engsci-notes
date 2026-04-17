@@ -17,14 +17,13 @@
 		* We model $w(t) \sim \mathcal U\left(-\frac{\pi}{2^N}, \frac{\pi}{2^N}\right)$ for quantization error
 		* For convenience we approximate as a zero-mean Gaussian $\bm w(t) = \cvec{w_r(t)}{w_l(t)} \sim \mathcal N(\bm 0, \bm Q)$
 	* $\bm q(t + h) = \bm q(t)\matthreetwo{\cos\theta}{0}{\sin\theta}{0}{0}{1}\mattwo{r/2}{r/2}{r/(2b)}{-r/(2b)}\cvec{\Delta\varphi _r(t) + w_r(t)}{\Delta\varphi _l(t) + w_l(t)}$
-	* We often denote $\bm q(t)$ as the overall noisy state, which is composed of $\bar{\bm q}(t)$, the large and known mean, and $\delta\bm q(t)$, the small uncertain part (noise)
-		* Therefore $\bm q$ has mean $\bar{\bm q}$ and covariance $\delta q(t)\delta q^T(t)$
+	* We often denote $\bm q(t)$ as the overall noisy state, which is composed of $\bar{\bm q}(t)$, the large and known mean, and $\delta\bm q(t)$, the small uncertain part (noise), so $\bm q$ has mean $\bar{\bm q}$ and covariance $E[\delta\bm q(t)\delta\bm q^T(t)]$
 	* Linearize the update equation about the mean to propagate uncertainty
 		* $\cos(\theta(t)) \approx \cos(\bar\theta(t)) - \sin(\bar\theta(t))\delta\theta(t)$
 		* $\sin(\theta(t)) \approx \sin(\bar\theta(t)) + \cos(\bar\theta(t))\delta\theta(t)$
 	* $\bm q(t + h) = \bm q(t) + \left(\matthreetwo{\cos\bar\theta(t)}{0}{\sin\bar\theta(t)}{0}{0}{1} + \matthreetwo{-\sin\bar\theta(t)}{0}{\cos\bar\theta(t)}{0}{0}{0}\delta\theta(t)\right)\mattwo{r/2}{r/2}{r/(2b)}{-r/(2b)}\cvec{\Delta\varphi _r(t) + w_r(t)}{\Delta\varphi _l(t) + w_l(t)}$
 		* We drop all second order terms in our approximation to make it linear
-		* The mean propagates as $\bar{\bm q}(t + h) = \bar{\bm q}(t) + \matthreetwo{\cos\bar\theta(t)}{0}{\sin\bar\theta(t)}{0}{0}{1}\mattwo{r/2}{r/2}{r/(2b)}{-r/(2b)}\cvec{\Delta\varphi _r(t) + w_r(t)}{\Delta\varphi _l(t) + w_l(t)}$
+		* The mean propagates as $\bar{\bm q}(t + h) = \bar{\bm q}(t) + \matthreetwo{\cos\bar\theta(t)}{0}{\sin\bar\theta(t)}{0}{0}{1}\mattwo{r/2}{r/2}{r/(2b)}{-r/(2b)}\cvec{\Delta\varphi _r(t)}{\Delta\varphi _l(t)}$
 		* $\alignedeqntwo[t]{\delta\bm q(t + h)}{\begin{aligned}[t] \delta\bm q(t) &+ \matthreetwo{-\sin\bar\theta(t)}{0}{\cos\bar\theta(t)}{0}{0}{0}\mattwo{r/2}{r/2}{r/(2b)}{-r/(2b)}\cvec{\Delta\varphi _r(t)}{\Delta\varphi _l(t)}\delta\theta(t) \\ &+ \matthreetwo{\cos\bar\theta(t)}{0}{\sin\bar\theta(t)}{0}{0}{1}\mattwo{r/2}{r/2}{r/(2b)}{-r/(2b)}\cvec{w_r(t)}{w_l(t)}\end{aligned}}{\bm A(t)\delta\bm q(t) + \bm B(t)\bm w(t)}$
 		* The uncertainty propagates as $\bm\Sigma(t + h) = \bm A(t)\bm\Sigma(t)\bm A(t)^T + \bm B(t)\bm Q\bm B(t)^T$
 			* Once again the uncertainty grows without bound

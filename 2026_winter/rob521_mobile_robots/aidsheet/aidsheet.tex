@@ -8,7 +8,6 @@
 \input{ncommon}
 \everymath{}
 \usepackage{titlesec}
-\usepackage{enumitem}
 \usepackage{multicol}
 
 \usepackage[english]{babel}
@@ -16,11 +15,29 @@
 \MakeOuterQuote{"}
 
 % Options: [subtle], [moderate], or [extreme]
-\usepackage[extreme, mathspacing=normal]{savetrees} 
+\usepackage[extreme, mathspacing=normal, lists=normal]{savetrees} 
 % Restore space between operators (sin, cos, log) and variables
 % \thinmuskip=3mu       % Readable sin/cos
 % \medmuskip=2mu        % Tight + and -
 % \thickmuskip=3mu      % Tight =
+\usepackage{enumitem}
+
+\newenvironment{tight}
+  {\begingroup
+   \setlength{\arraycolsep}{2pt}
+   \thinmuskip=3mu       % Readable sin/cos
+   \medmuskip=2mu        % Tight + and -
+   \thickmuskip=3mu      % Tight =
+  }
+  {
+    \endgroup
+  }
+
+
+% Normal vdots and ddots leave too much space above
+% https://tex.stackexchange.com/questions/207056/wrong-too-much-vertical-space-above-vdots-in-small-matrix
+\newcommand{\newvdots}{\vphantom{\int\limits^x}\smash[t]{\vdots}}
+\newcommand{\newddots}{\vphantom{\int\limits^x}\smash[t]{\ddots}}
 
 \titleformat{\section}
   {\normalfont\fontsize{12}{14}\bfseries}{\thesection}{1em}{}
@@ -38,95 +55,10 @@
 \raggedbottom
 \raggedcolumns
 
-\title{ECE470 Exam Aidsheet}
+\title{ROB521 Exam Aidsheet}
 \author{Tyler Tian}
 
 \begin{document}
-
-\section{History} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\textbf{Notable Robots:}
-
-\begin{small}
-Hephaestus: Golden tripods (Illiad, 800 BCE).
-
-Hero of Alexandria: Programmable cart (70 CE).
-
-Leonardo da Vinci: Humanoid knight (1495).
-
-Nikola Tesla: Teleautomaton, radio controlled boat (1898).
-
-Grey Walter: Machina Speculatrix (tortoises) Elmer and Elsie, seeks out light sources using an analog 2-celled brain.
-First mobile robot and autonomous behaviour (1948).
-
-John Hopkins University: Beast, seeks out wall socket using analog voltages with transistors (cybernetic); first to have
-deliberate, coordinated actions (1961).
-
-James Adams/Paul Braisted/Rodney Schmidt/Hans Moravec: Stanford cart, predictive display, line following, teleoperation;
-first to have camera and computer (1971); stereo with slider, map building, planning; first to have 3D vision (1971-79).
-
-Charles Rosen/Stanford: Shakey, with cameras, range sensors, bump sensors, computers, RC, resulting in A*; first to
-reason about its own actions (1966-72).
-
-Mowbot, autonomous lawn mower; first outdoor robot and field application (1969).
-
-Lunokhod, teleoperated RTG powered lunar rovers; first robot off Earth (1971/73).
-
-CMU/SRI/DARPA/Hughes Research Labs: Autonomous land vehicle (ALV); first AV using LiDAR, first off-road navigation (1980s).
-
-Valentin von Braitenberg: Braitenberg vehicles. Proposed 14 vehicles with increasingly complex behaviour (1984).
-
-Rodney Brooks: Gengis, hexapod using subsumption architecture; first behaviour-based walking robot (1988).
-
-S. Tsugawa: first autonomous car.
-
-Ernst Dickmanns: VaMoRs, VaMP, Vita-2 using cameras; first infrastructure-free autonomous car (1987-95).
-
-CMU: Navlab; Navlab 5 drove from Pittsburgh to LA mostly autonomously; first robot to drive across the US (1986-1997).
-
-NASA: Sojourner, using stereo; first mobile robot on Mars (1997).
-
-iRobot: PackBot, for military use; first to enter Fukushima (1999).
-
-Honda: Asimo, humanoid robot (2000).
-
-iRobot: Roomba; first commercially successful consumer robot (2002).
-
-NASA: MERs Spirit and Opportunity, using stereo to detect and plan around obstacles; first robot with on-board autonomy
-on another planet (2004).
-
-CMU: Sandstorm, furthest in DARPA Grand Challenge desert race (2004).
-
-Sebastian Thrun/Stanford: Stanley, winner of DARPA Grand Challenge (2005).
-
-Boston Dynamics: BigDog, quadruped for rugged terrain transport (2005).
-
-Red Whittaker/CMU: Boss, winner of DARPA Urban Grand Challenge (2007).
-
-Kiva Systems: Autonomous warehouse robots, bought by Amazon (2003-2009).
-
-Google/Waymo: First fully autonomous vehicle on public roads (2009).
-
-NASA: Mars Science Laboratory, Curiosity (2012).
-
-DARPA: DARPA Robotics Challenge; first humanoid competition (2015).
-
-Boston Dynamics: Atlas; first outdoor-capable humanoid (2015).
-
-Boston Dynamics: SpotMini, quadruped (2017).
-
-Waymo: First true driverless robotaxi service (2018).
-\end{small}
-
-\textbf{Behaviourism:} Behaviours are reactions to stimuli or history.
-
-\textbf{Physical Grounding Hypothesis/Subsumption Architecture:} Decomposition of intelligence into individual
-behaviours with multiple layers; lower layers do not depend on higher layers; higher layers subsume but don't modify
-lower layers (Brooks, 1986). Robots are fast, responsive, need no high level representation, simplifies design of
-complex behaviour, but difficult to do high-level long-term planning or optimize behaviours from interacting layers.
-
-\textbf{Physical Symbol System Hypothesis:} Intelligence is some kind of symbol manipulation process. Perception
-generates symbols and feeds to reasoning.
 
 \section{Mathematical Foundations} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -249,7 +181,7 @@ Applied to unicycle model: \(\cvec{\dot\varepsilon _L}{\dot\varepsilon _H} = \cv
 (tangent approximation), change variables \(\cvec{z_1}{z_2} = \cvec{\varepsilon _l}{v\sin\varepsilon _H}\) to get
 \(\cvec{\dot z_1}{\dot z_2} = \mattwo{0}{1}{0}{0}\cvec{z_1}{z_2} + \cvec{0}{1}\eta\) where \(\eta = v\omega\cos\varepsilon _H\).
 Let output \(y = \rvec{\alpha}{1}\cvec{z_1}{z_2}\) and proportional controller \(\eta = K(y_d - y)\), take \(K = 4\alpha\)
-to get \(\omega = -\frac{4\alpha^2}{v}\frac{\varepsilon _L}{\cos\varepsilon _H} - 4\alpha\tan\varepsilon _H\).
+to get \(\displaystyle \omega = -\frac{4\alpha^2}{v}\frac{\varepsilon _L}{\cos\varepsilon _H} - 4\alpha\tan\varepsilon _H\).
 
 This has singularities at \(\varepsilon _H = \pm\pi / 2\) or \(v = 0\), and overshoots turns.
 
@@ -260,9 +192,9 @@ too short results in oscillation; too long results in slow convergence.
 \(\displaystyle \delta(t) = \varepsilon _H(t) + \tan^{-1}\left(\frac{k\varepsilon _L(t)}{k_s + v_f(t)}\right)\)
 for some steering \(\delta(t)\) and forward velocity \(v_f(t)\), gain \(k\) and softening \(k_s\).
 
-Error dynamics: using \(\dot\varepsilon _H(t) = \frac{-v_f(t)\sin(\delta(t))}{l}, \dot\varepsilon _L(t) = v_f(t)\sin(\varepsilon _H(t) - \delta(t))\),
-crosstrack error has \(\dot\varepsilon _L(t) = \frac{-k\varepsilon _L(t)}{\sqrt{1 + \left(\frac{k\varepsilon _L(t)}{v_f}\right)^2}}\),
-like exponential decay for small \(\varepsilon _L\).
+Error dynamics: using \(\displaystyle \dot\varepsilon _H(t) = \frac{-v_f(t)\sin(\delta(t))}{l}, \dot\varepsilon _L(t) = v_f(t)\sin(\varepsilon _H(t) - \delta(t))\),
+crosstrack error has \(\displaystyle \dot\varepsilon _L(t) = \frac{-k\varepsilon _L(t)}{\sqrt{1 + \left(\frac{k\varepsilon _L(t)}{v_f}\right)^2}}\),
+exponential decay for small \(\varepsilon _L\).
 
 \textbf{Model Predictive Control:} At each step, predict all future errors for some horizon, find optimal sequence of
 control inputs, apply the first step (or for a short time) and iterate again.
@@ -282,7 +214,7 @@ trajectory to account for dynamics (i.e. adding a velocity profile), and design 
 \subsection{Reactive Planners}
 
 \textbf{Potential Fields:} Define a potential \(V(x_t) = V_\text{att}(x_t) + V_\text{rep}(x_t)\) where
-\(V_\text{att}(q) = K_\text{att}\rho(q, q^g)^2\) and \(V_\text{rep}(q) = K_\text{rep}\sum _{i = 1}^n \frac{1}{\rho(q, O^i)^2}\)
+\(V_\text{att}(q) = K_\text{att}\rho(q, q^g)^2\) and \(\displaystyle V_\text{rep}(q) = K_\text{rep}\sum _{i = 1}^n \frac{1}{\rho(q, O^i)^2}\)
 and use gradient descent (move in the direction of \(-\nabla V\)).
 Can get stuck in local minima; non-optimal; does not account for vehicle constraints.
 
@@ -307,7 +239,7 @@ grid resolution.
 \subsubsection{Graph Search Methods}
 
 \textbf{Backward Value Iteration:} Working backwards from the final state using dynamic programming to find optimal
-cost-to-go. At each step for each node iterate as \(G^*(x) = \min _u \set{l(x, u) + G^*(f(x, u))}\).
+cost-to-go. At each step for each node iterate as \(\displaystyle G^*(x) = \min _u \set{l(x, u) + G^*(f(x, u))}\).
 
 \textbf{Generic Forward Search Algorithm:} At each step, take the next state from the queue, mark it as visited,
 discover all unvisited nodes reachable from this node, and add each reachable unvisited node to the queue. Queue
@@ -385,38 +317,45 @@ variational \(\min _{\delta x} J(x + \delta x)\) for optimality, init with globa
 \textbf{Conformal Lattice Planner:} Fits control actions/grid to the road. Solve with boundary conditions \((x, y,
 \theta, \kappa)\) with max curvature, min velocity constraints.
 
-\textbf{Cubic Spirals:} Numerically integrate \(\kappa(s) = a_3s^3 + a_2s^2 + a_1s + a_0 \implies \theta(s) = \theta _0
-+ \int _0^s \kappa(s')\ds', x(s) = x_0 + \int _0^s \cos(\theta(s'))\,\ds', y(s) = y_0 + \int _0^s
+\textbf{Cubic Spirals:} Numerically integrate \(\displaystyle \kappa(s) = a_3s^3 + a_2s^2 + a_1s + a_0 \implies
+\theta(s) = \theta _0 + \int _0^s \kappa(s')\ds', x(s) = x_0 + \int _0^s \cos(\theta(s'))\,\ds', y(s) = y_0 + \int _0^s
 \sin(\theta(s'))\,\ds'\). Specify boundary constraints, check curvature at 1/3, 2/3 points. For optim remap params to 4
 control points and arc length and use soft constraints.
 
-\textbf{Objectives:} Path length \(s_f = \int _{x_i}^{x_f} \sqrt{1 + \left(\diff{y}{x}\right)^2}\,\dx\), time \(T_f =
-\int _0^{s_f} \frac{1}{v(s)}\,\ds\), bending energy \(\int _0^{s_f} \norm{\kappa(s)}^2\,\ds\) (distributes curvature).
+\textbf{Objectives:} Path length \(\displaystyle s_f = \int _{x_i}^{x_f} \sqrt{1 + \left(\diff{y}{x}\right)^2}\,\dx\),
+time \(\displaystyle T_f = \int _0^{s_f} \frac{1}{v(s)}\,\ds\), bending energy \(\displaystyle \int _0^{s_f}
+\norm{\kappa(s)}^2\,\ds\) (distributes curvature).
 
-\textbf{Velocity Generation:} Track reference and minimize \(\int _0^{s_f} \norm{v(s) - v_{ref}(s)}\,\ds\) or Hinge
-loss (penalize too fast, not too slow). Penalize jerk \(\int _0^{s_f} \norm{\dddot x(s)}^2\,\ds\) for smoothness.
-Get desired \(v_f\) based on minimum of \(v_{ref}\), lead vehicle speed, and acceleration within friction
-ellipse/comfort rectangle (\(a_{lat} = v^2\kappa\)). Connect to current \(v_0\) with linear (\(v_f = \sqrt{2as +
-v_0^2}\)) or trapezoidal ramp.
+\textbf{Velocity Generation:} Track reference and minimize \(\displaystyle \int _0^{s_f} \norm{v(s) - v_{ref}(s)}\,\ds\)
+or Hinge loss (penalize too fast, not too slow). Penalize jerk \(\displaystyle \int _0^{s_f} \norm{\dddot x(s)}^2\,\ds\)
+for smoothness. Get desired \(v_f\) based on minimum of \(v_{ref}\), lead vehicle speed, and acceleration within
+friction ellipse/comfort rectangle (\(a_{lat} = v^2\kappa\)). Connect to current \(v_0\) with linear (\(v_f = \sqrt{2as
++ v_0^2}\)) or trapezoidal ramp.
 
 \section{Probability} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\textbf{Total Probability:} \(\int _{a_N}^{b_N} \cdots \int _{a_1}^{b_1} p(x_1, \dots, x_N) \,\dx_1\cdots\dx_N = 1\)
+\textbf{Total Probability:} \(\displaystyle \int _{a_N}^{b_N} \cdots \int _{a_1}^{b_1} p(x_1, \dots, x_N) \,\dx_1\cdots\dx_N = 1\)
 
-\textbf{Bayes' Rule:} \(p(\bm x | \bm y) = \frac{p(\bm y | \bm x)p(\bm x)}{p(\bm y)}\)
+\textbf{Bayes' Rule:} \(\displaystyle p(\bm x | \bm y) = \frac{p(\bm y | \bm x)p(\bm x)}{p(\bm y)}\)
 
-\textbf{Moments:} 1st (mean): \(\bm\mu = \mathbb E[\bm x] = \int \bm x p(\bm x)\,\dd\bm x\);
-2nd (variance): \(\bm\Sigma = \mathbb E[(\bm x - \bm\mu)(\bm x - \bm\mu)^T]\); 3rd (skewness); 4th (kurtosis).
+\textbf{Moments:}
+\begin{enumerate}[start=0]
+  \item Always 1 by total probability.
+  \item Mean: \(\displaystyle \bm\mu = \mathbb E[\bm x] = \int \bm x p(\bm x)\,\dd\bm x\).
+  \item (Co)variance: \(\bm\Sigma = \mathbb E[(\bm x - \bm\mu)(\bm x - \bm\mu)^T]\).
+  \item Skewness
+  \item Kurtosis
+\end{enumerate}
 
 \textbf{Independence:} \(p(\bm x, \bm y) = p(\bm x)p(\bm y)\); implies uncorrelated.
 
 \textbf{Uncorrelated:} \(\mathbb E[\bm x\bm y^T] = \mathbb E[\bm x]\mathbb E[\bm y]^T \iff \bm\Sigma _{xy} = \bm 0\)
 
-\textbf{Shannon Information:} $H(\bm X) = -\mathbb E[\ln p(\bm x)] = -\int _a^b p(\bm x)\ln p(\bm x)\,\dd\bm x$
+\textbf{Shannon Information:} $\displaystyle H(\bm X) = -\mathbb E[\ln p(\bm x)] = -\int _a^b p(\bm x)\ln p(\bm x)\,\dd\bm x$
 
 \subsection{Gaussians}
 
-\textbf{Multivariate:} \(p(\bm x | \bm\mu, \bm\Sigma) = \frac{1}{\sqrt{(2\pi)^N\det\bm\Sigma}}\exp\left(-\frac{1}{2}(\bm x - \bm\mu)^T\bm\Sigma^{-1}(\bm x - \bm\mu)\right)\)
+\textbf{PDF:} \(\displaystyle p(\bm x | \bm\mu, \bm\Sigma) = \frac{1}{\sqrt{(2\pi)^N\det\bm\Sigma}}\exp\left(-\frac{1}{2}(\bm x - \bm\mu)^T\bm\Sigma^{-1}(\bm x - \bm\mu)\right)\)
 
 \textbf{Factoring:}
 \(\begin{aligned}[t]
@@ -425,9 +364,9 @@ v_0^2}\)) or trapezoidal ramp.
 	p(\bm y) & = \mathcal N(\bm\mu _y, \bm\Sigma _{yy})
 \end{aligned}\)
 
-\textbf{Direct Product:} \(\bm\Sigma^{-1} = \sum _{k = 1}^K\bm\Sigma _k^{-1}, \bm\mu = \bm\Sigma\sum _{k = 1}^K\bm\Sigma _k^{-1}\bm\mu _k\)
+\textbf{Direct Product:} \(\displaystyle \bm\Sigma^{-1} = \sum _{k = 1}^K\bm\Sigma _k^{-1}, \bm\mu = \bm\Sigma\sum _{k = 1}^K\bm\Sigma _k^{-1}\bm\mu _k\)
 
-\textbf{Linearization:} \(p(\bm y) = \int p(\bm y | \bm x)p(\bm x)\,\dd\bm x \approx \mathcal N(\bm g(\bm\mu _x), \bm R + \bm G\bm\Sigma _{xx}\bm G^T)\)
+\textbf{Linearization:} \(\displaystyle p(\bm y) = \int p(\bm y | \bm x)p(\bm x)\,\dd\bm x \approx \mathcal N(\bm g(\bm\mu _x), \bm R + \bm G\bm\Sigma _{xx}\bm G^T)\)
 where $p(\bm x) = \mathcal N(\bm\mu _x, \bm\Sigma _{xx})$, $p(\bm y | \bm x) = \mathcal N(\bm g(\bm x), \bm R)$, and $\bm G = \eval{\pdiff{\bm g(\bm x)}{\bm x}}{\bm x = \bm\mu _x}$.
 
 \textbf{Shannon Information:} \(H(\bm X) = \frac{1}{2}\ln((2\pi e)^N\det\bm\Sigma)\); \(\sqrt{\det\bm\Sigma}\) is the uncertainty ellipsoid volume.
@@ -457,9 +396,9 @@ increment (quadrature uses 2 sensors a half slit apart).
 
 \textbf{LiDAR:} Measures distance using time-of-flight of laser pulses, determined by measuring phase shift of an
 intensity modulated signal. Beams steered using spinning heads, mirrors, or MEMS. Measurement model:
-\(\rho _{ij} = \sqrt{x_{ij}^2 + y_{ij}^2 + z_{ij}^2} + \Delta\rho\),
-\(\theta _{ij} = \tan^{-1}\left(\frac{y_{ij}}{x_{ij}}\right) + \Delta\theta\),
-\(\alpha _{ij} = \tan^{-1}\left(\frac{z_{ij}}{\sqrt{x_{ij}^2 + y_{ij}^2}}\right) + \Delta\alpha\).
+\(\displaystyle \rho _{ij} = \sqrt{x_{ij}^2 + y_{ij}^2 + z_{ij}^2} + \Delta\rho\),
+\(\displaystyle \theta _{ij} = \tan^{-1}\left(\frac{y_{ij}}{x_{ij}}\right) + \Delta\theta\),
+\(\displaystyle \alpha _{ij} = \tan^{-1}\left(\frac{z_{ij}}{\sqrt{x_{ij}^2 + y_{ij}^2}}\right) + \Delta\alpha\).
 
 \textbf{ToF Camera:} Like LiDAR but captures the entire point cloud at once. Much shorter range; suitable for indoor
 use since sunlight causes problems.
@@ -567,29 +506,23 @@ closer.
 \textbf{Combined Stereo Model:} Forward model produces pixel locations in both cameras. Frame origin is halfway between
 two cameras.
 
-\begingroup
-\thinmuskip=3mu       % Readable sin/cos
-\medmuskip=2mu        % Tight + and -
-\thickmuskip=3mu      % Tight =
-Forward: \(\displaystyle f(\bm p) = \bm M\frac{1}{z}\bm p = \matfour{f_u}{0}{c_u}{f_u\frac{b}{2}}{0}{f_v}{c_v}{0}{f_u}{0}{c_u}{-f_u\frac{b}{2}}{0}{f_v}{c_v}{0}\frac{1}{z}\bm p = \cvec{u_l}{v_l}{u_r}{v_r}\). \\
-\endgroup
+\begin{tight}
+  Forward: \(\displaystyle f(\bm p) = \bm M\frac{1}{z}\bm p = \matfour{f_u}{0}{c_u}{f_u\frac{b}{2}}{0}{f_v}{c_v}{0}{f_u}{0}{c_u}{-f_u\frac{b}{2}}{0}{f_v}{c_v}{0}\frac{1}{z}\bm p = \cvec{u_l}{v_l}{u_r}{v_r}\). \\
+\end{tight}
 Inverse model: \(\displaystyle \bm g(\bm y) = {\displaystyle\frac{b}{u_l - u_r}}\cvec{\frac{1}{2}(u_l + u_r) - c_u}{\frac{f_u}{f_v}\left(\frac{1}{2}(v_l + v_r) - c_v\right)}{f_u}\). \\
 \mbox{Jacobians: forward \(\displaystyle\pdiff{\bm f}{\bm p} = \bm M\frac{1}{p_3}\matfour{1}{0}{-{p_1}/{p_3}}{0}{0}{1}{-{p_2}/{p_3}}{0}{0}{0}{0}{0}{0}{0}{-{p_4}/{p_3}}{1}\),
 inverse \(\displaystyle\pdiff{\bm g}{\bm y} =\)}\\ % FUCK LATEX
 \begingroup
-\setlength{\arraycolsep}{2pt} 
+\setlength{\arraycolsep}{2pt}
 \[\frac{b}{(u_l - u_r)^2}\mat{\mrow{-u_r + c_u}{0}{u_l - c_u}{0}\mrow{-\frac{f_u}{f_v}\left(\frac{1}{2}(v_l + v_r) - c_v\right)}{\frac{f_u}{2f_v}}{\frac{f_u}{f_v}\left(\frac{1}{2}(v_l + v_r) - c_v\right)}{\frac{f_u}{2f_v}}\mrow{-f_u}{0}{f_u}{0}}\]
 \endgroup
 
 \textbf{Pixel-Disparity Stereo Model:} Forward model produces a pixel location and disparity. Frame origin is at the
 left camera.
 
-\begingroup
-\thinmuskip=3mu       % Readable sin/cos
-\medmuskip=2mu        % Tight + and -
-\thickmuskip=3mu      % Tight =
-Forward: \(\displaystyle \bm y = \bm f(\bm p) = \bm M\frac{1}{p_3}\bm p = \mat{\mrow{f_u}{0}{c_u}{0}\mrow{0}{f_v}{c_v}{0}\mrow{0}{0}{0}{f_ub}}\frac{1}{p_3}\bm p = \cvec{u_l}{v_l}{d}\). \\
-\endgroup
+\begin{tight}
+  Forward: \(\displaystyle \bm y = \bm f(\bm p) = \bm M\frac{1}{p_3}\bm p = \mat{\mrow{f_u}{0}{c_u}{0}\mrow{0}{f_v}{c_v}{0}\mrow{0}{0}{0}{f_ub}}\frac{1}{p_3}\bm p = \cvec{u_l}{v_l}{d}\). \\
+\end{tight}
 Inverse model: \(\displaystyle \bm g(\bm y) = \frac{b}{d}\cvec{u_l - c_u}{\frac{f_u}{f_v}(v_l - c_v)}{f_u}\).
 
 Forward Jacobian: \(\displaystyle \pdiff{\bm f}{\bm p} = \frac{1}{p_3}\bm M\matfour{1}{0}{-p_1/p_3}{0}{0}{1}{-p_2/p_3}{0}{0}{0}{0}{0}{0}{0}{-p_4/p_3}{1}\) \\
@@ -637,21 +570,427 @@ or image subpatch) to form descriptor.
 + pose sequences for unsupervised methods. LIFT is one such method using 3 CNNs to detect, estimate orientation, and
 generate descriptor, trained using contrastive learning.
 
+\section{Odometry} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Dead Reckoning/Wheel Odometry}
+
+\textbf{Key Characteristics:} Mean is unbiased, variance is unbounded.
+
+\textbf{Derivation:} Get \(\dot{\bm q}(\dot{\bm\varphi})\) from kinematics, discretize to get \(\bm q(t + h)\) and split
+into \(\bar{\bm q}(t) + \delta\bm q(t)\). Linearize about \(\bar{\bm q}(t)\), drop H.O.T. and take 
+\(\bar{\bm q}(t + h) = \mathbb E[\bm q(t + h)]\). Subtract mean and take \(\bm\Sigma(t + h) = \mathbb E[\delta\bm q(t)\delta\bm q(t)^T]\).
+
+\textbf{Differential Drive:} Let \(\bm R = \mattwo{r/2}{r/2}{r/(2b)}{-r/(2b)}\)
+\begin{tight}
+  \begin{align*}
+    \bar{\bm q}(t + h) &= \bar{\bm q}(t) + \matthreetwo{\cos\bar\theta(t)}{0}{\sin\bar\theta(t)}{0}{0}{1}\bm R\cvec{\Delta\varphi _r(t)}{\Delta\varphi _l(t)} \\
+    \delta\bm q(t + h) &= \delta\bm q(t) + \matthreetwo{-\sin\bar\theta(t)}{0}{\cos\bar\theta(t)}{0}{0}{0}\bm R\cvec{\Delta\varphi _r(t)}{\Delta\varphi _l(t)}\delta\theta(t) + \matthreetwo{\cos\bar\theta(t)}{0}{\sin\bar\theta(t)}{0}{0}{1}\bm R\cvec{w_r(t)}{w_l(t)} \\
+    &= \bm A(t)\delta\bm q(t) + \bm B(t)\bm w(t) \\
+    \bm\Sigma(t + h) &= \bm A(t)\bm\Sigma(t)\bm A(t)^T + \bm B(t)\bm Q\bm B(t)^T
+  \end{align*}
+\end{tight}
+
+\textbf{Params:} \(\displaystyle r = 2\frac{x_\text{true}}{\sum _k (\Delta\varphi _r(kh) + \Delta\varphi _l(kh))};
+\displaystyle b = \frac{r}{2}\frac{\sum _k (\Delta\varphi _r(kh) + \Delta\varphi _l(kh))}{2\pi N}\)
+
+\subsection{Feature-Based Stereo Visual Odometry}
+
+Given images captured in frame \(a\) and frame \(b\), find \(\bm T_{ba}\). Use where high
+accuracy short-term localization is needed, e.g. indoors, Mars, or high wheel slip environments.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{imgs/stereo_vo.png}
+\end{figure}
+
+\textbf{Point Cloud Alignment:} Given \(\bm p_a^j, \bm p_b^j\), minimize cost
+\[E(\bm C_{ba}, \bm r_a) = \frac{1}{2}\sum _{j = 1}^J \left(\bm p_b^j - \bm C_{ba}(\bm p_a^j - \bm r_a)\right)^T\bm\Sigma^j\left(\bm p_b^j - \bm C_{ba}(\bm p_a^j - \bm r_a)\right)\]
+with matrix weights \(\bm\Sigma^j = \left(\bm G_b^j\bm R_b^j{\bm G_b^j}^T + \bm C_{ba}\bm G_a^j\bm R_a^j{\bm G_a^j}^T\bm C_{ba}^T\right)^{-1}\)
+where \(\bm G_b^j = \eval{\pdiff{\bm g}{\bm y}}{\bm f(\bm p_b^j)}, \bm G_a^j = \eval{\pdiff{\bm g}{\bm y}}{\bm f(\bm p_a^j)}\), and $\bm R_b^j, \bm R_a^j$ are pixel measurement covariances.
+Closed-form solution for scalar weights:
+\begin{enumerate}
+	\item Align centroids: $\displaystyle\bm p_a = \frac{\sum _{j = 1}^J w^j\bm p_a^j}{\sum _{j = 1}^J w^j}, \bm p_b = \frac{\sum _{j = 1}^J w^j\bm p_b^j}{\sum _{j = 1}^J w^j}$
+	\item Outer product: $\displaystyle\bm W_{ba} = \frac{1}{\sum _{j - 1}^J w^j}\sum _{j = 1}^J w^j(\bm p_b^j - \bm p_b)(\bm p_a^j - \bm p_a)^T$
+	\item Compute SVD $\bm V\bm S\bm U^T = \bm W_{ba}$, then compute rotation \(\bm C_{ba} = \bm V\matthree[bsmall]{1}{0}{0}{0}{1}{0}{0}{0}{\det(\bm U)\det(\bm V)}\bm U^T\),
+        and translation \(\bm r_a = -\bm C_{ba}^T\bm p_b + \bm p_a\).
+\end{enumerate}
+
+\subsection{LiDAR Scan Matching}
+
+Given reference $M = \set{\bm p_M^1, \dots, \bm p_M^{N_M}}$, data $D = \set{\bm p_D^1, \dots, \bm p_D^{N_D}}$, where
+$N_M = N_D$ (i.e. one-to-one correspondence), find \(\bm T_{MD} = \set{\bm C_{MD}, \bm t_D^{MD}}\).
+
+\textbf{ICP Algorithm:} Until convergence, do:
+\begin{enumerate}
+	\item Transform $\bm p_M^j = \bm C_k(\bm p_D^j - \bm t_k)$ to form $\tilde D$
+  \item Find correspondences $\set{I, J} = \on{NN}(M, \tilde D)$
+	\item Error: $\mathcal J = \frac{1}{2}\sum _{j = 1}^J w^j\left(\bm p_M^i - \bm C_k\left(\bm p_D^j - \bm t_k\right)\right)^T\left(\bm p_M^i - \bm C_k\left(\bm p_D^j - \bm t_k\right)\right)$
+  \item Gradient descent: $\bm T_{k + 1} = \bm T_k + \alpha\nabla\mathcal J$
+\end{enumerate}
+
+\textbf{Subsampling:} \emph{Uniform} (voxel-based): take one point per voxel, preserves structure; \emph{random}:
+preserves density, amy lose structure; \emph{feature-based}: identifies structural features to preserve environment
+traits; \emph{normal-space}: sample a subset with surface normals uniformly distributed, good for smooth areas with
+sparse features.
+
+\textbf{Surface Normal Estimation:} For a neighbourhood of local points, try to fit a plane $a^Tp = c$
+by minimizing $\frac{1}{k}\sum _{i = 1}^k (\bm a^T\bm p_i - c)^2$; equivalent to PCA of
+$M = \frac{1}{k}\sum _{i = 1}^k (\bm p_i - \bar{\bm p})(\bm p_i - \bar{\bm p})^T$, where the eigenvector of the smallest
+eigenvalue (least variance) is the normal.
+
+\textbf{Data Association:} \emph{Closest compatible point}: check normals/colours/etc. within range; \emph{normal
+shooting}: first point along the surface normal direction; \emph{outlier rejection} (by checking distances of
+neighbours).
+
+\textbf{Point-to-Plane Matching:} Only penalize errors in the normal direction;
+\[\mathcal J = \frac{1}{2}\sum _{j = 1}^J w^j\left(\bm p_M^i - \bm C_k\left(\bm p_D^j - \bm t_k\right)\right)^T{\bm n^j}^T{\bm n^j}\left(\bm p_M^i - \bm C_k\left(\bm p_D^j - \bm t_k\right)\right)\]
+
+\textbf{Plane-to-Plane Matching:} Uses normals in both sets;
+\begin{tight}
+  \[\mathcal J = \frac{1}{2}\sum _{j = 1}^J\left(\bm p_M^i - \bm C_k(\bm p_D^j - \bm t_k)\right)^T(\bm\Sigma _i^M + \bm C_k\bm\Sigma _j^D\bm C_k^T)^{-1}\left(\bm p_M^i - \bm C_k(\bm p_D^j - \bm t_k)\right)\]
+\end{tight}
+
+$\bm\Sigma _i^M = \bm C(\bm n_i^M)\bm\Sigma _\varepsilon\bm C(\bm n_i^M)^T$,
+$\bm\Sigma _j^D = \bm C(\bm n_j^D)\bm\Sigma _\varepsilon\bm C(\bm n_j^D)^T$,
+\(\bm\Sigma _\varepsilon = \diag(\varepsilon, 1, 1)\).
+
+\textbf{Normal Distribution Transform (NDT):} Divide into cells and model each as
+$\rho _{c_i}(\bm p) = \exp\left(-\frac{1}{2}(\bm p - \bm\mu _i)^T\bm\Sigma _i^{-1}(\bm p - \bm\mu _i)\right)$;
+score each point in \(D\) based on the Gaussian in its cell: $\Lambda(\bm T) = -\sum _{\bm p_D^j \in D}\rho _c(\bm T(\bm p_D^j))$.
+
+\textbf{Practical Considerations:} Motion compensation; anisotropic (e.g. distance-based) filtering to remove
+low-information points; coarse-to-fine alignment (starting with smaller subsample); quality estimation via final
+association covariance, overlap between scans, etc.
+
+\section{Localization and Mapping} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textbf{Map Types by Application:} \emph{Planning}: tracks occupancy, safe/unsafe places; \emph{application}: tracks
+spatially distributed properties, e.g. topography; \emph{navigation}: tracks localization features, may be sparse.
+
+\textbf{Map Types by Information:} \emph{Metric}: retains scale, metric consistency; \emph{topometric}: locally metric,
+globally topographic; \emph{topological}: no distances, just interconnectedness.
+
+\subsection{Occupancy Grid Mapping}
+
+\textbf{Assumptions:} Cell occupancy independent from other cells (no space connectivity) or robot movement,
+measurements independent given robot states and map.
+
+\textbf{Probabilistic Update:} \(\displaystyle p(c_k | y^t, x^t) = \frac{p(y_t | c_k, x_t)}{p(y_t)}p(c_k | y^{t - 1}, x^{t - 1})\)
+
+\textbf{Log-Odds:} \(\displaystyle l(x) = \ln\left(\frac{p(x)}{1 - p(x)}\right) \iff p(x) = \frac{\exp(l(x))}{1 + \exp(l(x))}\)
+
+\textbf{Log-Odds Update:} \(\displaystyle l(c_k | y^t, x^t) = l(c_k | y^{t - 1}, x^{t - 1}) + \ln\left(\frac{p(y_t | c_k, x_t)}{1 - p(y_t | c_k, x_t)}\right)\)
+where the last term is \(\alpha\) if \(c_k\) near measurement, \(-\beta\) if \(c_k\) closer than measurement, 0 otherwise.
+
+\subsection{Terrain Assessment}
+
+Determine which parts of terrain are safe to traverse and which parts are not by fitting planes to local sections.
+Use RANSAC to reject outliers. Use info such as plane height and slope to determine traversibility.
+
+\textbf{Regular Grid}: Patch $j$: let \begin{tight}\(\bm A_j = \matthree{1}{x_{1j}}{y_{1j}}{\newvdots}{\newvdots}{\newvdots}{1}{x_{n_jj}}{y_{n_jj}}, \bm x_j = \cvec{a_j}{b_j}{c_j}, \bm b_j = \cvec{z_{1j}}{\newvdots}{z_{n_jj}}\)\end{tight}
+minimize error $\bm e_j = \bm A_j\bm x_j - \bm b_j$, with solution $\bm x_j = (\bm A_j^T\bm A_j)^{-1}\bm A_j^T\bm b_j$.
+
+\textbf{Recursive Formulation:} Let \(\bm p_{ij} = \rvec{1}{x_{ij}}{y_{ij}}{z_{ij}}^T\) and define
+\[
+\bm P_j = \sum _i \bm p_{ij}\bm p_{ij}^T = \mattwo{\bm A_j^T\bm A_j}{\bm A_j^T\bm b_j}{(\bm A_j^T\bm b_j)^T}{\bm b_j^T\bm b_j}
+= \matfour[bsmall]{p_{11}}{p_{12}}{p_{13}}{p_{14}}{p_{21}}{p_{22}}{p_{23}}{p_{24}}{p_{31}}{p_{32}}{p_{33}}{p_{34}}{p_{41}}{p_{42}}{p_{43}}{p_{44}}
+= \mattwo{\bm Q^{-1}}{\bm r}{\bm r^T}{p_{44}}
+\]
+\begin{itemize}
+  \item Number of points: $n_j = p_{11}$
+  \item Plane fit: \(\rvec{a_j}{b_j}{c_j}^T = \bm Q\bm r\)
+  \item Residuals: \(e_j = p_{44} - \bm r^T\bm Q\bm r\)
+	\item Average height: $h_j = \frac{p_{14}}{n_j}$
+	\item Max slope: $\alpha _j = \cos^{-1}\frac{1}{b_j^2 + c_j^2 + 1}$
+\end{itemize}
+
+\subsection{Filtering-Based Localization}
+
+\textbf{Markov Assumption:} The conditional probabilities of future states are independent of any past states, given the
+current state; i.e. the state contains enough information to predict the future.
+
+\textbf{Bayes Filter:} \(\displaystyle p(\bm x_k | \check{\bm x}_0, \bm v_{1:k}, \bm y_{0:k}) =\)\\
+\(\displaystyle \eta p(\bm y_k | \bm x_k)\int p(\bm x_k | \bm x_{k - 1}, \bm v_k)p(\bm x_{k - 1} | \check{\bm x}_0, \bm v_{1:k - 1}, \bm y_{0:k - 1})\,\dd\bm x_{k - 1}\)
+
+\textbf{Particle Filtering:} Representing the robot state PDF with particles, where each particle is a hypothesis:
+\begin{enumerate}
+  \item Prediction: $\cvec{\check{\bm x}_{k - 1, m}}{\bm w_{k, m}} \sim p(\bm x_{k - 1} | \check{\bm x}_0, \bm v_{1:k - 1}, \bm y_{0:k - 1})p(\bm w_k)$
+        from prior and motion noise; generate predictions \(\check{\bm x}_{k, m} = \bm f(\hat{\bm x}_{k - 1, m}, \bm v_k, \bm w_{k, m})\).
+  \item Correction: Assign weights $w_{k, m} = \eta p(\bm y_k | \check{\bm x}_{k, m})$ by using expected measurements
+        $\check{\bm y}_{k, m} = \bm g(\check{\bm x}_{k, m}, \bm 0)$ and assuming $p(\bm y_k | \check{\bm x}_{k, m}) = p(\bm y_k | \check{\bm y}_{k, m})$;
+        resample based on weights to get new particles \(\hat{\bm x}_{k, m}\).
+\end{enumerate}
+Practical considerations: Maintaining sample variance by adding more noise, adding samples drawn uniformly from sample
+space, or resampling less often; adapting particle count online using weight sum heuristic.
+
+\textbf{Madow Systematic Sampling:} Create $M$ bins where bin $m$ has size $w_{k, m}$; starting from random, take steps
+of $1/M$ and sample from each visited bin. Helps preserve particle diversity.
+
+\textbf{Kalman Filter:} Linear model \(\bm x_k = \bm A_{k - 1}\bm x_{k - 1} + \bm v_k + \bm w_k\), \(\bm y_k = \bm C_k\bm x_k + \bm n_k\):
+\begin{enumerate}
+  \item Prediction: $\twopiece{\check{\bm P}_k = \bm A_{k - 1}\hat{\bm P}_{k - 1}\bm A_{k - 1}^T + \bm Q_k}{\check{\bm x}_k = \bm A_{k - 1}\hat{\bm x}_{k - 1} + \bm v_k}$
+  \item Kalman gain: $\bm K_k = \check{\bm P}_k\bm C_k^T(\bm C_k\check{\bm P}_k\bm C_k^T + \bm R_k)^{-1}$
+  \item Correction: $\twopiece{\hat{\bm P}_k = (\bm 1 - \bm K_k\bm C_k)\check{\bm P}_k}{\hat{\bm x}_k = \check{\bm x}_k + \bm K_k(\bm y_k - \bm C_k\check{\bm x}_k)}$
+\end{enumerate}
+With correct modeling KF is \emph{consistent} and \emph{unbiased} (correct mean and covariance).
+
+\textbf{Extended Kalman Filter:} Nonlinear \(\bm x_k = \bm f(\bm x_{k - 1}, \bm v_k, \bm w_k)\), \(\bm y_k = \bm g(\bm x_k, \bm n_k)\):
+\begin{enumerate}
+  \item Prediction: $\twopiece{\check{\bm P}_k = \bm F_{k - 1}\hat{\bm P}_k\bm F_{k - 1}^T + \bm Q_k'}{\check{\bm x}_k = \bm f(\hat{\bm x}_{k - 1}, \bm v_k, \bm 0)}$,
+        \(\displaystyle \bm F_{k - 1} = \pdiff{\bm f(\bm x_{k - 1}, \bm v_k, \bm w_k)}{\bm x_{k - 1}}\).
+  \item Kalman gain: $\bm K_k = \check{\bm P}_k\bm G_k^T(\bm G_k\check{\bm P}_k\bm G_k^T + \bm R_k')^{-1}$,
+        \(\displaystyle \bm G_k = \pdiff{\bm g(\bm x_k, \bm n_k)}{\bm x_k}\).
+  \item Correction: $\twopiece{\hat{\bm P}_k = (\bm 1 - \bm K_k\bm G_k)\check{\bm P}_k}{\hat{\bm x}_k = \check{\bm x}_k + \bm K_k(\bm y_k - \bm g(\check{\bm x}_k, \bm 0))}$
+\end{enumerate}
+where \(\bm Q_k' = \pdiff{\bm f}{\bm w_k}\bm Q_k\left(\pdiff{\bm f}{\bm w_k}\right)^T\),
+\(\bm R_k' = \pdiff{\bm g}{\bm n_k}\bm R_k\left(\pdiff{\bm g}{\bm n_k}\right)^T\).
+EKF can be biased and inconsistent for severe nonlinearity since it linearizes about the estimate.
+
+\textbf{Sigma Point Transform:} For $L$-dimensional state and parameter \(\kappa\):
+\begin{enumerate}
+  \item Compute $2L + 1$ sigma points, where \(\bm x_0 = \bm\mu _x\), \(\bm x_i = \bm\mu _x + \sqrt{L + \kappa}\on{col}_i\bm L\),
+        and \(\bm x_{i + L} = \bm\mu _x - \sqrt{L + \kappa}\on{col}_i\bm L\), where \(\bm L\bm L^T = \bm\Sigma _x\).
+	\item Pass each through the nonlinearity: $\bm y_i = \bm g(\bm x_i)$.
+  \item Output Gaussian: \(\displaystyle \bm\mu _y = \sum _{i = 0}^{2L} \alpha _i\bm y_i\),
+        \(\displaystyle \bm\Sigma _y = \sum _{i = 0}^{2L} \alpha _i(\bm y_i - \bm\mu _y)(\bm y_i - \bm\mu _y)^T\),
+        with weights $\alpha_0 = \frac{\kappa}{L + \kappa}$, $\alpha _i = \frac{1}{2}\frac{1}{L + \kappa}$.
+\end{enumerate}
+
+\textbf{Unscented Kalman Filter:}
+\begin{tight}
+  \begin{enumerate}
+    \item State Prediction:
+    \begin{enumerate}
+      \item Extract sigma points $\bm z_i$ from $\bm\mu _z = \cvec{\hat{\bm x}_{k - 1}}{\bm 0}, \bm\Sigma _{zz} = \mattwo{\hat{\bm P}_{k - 1}}{\bm 0}{\bm 0}{\bm Q_k}$.
+      \item Nonlinear motion model: $\bm z_i = \cvec{\hat{\bm x}_{k - 1, i}}{\bm w_{k, i}}$, $\check{\bm x}_{k,i} = \bm f(\hat{\bm x}_{k-1, i}, \bm v_k, \bm w_{k,i})$.
+      \item Recombine sigma points: \\
+            \(\check{\bm x}_k = \sum _{i = 0}^{2L} \alpha _i\check{\bm x}_{k,i}\),
+            \(\check{\bm P}_k = \sum _{i = 0}^{2L} \alpha _i(\check{\bm x}_{k,i} - \check{\bm x}_k)(\check{\bm x}_{k,i} - \check{\bm x}_k)^T\).
+    \end{enumerate}
+    \item Measurement Prediction:
+    \begin{enumerate}
+      \item Extract sigma points $\bm z_i$ from $\bm\mu _z = \cvec{\check{\bm x}_k}{\bm 0}, \bm\Sigma _{zz} = \mattwo{\check{\bm P}_k}{\bm 0}{\bm 0}{\bm R_k}$.
+      \item Nonlinear measurement model: $\bm z_i = \cvec{\check{\bm x}_{k,i}}{\bm n_{k,i}}$, $\check{\bm y}_{k,i} = \bm g(\check{\bm x}_{k,i}, \bm n_{k, i})$.
+      \item Recombine sigma points: $\bm\mu _{y, k} = \sum _{i = 0}^{2L} \alpha _i\check{\bm y}_{k, i}$, \\
+            $\bm\Sigma _{yy,k} = \sum _{i = 0}^{2L} \alpha _i(\check{\bm y}_{k, i} - \bm\mu _{y, k})(\check{\bm y}_{k, i} - \bm\mu _{y, k})^T$, \\
+            $\bm\Sigma _{xy,k} = \sum _{i = 0}^{2L} \alpha _i(\check{\bm x}_{k, i} - \check{\bm x}_k)(\check{\bm y}_{k, i} - \bm\mu _{y, k})^T$.
+    \end{enumerate}
+    \item Update: $\bm K_k = \bm\Sigma _{xy,k}\bm\Sigma _{yy,k}^{-1}$, $\twopiece{\hat{\bm P}_k = \check{\bm P}_k - \bm K_k\bm\Sigma _{xy,k}^T}{\hat{\bm x}_k = \check{\bm x}_k + \bm K_k(\bm y_k - \bm\mu _{y,k})}$.
+  \end{enumerate}
+\end{tight}
+UKF deals with nonlinearities better since the approximation is third-order and does not need analytical Jacobians.
+
+\section{Simultaneous Localization and Mapping} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Given frame-to-frame odometric measurements and measurements of landmarks in robot frames, localize the robot and
+compute a consistent map of landmarks in the inertial frame.
+
+\subsection{Filtering-Based SLAM}
+
+Filtering-based approaches marginalize out past states, leading to difficulties with large loop closures.
+
+\textbf{EKF-SLAM:} Form augmented state \(\bm x_k\) by stacking robot states and landmark states. Landmarks have
+identity motion model with no process noise. Use EKF to estimate robot and landmark positions simultaneously.
+Scales poorly with number of landmarks. Can use sparse extended information filter formulation, which sparsifies
+\(\bm P^{-1}\) and uses sparsity to quickly invert.
+
+\textbf{Information Filter:} Alternative KF formulation using \(\bm P^{-1}\) and \(\bm P^{-1}\bm x\):
+\begin{enumerate}
+  \item Prediction: $\twopiece{\check{\bm x}_k = \bm A_{k - 1}\hat{\bm x}_{k - 1} + \bm v_k}{\check{\bm P}_k = \bm Q_k + \bm A_{k - 1}\hat{\bm P}_{k - 1}\bm A_{k - 1}^T}$
+  \item Correction: $\twopiece{\hat{\bm P}_k^{-1} = \check{\bm P}_k^{-1} + \bm C_k^T\bm R_k^{-1}\bm C_k}{\hat{\bm P}_k^{-1}\hat{\bm x}_k = \check{\bm P}_k^{-1}\check{\bm x}_k + \bm C_k^T\bm R_k^{-1}\bm y_k}$
+\end{enumerate}
+
+\textbf{Rao-Blackwellized Particle Filter/FastSLAM:} Factor the belief as
+\(p(\bm x_{1:K}, \bm m | \bm y_{1:K}, \bm u_{1:K}) = p(\bm m | \bm x_{1:K}, \bm y_{1:K})p(\bm x_{1:K} | \bm y_{1:K}, \bm u_{1:K})\),
+represent the second piece (robot states) with particle filter, marginalize out first piece (e.g. Gaussians, occupancy
+grid). Each particle has its own map; weights are calculated based on measurements and each particle's map.
+On loop closure the particles with the most consistent map (best explaining measurements) will remain while others drop out.
+
+\subsection{Batch SLAM}
+
+All poses are kept and globally optimized along with landmark positions, similar to bundle adjustment.
+Consider $\bm x_k = \bm f(\bm x_{k - 1}, \bm u_k, \bm w_k)$ and $\bm y_{kl} = \bm g(\bm x_k, \bm m_l, \bm n_k)$, define
+errors $\bm e_k = \bm x_k - \bm f(\bm x_{k - 1}, \bm u_k, \bm 0) \sim \mathcal N(\bm 0, \bm Q)$ and 
+$\bm e_{kl} = \bm y_{kl} - \bm g(\bm x_k, \bm m_l, \bm 0) \sim \mathcal N(\bm 0, \bm R)$. Minimize error:
+\begin{tight}
+  \begin{align*}
+    J &= \frac{1}{2}\sum _k \bm e_k^T\bm Q^{-1}\bm e_k + \frac{1}{2}\sum _{k,l} \bm e_{kl}^T\bm R^{-1}\bm e_{kl} \\
+      &= \alignedlines[t]{}{\frac{1}{2}\sum _k \left(\bar{\bm e}_k + \delta\bm x_k - \bm F_{k - 1}\delta\bm x_{k - 1}\right)^T\bm Q^{-1}\left(\bar{\bm e}_k + \delta\bm x_k - \bm F_{k - 1}\delta\bm x_{k - 1}\right)}{+ \frac{1}{2}\sum _{k, l} \left(\bar{\bm e}_{kl} - \bm G_{x,kl}\delta\bm x_k - \bm G_{m,kl}\delta\bm m_l\right)^T\bm R^{-1}\left(\bar{\bm e}_{kl} - \bm G_{x,kl}\delta\bm x_k - \bm G_{m,kl}\delta\bm m_l\right)} \\
+      &= \frac{1}{2}(\bar{\bm e} + \bm E\delta\bm z)^T\bm T^{-1}(\bar{\bm e} + \bm E\delta\bm z)
+  \end{align*}
+\end{tight}
+
+where \(\bm F = \pdiff{\bm f}{\bm x}, \bm G_x = \pdiff{\bm g}{\bm x}, \bm G_m = \pdiff{\bm g}{\bm m}\), \(\bm T\) has
+\(\bm Q, \bm R\) repeated along the diagonal, \(\delta\bm z\) collects perturbations to robot states and landmark
+positions, and \(\bar{\bm e}\) collects all odometry and measurement errors.
+Solve for optimal update \(\bm E^T\bm T^{-1}\bm E\delta\bm z^* = -\bm E^T\bm T^{-1}\bar{\bm e} \iff \bm A\delta\bm z^* = \bm b\)
+and iterate until convergence. \(\bm E^T\bm T^{-1}\bm E\) has a sparse arrowhead structure for fast inversion.
+
+\textbf{Levenberg-Marquardt/Damped Least Squares:} Solve $(\bm E^T\bm T^{-1}\bm E + \mu\diag(\bm E^T\bm T^{-1}\bm
+E\delta))\bm z^* = -\bm E^T\bm T^{-1}\bar{\bm e}$ where $\mu$ is tunable and $\diag(\bm A)$ is a matrix with the
+diagonal elements of \(\bm A\). Helps when \(\bm A\) is noninvertible and prevents large jumps for highly nonlinear
+functions.
+
+\textbf{Line Search:} Search in the direction of $\delta\bm z^*$; do $\bar{\bm z} \gets \bar{\bm z} + \alpha\delta\bm z$
+where we pick the largest $\alpha \in [0, 1]$ that decreases $J$.
+
+\textbf{Sliding Window Filter:} Marginalize out old poses and invisible landmarks beyond the sliding window, but keeps
+poses within the window; similar to a hybrid of batch and filtering-based SLAM, but still has issues with large loop
+closures.
+
+\textbf{Adaptive Relative Bundle Adjustment:} Represent landmark poses relative to observation pose, and robot poses
+relative to the last pose to avoid a privileged global frame. Optimize only landmarks and poses within the active
+window. Active window size adapts to incorporate more poses and landmarks on loop closure until error is small enough.
+
+\subsection{Visual SLAM}
+
+\subsubsection{Feature-Based SLAM}
+
+Usually consists of a frontend for feature extraction and association (including loop closure), and a backend for map
+optimization.
+
+\textbf{MonoSLAM:} First realtime monocular SLAM, using Shi-Tomasi features and constant velocity models. Builds
+probabilistic feature map through per-frame bundle adjustment.
+
+\textbf{Parallel Tracking and Mapping (PTAM):} Separate threads for tracking (against existing point cloud) and mapping
+(adding to point cloud) into parallel threads. Coarse-to-fine feature matching and local window bundle adjustment for
+tracking.
+
+\textbf{Multi-Camera PTAM (MCPTAM):} Extension of PTAM to multiple cameras with non-overlapping FOVs. Spherical
+coordinate feature parametrization to limit depth uncertainty to a single axis. Use inverse depth to improve numerical
+optimization. Keyframe selection by estimating the amount of covariance reduction in features.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{imgs/mcptam.png}
+\end{figure}
+
+\textbf{ORB-SLAM:} Improving PTAM with loop closure ORB features. Scale-drift aware loop closure optimizes over and
+allows variation of the scale parameter when matching features. Covisbility graph uses viewpoints where features were
+observed to filter out implausible features when attempting matching. Bag of Binary Words extracts BoW descriptor from
+each frame for relocalization and loop closures. Parallel thread architecture with tracking, local bundle adjustment,
+and global loop closure/pose graph optimization, and full bundle adjustment after loop closure. Grid-based ORB feature
+extraction to spread out features. Aggressive adding of keyframes, cull when 90\% of points are visible in 3 other
+frames.
+
+\textbf{ORB-SLAM2:} Extension of ORB-SLAM for RGB-D input, semi-dense and dense mapping.
+
+\textbf{ORB-SLAM3:} Map atlases for large scale mapping.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{imgs/orbslam.png}
+\end{figure}
+
+\subsubsection{Direct SLAM}
+
+Match images and produce a pose between frames based on image intensities only, without extracting features, and using
+(almost) every pixel to construct the map, i.e. solving pixel correspondence and camera pose estimation at once, instead
+of decoupling them like in sparse VO.
+
+\textbf{Comparison to Feature-Based SLAM:}
+\begin{enumerate}
+  \item More robust to common failure modes due to inclusion of global information, e.g. blur, self-similar textures, defocus
+  \item Uses almost all information in the image (as opposed to only pixels around features)
+  \item Dense maps enable scene understanding and path planning
+  \item Implicit data association by matching pixel intensities
+  \item Very high dimensionality ($10^5$ to $10^6$ pixels per image), computationally expensive
+  \item Contains a lot more local minima (due to implicit data association), sensitive to initialization (works only for small camera movements); IMU data needed for initialization
+  \item No modelling of geometric noise (e.g. rolling shutter)
+\end{enumerate}
+
+\textbf{Image Warping:} Given the location of a pixel in frame \(k - 1\) and pose transformation \(\bm T_{k, k - 1}\),
+\(\cvec{u_k}{v_k}{d_k} = \bm f\left(\bm T_{k, k - 1}\bm g\left(\cvec{u_{k - 1}}{v_{k - 1}}{d_{k - 1}}\right)\right)\).
+
+\textbf{Photometric Error:} \(e_i = I_{k - 1}(\bm u_{k - 1}^i) - I_k'(\bm u_k^i)\) where \(I_k'\) is interpolated from
+\(I_k\), indexed with continuous coordinates \(\bm u_k^i\), and
+\(\bm y_k^i = \cvec{\bm u_k^i}{d_k^i} = \bm f(\bm T_{k, k - 1}\bm g(\bm y_{k - 1}^i))\) from image warping.
+Solve for optimal pose transform \(\displaystyle \hat{\bm T}_{k, k - 1} = \argmin _{\bm T_{k, k - 1}}\sum _{i = 1}^N\left(\frac{1}{\sigma}e_i\right)^2\).
+
+\textbf{Coarse-to-Fine Optimization:} Starting with a blurred and subsampled image, then repeatedly optimizing while
+increasing resolution, using the previous optimization result as the initial guess for the next iteration. First
+iteration can use IMU/odometry. This smoothes out local minima and increases region of convergence.
+
+\textbf{Selective Pixel Matching:} Performing matching/optimization only over "informative" pixels, based on gradient
+magnitude. Divide image into a grid, and for each cell take only the pixel with the largest gradient magnitude for
+optimization.
+
+\textbf{Photometric Calibration:} Dense mapping is affected by gamma, exposure, vignetting, etc., so photometric
+calibration can be used to build a model correcting these effects.
+
+\textbf{LSD-SLAM:} Seminal work on direct SLAM.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{imgs/lsdslam.png}
+\end{figure}
+
+\textbf{Direct Sparse Odometry (DSO):} Integrates photometric calibration and optimizes over a sliding window of 7 keyframes,
+fixed number of 2000 active points. Region-adaptive gradient threshold for pixel selection. Try to match pixel along
+epipolar line based on motion estimate.
+
+\subsection{LiDAR SLAM}
+
+\textbf{Lidar Odometry and Mapping (LOAM):} Uses a keypoint extractor to look for planes and edges, while avoiding
+oblique planes, and edges caused by occlusion; matches only feature points. High-frequency thread performs odometry
+and does motion compensation, low frequency thread builds map with fine alignment.
+
+\textbf{Visual LOAM (VLOAM):} Fuses IMU, camera, and LiDAR; high frequency pose propagation using IMU, medium frequency
+feature-based visual inertial odometry, then low-frequency corrections from LOAM.
+
+\textbf{LIO-SAM:} Tightly coupled LiDAR-inertial odometry and SLAM, fusing LiDAR along with IMU, GPS, magnetometer, with
+a sliding window factor graph for motion correction.
+
+\textbf{LiDAR-Camera-Inertial SLAM Approaches:} \emph{LiDAR-enhanced visual SLAM}: using LiDAR to initialize depths for
+bundle adjustment in visual SLAM; \emph{vision-enhanced LiDAR SLAM}: using visual SLAM output poses to initialize scan
+registration and pose graph optimization; \emph{tightly coupled}: simultaneous optimization of LiDAR and camera
+measurements (BA or BA+PG).
+
+\subsection{Dense RGB-D SLAM}
+
+\textbf{Signed Distance Fields:} Represent surfaces implicitly by storing the signed distance to the nearest surface in
+each cell in a voxel grid Max distance often truncated (capped). Recover surfaces from zero crossings using marching
+cubes. Noise naturally cancels over time when fusing observations, and surfaces can be represented at sub-voxel
+accuracy.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\linewidth]{imgs/sdf_confidence.png}
+\end{figure}
+
+\textbf{Dense Tracking and Mapping (DTAM):} TSDF fusion from monocular camera. Builds highly detailed maps but requires
+many images and suffers with lighting changes and textureless areas. Initialization with feature-based tracking.
+
+\textbf{KinectFusion:} RGB-D dense mapping and odometry using Kinect. Uses TSDF fusion and ICP. Can only map a fixed
+volume and relies on slow camera movements.
+
+\textbf{Kintinuous:} Extension of KinectFusion to large-scale maps and adds loop closures. KinectFusion builds small
+submaps attached to poses which are loaded dynamically. When loop closure is detected via place recognition, the submap
+poses are changed, but their contents are fixed.
+
+\textbf{ElasticFusion:} RGB-D SLAM using surfel maps. Each surfel has a position, normal, radius, colour and confidence.
+On loop closure a polygonal mesh is created from the surfel map, elastically deformed, and surfel positions are
+recalculated using interpolation.
+
+\textbf{Neural Radiance Field (NeRF) Methods:} Implicit representation of the scene in a neural network. Sacrifices
+geometric accuracy but allows rendering realistic views from unseen angles. \textbf{NICE-SLAM} does SLAM using NeRFs in
+real time. \textbf{iSDF} uses SDFs stored implicitly in a neural network.
+
 \section{Useful Identities} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{gather*}
-    % {\textstyle\sin\left(x + \frac{\pi}{2}\right) = \cos(x) \quad \sin\left(x - \frac{\pi}{2}\right) = -\cos(x) \quad \sin\left(\frac{3\pi}{2} - x\right) = -\cos(x)} \\
-    % {\textstyle\cos\left(x + \frac{\pi}{2}\right) = -\sin(x) \quad \cos\left(x - \frac{\pi}{2}\right) = \sin(x) \quad \cos\left(\frac{3\pi}{2} - x\right) = \sin(x)} \\
+    {\textstyle\sin\left(x + \frac{\pi}{2}\right) = \cos(x) \quad \sin\left(x - \frac{\pi}{2}\right) = -\cos(x) \quad \sin\left(\frac{3\pi}{2} - x\right) = -\cos(x)} \\
+    {\textstyle\cos\left(x + \frac{\pi}{2}\right) = -\sin(x) \quad \cos\left(x - \frac{\pi}{2}\right) = \sin(x) \quad \cos\left(\frac{3\pi}{2} - x\right) = \sin(x)} \\
     \sin(x + y) = \sin x\cos y + \cos x\sin y \quad \sin(x - y) = \sin x\cos y - \cos x\sin y \\
     \cos(x + y) = \cos x\cos y - \sin x\sin y \quad \cos(x - y) = \cos x\cos y + \sin x\sin y \\
     \sin(\tan^{-1} x) = \frac{x}{\sqrt{1 + x^2}} \qquad \cos(\tan^{-1} x) = \frac{1}{\sqrt{1 + x^2}} \\
     \sin(\cos^{-1} x) = \cos(\sin^{-1} x) = \sqrt{1 - x^2} \\
-    % \atantwo(-y, x) = -\atantwo(y, x) \qquad \atantwo(y, -x) = \pi - \atantwo(y, x) \\
-    % \forall a > 0,\,\atantwo(ay, ax) = \atantwo(y, x) \\
-    % \atantwo\left(x, \sqrt{1 - x^2}\right) = \sin^{-1} x \qquad \atantwo\left(\pm\sqrt{1 - x^2}, x\right) = \pm\cos^{-1} x \\
-    % \atantwo\left(x, -\sqrt{1 - x^2}\right) = \twocond{\pi - \sin^{-1}x}{x > 0}{-\pi - \sin^{-1}(x)}{x < 0} \\
-    % \nabla _x f(\bm x) = \left(\pdiff{f(\bm x)}{\bm x}\right)^T \qquad \pdiff{\norm{\bm x}}{\bm x} = \frac{1}{\norm{\bm x}}\bm x^T \\
-    % v_1 \cdot v_2 = \norm{v_1}\norm{v_2}\cos\theta \qquad v_1 \times v_2 = \norm{v_1}\norm{v_2}\sin(\theta)\hat n \\
+    \atantwo(-y, x) = -\atantwo(y, x) \qquad \atantwo(y, -x) = \pi - \atantwo(y, x) \\
+    \forall a > 0,\,\atantwo(ay, ax) = \atantwo(y, x) \\
+    \atantwo\left(x, \sqrt{1 - x^2}\right) = \sin^{-1} x \qquad \atantwo\left(\pm\sqrt{1 - x^2}, x\right) = \pm\cos^{-1} x \\
+    \atantwo\left(x, -\sqrt{1 - x^2}\right) = \twocond{\pi - \sin^{-1}x}{x > 0}{-\pi - \sin^{-1}(x)}{x < 0} \\
+    \nabla _x f(\bm x) = \left(\pdiff{f(\bm x)}{\bm x}\right)^T \qquad \pdiff{\norm{\bm x}}{\bm x} = \frac{1}{\norm{\bm x}}\bm x^T \\
+    v_1 \cdot v_2 = \norm{v_1}\norm{v_2}\cos\theta \qquad v_1 \times v_2 = \norm{v_1}\norm{v_2}\sin(\theta)\hat n \\
     \bm A^{-1} = \frac{1}{\det\bm A}(\on{cof}\bm A)^T \qquad \mattwo{a}{b}{c}{d}^{-1} = \frac{1}{ad - bc}\mattwo{d}{-b}{-c}{a} \\
     \diff{}{x}\sin^{-1}x = \frac{1}{\sqrt{1 - x^2}} \quad \diff{}{x}\cos^{-1}x = -\frac{1}{\sqrt{1 - x^2}} \quad \diff{}{x}\tan^{-1}x = \frac{1}{1 + x^2}
 \end{gather*}

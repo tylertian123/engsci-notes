@@ -2,7 +2,7 @@
 
 ## Filter-Based SLAM
 
-* Consider the problem of a moving robot, generating a series of frames; we have the frame-to-frame odometric measurements, measurements of landmarks; we need to compute ta globally consistent map of landmarks in the inertial frame, and localize our robot
+* Consider the problem of a moving robot, generating a series of frames; we have the frame-to-frame odometric measurements, measurements of landmarks; we need to compute a globally consistent map of landmarks in the inertial frame, and localize our robot
 
 ![Illustration of the SLAM problem.](./imgs/lec27_1.png){width=50%}
 
@@ -23,13 +23,14 @@
 	* We can use submapping to address this, i.e. break down the map into smaller sub-maps, e.g. for rooms
 	* The formulation can be changed to use the inverse covariance matrix (i.e. an *information filter*), which has a sparse structure for a single timestep (i.e. before the robot starts to move)
 		* Once the robot moves however, correlations between landmarks observed in successive steps slowly fill in the inverse covariance
-		* This leads to the *sparse extended information filter* (SEIF) approximation, which ignores the nearly zero entries
 
-![Structure of the sparse inverse covariance matrix.](./imgs/lec27_2.png){width=70%}
+![Structure of the sparse inverse covariance matrix before the robot starts moving.](./imgs/lec27_2.png){width=70%}
 
-* The information filter tracks $\bm P_k^{-1}$ instead:
+* The *information filter* is an alternative formulation of the Kalman filter which tracks the inverse covariance (information matrix) $\bm P^{-1}$ and information vector $\bm P^{-1}\bm x$, instead of $\bm P$ and $\bm x$
 	* Prediction: $\twopiece{\check{\bm x}_k = \bm A_{k - 1}\hat{\bm x}_{k - 1} + \bm v_k}{\check{\bm P}_k = \bm Q_k + \bm A_{k - 1}\hat{\bm P}_{k - 1}\bm A_{k - 1}^T}$
 	* Correction: $\twopiece{\hat{\bm P}_k^{-1} = \check{\bm P}_k^{-1} + \bm C_k^T\bm R_k^{-1}\bm C_k}{\hat{\bm P}_k^{-1}\hat{\bm x}_k = \check{\bm P}_k^{-1}\check{\bm x}_k + \bm C_k^T\bm R_k^{-1}\bm y_k}$
+	* Here the inversion (getting $\bm P$ from $\bm P^{-1}$ moves from the correction step to the prediction step
+	* The *sparse extended information filter* (SEIF) approximates this inversion using a sparsification step and Schur complement updates
 * EKF can be swapped out for UKF, which has the same computational constraints
 
 ### FastSLAM

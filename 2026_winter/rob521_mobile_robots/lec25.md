@@ -2,7 +2,7 @@
 
 ## Filter-Based Localization
 
-* Suppose we have a motion model $\bm x_k = \bm f(\bm x_{k - 1}, \bm v_k, \bm w_k)$ for state $\bm x_k$, input $v_k$ and process noise $\bm w_k$; we also have a measurement model $\bm y_k = \bm g(\bm x_k, \bm n_k)$ for some measurement noise $\bm n_k$; we want to produce an estimate $\hat{\bm x}_k$ of the true state, given the measurements, inputs, and models
+* Suppose we have a motion model $\bm x_k = \bm f(\bm x_{k - 1}, \bm v_k, \bm w_k)$ for state $\bm x_k$, input $\bm v_k$ and process noise $\bm w_k$; we also have a measurement model $\bm y_k = \bm g(\bm x_k, \bm n_k)$ for some measurement noise $\bm n_k$; we want to produce an estimate $\hat{\bm x}_k$ of the true state, given the measurements, inputs, and models
 * We assume that the process is *Markovian* (Markov assumption): the conditional PDFs of future states depends on the present state only, and is independent of any past states
 	* This essentially means that our state contains enough information so that predicting the future states does not rely on the past states
 * Our goal is to compute $p(\bm x_k | \check{\bm x}_0, \bm v_{1:k}, \bm y_{0:k})$, known as the *belief function* for $\bm x_k$

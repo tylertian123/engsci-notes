@@ -4,8 +4,8 @@
 
 * Using scan alignment with LiDAR, we can get a much better version of dead reckoning compared to wheel odometry
 * Consider a model (reference) point set $M = \set{\bm p_M^1, \dots, \bm p_M^{N_M}}$ and data (target) point set $D = \set{\bm p_D^1, \dots, \bm p_D^{N_D}}$, and assume that each point in $D$ corresponds to a single point in $M$, i.e. $N_M = N_D$, but unlike in feature-based odometry we no longer have correspondences
-	* We wish to find $\bm T_{MD} = \set{\bm C_{MD}, \bm t_D^{D}}$, the transformation between two scans
-	* The goal is to minimize $\Delta = \bm p_M^i - \bm C_{MD}(\bm p_D^j - t_D^{MD})$
+	* We wish to find $\bm T_{MD} = \set{\bm C_{MD}, \bm t_D^{MD}}$, the transformation between two scans
+	* The goal is to minimize $\Delta = \bm p_M^i - \bm C_{MD}(\bm p_D^j - \bm t_D^{MD})$
 	* Form a loss $\mathcal J$, then we have $T^* = \argmin _{T \in SE(3)} \mathcal J(M, T(D))$
 * Many variations are possible in the problem formulation, including parameterization of the transformation, point dimensionality (e.g. intensity, colour, learned features), and point-level filtering, cost metrics, association (e.g. using semantic information)
 * In the basic *iterative closest point* (ICP) algorithm:
@@ -28,9 +28,10 @@
 
 * We can use many other methods to weight point correspondences in our cost function
 	* The basic method uses point-to-point correspondences
-	* Point-to-plane (or point-to-line in 2D) can be performed by calculating surface normals, and only penalize errors in the normal plane
+	* Point-to-plane (or point-to-line in 2D) can be performed by calculating surface normals, and only penalize errors in the direction of the normal; effectively lets planes slide past each other
 		* This is especially useful since LiDAR has density varying with distance
 		* $\mathcal J = \frac{1}{2}\sum _{j = 1}^J w^j\left(\bm p_M^i - \bm C_k\left(\bm p_D^j - \bm t_k\right)\right)^T{\bm n^j}^T{\bm n^j}\left(\bm p_M^i - \bm C_k\left(\bm p_D^j - \bm t_k\right)\right)$ where $\bm n$ are the surface normals
+		* Slower to compute, but often faster convergence
 	* Plane-to-plane follows a similar idea but calculates surface normals in both sets
 		* Use covariances $\bm\Sigma _\varepsilon = \matthree{\varepsilon}{0}{0}{0}{1}{0}{0}{0}{1}$ for some small $\varepsilon$
 			* This makes the error weighted much more in the direction of the surface normal
@@ -41,7 +42,7 @@
 	* This can be extended to curves but is less common
 	* The *normal distribution transform* (NDT) tries to match clusters to clusters
 		* Divide the scan into cells and model the surface within each cell as a Gaussian
-			* $\rho _{c_i}(\bm p) = \exp\left(-\frac{(\bm p - \bm\mu _i^T)\bm\Sigma _i^{-1}(\bm p - \bm\mu _i)}{2}\right)$
+			* $\rho _{c_i}(\bm p) = \exp\left(-\frac{(\bm p - \bm\mu _i)^T\bm\Sigma _i^{-1}(\bm p - \bm\mu _i)}{2}\right)$
 		* Each point in the data point cloud is scored based on the probability density of the Gaussian in its cell
 			* $\Lambda(\bm T) = -\sum _{\bm p_D^j \in D}\rho _c(\bm T(\bm p_D^j))$ where $\rho _c$ is taken for the grid that $\bm p_D^j$ falls into
 		* In highly concentrated surfaces, e.g. walls, we get narrow Gaussians, which helps a lot with alignment; however corners get blurred

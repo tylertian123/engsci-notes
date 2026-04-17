@@ -4,7 +4,7 @@
 
 * *LiDAR* (Light Detection And Ranging) uses light pulses to measure the distance from the sensor to each point in the environment, in 2D or 3D
 	* LiDARs send laser pulses using a rotating optical system, and measures the time of flight of each pulse to determine the distance
-		* Time of flight is usually determined using phase shift of the light wave sent out, using interference
+		* Time of flight is usually determined using phase shift of the light wave sent out; instead of a single pulse, the system sends a continuous beam, with the intensity modulated according to a wave; the phase of the reflected wave is compared with the outgoing wave to determine where it was reflected (i.e. where the object is)
 		* We could get more than a single return for each beam (e.g. the beam can go through snow or leaves); modern sensors will give all the returns as well as the strongest one, so we can see through some things
 		* The returning pulse also provides an intensity, which depends on the range, surface material, and angle of incidence
 		* Complete scans can be produced using a spinning head, rotating mirror, or other optical system (e.g. Rinsley prisms, MEMS mirrors/solid state)
@@ -31,9 +31,13 @@
 	* Becoming more popular in automotive applications using millimetre-wave radar (which measures distance and velocity, but not angle reliably)
 * *Global navigation satellite systems* (GNSS) are satellites with known orbits and synchronized clocks that transmit signals to triangulate the position of the receiver
 	* To solve for the position, we need 4 satellites for the 3 position DoFs and a receiver clock offset
-	* GPS uses a base carrier signal at $\SI{1575}{MHz}$, which is modulated into a code at $\SI{1.023}{MHz}$; this code is then further modulated to transmit the actual navigation data (including satellite orbit corrects etc.) at $\SI{50}{bps}$
-		* The code uses a set pattern (32 unique *gold codes*), which are very distinct and easy to match
-	* The path the signal takes from the satellite to the receiver is curved, resulting in the *pseudorange*
+	* GPS uses a base carrier signal at $\SI{1575}{MHz}$, which is modulated into a code at $\SI{1.023}{Mcps}$ (mega-chips per second); this code is then further modulated to transmit the actual navigation data (including satellite orbit corrections, time, etc.) at $\SI{50}{bps}$
+		* The code uses a set pattern (32 unique *gold codes* consisting of 1023 chips each), which are distinct from each other and shifted versions of itself
+			* The receiver matches the known code against the incoming signal, and shifts it until there is a peak in correspondence, at which point the phase of the codes is found
+			* This allows the time of flight of the signal from each satellite to be determined
+		* 20 repeats of the gold code encodes a single bit of navigation data
+		* Raw distances obtained from code matching are *psuedoranges*
+	* The path the signal takes from the satellite to the receiver can be curved, and the receiver clock is usually unaligned, so more processing is needed to solve for position
 		* Nonlinear least squares is used to solve for receiver position and clock bias from pseudorange measurements
 		* The more satellites, the more accurate our estimates; most modern receivers are multi-system
 		* Can be augmented with a motion model if known
