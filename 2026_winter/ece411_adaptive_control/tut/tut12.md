@@ -1,6 +1,6 @@
 # Tutorial 12, Mar 30, 2026
 
-* Consider the system: $\begin{aligned}[t] x(k + 1) &= \mattwo{0}{1}{-1}{0}x(k) + \cvec{1}{1}u(k) \\ y(k) = \rvec{1}{0}x(k) \end{aligned}$
+* Consider the system: $\begin{aligned}[t] x(k + 1) &= \mattwo{0}{1}{-1}{0}x(k) + \cvec{1}{1}u(k) \\ y(k) &= \rvec{1}{0}x(k) \end{aligned}$
 	* Design a regulator to make $y(k)$ track $r(k) = \bar r \cdot 1(k)$ (i.e. a step input)
 		* First, we build an exosystem for the disturbance and reference
 			* Since there is no disturbance and a constant reference, we simply have $S = 1$ and $w(0) = \bar r$

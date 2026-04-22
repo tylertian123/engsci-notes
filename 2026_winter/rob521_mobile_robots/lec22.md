@@ -30,7 +30,7 @@
 	* The basic method uses point-to-point correspondences
 	* Point-to-plane (or point-to-line in 2D) can be performed by calculating surface normals, and only penalize errors in the direction of the normal; effectively lets planes slide past each other
 		* This is especially useful since LiDAR has density varying with distance
-		* $\mathcal J = \frac{1}{2}\sum _{j = 1}^J w^j\left(\bm p_M^i - \bm C_k\left(\bm p_D^j - \bm t_k\right)\right)^T{\bm n^j}^T{\bm n^j}\left(\bm p_M^i - \bm C_k\left(\bm p_D^j - \bm t_k\right)\right)$ where $\bm n$ are the surface normals
+		* $\mathcal J = \frac{1}{2}\sum _{j = 1}^J w^j\left(\bm p_M^i - \bm C_k\left(\bm p_D^j - \bm t_k\right)\right)^T{\bm n^j}{\bm n^j}^T\left(\bm p_M^i - \bm C_k\left(\bm p_D^j - \bm t_k\right)\right)$ where $\bm n$ are the surface normals
 		* Slower to compute, but often faster convergence
 	* Plane-to-plane follows a similar idea but calculates surface normals in both sets
 		* Use covariances $\bm\Sigma _\varepsilon = \matthree{\varepsilon}{0}{0}{0}{1}{0}{0}{0}{1}$ for some small $\varepsilon$

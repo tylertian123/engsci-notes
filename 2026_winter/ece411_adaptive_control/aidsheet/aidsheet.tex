@@ -8,19 +8,30 @@
 \input{ncommon}
 \everymath{}
 \usepackage{titlesec}
-\usepackage{enumitem}
 \usepackage{multicol}
 
 \usepackage[english]{babel}
 \usepackage[autostyle]{csquotes}
 \MakeOuterQuote{"}
 
-% Options: [subtle], [moderate], or [extreme]
-\usepackage[extreme, mathspacing=normal]{savetrees} 
+%  Options: [subtle], [moderate], or [extreme]
+\usepackage[extreme, mathspacing=normal, lists=normal]{savetrees} 
 % Restore space between operators (sin, cos, log) and variables
 % \thinmuskip=3mu       % Readable sin/cos
 % \medmuskip=2mu        % Tight + and -
 % \thickmuskip=3mu      % Tight =
+\usepackage{enumitem}
+
+\newenvironment{tight}
+  {\begingroup
+   \setlength{\arraycolsep}{2pt}
+   \thinmuskip=3mu       % Readable sin/cos
+   \medmuskip=2mu        % Tight + and -
+   \thickmuskip=3mu      % Tight =
+  }
+  {
+    \endgroup
+  }
 
 % Normal vdots and ddots leave too much space above
 % https://tex.stackexchange.com/questions/207056/wrong-too-much-vertical-space-above-vdots-in-small-matrix
@@ -48,7 +59,10 @@
 
 \begin{document}
 
-\section{Dynamical Systems}
+\section{Dynamical Systems} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textbf{Difference Equations:} For degree \(n\) system, \(n \geq m\) for causality:
+\[y(k) + a_1y(k - 1) + \cdots + a_ny(k - n) = b_0u(k) + \cdots + b_mu(k - m)\]
 
 \textbf{Z-Transform:} \(\displaystyle \ztf{x(k)} = X(z) = \sum _{k = 0}^\infty x(k)z^{-k}, z \in \complex\)
 
@@ -73,7 +87,7 @@ if \(\abs{p} = 1\), unstable if \(\abs{p} > 1\), alternating if \(p < 0\).
 Conjugate poles: \(\iztf{\frac{z^2}{(z - re^{j\omega})(z - re^{-j\omega})}} = \frac{1}{\sin\omega}r^k\sin(k\omega + \phi)\);
 \(r\) is rate of decay (smaller is faster, \(r > 1\) unstable), \(\omega\) is oscillation frequency.
 
-\section{Stability}
+\section{Stability} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \textbf{Equilibrium:} \(\bar x\) is equilibrium of \(x(k + 1) = f(k, x(k))\) if \(\bar x = f(k, \bar x)\).
 
@@ -122,7 +136,7 @@ there exists a unique $P \in \reals^{n \times n}, P = P^T, P \succ 0 \suchthat A
 with only one \(Q\) using \(V(x) = x^TPx, \Delta V(x) = -x^TQx\), and that
 \(\lambda _\text{min}(P)\norm{x}^2 \leq x^TPx \leq \lambda _\text{max}(P)\norm{x}^2\).
 
-\section{State \& Output Feedback Stabilization}
+\section{State \& Output Feedback Stabilization} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \textbf{Controllability:} The LTI system $(A, B)$ is controllable if $\rank(Q_c) = n$, where the controllability matrix
 $Q_c = \rvec{B}{AB}{\cdots}{A^{n - 1}B}$.
@@ -175,7 +189,7 @@ the estimation error $\tilde x(k) = \hat x(k) - x(k)$ has dynamics \(\tilde x(k 
 design a state feedback stabilizer and observer, then \(u(k) = K\hat x(k)\) asymptotically stabilizes the system.
 The closed-loop system has dynamics \(\cvec{x(k + 1)}{\tilde x(k + 1)} = \mattwo{A + BK}{BK}{0}{A - LC}\cvec{x(k)}{\tilde x(k)}\).
 
-\section{Adaptive Control}
+\section{Adaptive Control} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \textbf{$l_\infty$-Norm:} $\norm{x}_{l_\infty} = \sup _{k \geq 0}\norm{x(k)}$; denote $x(k) \in l_\infty$ if $\norm{x}_{l_\infty}$ exists.
 
@@ -225,9 +239,9 @@ Assuming \(w \in l_\infty\), then $\hat\psi \in l_\infty, e_a \in l_\infty \cap 
 \textbf{Swapping Lemma:} Let discrete signals $\hat\psi: \naturals _0 \mapsto \reals^q$ and $w: \naturals _0 \mapsto
 \reals^q$, and transfer function $H(z) = C(zI - A)^{-1}B$ be stable with no pole-zero cancellations, then
 \(\hat\psi^T(k)H(z)I\left[w(k)\right] - H(z)\left[\hat\psi^T(k)w(k)\right] = c\tilde\eta(k)\) where \(\eta _1(k + 1) =
-A\eta _1(k) + Bw^T(k), \tilde\eta(k + 1) &= A\tilde\eta(k) + \eta _1(k + 1)(\tilde\psi(k + 1) - \tilde\psi(k))\).
+A\eta _1(k) + Bw^T(k), \tilde\eta(k + 1) = A\tilde\eta(k) + \eta _1(k + 1)(\tilde\psi(k + 1) - \tilde\psi(k))\).
 
-\section{Optimal Control}
+\section{Optimal Control} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \textbf{Finite-Time Optimal Control:} Given a system $x(k + 1) = f(k, x(k), u(k))$ where $x(k) \in \mathcal X$, for $k
 \in {0, 1, \dots, N - 1}$, we want to select a control $\pi = \set{u(0), u(1), \dots, u(N - 1) | u(k) \in \mathcal
@@ -258,7 +272,7 @@ Denote \((T^\mu V)(x) = r(x, \mu(x)) + \gamma V(f(x, \mu(x)))\) so \(V^* = TV^*\
 policy $\mu$).
 Denote \((T^\mu V)(x) = r(x, \mu(x)) + \gamma V(f(x, \mu(x)))\) so \(V^\mu = T^\mu V^\mu\).
 
-\textbf{Value Iteartion:} Initialize with any $V^0 \geq 0$. Until convergence, do
+\textbf{Value Iteration:} Initialize with any $V^0 \geq 0$. Until convergence, do
 $\displaystyle V^{j + 1} = TV^j \iff V^{j + 1}(x) = \inf _{u \in \mathcal U(x)}\set{r(x, u) + \gamma V^j(f(x, u))}$.
 
 \textbf{Policy Iteration:} Initialize with any admissible feedback $\mu^0 = \mathcal M$. Repeat:
@@ -277,6 +291,113 @@ Given value function, \(K = (R + B^TPB)^{-1}B^TPA\). Substitute to get discrete 
 
 Unique positive definite solution for \(P\) exists if \((A, B)\) stabilizable and \(Q, A\) detectable.
 
+\section{Reinforcement Learning} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textbf{Goal:} Learn the optimal stationary policy \(\mu^*(x)\) online and without knowing the system \(x(k + 1) = f(x(k), u(k))\).
+
+\textbf{Value Function Approximation:} \(V^\mu(x) = \psi^Tw(k)\)
+
+\textbf{Q-Function:} \(Q^\mu(x, u) = r(x, u) + \gamma V^\mu(f(x, u))\),
+satisfies \(Q^\mu(x, u) = r(x, u) + \gamma Q^\mu(f(x, u), \mu(f(x, u)))\).
+\(\displaystyle V^*(x) = \min _{u \in \mathcal U} Q^*(x, u)\), \(\displaystyle \mu^*(x) = \argmin _{u \in \mathcal U} Q^*(x, u)\).
+
+\textbf{Q-Function VI:} Initialize with any $Q^0 \geq 0$. Until convergence, do
+$\displaystyle Q^{j + 1}(x, u) = r(x, u) + \min _{u' \in \mathcal U} \gamma Q^j(f(x, u), u')$.
+
+\textbf{Q-Function PI:} Initialize with any admissible feedback $\mu^0 = \mathcal M$. Repeat:
+1. Policy evaluation: \(Q^{\mu^j}(x, u) = r(x, u) + \gamma Q^{\mu^j}(f(x, u), \mu^j(f(x, u))), \forall x \in \mathcal X, u \in \mathcal U(x)\).
+2. Policy improvement: $\displaystyle \mu^{j + 1}(x) = \argmin _{u \in \mathcal U(x)} Q^{\mu^j}(x, u)$.
+
+\textbf{TD Error:} \(e(k) = r(x(k), \mu(x(k))) + \gamma V^\mu(x(k + 1)) - V^\mu(x(k))\)
+
+\textbf{Q-Learning:} \(Q^\mu(x(k), u(k)) - \gamma Q^\mu(x(k + 1), \mu(x(k + 1))) - r(x(k), u(k)) = e(k) = 0\) along solutions.
+Approximate \(Q^\mu(x, u) = \psi^Tw(x, u)\) and let \(v(k) = w(x(k)) - \gamma w(x(k + 1))\) then \(\psi^Tv(k) = r(x(k), u(k))\).
+
+\textbf{Q-Learning:} Approximate \(Q^\mu(x, u) = \psi^Tw(x, u)\) and use the fact that
+\(Q^\mu(x(k), u(k)) - \gamma Q^\mu(x(k + 1), \mu(x(k + 1))) - r(x(k), u(k)) = e(k) = 0\).
+
+Policy evaluation: Let prediction error \(e_1(k) = (\hat\psi^{j + 1})^T(k)v(k) - r(x(k), u(k))\) and new regressor
+\(v(k) = w(x(k), u(k)) - \gamma w(x(k + 1), \mu^j(x(k + 1)))\). Update using gradient law \(\hat\psi^{j + 1}(k + 1) =
+\hat\psi^{j + 1}(k) - \gamma _1(k)e_1(k)v(k)\) until convergence of \(\hat\psi^{j + 1}\). Add probing noise to \(u(k)\)
+for PE, so \(\mu(x(k)) \neq u(k)\).
+
+Policy improvement: Solve $\pdiff{Q^\mu(x, u)}{u} = \pdiff{}{u}\left(\hat\psi^{j + 1}w(x, u)\right) = 0$
+for \(u\) as a function of \(x\) to get $\mu^{j + 1}$.
+
+\section{Regulator Design} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textbf{Regulator Problem:} For $x(k) \in \reals^n, u(k) \in \reals^m, e(k) \in \reals^p, w(k) \in \reals^q$ and
+\(x(k + 1) = Ax(k) + Bu(k) + Ew(k)\), \(w(k + 1) = Sw(k)\), \(e(k) = Cx(k) + Dw(k)\)
+design regulator \(u(k)\) such that: 1. The unforced closed-loop system ($w(k) \equiv 0$) has an A.S. equilibrium, and
+2. When $w(0) \neq 0$, $\displaystyle \lim _{k \to \infty} e(k) = 0$.
+
+\textbf{Regulator Equations:} \(\Pi S = A\Pi + B\Gamma + E\), \(0 = C\Pi + D\), where \(x_{ss}(t) = \Pi w(k)\),
+\(u_{ss}(k) = \Gamma w(k)\) gives steady-state solutions for \(e(k) = 0\).
+
+Solution exists if \((A, B)\) controllable, \((C, A)\) observable, and \(\forall \lambda \in \sigma(S)\), \(\abs{\lambda} = 1\),
+\(\lambda\) has algebraic multiplicity 1, and \(\det \mattwo[bsmall]{A - \lambda I}{B}{C}{0} \neq 0\) (nonresonance).
+
+\begin{tight}
+    Coord. change: \(z(k) = x(k) - \Pi w(k) \Rightarrow \twopiece{z(k + 1) = Az(k) + Bu(k) - B\Gamma w(k)}{e(k) = Cz(k)}\)
+\end{tight}
+
+\textbf{Controller:} \(u(k) = u_s(k) + u_{im}(k) = Kz(k) + \Gamma w(k) = Kx(k) + (\Gamma - K\Pi)w(k)\)
+
+\textbf{Partial Measurement:} Assume \(\left(\rvec[bsmall]{C}{D}, \mattwo[bsmall]{A}{E}{0}{S}\right) = (C_c, A_c)\) observable;
+Build observer: \(\hat x(k + 1) = A\hat x(k) + Bu(k) + E\hat w(k) + L_1(e(k) - \hat e(k))\),
+\(\hat w(k + 1) = S\hat w(k) + L_2(e(k) - \hat e(k))\), \(\hat e(k) = C\hat x(k) + D\hat w(k)\).
+% \begin{align*} \hat x(k + 1) &= A\hat x(k) + Bu(k) + E\hat w(k) + L_1(e(k) - \hat e(k)) \\ \hat w(k + 1) &= S\hat w(k) + L_2(e(k) - \hat e(k)) \\ \hat e(k) &= C\hat x(k) + D\hat w(k) \end{align*}
+
+Estimation error dynamics \(\cvec[bsmall]{\tilde x(k + 1)}{\tilde w(k + 1)} = \left(A_c - \cvec[bsmall]{L_1}{L_2}C_c\right)\cvec[bsmall]{\tilde x(k)}{\tilde w(k)}\).
+
+\section{Adaptive Regulation} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textbf{Adaptive Regulator Problem:} \(x(k + 1) = Ax(k) + Bu(k) + E\xi(k)\), \(\xi(k + 1) = S\xi(k)\), \(e(k) = Cx(k) +
+D\xi(k)\) where \(S, E, D\) are unknown.
+
+\textbf{Nikiforov Canonical Representation:} Let \(d(k) = \Gamma\xi(k)\). Assuming regulator equations are solvable,
+then for all controllable \((F, G)\) where \(F\) Schur stable, if \((\Gamma, S)\) observable, \(\sigma(F) \cap \sigma(S)
+= \emptyset\), then \(\exists M \suchthat MS = FM + G\Gamma\) and \(M\) invertible. Let \(w(k) = M\xi(k)\) so \(d(k) =
+\Gamma M^{-1}w(k) = \psi^Tw(k)\), then:
+\[w(k + 1) = Fw(k) + Gd(k) = (F + G\psi^T)w(k) \qquad d(k) = \psi^Tw(k)\]
+
+\textbf{Disturbance Observer:} $\hat z_d(k + 1) = A\hat z_d(k) + Bu(k) + L_d(e(k) - C\hat z_d(k))$, \\
+$A - L_dC$ Schur stable. Error $\tilde z_d(k) = \hat z_d(k) - z(k)$, $\tilde z_d(k + 1) = A_d\tilde z_d(k) + Bd(k)$
+where \(A_d = A - L_dC\). Let $d_f(k) = C\tilde z_d(k) = C\hat z_d(k) - e(k)$ (measurable).
+
+Let \(H_d(z) = C(zI - A_d)^{-1}B\), then \(d_f(k) = H_d(z)\left[d(k)\right]\).
+
+\textbf{Steady-State Matching Lemma:} For the Nikiforov exosystem and disturbance observer, \(\exists z_d(0)\) such
+that the steady-state \(d_f(k)\) from the LTI system \(z_d(k + 1) = (A - L_dC)z_d(k) + Bd(k)\), \(d_f(k) = Cz_d(k)\) can
+be generated by \(w_f(k + 1) = Fw_f(k) + Gd_f(k)\), \(d_f(k) = \psi^Tw_f(k)\), and there exists a nonsingular $H_f \in
+\reals^{q \times q}$ such that $w(k) = H_fw_f(k)$.
+
+Intuitively, because \(d_f(k)\) is \(d(k)\) filtered through an LTI system, it can be generated by a system with the
+same \((F, G, \psi)\) as the system generating \(d(k)\), with the states differing by only a coordinate transformation.
+
+\textbf{\(\bm w_{\bm f}\) Observer:} \(\hat w_f(k + 1) = F\hat w_f(k) + Gd_f(k) = F\hat w_f(k) + G(C\hat z_d(k) - e(k))\)
+
+\textbf{Effective Disturbance:}
+\[d(k) = \Gamma\xi(k) = \psi^Tw(k) = \psi^TH_f^{-1}w_f(k) = \psi _f^Tw_f(k) = \psi _f^T\hat w_f(k) + \varepsilon(k)\]
+
+\textbf{Kreisselmeier Filter:} Directly estimate \(w(k)\):
+\begin{align*}
+    &\eta _0(k + 1) = F\eta _0(k) + FGe(k) && \eta _2(k + 1) = F\eta _2(k) + Gu(k) \\
+    &\eta _1(k + 1) = F\eta _1(k) - Ge(k)  && \hat w(k) = \eta _0(k) + Ge(k) - A\eta _1(k) + B\eta _2(k)
+\end{align*}
+
+\textbf{Controller:} \(u(k) = u_s(k) + u_{im}(k) = u_s(k) + \hat\psi _f^T(k)\hat w_f(k)\)
+
+\textbf{Stabilizer:} \(u_s(k) = K\hat z_s(k)\), \(\hat z_s(k + 1) = A\hat z_s(k) + Bu_s(k) + L_s(e(k) - C\hat z_s(k))\)
+where \(A + BK\) and \(A - L_sC\) Schur stable. If \(A\) Schur stable, can use \(u_s(k) \equiv 0\).
+
+\textbf{Adaptation:} Let \(\hat w_a(k) = H_d(z)I\left[\hat w_f(k)\right]\), then \(d_f(k) = \psi _f^T(k)\hat w_a(k)\)
+(swapping lemma). Let \(\hat d_f(k) = \hat\psi _f^T\hat w_a(k)\) (measurable) and augmented error
+\(e_a(k) = \hat d_f(k) - d_f(k) = \tilde\psi^T\hat w_a(k)\). Gradient law:
+\[\hat\psi _f(k + 1) = \hat \psi _f(k) - \gamma(k)e_a(k)w_a(k) \qquad \gamma(k) = \frac{\bar\gamma}{1 + \norm{w_a(k)}^2}, \bar\gamma \in (0, 2)\]
+
+If \(u_s(k) \equiv 0\) (\(A\)) Schur stable, can also use dynamic EM for the \(z(k)\) system.
+
 \section{Useful Identities} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{gather*}
@@ -294,13 +415,8 @@ Unique positive definite solution for \(P\) exists if \((A, B)\) stabilizable an
     % \nabla _x f(\bm x) = \left(\pdiff{f(\bm x)}{\bm x}\right)^T \qquad \pdiff{\norm{\bm x}}{\bm x} = \frac{1}{\norm{\bm x}}\bm x^T \\
     % v_1 \cdot v_2 = \norm{v_1}\norm{v_2}\cos\theta \qquad v_1 \times v_2 = \norm{v_1}\norm{v_2}\sin(\theta)\hat n \\
     A^{-1} = \frac{1}{\det A}(\on{cof} A)^T \qquad \mattwo{a}{b}{c}{d}^{-1} = \frac{1}{ad - bc}\mattwo{d}{-b}{-c}{a} \\
-    \diff{}{x}\sin^{-1}x = \frac{1}{\sqrt{1 - x^2}} \quad \diff{}{x}\cos^{-1}x = -\frac{1}{\sqrt{1 - x^2}} \quad \diff{}{x}\tan^{-1}x = \frac{1}{1 + x^2}
+    \diff{}{x}\sin^{-1}x = \frac{1}{\sqrt{1 - x^2}} \quad \diff{}{x}\cos^{-1}x = -\frac{1}{\sqrt{1 - x^2}} \quad \diff{}{x}\tan^{-1}x = \frac{1}{1 + x^2} \\
+    \ztf{1} = \frac{z}{z - 1} \quad \ztf{\delta(k)} = 1 \quad \ztf{k} = \frac{z}{(z - 1)^2} \quad \sum _{k = 0}^\infty ax^k = \frac{a}{1 - x}
 \end{gather*}
-
-% Need to add:
-% - Common Z transforms
-% - Diff eq.
-% - How to deal with TFs where degree of numerator and denominator are equal
-% - Jordan forms??
 
 \end{document}

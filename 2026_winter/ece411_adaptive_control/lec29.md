@@ -18,7 +18,7 @@
 		* As previously mentioned, if $(\Gamma, S)$ is not observable then we can get rid of the extra states
 		* Note that if $F$ is Schur stable then it must have $\abs{\lambda} < 1$, but if $\xi(k)$ contains only persistent signals then it must have $\abs{\lambda} = 1$ (otherwise it would decay), so their spectra are naturally disjoint
 	* Define a coordinate transformation $w(k) = M\xi(k)$, then $\alignedeqntwo[t]{w(k + 1)}{M\xi(k + 1)}{MS\xi(k)}{(FM + G\Gamma)\xi(k)}{Fw(k) + Gd(k)}$
-	* Now $d(k) = \Gamma\xi(k) = \Gamma M^{-1}w(k)$ and let $d(k) = \psi^Tw(k)$
+	* Now $d(k) = \Gamma\xi(k) = \Gamma M^{-1}w(k)$, so we can let $d(k) = \psi^Tw(k)$
 	* This gives us the new exosystem $\begin{aligned}[t] w(k + 1) &= Fw(k) + Gd(k) \\ d(k) &= \psi^Tw(k) \end{aligned}$
 		* Note that if we substitute the second equation into the first, $w(k + 1) = (F + G\psi^T)w(k)$, so $\psi^T$ decides the frequency content of the disturbance
 	* Now we substitute this back to get $\begin{aligned}[t] z(k + 1) &= Az(k) + Bu(k) - Bd(k) \\ e(k) &= Cz(k) \end{aligned}$

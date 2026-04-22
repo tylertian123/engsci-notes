@@ -178,7 +178,7 @@ input mapping \(u = a(x) + b(x)\eta\) such that \(\dot x = f(x) + g(x)(a(x) + b(
 such that \(f(x) + g(x)a(x) = Ax, g(x)b(x)\eta = B\eta\).
 
 Applied to unicycle model: \(\cvec{\dot\varepsilon _L}{\dot\varepsilon _H} = \cvec{v\sin\varepsilon _H}{\omega}\)
-(tangent approximation), change variables \(\cvec{z_1}{z_2} = \cvec{\varepsilon _l}{v\sin\varepsilon _H}\) to get
+(tangent approximation), change variables \(\cvec{z_1}{z_2} = \cvec{\varepsilon _L}{v\sin\varepsilon _H}\) to get
 \(\cvec{\dot z_1}{\dot z_2} = \mattwo{0}{1}{0}{0}\cvec{z_1}{z_2} + \cvec{0}{1}\eta\) where \(\eta = v\omega\cos\varepsilon _H\).
 Let output \(y = \rvec{\alpha}{1}\cvec{z_1}{z_2}\) and proportional controller \(\eta = K(y_d - y)\), take \(K = 4\alpha\)
 to get \(\displaystyle \omega = -\frac{4\alpha^2}{v}\frac{\varepsilon _L}{\cos\varepsilon _H} - 4\alpha\tan\varepsilon _H\).
@@ -409,14 +409,21 @@ Popular underwater.
 \textbf{Radar:} Measures distance and velocity using radio waves. Good for distance, unreliable for angle.
 
 \textbf{GNSS/GPS:} Measures position using distance to satellites. At least 4 for solution (3 position + 1 clock
-offset). Base carrier frequency at \SI{1575}{MHz}, carrying a code at \SI{1.023}{Mcps}; 1023 chips form a unique
-orthogonal gold code identifying the satellite (repeated at \SI{1}{kHz}). Correlation with code determines ToF. 20 code
-repeats encodes 1 bit (\SI{50}{bps}), carrying orbital data, time, etc. Raw distances (pseudoranges) are used to solve
-for position and clock bias using NLLS.
+offset). Satellites use atomic clocks and correct for relativistic effects. Uses fixed WGS84 globe model.
+
+Base carrier frequency at \SI{1575}{MHz}, modulated to carry a code (chips) at \SI{1.023}{Mcps}; 1023 chips form a
+unique orthogonal gold code identifying the satellite (repeated at \SI{1}{kHz}). Correlation with code determines ToF.
+20 code repeats encodes 1 bit (\SI{50}{bps}), carrying orbital ephemeris corrections, time, etc. Raw distances
+(pseudoranges) are used to solve for position and clock bias using NLLS.
 
 Errors from satellite geometry (dilution of precision), ionospheric/tropospheric effects, multi-path, giving \SI{10}{m}
 accuracy. DGPS uses known base station to eliminate atmospherics and satellite clock error (\SI{10}{cm} relative to
 base). RTK GPS also uses carrier phase (\SI{2}{cm}).
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{imgs/gnss.png}
+\end{figure}
 
 \subsection{Cameras}
 
@@ -576,17 +583,21 @@ generate descriptor, trained using contrastive learning.
 
 \textbf{Key Characteristics:} Mean is unbiased, variance is unbounded.
 
-\textbf{Derivation:} Get \(\dot{\bm q}(\dot{\bm\varphi})\) from kinematics, discretize to get \(\bm q(t + h)\) and split
-into \(\bar{\bm q}(t) + \delta\bm q(t)\). Linearize about \(\bar{\bm q}(t)\), drop H.O.T. and take 
-\(\bar{\bm q}(t + h) = \mathbb E[\bm q(t + h)]\). Subtract mean and take \(\bm\Sigma(t + h) = \mathbb E[\delta\bm q(t)\delta\bm q(t)^T]\).
+\textbf{Derivation:} Get \(\dot{\bm q}(\dot{\bm\varphi})\) from kinematics (transform \((v, u, \omega)\) to inertial
+frame first), discretize to get \(\bm q(t + h)\) and split \(\bm q(t) = \bar{\bm q}(t) + \delta\bm q(t)\).
+
+Linearize about \(\bar{\bm q}(t)\) and drop product of Gaussians to get \(\bar{\bm q}(t + h) + \delta\bm q(t + h)\).
+Take \(\bar{\bm q}(t + h) = \mathbb E[\bar{\bm q}(t + h) + \delta\bm q(t + h)]\).
+
+Subtract \(\bar{\bm q}(t + h)\) to get linear update equation \(\delta\bm q(t + h) = \bm A(t)\delta\bm q(t) + \bm
+B(t)\bm w(t)\). Take \(\bm\Sigma(t + h) = \mathbb E[\delta\bm q(t)\delta\bm q(t)^T] = \bm A(t)\bm\Sigma(t)\bm A(t)^T +
+\bm B(t)\bm Q\bm B(t)^T\) where \(\bm Q\) is covariance of \(\bm w(t)\).
 
 \textbf{Differential Drive:} Let \(\bm R = \mattwo{r/2}{r/2}{r/(2b)}{-r/(2b)}\)
 \begin{tight}
   \begin{align*}
     \bar{\bm q}(t + h) &= \bar{\bm q}(t) + \matthreetwo{\cos\bar\theta(t)}{0}{\sin\bar\theta(t)}{0}{0}{1}\bm R\cvec{\Delta\varphi _r(t)}{\Delta\varphi _l(t)} \\
-    \delta\bm q(t + h) &= \delta\bm q(t) + \matthreetwo{-\sin\bar\theta(t)}{0}{\cos\bar\theta(t)}{0}{0}{0}\bm R\cvec{\Delta\varphi _r(t)}{\Delta\varphi _l(t)}\delta\theta(t) + \matthreetwo{\cos\bar\theta(t)}{0}{\sin\bar\theta(t)}{0}{0}{1}\bm R\cvec{w_r(t)}{w_l(t)} \\
-    &= \bm A(t)\delta\bm q(t) + \bm B(t)\bm w(t) \\
-    \bm\Sigma(t + h) &= \bm A(t)\bm\Sigma(t)\bm A(t)^T + \bm B(t)\bm Q\bm B(t)^T
+    \delta\bm q(t + h) &= \delta\bm q(t) + \matthreetwo{-\sin\bar\theta(t)}{0}{\cos\bar\theta(t)}{0}{0}{0}\bm R\cvec{\Delta\varphi _r(t)}{\Delta\varphi _l(t)}\delta\theta(t) + \matthreetwo{\cos\bar\theta(t)}{0}{\sin\bar\theta(t)}{0}{0}{1}\bm R\cvec{w_r(t)}{w_l(t)}
   \end{align*}
 \end{tight}
 
@@ -614,6 +625,9 @@ Closed-form solution for scalar weights:
 	\item Compute SVD $\bm V\bm S\bm U^T = \bm W_{ba}$, then compute rotation \(\bm C_{ba} = \bm V\matthree[bsmall]{1}{0}{0}{0}{1}{0}{0}{0}{\det(\bm U)\det(\bm V)}\bm U^T\),
         and translation \(\bm r_a = -\bm C_{ba}^T\bm p_b + \bm p_a\).
 \end{enumerate}
+
+Solution is unique if \(\rank\bm W_{ba} \geq 2\). If \(\rank\bm W_{ba} = 2\) points are coplanar (unique if we enforce
+no reflection). If \(\rank\bm W_{ba} = 1\) points are colinear.
 
 \subsection{LiDAR Scan Matching}
 
@@ -643,7 +657,7 @@ shooting}: first point along the surface normal direction; \emph{outlier rejecti
 neighbours).
 
 \textbf{Point-to-Plane Matching:} Only penalize errors in the normal direction;
-\[\mathcal J = \frac{1}{2}\sum _{j = 1}^J w^j\left(\bm p_M^i - \bm C_k\left(\bm p_D^j - \bm t_k\right)\right)^T{\bm n^j}^T{\bm n^j}\left(\bm p_M^i - \bm C_k\left(\bm p_D^j - \bm t_k\right)\right)\]
+\[\mathcal J = \frac{1}{2}\sum _{j = 1}^J w^j\left(\bm p_M^i - \bm C_k\left(\bm p_D^j - \bm t_k\right)\right)^T{\bm n^j}{\bm n^j}^T\left(\bm p_M^i - \bm C_k\left(\bm p_D^j - \bm t_k\right)\right)\]
 
 \textbf{Plane-to-Plane Matching:} Uses normals in both sets;
 \begin{tight}
@@ -734,12 +748,18 @@ of $1/M$ and sample from each visited bin. Helps preserve particle diversity.
 \end{enumerate}
 With correct modeling KF is \emph{consistent} and \emph{unbiased} (correct mean and covariance).
 
-\textbf{Extended Kalman Filter:} Nonlinear \(\bm x_k = \bm f(\bm x_{k - 1}, \bm v_k, \bm w_k)\), \(\bm y_k = \bm g(\bm x_k, \bm n_k)\):
+\textbf{Extended Kalman Filter:} Linearize nonlinear models:
+\begin{align*}
+  \bm x_k = \bm f(\bm x_{k - 1}, \bm v_k, \bm w_k) &\approx \check{\bm x}_k + \bm F_{k - 1}(\bm x_{k - 1} - \check{\bm x}_{k - 1}) + w_k' \\
+  \bm y_k = \bm g(\bm x_k, \bm n_k) &\approx \check{\bm y}_k + \bm G_k(\bm x_k - \check{\bm x}_k) + n_k'
+\end{align*}
+where \(\bm F_{k - 1} = \pdiff{\bm f}{\bm x_{k - 1}}\), 
+\(\bm G_k = \pdiff{\bm g}{\bm x_k}\),
+\(\bm w_k' = \pdiff{\bm f}{\bm w_k}\bm w_k\), \(\bm n_k' = \pdiff{\bm g}{\bm n_k}\bm n_k\),
+\(\bm f\) Jacobians evaluated at \((\check{\bm x}_{k - 1}, \bm v_k, \bm 0)\) and \(\bm g\) Jacobians at \((\check{\bm x}_k, \bm 0)\).
 \begin{enumerate}
-  \item Prediction: $\twopiece{\check{\bm P}_k = \bm F_{k - 1}\hat{\bm P}_k\bm F_{k - 1}^T + \bm Q_k'}{\check{\bm x}_k = \bm f(\hat{\bm x}_{k - 1}, \bm v_k, \bm 0)}$,
-        \(\displaystyle \bm F_{k - 1} = \pdiff{\bm f(\bm x_{k - 1}, \bm v_k, \bm w_k)}{\bm x_{k - 1}}\).
-  \item Kalman gain: $\bm K_k = \check{\bm P}_k\bm G_k^T(\bm G_k\check{\bm P}_k\bm G_k^T + \bm R_k')^{-1}$,
-        \(\displaystyle \bm G_k = \pdiff{\bm g(\bm x_k, \bm n_k)}{\bm x_k}\).
+  \item Prediction: $\twopiece{\check{\bm P}_k = \bm F_{k - 1}\hat{\bm P}_k\bm F_{k - 1}^T + \bm Q_k'}{\check{\bm x}_k = \bm f(\hat{\bm x}_{k - 1}, \bm v_k, \bm 0)}$
+  \item Kalman gain: $\bm K_k = \check{\bm P}_k\bm G_k^T(\bm G_k\check{\bm P}_k\bm G_k^T + \bm R_k')^{-1}$
   \item Correction: $\twopiece{\hat{\bm P}_k = (\bm 1 - \bm K_k\bm G_k)\check{\bm P}_k}{\hat{\bm x}_k = \check{\bm x}_k + \bm K_k(\bm y_k - \bm g(\check{\bm x}_k, \bm 0))}$
 \end{enumerate}
 where \(\bm Q_k' = \pdiff{\bm f}{\bm w_k}\bm Q_k\left(\pdiff{\bm f}{\bm w_k}\right)^T\),
@@ -979,20 +999,28 @@ real time. \textbf{iSDF} uses SDFs stored implicitly in a neural network.
 \section{Useful Identities} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{gather*}
-    {\textstyle\sin\left(x + \frac{\pi}{2}\right) = \cos(x) \quad \sin\left(x - \frac{\pi}{2}\right) = -\cos(x) \quad \sin\left(\frac{3\pi}{2} - x\right) = -\cos(x)} \\
-    {\textstyle\cos\left(x + \frac{\pi}{2}\right) = -\sin(x) \quad \cos\left(x - \frac{\pi}{2}\right) = \sin(x) \quad \cos\left(\frac{3\pi}{2} - x\right) = \sin(x)} \\
-    \sin(x + y) = \sin x\cos y + \cos x\sin y \quad \sin(x - y) = \sin x\cos y - \cos x\sin y \\
-    \cos(x + y) = \cos x\cos y - \sin x\sin y \quad \cos(x - y) = \cos x\cos y + \sin x\sin y \\
-    \sin(\tan^{-1} x) = \frac{x}{\sqrt{1 + x^2}} \qquad \cos(\tan^{-1} x) = \frac{1}{\sqrt{1 + x^2}} \\
-    \sin(\cos^{-1} x) = \cos(\sin^{-1} x) = \sqrt{1 - x^2} \\
-    \atantwo(-y, x) = -\atantwo(y, x) \qquad \atantwo(y, -x) = \pi - \atantwo(y, x) \\
-    \forall a > 0,\,\atantwo(ay, ax) = \atantwo(y, x) \\
-    \atantwo\left(x, \sqrt{1 - x^2}\right) = \sin^{-1} x \qquad \atantwo\left(\pm\sqrt{1 - x^2}, x\right) = \pm\cos^{-1} x \\
-    \atantwo\left(x, -\sqrt{1 - x^2}\right) = \twocond{\pi - \sin^{-1}x}{x > 0}{-\pi - \sin^{-1}(x)}{x < 0} \\
-    \nabla _x f(\bm x) = \left(\pdiff{f(\bm x)}{\bm x}\right)^T \qquad \pdiff{\norm{\bm x}}{\bm x} = \frac{1}{\norm{\bm x}}\bm x^T \\
-    v_1 \cdot v_2 = \norm{v_1}\norm{v_2}\cos\theta \qquad v_1 \times v_2 = \norm{v_1}\norm{v_2}\sin(\theta)\hat n \\
-    \bm A^{-1} = \frac{1}{\det\bm A}(\on{cof}\bm A)^T \qquad \mattwo{a}{b}{c}{d}^{-1} = \frac{1}{ad - bc}\mattwo{d}{-b}{-c}{a} \\
-    \diff{}{x}\sin^{-1}x = \frac{1}{\sqrt{1 - x^2}} \quad \diff{}{x}\cos^{-1}x = -\frac{1}{\sqrt{1 - x^2}} \quad \diff{}{x}\tan^{-1}x = \frac{1}{1 + x^2}
+  {\textstyle\sin\left(x + \frac{\pi}{2}\right) = \cos(x) \quad \sin\left(x - \frac{\pi}{2}\right) = -\cos(x) \quad \sin\left(\frac{3\pi}{2} - x\right) = -\cos(x)} \\
+  {\textstyle\cos\left(x + \frac{\pi}{2}\right) = -\sin(x) \quad \cos\left(x - \frac{\pi}{2}\right) = \sin(x) \quad \cos\left(\frac{3\pi}{2} - x\right) = \sin(x)} \\
+  \sin(\bar\theta + \delta\theta) \approx \sin\bar\theta + \cos(\bar\theta)\delta\theta \quad
+  \cos(\bar\theta + \delta\theta) \approx \cos\bar\theta - \sin(\bar\theta)\delta\theta \\
+  \sin(x + y) = \sin x\cos y + \cos x\sin y \quad \sin(x - y) = \sin x\cos y - \cos x\sin y \\
+  \cos(x + y) = \cos x\cos y - \sin x\sin y \quad \cos(x - y) = \cos x\cos y + \sin x\sin y \\
+  \sin(\tan^{-1} x) = \frac{x}{\sqrt{1 + x^2}} \qquad \cos(\tan^{-1} x) = \frac{1}{\sqrt{1 + x^2}} \\
+  \sin(\cos^{-1} x) = \cos(\sin^{-1} x) = \sqrt{1 - x^2} \\
+  \atantwo(-y, x) = -\atantwo(y, x) \qquad \atantwo(y, -x) = \pi - \atantwo(y, x) \\
+  \forall a > 0,\,\atantwo(ay, ax) = \atantwo(y, x) \\
+  \atantwo\left(x, \sqrt{1 - x^2}\right) = \sin^{-1} x \qquad \atantwo\left(\pm\sqrt{1 - x^2}, x\right) = \pm\cos^{-1} x \\
+  \atantwo\left(x, -\sqrt{1 - x^2}\right) = \twocond{\pi - \sin^{-1}x}{x > 0}{-\pi - \sin^{-1}(x)}{x < 0} \\
+  v_1 \cdot v_2 = \norm{v_1}\norm{v_2}\cos\theta \qquad v_1 \times v_2 = \norm{v_1}\norm{v_2}\sin(\theta)\hat n \\
+  \bm A^{-1} = \frac{1}{\det\bm A}(\on{cof}\bm A)^T \qquad \mattwo{a}{b}{c}{d}^{-1} = \frac{1}{ad - bc}\mattwo{d}{-b}{-c}{a} \\
+  \diff{}{x}\sin^{-1}x = \frac{1}{\sqrt{1 - x^2}} \quad \diff{}{x}\cos^{-1}x = -\frac{1}{\sqrt{1 - x^2}} \quad \diff{}{x}\tan^{-1}x = \frac{1}{1 + x^2} \\
 \end{gather*}
+
+\textbf{Common Derivatives:} (Denom. layout/gradients are \emph{column vectors})
+\begin{gather*}
+  \pdiff{}{\bm x} \bm A\bm x = \bm A \qquad \pdiff{}{\bm x} \bm x^T\bm A = \bm A^T \qquad \pdiff{}{\bm x}\bm x^T\bm b = \pdiff{}{\bm x}\bm b^T\bm x = \bm b \\
+  \pdiff{}{\bm x}\bm x^T\bm A\bm x = (\bm A + \bm A^T)\bm x \qquad \pdiff{f}{\bm x} = \left(\pdiff{\bm u}{\bm x}\right)^T\pdiff{f}{\bm u} \qquad \pdiff{\norm{\bm x}}{\bm x} = \frac{1}{\norm{\bm x}}\bm x^T \\
+\end{gather*}
+
 
 \end{document}

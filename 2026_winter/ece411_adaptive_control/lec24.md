@@ -5,9 +5,9 @@
 * Recall the Bellman equation for the Q-function: $Q^\mu(x, u) = r(x, u) + \gamma Q^\mu(f(x, u), \mu(f(x, u)))$
 	* Along a solution, this becomes $Q^\mu(x(k), u(k)) = r(x(k), u(k)) + \gamma Q^\mu(x(k + 1), \mu(x(k + 1)))$
 		* It's important to note that we use $u(k)$ in $Q$ and $r$ for time $k$, but $\mu(x(k + 1))$ for time $k + 1$; for the current time step we are allowed to explore and apply any input we want (so $u(k) \neq \mu(x(k))$), but for all future time steps we must follow the policy
-* The TD error is $e(k) = Q^\mu(x(k), u(k)) - \gamma Q^\mu(x(k _ 1), \mu(x(k + 1))) - r(x(k), u(k))$, zero along solutions
+* The TD error is $e(k) = Q^\mu(x(k), u(k)) - \gamma Q^\mu(x(k + 1), \mu(x(k + 1))) - r(x(k), u(k))$, zero along solutions
 * Introduce the Q-function approximation, $Q^\mu(x, u) = \psi^Tw(x, u)$ for some known regressor and unknown (but constant) parameters
-* Let $v(k) = w(x(k)) - \gamma(w(x(k + 1)))$, a regressor which is fully known at time $k + 1$, then using the TD error we can write $\psi^Tv(k) = r(x(k), u(k))$, since $e(k) = 0$ along a solution
+* Let $v(k) = w(x(k)) - \gamma w(x(k + 1))$, a regressor which is fully known at time $k + 1$, then using the TD error we can write $\psi^Tv(k) = r(x(k), u(k))$, since $e(k) = 0$ along a solution
 	* This allows us to estimate $\hat Q^\mu(x, u) = \hat\psi^T(k)w(x, u)$ for some parameter estimate $\hat\psi(k)$
 	* Define the new error $e_1(k) = \hat\psi^Tv(k) - r(x(k), u(k)) = \tilde\psi^T(k)v(k)$, where $\tilde\psi(k) = \hat\psi(k) - \psi$, giving us a static error model which we can solve using standard techniques
 * Now we can from an algorithm for online, model-free policy iteration:

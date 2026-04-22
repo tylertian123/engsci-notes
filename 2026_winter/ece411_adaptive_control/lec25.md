@@ -12,13 +12,13 @@
 * Overall our Q-learning algorithm is:
 	1. Initialization: select any admissible $\mu^0 \in \mathcal M$
 	2. Policy evaluation:
-		* Prediction error: $e_1(k) = (\hat\psi^{j + 1})^T(k) - r(x(k), u(k))$
+		* Prediction error: $e_1(k) = (\hat\psi^{j + 1})^T(k)v(k) - r(x(k), u(k))$
 		* Gradient law: $\hat\psi^{j + 1}(k + 1) = \hat\psi^{j + 1}(k) - \gamma _1(k)e_1(k)v(k)$ where $\gamma _1(k) = \frac{\bar\gamma}{1 + \norm{v(k)}^2}, \bar\gamma \in (0, 2)$
 		* New regressor: $v(k) = w(x(k), u(k)) - \gamma w(x(k + 1), \mu^j(x(k + 1)))$
 			* $w(x, u)$ is our parametrization for Q-function approximation, so $Q^\mu(x, u) = \psi^Tw(x, u)$
 			* Importantly here we don't use $u(k + 1)$!
 		* Note that the plant updates as $x(k + 1) = f(x(k), u(k))$
-	3. Policy improvement: Solve for $\pdiff{Q^\mu(x, u)}{u} = \pdiff{}{u}\left(\hat\psi^{j + 1}w(x, u)\right) = 0$ to get $\mu^{j + 1}$
+	3. Policy improvement: Solve $\pdiff{Q^\mu(x, u)}{u} = \pdiff{}{u}\left(\hat\psi^{j + 1}w(x, u)\right) = 0$ (for $u$ as a function of $x$) to get $\mu^{j + 1}$
 * Note that policy evaluation only converges if we have a persistently exciting $v(k)$, which we do by changing $u(k)$
 	* We do this by introducing a probing noise to $u(k)$, instead of just doing $u(k) = \mu(x(k))$ (this is the "exploration")
 
