@@ -4,7 +4,7 @@
 
 * LTI systems can be modelled in 3 ways:
 	1. *Difference equations* (DEs) of the form $y(k) + a_1y(k - 1) + \cdots + a_ny(k - n) = b_0u(k) + \cdots + b_mu(k - m)$
-		* Note we assume that $n \geq m$, which is required for causality (otherwise inputs in the future can affect outputs in the past)
+		* Note we assume that $n \leq m$, which is required for causality (otherwise inputs in the future can affect outputs in the past)
 		* This is analogous to ODEs in continuous domain
 	2. *Transfer functions* (TFs): $G(z) = \frac{Y(z)}{U(z)}$, assuming zero initial conditions
 		* They are analogous to transfer functions in continuous time but using a Z-transform instead of the Laplace transform; we also have the ratio of the Z-transform of the output over the input
