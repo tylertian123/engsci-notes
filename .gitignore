@@ -1,7 +1,8 @@
-# 1. Ignore everything by default
+# 1. Ignore everything by default, except files in the top-level directory and gitignores everywhere
 *
 !.gitignore
-!*/
+!/*
+/*/
 
 # 2. Global file-type ignores
 *.pdf

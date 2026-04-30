@@ -1,0 +1,43 @@
+.global_default:
+  aidsheet:
+    build: true
+    build_cmd:
+      - latexmk -pdf aidsheet.tex
+    files:
+      - aidsheet.pdf
+
+2022_fall:
+  ece253_compsys:
+    aidsheet:
+      build: false
+  esc203_engsoc:
+    aidsheet:
+      build: false
+      files:
+        - mt_aidsheet.pdf
+        - exam_aidsheet.pdf
+2023_winter:
+  jre420_orgbehaviour:
+    aidsheet:
+      build: false
+      files:
+        - mt_aidsheet.pdf
+        - exam_aidsheet.pdf
+2023_fall:
+  che374_econ:
+    aidsheet:
+      build_cmd:
+        - pandoc aidsheet.md -o aidsheet.pdf -H head.tex
+  rob310_robo_math:
+    aidsheet:
+      build_cmd:
+        - latexmk -pdf mt_aidsheet.tex
+        - latexmk -pdf exam_aidsheet.tex
+      files:
+        - mt_aidsheet.pdf
+        - exam_aidsheet.pdf
+2024_winter:
+  csc384_intro_ai:
+    aidsheet:
+      build: false
+

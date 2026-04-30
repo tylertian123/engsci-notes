@@ -8,9 +8,15 @@
 \input{ncommon}
 \everymath{}
 \usepackage{titlesec}
-\usepackage{enumitem}
 
-\usepackage[extreme, mathspacing=normal]{savetrees}
+% Options: [subtle], [moderate], or [extreme]
+\usepackage[extreme, mathspacing=normal, lists=normal]{savetrees} 
+% Restore space between operators (sin, cos, log) and variables
+% \thinmuskip=3mu       % Readable sin/cos
+% \medmuskip=2mu        % Tight + and -
+% \thickmuskip=3mu      % Tight =
+\usepackage{enumitem} % Needs to come after
+
 \titleformat{\section}
   {\normalfont\fontsize{12}{14}\bfseries}{\thesection}{1em}{}
 \titlespacing\section{0pt}{5pt plus 2pt minus 2pt}{2pt plus 1pt minus 1pt}
