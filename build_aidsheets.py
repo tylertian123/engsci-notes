@@ -39,7 +39,7 @@ def main(subdir: Path):
 
         for file in out_files:
             p = aidsheet_dir / file
-            if not p.exists() and p.is_file():
+            if not (p.exists() and p.is_file()):
                 print(f"- Expected output file {p} not found!")
                 sys.exit(1)
             print(f"- Found output file {p}")
