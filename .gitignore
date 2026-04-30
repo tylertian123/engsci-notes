@@ -1,5 +1,6 @@
 # 1. Ignore everything by default
 *
+!.gitignore
 !*/
 
 # 2. Global file-type ignores
